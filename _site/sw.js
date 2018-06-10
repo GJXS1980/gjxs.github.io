@@ -22,7 +22,7 @@ const PRECACHE_LIST = [
   "./img/root/icon_wechat.png",
   "./img/root/avatar-gjxs.jpg",
   "./img/root/home-bg.jpg",
-  "./img/root/404-bg.jpg",
+  "./img/404/404-bg.jpg",
   "./css/gjxs-blog.min.css",
   "./css/syntax.css",
   "./css/bootstrap.min.css"
@@ -32,7 +32,7 @@ const PRECACHE_LIST = [
 ]
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
-  "huangxuan.me",
+  "gjxslisa.club",
   "yanshuo.io",
   "cdnjs.cloudflare.com"
 ]
