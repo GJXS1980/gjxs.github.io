@@ -1,0 +1,125 @@
+# Site settings
+title: G.J.先生 Blog
+SEOTitle: G.J.先生的博客 | G.J.先生 Blog
+header-img: img/root/home-bg.jpg
+email: gjxslwz@gmail.com
+description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
+keyword: "李伟政, G.J.先生, GJXS, GJXS1980, GJXS2017, @GJXS1980, G.J.先生的博客, GJXS Blog, 博客, 个人网站, 自动化, ROS, 工程师, 机器人"
+url: "https://www.gjxslisa.club"              # your host, for absolute URL
+baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
+
+# Publish posts or collection documents with a future date.
+future: true
+
+# SNS settings
+RSS: false
+CSDN_username:     GJXS2017
+zhihu_username:     gjxian-sheng
+github_username:    GJXS1980
+twitter_username:   GJXS2017
+#facebook_username:  username
+music163_username:  home?id=261616078
+
+
+
+# Build settings
+# from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
+highlighter: rouge
+permalink: pretty
+paginate: 10
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
+
+
+
+# Gems
+# from PR#40, to support local preview for Jekyll 3.0
+plugins: [jekyll-paginate]
+
+
+
+# Markdown settings
+# replace redcarpet to kramdown,
+# although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
+# document: http://jekyllrb.com/docs/configuration/#kramdown
+markdown: kramdown
+kramdown:
+  input: GFM                            # use Github Flavored Markdown !important
+
+
+
+# Disqus settings
+disqus_username: gjxs
+
+# Netease settings
+netease_comment: false
+
+
+
+# Analytics settings
+# Baidu Analytics
+#ba_track_id: 5e4a91c21c
+#ba_track_id:8db676af20
+
+# Google Analytics
+ga_track_id: 'UA-120526213-1'            # Format: UA-xxxxxx-xx
+ga_domain: auto
+
+
+
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "搞笑，代码还是要自己写啊，<br>坑还是要自己填，自己的路自己走"
+sidebar-avatar: /img/root/avatar-gjxs.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+
+
+
+# Featured Tags
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+
+
+
+# Progressive Web Apps
+chrome-tab-theme-color: "#000000"
+service-worker: true
+
+
+
+# Friends
+friends: [
+    {
+    #     title: "Su",
+    #     href: "http://su.gallery/"
+    # },{
+        title: "Github",
+        href: "https://github.com/"
+    },{
+    #    title: "前端外刊评论",
+    #    href: "http://qianduan.guru/"
+    #},{
+    #    title: "天镶的博客",
+    #    href: "http://lingyu.wang/"
+    #},{
+    #    title: "Luke 的自留地",
+    #    href: "http://hmqk1995.github.io"
+    #},{
+    #    title: "Ebn's Blog",
+    #    href: "http://ebnbin.com/"
+    #},{
+    #    title: "SmdCn's Blog",
+    #    href: "http://blog.smdcn.net"
+    #},{
+    #    title: "David's Game",
+    #    href: "https://www.ruoyaowu.com/"
+    #},{
+    #    title: "DHong Say",
+    #    href: "http://dhong.co"
+    #},{
+    #    title: "尹峰以为",
+    #    href: "http://ingf.github.io/"
+    #},{
+    #    title: "解旻的博客",
+    #    href: "http://xieminis.me/"
+    }
+]

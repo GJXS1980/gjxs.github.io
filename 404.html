@@ -1,0 +1,25 @@
+---
+layout: default
+description: "发生这种事,大家都不想的.404的事呢,是不能强求的.所谓吉人自有天相,做人最要紧的就是开心.饿不饿,我给你煮一碗面... :("
+header-img: "img/404/404-bg.jpg"
+permalink: /404.html
+---
+
+
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<div class="site-heading" id="tag-heading">
+					<h1>404</h1>
+					<span class="subheading">{{ page.description }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<script>
+	document.body.classList.add('page-fullscreen');
+</script>

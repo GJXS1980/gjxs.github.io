@@ -1,0 +1,28 @@
+---
+layout:       post
+title:        "个人博客上线"
+subtitle:     "新的开始"
+date:         2018-06-10 14:36:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.06/10/bolg.jpg"
+header-mask:  0.3
+catalog:      true
+multilingual: true
+tags:
+    - 博客
+    - HTML
+    - CSS
+    - Markdown
+---
+
+<!-- Chinese Version -->
+<div class="zh post-container">
+    {% capture about_zh %}{% include posts/2018.06/10/zh.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
+</div>
+
+<!-- English Version -->
+<div class="en post-container">
+    {% capture about_en %}{% include posts/2018.06/10/en.md %}{% endcapture %}
+    {{ about_en | markdownify }}
+</div>
