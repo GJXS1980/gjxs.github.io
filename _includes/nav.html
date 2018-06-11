@@ -40,7 +40,7 @@
     var $navbar = document.querySelector('#gjxsblog_navbar');
     var $collapse = document.querySelector('.navbar-collapse');
 
-    var __GJXSNav__ = {
+    var __GjxsNav__ = {
         close: function(){
             $navbar.className = " ";
             // wait until animation end.
@@ -60,9 +60,9 @@
     // Bind Event
     $toggle.addEventListener('click', function(e){
         if ($navbar.className.indexOf('in') > 0) {
-            __GJXSNav__.close()
+            __GjxsNav__.close()
         }else{
-            __GJXSNav__.open()
+            __GjxsNav__.open()
         }
     })
 
@@ -73,13 +73,13 @@
      * $toggle/$collapse will break global delegation.
      *
      * Instead, we use a 'e.target' filter to prevent handler
-     * added to document close GJXSNav.
+     * added to document close gjxsNav.
      *
      * Also, we use 'click' instead of 'touchstart' as compromise
      */
     document.addEventListener('click', function(e){
         if(e.target == $toggle) return;
         if(e.target.className == 'icon-bar') return;
-        __GJXSNav__.close();
+        __GjxsNav__.close();
     })
 </script>
