@@ -1,6 +1,6 @@
 # Site settings
-title: G.J.先生 Blog
-SEOTitle: G.J.先生的博客 | G.J.先生 Blog
+title: GJXS Blog
+SEOTitle: G.J.先生的博客 | GJXS Blog
 header-img: img/root/home-bg.jpg
 email: gjxslwz@gmail.com
 description: "关于自动化、机器人与计算机 | 李伟政，Web & Mobile Lover，自动化　Engineer，UX Designer | 这里是 @GJXS李伟政 的个人博客，与你一起探索这个世界。"
@@ -50,6 +50,7 @@ kramdown:
 
 # Disqus settings
 disqus_username: gjxs
+livere_uid: MTAyMC8zNzIzMy8xMzc2Nw==
 
 # Netease settings
 netease_comment: false
