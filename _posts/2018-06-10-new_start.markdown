@@ -4,7 +4,7 @@ title:        "个人博客上线"
 subtitle:     "新的开始"
 date:         2018-06-10 14:36:00
 author:       "G.J.先生"
-header-img:   ![alt tag](http://pa59gape3.bkt.clouddn.com/blog.jpg)
+header-img:   ![blog](http://pa59gape3.bkt.clouddn.com/blog.jpg)
 header-mask:  0.3
 catalog:      true
 multilingual: true
