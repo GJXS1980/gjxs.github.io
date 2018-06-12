@@ -50,10 +50,10 @@ kramdown:
 
 # Disqus settings
 disqus_username: gjxs
-livere_uid: MTAyMC8zNzIzMy8xMzc2Nw==
+# livere_uid: MTAyMC8zNzIzMy8xMzc2Nw==
 
 # Netease settings
-netease_comment: false
+# netease_comment: false
 
 
 

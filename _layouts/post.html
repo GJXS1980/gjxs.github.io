@@ -99,9 +99,11 @@ layout: default
                 <div class="comment">
                     <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
-                <!-- disqus 评论框 end -->
+                <!-- disqus 评论框 end -->               
                 {% endif %}
- <!--
+                </div> 
+
+ <!-- 
                 {% if site.livere_uid %}
                 <!-来必力 评论框 start -->
  <!--                 <div id="lv-container" data-id="city" data-uid="livere_uid">
@@ -187,9 +189,9 @@ layout: default
 -->
 
 
-
 {% if site.disqus_username %}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus_username}}";
@@ -241,3 +243,7 @@ layout: default
     }
 </style>
 {% endif %}
+
+
+
+
