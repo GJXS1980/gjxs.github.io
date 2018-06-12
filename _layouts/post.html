@@ -6,6 +6,9 @@ layout: default
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
 <!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
 
+    <!-- canvas-nest.min.js -->
+<script type="text/javascript" src="../../../../js/canvas-nest.min.js"></script>
+
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
@@ -60,6 +63,7 @@ layout: default
 
                 <!-- Multi-Lingual -->
                 {% if page.multilingual %}
+
                 <!-- Language Selector -->
                 <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
                     <option value="0" selected> 中文 Chinese </option>
@@ -68,7 +72,6 @@ layout: default
                 {% endif %}
 
 				{{ content }}
-
                 <hr style="visibility: hidden;">
 
                 <ul class="pager">
@@ -100,9 +103,9 @@ layout: default
                 {% endif %}
  <!--
                 {% if site.livere_uid %}
-                <!-- 来必力 评论框 start -->
+                <!-来必力 评论框 start -->
  <!--                 <div id="lv-container" data-id="city" data-uid="livere_uid">
-                <!-- 来必力 评论框 end -->
+                <!-来必力 评论框 end -->
    <!--              {% endif %}
             </div>  
 -->
@@ -164,7 +167,7 @@ layout: default
 
 <!--
 {% if site.livere_uid %}
-<!-- 来必力City版安装代码 -->
+<!- 来必力City版安装代码 -->
 <!--<script type="text/javascript">
    (function(d, s) {
        var j, e = d.getElementsByTagName(s)[0];
@@ -179,7 +182,7 @@ layout: default
    })(document, 'script');
 </script>
 <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-<!-- City版安装代码已完成 -->
+<!- City版安装代码已完成 -->
 <!--{% endif %}
 -->
 
