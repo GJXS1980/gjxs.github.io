@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-#  Tutorial
-##  网站搭建
-####  1.安装Jekyll
-#####  (1)安装依赖
-=======
+
 # Tutorial
 ## 网站搭建
 #### 1.安装Jekyll
 ##### (1)安装依赖
->>>>>>> a0b25b35887523c2ec04eab3478f607a6ccf59fa
 ```
 sudo apt-get install ruby ruby-dev build-essential
 gem install bundler
@@ -25,19 +19,11 @@ export PATH=$HOME/gems/bin:$PATH
 source ~/.bashrc
 ```
 使配置生效
-<<<<<<< HEAD
-#####  (3)开始安装jekyll:
-```
-gem install jekyll bundler
-```
-#####  (4)升级JekyllPermalink
-=======
 ##### (3)开始安装jekyll:
 ```
 gem install jekyll bundler
 ```
 ##### (4)升级JekyllPermalink
->>>>>>> a0b25b35887523c2ec04eab3478f607a6ccf59fa
 查询版本:
 ```
 jekyll --version
@@ -50,20 +36,6 @@ gem update jekyll
 ```
 gem update --system
 ```
-<<<<<<< HEAD
-####  2.用jekyll生成网页
-```
- jekyll server
-```
-####  3.解析域名
-####  4.修改CNAME文件
-####  5.修改文件
-目录结构如下：`_layouts 内的文件为骨架模板`；`_posts `内的 markdown 文件会转化为我们所需发表的文章；`_config.yml` 为配置文件。
-######  `_posts`为博客更新处，照片可以放在`img/in-post/`目录下
-######  如果有中英文版的，．md文件放在`include posts/`目录下，相应修改_posts的文件就行了．
-#####  6.添加模块
-###### （１）动态曲线
-=======
 #### 2.用jekyll生成网页
 ```
  jekyll server
@@ -76,18 +48,13 @@ gem update --system
 ###### 如果有中英文版的，．md文件放在`include posts/`目录下，相应修改_posts的文件就行了．
 ##### 6.添加模块
 ######（１）动态曲线
->>>>>>> a0b25b35887523c2ec04eab3478f607a6ccf59fa
 添加模块`canvas-nest.min.js`到js目录下
 修改`layouts/post.html`文件在开始添加下面代码
 ```
     <!-- canvas-nest.min.js -->
 <script type="text/javascript" src="../../../../js/canvas-nest.min.js"></script>
 ```
-<<<<<<< HEAD
-##### （２）要修改照片的话，把
-=======
 #####（２）要修改照片的话，把
->>>>>>> a0b25b35887523c2ec04eab3478f607a6ccf59fa
 ```
 background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
 ```
@@ -95,11 +62,7 @@ background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header
 ```
 background-image: url({{ site.baseurl }}{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %})就行了
 ```
-<<<<<<< HEAD
-##### （３）打字特效
-=======
 #####（３）打字特效
->>>>>>> a0b25b35887523c2ec04eab3478f607a6ccf59fa
 ```
 <script src="../../../../js/activate-power-mode.js"></script>
 <script>
