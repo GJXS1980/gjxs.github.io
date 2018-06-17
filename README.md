@@ -8,7 +8,7 @@ sudo apt-get install ruby ruby-dev build-essential
 gem install bundler
 gem install jekyll-paginate
 ```
-#####  (2)修改.bashrc文件,添加下面的内容
+##### (2)修改.bashrc文件,添加下面的内容
 ```
 # Install Ruby Gems to ~/gems
 export GEM_HOME=$HOME/gems
@@ -47,14 +47,14 @@ gem update --system
 ###### `_posts`为博客更新处，照片可以放在`img/in-post/`目录下
 ###### 如果有中英文版的，．md文件放在`include posts/`目录下，相应修改_posts的文件就行了．
 ##### 6.添加模块
-######（１）动态曲线
+###### (1)动态曲线
 添加模块`canvas-nest.min.js`到js目录下
 修改`layouts/post.html`文件在开始添加下面代码
 ```
     <!-- canvas-nest.min.js -->
 <script type="text/javascript" src="../../../../js/canvas-nest.min.js"></script>
 ```
-#####（２）要修改照片的话，把
+##### (2)要修改照片的话，把
 ```
 background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')
 ```
@@ -62,7 +62,7 @@ background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header
 ```
 background-image: url({{ site.baseurl }}{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %})就行了
 ```
-#####（３）打字特效
+##### (3)打字特效
 ```
 <script src="../../../../js/activate-power-mode.js"></script>
 <script>
