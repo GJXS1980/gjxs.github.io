@@ -1,8 +1,8 @@
 ---
 layout:       post
-title:        "HELLO WORLD"
-subtitle:     "new start"
-date:         2018-06-10 14:36:00
+title:        "ROS Kinetic"
+subtitle:     "ROS Install"
+date:         2018-06-25 21:58:00
 author:       "G.J.先生"
 header-img:   "img/in-post/2018.06/10/bolg.jpg"
 catalog:      true
@@ -76,7 +76,7 @@ sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool
 roscore
 ```
 
-<center>![这里写图片描述](http://img.blog.csdn.net/20171222212714323?)</center>
+<center>![这里写图片描述](http://pa59gape3.bkt.clouddn.com/ros-kinetic.png)</center>
 
 (2)另外打开一个终端,输入:
 
@@ -84,7 +84,7 @@ roscore
 rosrun rviz rviz
 ```
 
-<center>![这里写图片描述](http://img.blog.csdn.net/20171222212737989?)</center>
+<center>![这里写图片描述](http://pa59gape3.bkt.clouddn.com/ros-kinetic1.png)</center>
 
 可以打开rviz就说明已经成功了
 
