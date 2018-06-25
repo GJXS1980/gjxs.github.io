@@ -66,7 +66,7 @@ sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool
 7.检查是否安装成功
 (1)
 
-```
+```bash
 roscore
 ```
 
@@ -75,7 +75,7 @@ roscore
 
 (2)另外打开一个终端,输入:
 
-```
+```bash
 rosrun rviz rviz
 ```
 
