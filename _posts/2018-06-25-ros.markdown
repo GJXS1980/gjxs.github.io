@@ -1,15 +1,14 @@
 ---
 layout:       post
 title:        "ROS Kinetic"
-subtitle:     "ROS Install"
+subtitle:     "ROS Installation"
 date:         2018-06-25 21:58:00
 author:       "G.J.先生"
-header-img:   "img/in-post/2018.06/10/bolg.jpg"
+header-img:   "img/in-post/2018.06/25/kinetic.png"
 catalog:      true
 tags:
-    - 博客
-    - HTML
-    - Markdown
+    - ROS
+    - Ubuntu16.04
 ---
 
 前提
@@ -19,59 +18,45 @@ Ubuntu版本：16.04
 安装过程
 ----------
 1.设置你的sources.list
-
 ```
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-
 ```
 
 2.下载安装秘钥
-
 ```
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 ```
 
 3.确保您的Debian软件包索引是最新的:
-
 ```
 sudo apt-get update
 ```
 
-
-
 4.安装Kinetic桌面完整安装:(推荐）：
-
 ```
 sudo apt-get install ros-kinetic-desktop-full
 ```
 
 5.Initialize rosdep
-
 (1)初始化rosdep
-
 ```
 sudo rosdep init
 rosdep update
 ```
 
 (2)环境设置
-
 ```
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
 6.安装软件包的依赖关系
-
 ```
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
 
-
 7.检查是否安装成功
-
 (1)输入下面的命令行
-
 ```
 roscore
 ```
@@ -79,7 +64,6 @@ roscore
 <center>![这里写图片描述](http://pa59gape3.bkt.clouddn.com/ros-kinetic.png)</center>
 
 (2)另外打开一个终端,输入:
-
 ```
 rosrun rviz rviz
 ```
