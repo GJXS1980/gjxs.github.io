@@ -61,14 +61,14 @@ sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool
 roscore
 ```
 
-![](http://pa59gape3.bkt.clouddn.com/ros-kinetic.png)
+<center>![ROS-Kinetic](http://pa59gape3.bkt.clouddn.com/ros-kinetic.png)
 
 (2)另外打开一个终端,输入:
 ```
 rosrun rviz rviz
 ```
 
-![](http://pa59gape3.bkt.clouddn.com/ros-kinetic1.png)
+<center>![ROS-Kinetic](http://pa59gape3.bkt.clouddn.com/ros-kinetic1.png)
 
 可以打开rviz就说明已经成功了
 
