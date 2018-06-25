@@ -11,12 +11,10 @@ tags:
     - Ubuntu16.04
 ---
 
-前提
-----------
+##### * 前提
 Ubuntu版本：16.04
-
-安装过程
-----------
+*****
+##### *安装过程
 1.设置你的sources.list
 ```bash
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -39,32 +37,32 @@ sudo apt-get install ros-kinetic-desktop-full
 
 5.Initialize rosdep
 (1)初始化rosdep
-```
+```bash
 sudo rosdep init
 rosdep update
 ```
 
 (2)环境设置
-```
+```bash
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
 6.安装软件包的依赖关系
-```
+```bash
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
-
+*****
 7.检查是否安装成功
 (1)输入下面的命令行
-```
+```bash
 roscore
 ```
 
 <center>![ROS-Kinetic](http://pa59gape3.bkt.clouddn.com/ros-kinetic.png)
 
 (2)另外打开一个终端,输入:
-```
+```bash
 rosrun rviz rviz
 ```
 
