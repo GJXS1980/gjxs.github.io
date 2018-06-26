@@ -27,7 +27,7 @@ Ubuntu
 
 （3）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
 ```bash
-sudo apt-get dpkg -i <package-name.deb>
+$ sudo apt-get dpkg -i <package-name.deb>
 ```
 重启完成配置
 
@@ -110,7 +110,7 @@ $ teamviewer
 ----------
 ##### 网易云音乐
 （1）下载软件包
-> 链接: https://pan.baidu.com/s/1i7b4QZN 密码: ktfk
+> 链接: https://pan.baidu.com/s/1fx-u-QgKJQxW72QnIxrhbw 密码: GJXS
 
 缺少依赖时,可以运行下面命令安装
 ```bash
@@ -118,7 +118,7 @@ $ sudo apt-get -f install
 ```
 （2）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
 ```bash
-sudo apt-get dpkg -i <package-name.deb>
+$ sudo apt-get dpkg -i <package-name.deb>
 ```
 
 *****
