@@ -11,8 +11,10 @@ tags:
     - Ubuntu
 ---
 
-##### 前提
-Ubuntu版本：16.
+>Abstract:机器人操作系统ROS(Robot Operating System)提供一系列程序库和工具以帮助软件开发者创建机器人应用软件。它提供了硬件抽象、设备驱动、函数库、可视化工具、消息传递和软件包管理等诸多功能,遵循BSD开源许可协议。每个ubuntu版本都对应一个ROS的版本，现在这个教程是基于Ubuntu16.04下安装相对应的ROS-Kinetic版本,其他版本见[ROS.org](http://wiki.ros.org/ROS/Installation)。
+
+##### 系统要求
+Ubuntu版本：16.04
 
 *****
 
@@ -85,3 +87,4 @@ rosrun rviz rviz
 
 可以打开rviz就说明已经成功了
 
+*****
