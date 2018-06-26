@@ -35,9 +35,9 @@ sudo apt-get dpkg -i <package-name.deb>
 ### 2.浏览器
 ----------
 ##### chrome
-1.到[官网](https://www.google.cn/chrome/browser/desktop/index.html)下载安装包
+(1)到[官网](https://www.google.cn/chrome/browser/desktop/index.html)下载安装包
 
-2.双击下载的安装包即可完成安装,如果显示缺少依赖，输入下面的命令行安装依赖：
+(2)双击下载的安装包即可完成安装,如果显示缺少依赖，输入下面的命令行安装依赖：
 ```bash
 sudo apt-get install libnss3
 ```
@@ -45,7 +45,7 @@ sudo apt-get install libnss3
 *****
 ### 3.社交软件
 ----------
-##### (1)微信
+##### 微信
 （1)到[github开源项目](https://github.com/geeeeeeeeek/electronic-wechat/releases)下载最新版electronic-wechat-linux64位
 
 （2）找到下载的目录，解压文件，双击下面的文件就可以打开微信
@@ -80,7 +80,7 @@ Name[en]=Eclipse     /**软件的名字*/
 
 最后在/usr/share/applications/目录下找到软件图标，把它复制粘贴到桌面就行了
 
-##### (2)TeamViewer
+##### TeamViewer
 （1）到[官网](https://www.teamviewer.com/en/download/linux/)下载Ubuntu, Debian（x86 64bit）安装包：
 
 （2）打开一个终端窗口，将目录切换到下载目录：
@@ -124,7 +124,7 @@ sudo apt-get dpkg -i <package-name.deb>
 *****
 ### 5.IDE编辑器
 ----------
-##### (1)sublime text
+##### sublime text
 （1）安装GPG密钥：
 ```bash
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -171,7 +171,7 @@ cd sublime-text-imfix
 ```
 重启软件生效
 
-##### (2)visual studio code IDE
+##### visual studio code IDE
 (1)到[官网](https://go.microsoft.com/fwlink/?LinkID=760868)下载安装包
 
 (2)进入下载的目录,安装软件:
@@ -187,7 +187,7 @@ code
 ```
 为了方便使用,可以锁定到启动器.
 
-##### (3)Atom
+##### Atom
 ```bash
 sudo add-apt-repository ppa:webupd8team/atom  
 sudo apt-get update  
