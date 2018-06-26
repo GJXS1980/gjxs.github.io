@@ -48,6 +48,7 @@ sudo apt-get install ros-kinetic-desktop-full
 ```
 
 5.Initialize rosdep
+
 (1)初始化rosdep
 
 ```bash
