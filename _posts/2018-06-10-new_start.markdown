@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "HELLO WORLD"
-subtitle:     "new start"
+subtitle:     "NEW START"
 date:         2018-06-10 14:36:00
 author:       "G.J.先生"
 header-img:   "img/in-post/2018.06/10/bolg.jpg"
