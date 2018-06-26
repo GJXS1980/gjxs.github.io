@@ -8,7 +8,7 @@ header-img:   "img/in-post/2018.06/25/kinetic.png"
 catalog:      true
 tags:
     - ROS
-    - Ubuntu16.04
+    - Ubuntu
 ---
 
 ##### 前提
@@ -61,12 +61,13 @@ source ~/.bashrc
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
 
+
 *****
 
-7.检查是否安装成功
-(1)
 
-```bash
+7.检查是否安装成功
+
+```vim
 roscore
 ```
 
@@ -75,7 +76,7 @@ roscore
 
 (2)另外打开一个终端,输入:
 
-```bash
+```vim
 rosrun rviz rviz
 ```
 
