@@ -18,15 +18,13 @@ tags:
 Ubuntu
 
 *****
-[toc]
-
-*****
 ### 1.输入法
 ----------
 ##### 搜狗输入法
 
 
 （1）先到软件管理中心下载安装fcitx
+
 （2）到下面的网站下载64位的安装包
 > https://pinyin.sogou.com/linux/?r=pinyin
 
@@ -45,7 +43,7 @@ sudo apt-get dpkg -i <package-name.deb>
 
 2.双击下载的安装包即可完成安装
 如果显示缺少依赖，输入下面的命令行安装依赖：
-```
+```bash
 $ sudo apt-get install libnss3
 ```
 
@@ -94,24 +92,24 @@ Name[en]=Eclipse     /**软件的名字*/
 
 （2）打开一个终端窗口，将目录切换到下载目录：
 
-<center>![这里写图片描述](https://img-blog.csdn.net/20180506114018877?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dKWFMyMDE3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)</center>
+![这里写图片描述](https://img-blog.csdn.net/20180506114018877?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0dKWFMyMDE3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 (3)安装：
-```
+```bash
 $ sudo dpkg -i teamviewer_13.1.3026_amd64.deb
 ```
 
-<font color=#FF0000>如果报错，就执行：
-```
+如果报错，就执行：
+```bash
 $ sudo apt-get -f install
 ```
 然后重新执行一次上面的命令;
-```
+```bash
 $ sudo dpkg -i teamviewer_13.1.3026_amd64.deb
 ```
 
 （4）输入下面的命令启动TeamViewer：
-```
+```bash
 $ teamviewer
 ```
 
@@ -123,7 +121,7 @@ $ teamviewer
 > 链接: https://pan.baidu.com/s/1i7b4QZN 密码: ktfk
 
 缺少依赖时,可以运行下面命令安装
-```
+```bash
 $ sudo apt-get -f install
 ```
 （2）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
@@ -136,27 +134,27 @@ sudo apt-get dpkg -i <package-name.deb>
 ----------
 ##### (1)sublime text
 （1）安装GPG密钥：
-```
+```bash
 $ wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 ```
 
 （2）确保apt已设置为使用https资源：
-```
+```bash
 $ sudo apt-get install apt-transport-https
 ```
 
 （3）安装稳定版或者开发版
 稳定版
-```
+```bash
 $ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 ```
 开发版
-```
+```bash
 $ echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 ```
 
 （4）更新apt源并安装Sublime Text
-```
+```bash
 $ sudo apt-get update
 $ sudo apt-get install sublime-text
 ```
@@ -166,20 +164,20 @@ $ sudo apt-get install sublime-text
 > https://go.microsoft.com/fwlink/?LinkID=760868
 
 (2)进入下载的目录,安装软件:
-```
+```bash
 $ sudo dpkg -i code_1.23.0-1525361119_amd64.deb
 ```
 
-> <font color=#FF0000>说明:这里是sudo dpkg -i 软件包的全名(带后缀)
+> 说明:这里是sudo dpkg -i 软件包的全名(带后缀)
 
 (3)在终端打开软件:
-```
+```bash
 $ code
 ```
 为了方便使用,可以锁定到启动器.
 
 ##### (3)Atom
-```
+```bash
 $ sudo add-apt-repository ppa:webupd8team/atom  
 $ sudo apt-get update  
 $ sudo apt-get install atom
