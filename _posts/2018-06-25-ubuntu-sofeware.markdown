@@ -27,7 +27,7 @@ Ubuntu
 
 （3）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
 ```bash
-    sudo apt-get dpkg -i <package-name.deb>
+sudo apt-get dpkg -i <package-name.deb>
 ```
 重启完成配置
 
@@ -39,7 +39,7 @@ Ubuntu
 
 2.双击下载的安装包即可完成安装,如果显示缺少依赖，输入下面的命令行安装依赖：
 ```bash
-    sudo apt-get install libnss3
+sudo apt-get install libnss3
 ```
 
 *****
@@ -54,12 +54,12 @@ Ubuntu
 
 (3)创建桌面快捷方式：
 ```bash
-    gksudo gedit /usr/share/applications/eclipse.desktop
+gksudo gedit /usr/share/applications/eclipse.desktop
 ```
 
 如果提示没安装gksu，输入下面的命令行安装：
 ```bash
-    sudo apt-get install gksu
+sudo apt-get install gksu
 ```
 
 将下面内容复制到打开的eclipse.desktop文件中：
@@ -88,21 +88,21 @@ Name[en]=Eclipse     /**软件的名字*/
 
 (3)安装：
 ```bash
-    sudo dpkg -i teamviewer_13.1.3026_amd64.deb
+sudo dpkg -i teamviewer_13.1.3026_amd64.deb
 ```
 
 如果报错，就执行：
 ```bash
-    sudo apt-get -f install
+sudo apt-get -f install
 ```
 然后重新执行一次上面的命令;
 ```bash
-    sudo dpkg -i teamviewer_13.1.3026_amd64.deb
+sudo dpkg -i teamviewer_13.1.3026_amd64.deb
 ```
 
 （4）输入下面的命令启动TeamViewer：
 ```bash
-    teamviewer
+teamviewer
 ```
 
 *****
@@ -114,11 +114,11 @@ Name[en]=Eclipse     /**软件的名字*/
 
 缺少依赖时,可以运行下面命令安装
 ```bash
-    sudo apt-get -f install
+sudo apt-get -f install
 ```
 （2）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
 ```bash
-    sudo apt-get dpkg -i <package-name.deb>
+sudo apt-get dpkg -i <package-name.deb>
 ```
 
 *****
@@ -127,35 +127,35 @@ Name[en]=Eclipse     /**软件的名字*/
 ##### (1)sublime text
 （1）安装GPG密钥：
 ```bash
-    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 ```
 
 （2）确保apt已设置为使用https资源：
 ```bash
-    sudo apt-get install apt-transport-https
+sudo apt-get install apt-transport-https
 ```
 
 （3）安装稳定版或者开发版
 稳定版
 ```bash
-    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 ```
 开发版
 ```bash
-    echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 ```
 
 （4）更新apt源并安装Sublime Text
 ```bash
-    sudo apt-get update
-    sudo apt-get install sublime-text
+sudo apt-get update
+sudo apt-get install sublime-text
 ```
 
 （5）解决不能输入中文问题
 
 更新并升级到最新版本
 ```bash
-    sudo apt-get update && sudo apt-get upgrade
+sudo apt-get update && sudo apt-get upgrade
 ```
 本地目录下载sublime-text-imfix
 ```bash
@@ -176,22 +176,22 @@ cd sublime-text-imfix
 
 (2)进入下载的目录,安装软件:
 ```bash
-$ sudo dpkg -i code_1.23.0-1525361119_amd64.deb
+sudo dpkg -i code_1.23.0-1525361119_amd64.deb
 ```
 
 > 说明:这里是sudo dpkg -i 软件包的全名(带后缀)
 
 (3)在终端打开软件:
 ```bash
-$ code
+code
 ```
 为了方便使用,可以锁定到启动器.
 
 ##### (3)Atom
 ```bash
-$ sudo add-apt-repository ppa:webupd8team/atom  
-$ sudo apt-get update  
-$ sudo apt-get install atom
+sudo add-apt-repository ppa:webupd8team/atom  
+sudo apt-get update  
+sudo apt-get install atom
 ```
 
 *****
