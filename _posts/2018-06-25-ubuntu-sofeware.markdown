@@ -11,8 +11,7 @@ tags:
     - Ubuntu
 ---
 *****
->Abstract: "基于ubuntu系统下的个人常用软件安装教程，为了以后自己重装软件时可以节省找相关教程的时间。"<br>                                                                                                                                                                                                                                
-<br />                             
+><font size="5">Abstract:</font><br /> "基于ubuntu系统下的个人常用软件安装教程，为了以后自己重装软件时可以节省找相关教程的时间。"<br>                                                                                                                                                   <br />                                                                                             
 
 *****
 ##### 系统要求
@@ -152,6 +151,25 @@ $ sudo apt-get update
 $ sudo apt-get install sublime-text
 ```
 
+（5）解决不能输入中文问题
+更新并升级到最新版本
+```bash
+sudo apt-get update && sudo apt-get upgrade
+```
+本地目录下载sublime-text-imfix
+```bash
+git clone https://github.com/lyfeyaj/sublime-text-imfix.git
+```
+进入目录下sublime-text-imfix
+```bash
+cd sublime-text-imfix
+```
+运行下面的脚本
+```
+./sublime-imfix
+```
+重启软件生效
+
 ##### (2)visual studio code IDE
 (1)到[官网](https://go.microsoft.com/fwlink/?LinkID=760868)下载安装包
 
@@ -182,5 +200,9 @@ $ sudo apt-get install atom
 (1)去[官网](https://www.xmind.net/xmind/downloads/xmind-8-update7-linux.zip)下载安装包
 
 (2)对下载的包解压,然后进入xmind-8/XMind_amd64/目录下点击打开XMind进可以了
+
+*****
+>参考链接：[Sublime Text 3 Input Method(Fcitx) Fix [Ubuntu(Debian)]
+](https://github.com/lyfeyaj/sublime-text-imfix)
 
 *****
