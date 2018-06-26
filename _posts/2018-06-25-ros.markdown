@@ -10,39 +10,30 @@ tags:
     - ROS
     - Ubuntu
 ---
-
 *****
-
->Abstract: "机器人操作系统ROS(Robot Operating System)是专为机器人软件开发所设计出来的一套电脑操作系统架构，提供一系列程序库和工具以帮助软件开发者创建机器人应用软件，它遵循BSD开源许可协议。每个ubuntu版本都对应一个ROS的版本，现在这个教程是基于Ubuntu16.04下安装相对应的ROS-Kinetic版本，其他版本安装见[ROS.org](http://wiki.ros.org/ROS/Installation)。"                                              
-
+>Abstract: "机器人操作系统ROS(Robot Operating System)是专为机器人软件开发所设计出来的一套电脑操作系统架构，提供一系列程序库和工具以帮助软件开发者创建机器人应用软件，它遵循BSD开源许可协议。每个ubuntu版本都对应一个ROS的版本，现在这个教程是基于Ubuntu16.04下安装相对应的ROS-Kinetic版本，其他版本安装见[ROS.org](http://wiki.ros.org/ROS/Installation)。"                               
 *****
-
 ##### 系统要求
-Ubuntu版本：16.04
+Ubuntu版本：16.04 
 
 *****
-
 ##### 安装过程
 1.设置你的sources.list
-
 ```bash
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 ```
 
 2.下载安装秘钥
-
 ```bash
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
 ```
 
 3.确保您的Debian软件包索引是最新的:
-
 ```bash
 sudo apt-get update
 ```
 
 4.安装Kinetic桌面完整安装:(推荐）：
-
 ```bash
 sudo apt-get install ros-kinetic-desktop-full
 ```
@@ -50,41 +41,33 @@ sudo apt-get install ros-kinetic-desktop-full
 5.Initialize rosdep
 
 (1)初始化rosdep
-
 ```bash
 sudo rosdep init
 rosdep update
 ```
 
 (2)环境设置
-
 ```bash
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
 6.安装软件包的依赖关系
-
 ```bash
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
 ```
 
 7.检查是否安装成功
-
 ```
     roscore
 ```
-
 ![ROS-Kinetic](http://pa59gape3.bkt.clouddn.com/ros-kinetic.png)
 
 (2)另外打开一个终端,输入:
-
 ```
     rosrun rviz rviz
 ```
-
 ![ROS-Kinetic](http://pa59gape3.bkt.clouddn.com/ros-kinetic1.png)
-
 可以打开rviz就说明已经成功了
 
 *****
