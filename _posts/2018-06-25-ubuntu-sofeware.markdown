@@ -11,7 +11,7 @@ tags:
     - Ubuntu
 ---
 *****
-><font size="5">Abstract:</font><br /> "基于ubuntu系统下的个人常用软件安装教程，为了以后自己重装软件时可以节省找相关教程的时间。"<br>                                                                                                                                                   <br />                                                                                             
+>Abstract: "基于ubuntu系统下的个人常用软件安装教程，为了以后自己重装软件时可以节省找相关教程的时间。"<br>                                                                                                                                                   <br />                                                                                             
 
 *****
 ##### 系统要求
@@ -27,7 +27,7 @@ Ubuntu
 
 （3）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
 ```bash
-$ sudo apt-get dpkg -i <package-name.deb>
+    sudo apt-get dpkg -i <package-name.deb>
 ```
 重启完成配置
 
@@ -39,7 +39,7 @@ $ sudo apt-get dpkg -i <package-name.deb>
 
 2.双击下载的安装包即可完成安装,如果显示缺少依赖，输入下面的命令行安装依赖：
 ```bash
-$ sudo apt-get install libnss3
+    sudo apt-get install libnss3
 ```
 
 *****
@@ -54,12 +54,12 @@ $ sudo apt-get install libnss3
 
 (3)创建桌面快捷方式：
 ```bash
-$ gksudo gedit /usr/share/applications/eclipse.desktop
+    gksudo gedit /usr/share/applications/eclipse.desktop
 ```
 
 如果提示没安装gksu，输入下面的命令行安装：
 ```bash
-$ sudo apt-get install gksu
+    sudo apt-get install gksu
 ```
 
 将下面内容复制到打开的eclipse.desktop文件中：
@@ -88,21 +88,21 @@ Name[en]=Eclipse     /**软件的名字*/
 
 (3)安装：
 ```bash
-$ sudo dpkg -i teamviewer_13.1.3026_amd64.deb
+    sudo dpkg -i teamviewer_13.1.3026_amd64.deb
 ```
 
 如果报错，就执行：
 ```bash
-$ sudo apt-get -f install
+    sudo apt-get -f install
 ```
 然后重新执行一次上面的命令;
 ```bash
-$ sudo dpkg -i teamviewer_13.1.3026_amd64.deb
+    sudo dpkg -i teamviewer_13.1.3026_amd64.deb
 ```
 
 （4）输入下面的命令启动TeamViewer：
 ```bash
-$ teamviewer
+    teamviewer
 ```
 
 *****
@@ -114,11 +114,11 @@ $ teamviewer
 
 缺少依赖时,可以运行下面命令安装
 ```bash
-$ sudo apt-get -f install
+    sudo apt-get -f install
 ```
 （2）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
 ```bash
-$ sudo apt-get dpkg -i <package-name.deb>
+    sudo apt-get dpkg -i <package-name.deb>
 ```
 
 *****
@@ -127,34 +127,35 @@ $ sudo apt-get dpkg -i <package-name.deb>
 ##### (1)sublime text
 （1）安装GPG密钥：
 ```bash
-$ wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 ```
 
 （2）确保apt已设置为使用https资源：
 ```bash
-$ sudo apt-get install apt-transport-https
+    sudo apt-get install apt-transport-https
 ```
 
 （3）安装稳定版或者开发版
 稳定版
 ```bash
-$ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 ```
 开发版
 ```bash
-$ echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+    echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 ```
 
 （4）更新apt源并安装Sublime Text
 ```bash
-$ sudo apt-get update
-$ sudo apt-get install sublime-text
+    sudo apt-get update
+    sudo apt-get install sublime-text
 ```
 
 （5）解决不能输入中文问题
+
 更新并升级到最新版本
 ```bash
-sudo apt-get update && sudo apt-get upgrade
+    sudo apt-get update && sudo apt-get upgrade
 ```
 本地目录下载sublime-text-imfix
 ```bash
