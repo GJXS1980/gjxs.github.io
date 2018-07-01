@@ -213,15 +213,15 @@ sudo apt-get update
 sudo apt-get install shadowsocks-qt5
 ```
 
-(2)安装完成之后配置ss-qt5和浏览器代理
+(2)配置ss-qt5及连接
 
 输入科学上网账号
 ![输入账号](http://pa59gape3.bkt.clouddn.com/ss-qt5.png)
 
-连接
+连接ss-qt5
 ![连接](http://pa59gape3.bkt.clouddn.com/ss-qt5-1.png)
 
-配置浏览器代理(以chrome浏览器为例)
+(3)配置浏览器代理(以chrome浏览器为例)
 ![配置浏览器](http://pa59gape3.bkt.clouddn.com/ss-qt5-2.png)
 
 *****
