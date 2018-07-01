@@ -8,7 +8,7 @@ header-img:   "img/in-post/2018.07/01/blog-07-01-1.jpg"
 catalog:      true
 tags:
     - ROS
-    - Tutorials
+    - ROS_Tutorials
     - Filesystem Tools
 ---
 *****
@@ -20,7 +20,7 @@ tags:
 ```bash
 sudo apt-get install ros-<distro>-ros-tutorials
 ```
-其中distro为你用ROS版本
+其中<distro\>为你用ROS版本
 
 *****
 ### 文件系统概念
