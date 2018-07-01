@@ -1,6 +1,6 @@
 ---
 layout:       post
-title:        "ROS Tutorials(2)"
+title:        "ROS Tutorials(1)"
 subtitle:     "Navigating the ROS Filesystem"
 date:         2018-07-01 11:18:00
 author:       "G.J.先生"
@@ -12,7 +12,7 @@ tags:
     - Filesystem Tools
 ---
 *****
->Abstract: "本教程主要介绍ROS文件系统的概念，并介绍了使用roscd，rosls和rospack命令行工具进行一些简单的演示，加深对文件级系统的理解。"<br>                                                                 <br />                                           
+>Abstract: "本教程主要介绍ROS文件系统的概念，并介绍了使用roscd，rosls和rospack命令行工具进行一些简单的演示，加深对文件级系统的理解。"<br>                                                                                                               <br />                                           
 
 *****
 ##### Prerequisites
@@ -20,7 +20,7 @@ tags:
 ```bash
 sudo apt-get install ros-<distro>-ros-tutorials
 ```
-其中<distro>为你用ROS版本
+其中distro为你用ROS版本
 
 *****
 ### 文件系统概念
@@ -31,8 +31,7 @@ sudo apt-get install ros-<distro>-ros-tutorials
 ### 命令行工具
 ----------
 ##### rospack
-rospack命令可以查看关于功能包的一些属性，比如用rospack find找功能包的路径
-用法：
+rospack命令可以查看关于功能包的一些属性，比如用rospack find找功能包的路径用法：
 ```bash
 rospack find [package_name]
 ```
@@ -46,8 +45,7 @@ rospack find roscpp
 ```
 
 ##### roscd 
-说明：roscd是rosbash的一部分，可以用roscd来进入到功能包的文件夹目录下
-用法：
+说明：roscd是rosbash的一部分，可以用roscd来进入到功能包的文件夹目录下,用法：
 ```bash
 roscd [locationname[/subdir]]
 ```
