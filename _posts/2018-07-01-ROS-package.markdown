@@ -62,6 +62,7 @@ Name | Illustration |
 <license\> | 发布代码的软件许可证（例如GPL，BSD，ASL） |
 
 不指定对其他包的任何依赖关系，有六种类型形式如下：
+
 Name | Illustration|
 |:-|:-|
 <build_depend\> | 构建依赖关系(Build Dependencies）|
