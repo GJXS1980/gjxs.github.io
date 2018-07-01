@@ -1,6 +1,6 @@
 ---
 layout:       post
-title:        "ROS Tutorials(1)"
+title:        "ROS Tutorials 1"
 subtitle:     "Navigating the ROS Filesystem"
 date:         2018-07-01 11:18:00
 author:       "G.J.先生"
@@ -31,7 +31,7 @@ sudo apt-get install ros-<distro>-ros-tutorials
 ### 命令行工具
 ----------
 ##### rospack
-rospack命令可以查看关于功能包的一些属性，比如用rospack find找功能包的路径用法：
+rospack命令可以查看关于功能包的一些属性，比如用rospack find找功能包的路径，用法如下：
 ```bash
 rospack find [package_name]
 ```
@@ -45,7 +45,7 @@ rospack find roscpp
 ```
 
 ##### roscd 
-说明：roscd是rosbash的一部分，可以用roscd来进入到功能包的文件夹目录下,用法：
+说明：roscd是rosbash的一部分，可以用roscd来进入到功能包的文件夹目录下，用法如下：
 ```bash
 roscd [locationname[/subdir]]
 ```
@@ -53,7 +53,7 @@ roscd [locationname[/subdir]]
 ```bash
 roscd roscpp
 ```
-进入了roscpp的文件目录下,查看现在的路径：
+进入了roscpp的文件目录下，查看现在的路径：
 ```bash
 pwd
 ```
@@ -61,7 +61,7 @@ pwd
 (-p：打印的路径名不包含符号链接;-l：打印的路径名可以包含符号链接)
 
 可以看到结果跟上面用rospack find找到的一样
->roscd与其他ROS工具一样，只会在ROS_PACKAGE_PATH中列出的目录中找到ROS包。要查看ROS_PACKAGE_PATH中的内容,递归搜索ROS_PACKAGE_PATH中的每个条目,将找到命名路径下的所有ROS软件包用下面的命令行：
+>roscd与其他ROS工具一样，只会在ROS_PACKAGE_PATH中列出的目录中找到ROS包。要查看ROS_PACKAGE_PATH中的内容，递归搜索ROS_PACKAGE_PATH中的每个条目，将找到命名路径下的所有ROS软件包用下面的命令行：
 ```bash
 echo $ROS_PACKAGE_PATH
 ```
@@ -70,11 +70,11 @@ echo $ROS_PACKAGE_PATH
 用roscd log可以进入ROS的日志文件夹目录
 
 ##### rosls
-rosls是rosbash一个子命令，可以用rosls显示现在目录下的所有文件名（带后缀），这个效果跟ls一样；如果后面加功能包的话，可以显示功能包目录下的文件名，ls没有这个功能，用法：
+rosls是rosbash一个子命令，可以用rosls显示现在目录下的所有文件名(带后缀)这个效果跟ls一样；如果后面加功能包的话，可以显示功能包目录下的文件名ls没有这个功能，用法：
 ```bash
 rosls [locationname[/subdir]]
 ```
-例如,现在要查看roscpp_tutorials目录有哪些文件，输入下面的命令行：
+例如，现在要查看roscpp_tutorials目录有哪些文件，输入下面的命令行：
 ```bash
 rosls roscpp_tutorials
 ```
