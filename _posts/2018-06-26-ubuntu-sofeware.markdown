@@ -203,6 +203,28 @@ sudo apt-get install atom
 (2)对下载的包解压,然后进入xmind-8/XMind_amd64/目录下点击打开XMind进可以了
 
 *****
+### 7.科学上网
+----------
+##### ss-qt5
+(1)输入下面的命令行安装ss-qt5:
+```bash
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+```
+
+(2)安装完成之后配置ss-qt5和浏览器代理
+
+输入科学上网账号
+![输入账号](http://pa59gape3.bkt.clouddn.com/ss-qt5.png)
+
+连接
+![连接](http://pa59gape3.bkt.clouddn.com/ss-qt5-1.png)
+
+配置浏览器代理(以chrome浏览器为例)
+![配置浏览器](http://pa59gape3.bkt.clouddn.com/ss-qt5-2.png)
+
+*****
 >参考链接：[Sublime Text 3 Input Method(Fcitx) Fix [Ubuntu(Debian)]
 ](https://github.com/lyfeyaj/sublime-text-imfix)
 
