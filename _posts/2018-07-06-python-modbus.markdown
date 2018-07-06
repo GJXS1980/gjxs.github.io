@@ -21,7 +21,11 @@ tags:
 ##### 02功能码
 ```python
 class ReadDiscreteInputs(ModbusFunction):
-    """ Implement Modbus function code 02    (02功能码读入多个离散量输入）
+    ###########################################################################
+    ###########################################################################
+
+    """
+    Implement Modbus function code 02    (02功能码读入多个离散量输入）
 
         "This function code is used to read from 1 to 2000 contiguous status of
         discrete inputs in a remote device. The Request PDU specifies the
@@ -91,6 +95,8 @@ class ReadDiscreteInputs(ModbusFunction):
         b'\\x02\\x01\\x03'
 
     """
+    ###########################################################################
+    ###########################################################################
     function_code = READ_DISCRETE_INPUTS
     max_quantity = 2000
     format_character = 'B'
@@ -240,6 +246,8 @@ class ReadDiscreteInputs(ModbusFunction):
 ##### 03功能码
 ```python
 class ReadHoldingRegisters(ModbusFunction):
+    ###########################################################################
+    ###########################################################################
     """ Implement Modbus function code 03.
 
         "This function code is used to read the contents of a contiguous block
@@ -301,6 +309,9 @@ class ReadHoldingRegisters(ModbusFunction):
         b'\\x03\\x06\\x00\\x08\\x00\\x00\\x00\\x0f'
 
     """
+    ###########################################################################
+    ###########################################################################
+
     function_code = READ_HOLDING_REGISTERS
     max_quantity = 0x007D
 
@@ -427,6 +438,8 @@ class ReadHoldingRegisters(ModbusFunction):
 一个功能包可以有很多间接的依赖关系，可以用rospack命令查看：
 ```python
 class WriteMultipleCoils(ModbusFunction):
+    ###########################################################################
+    ###########################################################################
     """ Implement Modbus function 15 (0x0F) Write Multiple Coils.
 
         "This function code is used to force each coil in a sequence of coils
@@ -481,6 +494,8 @@ class WriteMultipleCoils(ModbusFunction):
         ================ ===============
 
     """
+    ###########################################################################
+    ###########################################################################
     function_code = WRITE_MULTIPLE_COILS
 
     starting_address = None
@@ -522,6 +537,9 @@ class WriteMultipleCoils(ModbusFunction):
 
     @staticmethod
     def create_from_request_pdu(pdu):
+
+    ###########################################################################
+    ###########################################################################
         """ Create instance from request PDU.
 
         This method requires some clarification regarding the unpacking of
@@ -572,6 +590,9 @@ class WriteMultipleCoils(ModbusFunction):
 
         :param pdu: A request PDU.
         """
+    ###########################################################################
+    ###########################################################################
+
         _, starting_address, quantity, byte_count = \
             struct.unpack('>BHHB', pdu[:6])
 
@@ -651,6 +672,8 @@ class WriteMultipleCoils(ModbusFunction):
 ##### 16功能码
 ```python
 class WriteMultipleRegisters(ModbusFunction):
+    ###########################################################################
+    ###########################################################################
     """ Implement Modbus function 16 (0x10) Write Multiple Registers.
 
         "This function code is used to write a block of contiguous registers (1
@@ -702,6 +725,8 @@ class WriteMultipleRegisters(ModbusFunction):
         ================ ===============
 
     """
+    ###########################################################################
+    ###########################################################################
     function_code = WRITE_MULTIPLE_REGISTERS
 
     starting_address = None
