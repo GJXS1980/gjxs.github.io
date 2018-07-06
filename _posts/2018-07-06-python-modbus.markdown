@@ -1,18 +1,18 @@
 ---
 layout:       post
-title:        "ROS Tutorials 2"
-subtitle:     "ROS Package.xml"
-date:         2018-07-01 12:25:00
+title:        "Python Modbus"
+subtitle:     "modbus"
+date:         2018-07-06 17:47:00
 author:       "G.J.先生"
 header-img:   "img/in-post/2018.07/01/blog-07-01-2.jpg"
 catalog:      true
 tags:
-    - ROS
-    - ROS_Tutorials
-    - Package.xml
+    - python
+    - modbus
+    - kivy
 ---
 *****
->Abstract: "catkin package必须包含的部分CMakeLists.txt和package.xml，本教程主要介绍package.xml的构成和文件描述。"<br>                                                                                                                          <br /> 
+>Abstract: "临时文档"<br>                                                                                                                          <br /> 
 
 
 *****
