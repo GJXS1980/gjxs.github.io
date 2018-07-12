@@ -82,7 +82,10 @@ vim /etc/fstab
 ![bug4](http://pbqlliizk.bkt.clouddn.com/4.jpg)
 把挂载home的盘的2改为0
 ![bug4](http://pbqlliizk.bkt.clouddn.com/5.jpg)
-<img src="http://pbqlliizk.bkt.clouddn.com/5.jpg" width="500" hegiht="313" align=center />
+
+<div align="center">
+<img src="http://pbqlliizk.bkt.clouddn.com/5.jpg" height="330" width="190" >
+ </div>
 
 重启，问题修复
 
