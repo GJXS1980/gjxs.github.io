@@ -49,7 +49,9 @@ sudo rm /var/lib/dpkg/lock
 ##### BUG3:系统死机后重启停在initramfs界面的解决方法
 ###### 问题描述 
 由于系统错，导致系统发生错误，强制关机，造成重新开机停在initramfs界面，如下图：
-![bug3](http://pbqlliizk.bkt.clouddn.com/1.jpg)
+<div align="center">
+<img src="http://pbqlliizk.bkt.clouddn.com/1.jpg" height="660" width="400" >
+ </div>
 ###### 解决方法
 输入下面的命令（把n改为你装ubuntu系统的盘号）
 ```bash
@@ -60,7 +62,9 @@ fsck -y /dev/sdbn
 fsck -y /dev/sdb11 
 ```
 结果如下：
-![bug3](http://pbqlliizk.bkt.clouddn.com/2.jpg)
+<div align="center">
+<img src="http://pbqlliizk.bkt.clouddn.com/2.jpg" height="660" width="400" >
+ </div>
 然后重启
 ```bash
 reboot
@@ -73,16 +77,18 @@ reboot
 ```
 welcome to emergency mode！：after logging in ，type “journalctl -xb” to view system logs，“systemctl reboot” to reboot ，“systemctl default” to try again to boot into default mode。 give root password for maintenance （？？ Control-D？？？）’
 ```
-![bug4](http://pbqlliizk.bkt.clouddn.com/3.jpg)
+<div align="center">
+<img src="http://pbqlliizk.bkt.clouddn.com/3.jpg" height="660" width="400" >
+ </div>
 ###### 解决方法
 使用下面命令行检查磁盘挂载信息
 ```bash
 vim /etc/fstab 
 ```
-![bug4](http://pbqlliizk.bkt.clouddn.com/4.jpg)
+<div align="center">
+<img src="http://pbqlliizk.bkt.clouddn.com/4.jpg" height="660" width="400" >
+ </div>
 把挂载home的盘的2改为0
-![bug4](http://pbqlliizk.bkt.clouddn.com/5.jpg)
-
 <div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/5.jpg" height="660" width="400" >
  </div>
