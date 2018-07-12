@@ -69,7 +69,7 @@ git branch -a
 ```
 2.删除远程分支
 ```git
-git push origin <分支名>
+git push origin --delete <分支名>
 ```
 >如果是master分支，在github上将master分支设置成不是default的分支才可以删除
 
