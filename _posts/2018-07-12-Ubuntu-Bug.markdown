@@ -11,13 +11,14 @@ tags:
     - Ubuntu_BUG
 ---
 *****
->Abstract: "该教程主要是对Ubuntu系统使用时遇到的一些问题及解决方法的总结。"<br>                                                                                                                          <br /> 
+>Abstract: "该教程主要是对Ubuntu系统使用时遇到的一些问题及解决方法的总结。"<br>                                                                                                                                                           <br /> 
 
 ----------
 ##### BUG1:不能进入登录界面的解决方法
 ###### 问题描述  
 >问题一：N卡独显电脑安装ubuntu14.04/16.04,一直会卡在ubuntu图标那里进不去安装界面
 问题二：N卡独显电脑安装ubuntu14.04/16.04之后,开机的时候一直卡在ubuntu图标进不去登录界面
+
 ###### 解决方法
 两个问题的解决方法相同，操作如下：
 (1)重启Ubuntu,在下面这个界面的时候,按e进入编辑grub启动项参数
@@ -81,6 +82,8 @@ vim /etc/fstab
 ![bug4](http://pbqlliizk.bkt.clouddn.com/4.jpg)
 把挂载home的盘的2改为0
 ![bug4](http://pbqlliizk.bkt.clouddn.com/5.jpg)
+<img src="http://pbqlliizk.bkt.clouddn.com/5.jpg" width="500" hegiht="313" align=center />
+
 重启，问题修复
 
 *****
