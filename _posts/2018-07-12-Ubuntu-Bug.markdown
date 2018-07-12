@@ -74,9 +74,9 @@ reboot
 ##### BUG4:系统死机后重启停在initramfs界面的解决方法
 ###### 问题描述 
 开机的时候，发现进不了系统，显示下面的错误信息：
-```
+>
 welcome to emergency mode！：after logging in ，type “journalctl -xb” to view system logs，“systemctl reboot” to reboot ，“systemctl default” to try again to boot into default mode。 give root password for maintenance （？？ Control-D？？？）’
-```
+
 <div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/3.jpg" height="660" width="400" >
  </div>
