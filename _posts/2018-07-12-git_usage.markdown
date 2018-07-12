@@ -14,9 +14,8 @@ tags:
 >Abstract: "该教程主要是介绍git工具的一些基本的用法。"<br>                                                                                                                                                                             <br /> 
 
 ----------
-##### Usage1:基本的用法
-###### 新的仓库的上传  
-1.#新建README.md文件
+##### Usage1:基本的用法 
+1.新建README.md文件
 ```bash
 echo "# Ridgeback" >> README.md 
 ```
