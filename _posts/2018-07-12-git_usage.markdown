@@ -1,0 +1,99 @@
+---
+layout:       post
+title:        "Git Tools"
+subtitle:     "git usage"
+date:         2018-07-12 21:52:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.07/12/github.png"
+catalog:      true
+tags:
+    - github
+    - git
+---
+*****
+>Abstract: "该教程主要是介绍git工具的一些基本的用法。"<br>                                                                                                                                                                             <br /> 
+
+----------
+##### Usage1:基本的用法
+###### 新的仓库的上传  
+1.#新建README.md文件
+```bash
+echo "# Ridgeback" >> README.md 
+```
+2.创建标准仓库，这个步骤会在根目录下创建一个隐藏的.git
+```bash
+git init
+```
+3.添加文件追踪(.表示添加这个目录下的所有文件)
+```bash
+git add .  
+```
+4.查看仓库状态
+```git
+git status
+```
+5.提交代码
+```bash
+git commit -m "first commit"
+```
+>其中first commit为说明文字，可以改为其他的
+
+6.添加远程仓库
+```bash
+git remote add origin <你项目仓库链接>
+```
+7.推送代码
+```bash
+git push -u origin master
+```
+>其中master为分支名字，可以改为其他的，第二次推送代码的时候，不用-u,即
+```bash
+git push origin master
+```
+
+*****
+##### Usage2:分支改名
+1.如果对于分支不是当前分支
+```git
+git branch -m 原名 新
+```
+2.如果是当前，那么可以使用加上新名字
+```bash
+git branch -m 原名 
+```
+
+*****
+##### Usage3:删除本地分支和远程分支
+1.查看已有的本地及远程分支
+```git
+git branch -a
+```
+2.删除远程分支
+```git
+git push origin <分支名>
+```
+>如果是master分支，在github上将master分支设置成不是default的分支才可以删除
+
+删除后，可再次查看分支情况
+```git
+git branch -a
+```
+3.删除本地分支
+```git
+git branch -d <分支名>
+```
+若分支有修改还未合并，会提示你还没合并，强行删除本地分支：
+```git
+git branch -D <分支名>
+```
+如果是master分支，则应该先切换到新分支才可以删除master分支
+```git
+git checkout <new_branch>
+git branch -d master
+```
+删除后，可再次查看分支情况
+```git
+git branch -a
+```
+
+*****
