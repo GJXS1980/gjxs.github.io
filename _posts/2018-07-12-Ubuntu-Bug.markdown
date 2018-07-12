@@ -84,7 +84,7 @@ vim /etc/fstab
 ![bug4](http://pbqlliizk.bkt.clouddn.com/5.jpg)
 
 <div align="center">
-<img src="http://pbqlliizk.bkt.clouddn.com/5.jpg" height="330" width="190" >
+<img src="http://pbqlliizk.bkt.clouddn.com/5.jpg" height="660" width="400" >
  </div>
 
 重启，问题修复
