@@ -10,7 +10,7 @@ tags:
     - Ubuntu
 ---
 *****
->Abstract: "记录ubuntu日常的小脾气。"<br>                                                                                                             <br /> 
+>Abstract: "记录ubuntu日常的小脾气。"<br>                                                                                                                                                                                             <br /> 
 
 ----------
 *************************
