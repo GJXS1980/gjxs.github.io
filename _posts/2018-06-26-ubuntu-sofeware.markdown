@@ -45,41 +45,105 @@ sudo apt-get install libnss3
 *****
 ### 3.社交软件
 ----------
-##### 微信
-（1)到[github开源项目](https://github.com/geeeeeeeeek/electronic-wechat/releases)下载最新版electronic-wechat-linux64位
-
-（2）找到下载的目录，解压文件，双击下面的文件就可以打开微信
-
-![sofeware](http://pa59gape3.bkt.clouddn.com/sofeware1.png)
-
-(3)创建桌面快捷方式：
+##### QQ和TIM的安装
+****************************
+1.下载安装包
 ```bash
-gksudo gedit /usr/share/applications/eclipse.desktop
+mkdir -p ~/QQ
+cd ~/QQ
+#Wine-QQ下载
+wget https://yun.tzmm.com.cn/index.php/s/XRbfi6aOIjv5gwj/download -O QQ.AppImage
+#Wine-TIM下载
+wget https://yun.tzmm.com.cn/index.php/s/5hJNzt2VR9aIEF2/download -O TIM.AppImage
+svn co https://github.com/GJXS1980/QQ_wechat/trunk/QQ/icon
 ```
-
-如果提示没安装gksu，输入下面的命令行安装：
+2.给每个安装包权限
 ```bash
+cd ~/QQ
+chmod a+x QQ.AppImage
+chmod a+x TIM.AppImage
+```
+3.创建快捷键
+(1)QQ桌面快捷方式
+```bash
+gksudo gedit /usr/share/applications/QQ.desktop
+#如果提示没安装gksu，则通过下面命令安装
 sudo apt-get install gksu
 ```
-
-将下面内容复制到打开的eclipse.desktop文件中：
-```c
+在新建的QQ.desktop中添加下面内容,其中xxxx为你电脑终端的名字
+```bash
 [Desktop Entry]
-Name=Eclipse /**软件名字*/
+Name=QQ
 Encoding=UTF-8
 Type=Application
-Exec=/usr/local/eclipse/eclipse /**软件路径*/
+Exec=/home/xxxx/QQ/QQ.AppImage
 Terminal=false
-Icon=/usr/local/eclipse/icon.xpm   /**软件的照片，需要下载*/
+Icon=/home/xxxx/QQ/icon/QQ.png
 Comment=Integrated Development Environment
 StartupNotify=true
 Categories=Development;IDE;
-Name[en]=Eclipse     /**软件的名字*/
+Name[en]=QQ
 ```
-修改软件路径和照片，然后把注释删除，不要留空格
+(2)TIM桌面快捷方式
+```bash
+gksudo gedit /usr/share/applications/TIM.desktop
+#如果提示没安装gksu，则通过下面命令安装
+sudo apt-get install gksu
+```
+在新建的TIM.desktop中添加下面内容,其中xxxx为你电脑终端的名字
+```bash
+[Desktop Entry]
+Name=TIM
+Encoding=UTF-8
+Type=Application
+Exec=/home/xxxx/QQ/TIM.AppImage
+Terminal=false
+Icon=/home/xxxx/QQ/icon/TIM.ico
+Comment=Integrated Development Environment
+StartupNotify=true
+Categories=Development;IDE;
+Name[en]=TIM
+```
+(3)锁定到启动器
+按win键搜索QQ或者TIM，然后打开，右键锁定在启动器
 
-最后在/usr/share/applications/目录下找到软件图标，把它复制粘贴到桌面就行了
+******************************
+##### 微信的安装
+1.下载安装包
+```bash
+wget https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz
+mkdir -p ~/wechat && tar -xzvf linux-x64.tar.gz -C ~/wechat --strip-components 1
+rm -rf linux-x64.tar.gz
+```
+2.配置微信环境
+```bash
+cd ~/wechat
+svn co https://github.com/GJXS1980/QQ_wechat/trunk/wechat/icon
+```
+创建桌面快捷方式:
+```bash
+gksudo gedit /usr/share/applications/wechat.desktop
+#如果提示没安装gksu，输入下面的命令行安装：
+sudo apt-get install gksu
+```
+将下面内容复制到打开的wechat.desktop文件中(其中xxxx为你电脑终端的名字)：
+```bash
+[Desktop Entry]
+Name=wechat
+Encoding=UTF-8
+Type=Application
+Exec=/home/xxxx/wechat/electronic-wechat
+Terminal=false
+Icon=/home/xxxx/wechat/icon/wechat.png
+Comment=Integrated Development Environment
+StartupNotify=true
+Categories=Development;IDE;
+Name[en]=wechat
+```
+3.锁定到启动器
+按win键搜索wechat，然后打开，右键锁定在启动器
 
+***********************************
 ##### TeamViewer
 （1）到[官网](https://www.teamviewer.com/en/download/linux/)下载Ubuntu, Debian（x86 64bit）安装包：
 
@@ -225,7 +289,11 @@ sudo apt-get install shadowsocks-qt5
 ![配置浏览器](http://pa59gape3.bkt.clouddn.com/ss-qt5-2.png)
 
 *****
->参考链接：[Sublime Text 3 Input Method(Fcitx) Fix [Ubuntu(Debian)]
+>参考链接
+>
+>1.[Sublime Text 3 Input Method(Fcitx) Fix [Ubuntu(Debian)]
 ](https://github.com/lyfeyaj/sublime-text-imfix)
+>
+>2.[Wine-QQ-TIM](https://github.com/askme765cs/Wine-QQ-TIM)
 
 *****
