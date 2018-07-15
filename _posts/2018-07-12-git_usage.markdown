@@ -96,3 +96,17 @@ git branch -a
 ```
 
 *****
+##### Usage4:用git下载文件
+1.下载整个项目
+```bash
+git clone <项目的地址>
+```
+2.下载单一的文件
+
+用trunk代替链接中的tree/master
+```bash
+svn co <修改后的项目地址>
+#例如要下载QQ_wechat下的icon，把trunk代替链接中的tree/master
+svn co https://github.com/GJXS1980/QQ_wechat/trunk/wechat/icon
+```
+
