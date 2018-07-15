@@ -64,6 +64,7 @@ chmod a+x QQ.AppImage
 chmod a+x TIM.AppImage
 ```
 3.创建快捷键
+
 (1)QQ桌面快捷方式
 ```bash
 gksudo gedit /usr/share/applications/QQ.desktop
