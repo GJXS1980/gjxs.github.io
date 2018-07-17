@@ -156,6 +156,7 @@ Categories=Development;IDE;
 Name[en]=wechat
 ```
 3.锁定到启动器
+
 按win键搜索wechat，然后打开，右键锁定在启动器
 
 ***********************************
