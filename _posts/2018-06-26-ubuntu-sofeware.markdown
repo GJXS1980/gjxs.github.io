@@ -21,13 +21,24 @@ Ubuntu
 ### 1.输入法
 ----------
 ##### 搜狗输入法
-（1）先到软件管理中心下载安装fcitx
-
-（2）到[官网](https://pinyin.sogou.com/linux/?r=pinyin)下载64位的安装包
-
-（3）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
+（1）下载安装fcitx
 ```bash
-sudo apt-get dpkg -i <package-name.deb>
+#安装fcitx输入法框架
+sudo apt-get install fcitx
+```
+（2）到[官网](https://pinyin.sogou.com/linux/?r=pinyin)下载64位的安装包
+```bash
+#下载64位的sogoupinyin安装包
+mkdir -p ~/sogoupinyin && cd ~/sogoupinyin
+wget 'http://cdn2.ime.sogou.com/dl/index/1524572264/sogoupinyin_2.2.0.0108_amd64.deb?st=kheylSEtb-kN-Vhn3QU4Fw&e=1531824789&fn=sogoupinyin_2.2.0.0108_amd64.deb' -O sogoupinyin_amd64.deb
+```
+（3）安装下载的软件包
+```bash
+cd ~/sogoupinyin && sudo dpkg -i sogoupinyin_amd64.deb 
+#发现依赖少了，修复依赖继续安装
+sudo apt-get install -f && sudo dpkg -i sogoupinyin_amd64.deb 
+#最后删除安装包
+rm -rf cd ~/sogoupinyin
 ```
 重启完成配置
 
@@ -37,9 +48,12 @@ sudo apt-get dpkg -i <package-name.deb>
 ##### chrome
 (1)到[官网](https://www.google.cn/chrome/browser/desktop/index.html)下载安装包
 
-(2)双击下载的安装包即可完成安装,如果显示缺少依赖，输入下面的命令行安装依赖：
+(2)安装
 ```bash
+#如果显示缺少依赖，输入下面的命令行安装依赖：
 sudo apt-get install libnss3
+#安装
+sudo dpkg -i <软件名.deb>
 ```
 
 *****
@@ -147,25 +161,19 @@ Name[en]=wechat
 ***********************************
 ##### TeamViewer
 （1）到[官网](https://www.teamviewer.com/en/download/linux/)下载Ubuntu, Debian（x86 64bit）安装包：
-
-（2）打开一个终端窗口，将目录切换到下载目录：
-![sofeware](http://pa59gape3.bkt.clouddn.com/sofeware2.png)
-
-(3)安装：
-```bash
-sudo dpkg -i teamviewer_13.1.3026_amd64.deb
 ```
-
-如果报错，就执行：
-```bash
-sudo apt-get -f install
+mkdir -p ~/teamviewer && cd ~/teamviewer
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 ```
-然后重新执行一次上面的命令;
+(2)安装：
 ```bash
-sudo dpkg -i teamviewer_13.1.3026_amd64.deb
+cd ~/teamviewer && sudo dpkg -i teamviewer_amd64.deb
+#如果报错，就执行：
+sudo apt-get -f install && sudo dpkg -i teamviewer_amd64.deb
+#最后删除下载的软件包
+rm -rf ~/teamviewer
 ```
-
-（4）输入下面的命令启动TeamViewer：
+（3）输入下面的命令启动TeamViewer：
 ```bash
 teamviewer
 ```
@@ -238,14 +246,15 @@ cd sublime-text-imfix
 
 ##### visual studio code IDE
 (1)到[官网](https://go.microsoft.com/fwlink/?LinkID=760868)下载安装包
-
+```bash
+mkdir -p ~/code && cd ~/code
+wget https://go.microsoft.com/fwlink/?LinkID=760868 -O code_amd64.deb
+```
 (2)进入下载的目录,安装软件:
 ```bash
-sudo dpkg -i code_1.23.0-1525361119_amd64.deb
+cd ~/code && sudo dpkg -i code_amd64.deb
+rm -rf ~/code
 ```
-
-> 说明:这里是sudo dpkg -i 软件包的全名(带后缀)
-
 (3)在终端打开软件:
 ```bash
 code
@@ -264,8 +273,12 @@ sudo apt-get install atom
 ---------
 ##### Xmind8
 (1)去[官网](https://www.xmind.net/xmind/downloads/xmind-8-update7-linux.zip)下载安装包
-
-(2)对下载的包解压,然后进入xmind-8/XMind_amd64/目录下点击打开XMind进可以了
+```
+mkdir -p ~/xmind && cd ~/xmind && wget -U ~/xmind https://www.xmind.net/xmind/downloads/xmind-8-update7-linux.zip 
+unzip xmind-8-update7-linux.zip && rm -rf xmind-8-update7-linux.zip
+cd ~/xmind/XMind_amd64 && ./XMind
+```
+(2)在搜索那里输入XMind并打开，将XMind锁定在启动器
 
 *****
 ### 7.科学上网
