@@ -18,6 +18,7 @@ tags:
 ## libfreenect2
 *************************
 ##### 依赖
+
 Dependence | Version |
 - | :-: |
 OpenGL | 3.1 | 
@@ -36,6 +37,7 @@ sudo apt-get install libopenni2-dev && sudo apt-get install openni2-utils
 ```
 
 2.安装OpenCL/CUDA
+
 安装CUDA8.0要降低gcc和g++版本到5.0以下（可用4.9或者4.8版本的gcc和g++）
 ```bash
 #查看当前gcc版本
@@ -120,6 +122,7 @@ sudo make install-openni2 && NiViewer2
 ***********************************
 ### IAI Kinect2
 ##### 依赖
+
 Dependence | Version |
 - | :-: |
 OpenCV | 2.4.x | 
@@ -158,6 +161,7 @@ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 测试是否安装成功
 
 3.安装PCL1.8
+
 安装依赖
 ```bash
 sudo apt-get update
