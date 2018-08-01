@@ -1,0 +1,134 @@
+---
+layout:       post
+title:        "OpenWrt"
+subtitle:     "openwrt and openwrt-packages"
+date:         2018-08-01 16:50:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.08/01/OpenWrt.png"
+catalog:      true
+tags:
+    - OpenWrt
+---
+*****
+>Abstract: "OpenWrt固件及OpenWrt相关插件的教程"<br>                                                                                                                                                                                 <br /> 
+
+----------
+*************************
+### 前提
+***************
+1.先看看OpenWrt支持的路由器[Table of Hardware](https://openwrt.org/toh/start)
+
+2.OpenWrt固件下载地址[Table of Hardware: Firmware downloads
+](https://openwrt.org/toh/views/toh_fwdownload)
+
+3.极路由要申请一个开发者模式，教程参考[极路由怎么申请开发者权限？](https://jingyan.baidu.com/article/4f7d5712ca0d031a21192779.html)
+
+4.安装putty软件
+
+Windowns下的直接到[官网](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)下载软件并安装就可以了
+
+ubuntu系统的安装如下：
+```bash
+sudo apt-get install putty
+```
+然后在搜索那里（按win键）找到软件打开就ok了
+### 刷OpenWrt
+***************
+##### 用putty登录路由器后台（以SSH方式登录）
+这个ip是你给极路由设定的，默认是192.168.199.1，用户名为：root，密码为路由器后台密码
+##### 刷解锁版不死U-Root
+>进固件作者网站查找对应u-boot:[Index of /roms/uboot/](http://rssn.cn/roms/uboot/)
+
+安装（以极路由1S为例)
+```bash
+#连上路由器后台，进入tmp目录下
+cd /tmp
+#下载对应版本的U-Root
+wget http://rssn.cn/roms/uboot/HC5661-uboot.bin
+#安装U-Root
+mtd write HC5661-uboot.bin u-boot
+```
+##### 刷OpenWrt固件
+1.查看一下路由器CPU的型号，以确定我们要刷什么版本的固件
+```bash
+cat /proc/cpuinfo
+```
+2.进入[Table of Hardware: Firmware downloads
+](https://openwrt.org/toh/views/toh_fwdownload)查找cpu和型号对应的固件，并复制固件地址
+```bash
+#下载固件
+wget http://downloads.lede-project.org/releases/17.01.4/targets/ramips/mt7620/lede-17.01.4-ramips-mt7620-hc5661-squashfs-sysupgrade.bin
+#刷机
+sysupgrade -F -n lede-17.01.4-ramips-mt7620-hc5661-squashfs-sysupgrade.bin
+```
+等待几分钟，当路由器自动重启说明成功（期间不要断开电源，不然就变砖了）
+
+##### 安装OpenWrt插件
+用法：下载需要安装的插件的源代码，并编译。编译完成后去bin/ramips/packages里面找到对应的ipk，上传到路由器：
+```bash
+opkg install packagename
+```
+####### OpenWrt插件
+```bash
+opkg update
+```
+1.安装中文支持
+system--software
+
+Update lists 更新软件列表
+
+Filter 填 luci-i18n-base-zh-cn   然后搜索 Find packae
+
+2.换主题
+luci-theme-material
+
+3.安装shadowsocks
+增加aa65535配置的SourceForge源
+```bash
+src/gz openwrt_dist_luci http://openwrt-dist.sourceforge.net/packages/luci
+```
+使用方法
+```bash
+#LEDE 执行命令：
+wget --no-check-certificate https://raw.githubusercontent.com/gatoslu/Autoconfig-OpenWrt-LEDE/master/autoconfig_lede.sh
+
+chmod +x autoconfig_lede.sh
+
+./autoconfig.sh
+
+#OpenWrt 执行命令：
+wget --no-check-certificate https://raw.githubusercontent.com/gatoslu/Autoconfig-OpenWrt-LEDE/master/autoconfig_openwrt.sh
+
+chmod +x autoconfig_openwrt.sh
+
+./auconfig_openwrt.sh
+```
+>参考链接：[Autoconfig-OpenWrt-LEDE](https://github.com/gatoslu/Autoconfig-OpenWrt-LEDE)
+
+4.使用openwrt屏蔽广告（包括视频前的广告）
+
+[使用openwrt屏蔽广告（包括视频前的广告)](https://blog.csdn.net/boliang319/article/details/39957897)
+##### OpenWrt社区介绍
+1.[LEDE论坛](https://forum.lede-project.org/)
+
+2.[OpenWrt论坛](https://forum.openwrt.org/)
+
+3.[OpenWrt 中文网](http://www.openwrt.org.cn/)
+
+4.[OpenWrt](https://openwrt.org/start)
+
+5.[OpenWrt下载网](https://www.openwrtdl.com/)
+
+6.[中国无线论坛](http://forum.anywlan.com/forum.php?mod=forumdisplay&fid=61&filter=typeid&typeid=246)
+### 救砖教程
+意外：[救砖教程](https://github.com/GJXS1980/OpenWrt/tree/master/reset)
+
+*************************
+
+>参考链接
+>
+>1.[极路由2刷OpenWrt的折腾之路](https://www.levey.cn/352.html)
+>
+>
+
+*************************
