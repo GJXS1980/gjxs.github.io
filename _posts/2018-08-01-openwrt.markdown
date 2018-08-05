@@ -68,7 +68,7 @@ sysupgrade -F -n lede-17.01.4-ramips-mt7620-hc5661-squashfs-sysupgrade.bin
 ```bash
 opkg install packagename
 ```
-####### OpenWrt插件
+###### OpenWrt插件
 ```bash
 opkg update
 ```
