@@ -183,7 +183,7 @@ generate_messages()
 
 example:
 如果你的软件包在名为“msg”的名为“ MyMessage1.msg ”和“ MyMessage2.msg ” 的目录中有两条消息，并且这些消息依赖于std_msgs和sensor_msgs，那么名为“srv”的目录中的服务名为“ MyService.srv ”，定义使用这些消息和服务的可执行message_program，以及可执行文件do_not_use_local_messages_program，它使用ROS的某些部分，但不包含此程序包中定义的消息/服务，那么您需要在CMakeLists.txt中使用以下内容：
-```cmakelist
+```cmake
  # Get the information about this package's buildtime dependencies
   find_package(catkin REQUIRED
     COMPONENTS message_generation std_msgs sensor_msgs)
