@@ -1,6 +1,6 @@
 ---
 layout:       post
-title:        "第一讲ROS笔记"
+title:        "ROS笔记第一讲"
 subtitle:     "认识ROS"
 date:         2018-08-19 23:25:00
 author:       "G.J.先生"
@@ -10,7 +10,7 @@ tags:
     - ROS
 ---
 *****
->Abstract: "深蓝学院的课程学习笔记，第一讲：认识ROS"<br>                                                                                                                                                                                    <br /> 
+>Abstract: "深蓝学院的课程学习笔记，第一讲：认识ROS."<br>                                                                                                                                                                                   <br /> 
 
 ----------
 *************************
