@@ -97,7 +97,7 @@ ros::init(argc, argv, "talker");
 ```
 >初始化ROS并命名节点
 
-```C++
+>```C++
 ros::NodeHandle n;
 ```
 >为发布者节点创建一个句柄
