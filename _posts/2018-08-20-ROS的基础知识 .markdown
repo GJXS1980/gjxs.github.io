@@ -1,0 +1,644 @@
+---
+layout:       post
+title:        "ROS NOTE 2"
+subtitle:     "ROS通信编程"
+date:         2018-08-21 22:00:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.08/21/21.jpeg"
+catalog:      true
+tags:
+    - ROS
+    - 深蓝学院课程笔记
+---
+*****
+>Abstract: "深蓝学院的课程学习笔记，第二讲：ROS基础知识中的ROS通信编程."<br>                                                                                                                                                                  <br /> 
+
+----------
+*************************
+### 话题编程
+##### 话题编程流程
+(1)创建发布者
+
+(2)创建订阅者
+
+(3)添加编译选项
+
+(4)运行可执行程序
+
+##### 创建发布者
+(1)初始化ROS节点
+
+(2)向ROS Master注册节点信息，包括发布的话题名和话题中的信息类型
+
+(3)按照一定频率循环发布消息
+
+例程(talker.cpp)如下：
+```C++
+/**
+ * 该例程将发布chatter话题，消息类型String
+ */
+ 
+#include <sstream>
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+int main(int argc, char **argv)
+{
+  // ROS节点初始化
+  ros::init(argc, argv, "talker");
+  
+  // 创建节点句柄
+  ros::NodeHandle n;
+  
+  // 创建一个Publisher，发布名为chatter的topic，消息类型为std_msgs::String
+  ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
+
+  // 设置循环的频率
+  ros::Rate loop_rate(10);
+
+  int count = 0;
+  while (ros::ok())
+  {
+    // 初始化std_msgs::String类型的消息
+    std_msgs::String msg;
+    std::stringstream ss;
+    ss << "hello world " << count;
+    msg.data = ss.str();
+
+    // 发布消息
+    ROS_INFO("%s", msg.data.c_str());
+    chatter_pub.publish(msg);
+
+    // 循环等待回调函数
+    ros::spinOnce();
+    
+    // 按照循环频率延时
+    loop_rate.sleep();
+    ++count;
+  }
+
+  return 0;
+}
+
+```
+>分析
+```C++
+#include "ros/ros.h"
+```
+>包含所有ROS系统要用到的头文件
+
+>```C++
+#include "std_msgs/String.h"
+```
+>包含String.msg的头文件
+
+>```C++
+ros::init(argc, argv, "talker");
+```
+>初始化ROS并命名节点
+
+```C++
+ros::NodeHandle n;
+```
+>为发布者节点创建一个句柄
+
+>```C++
+ros::Publisher chatter_pub =
+n.advertise<std_msgs::String>("chatter", 1000);
+```
+>告诉ROS Master将要发布一个消息类型为std msgs/String，名为chatter的话题,字符长度为1000
+
+>```C++
+ros::Rate loop_rate(10);
+```
+>设置循环的频率
+
+>```C++
+while (ros::ok())
+{
+```
+>接收Ctrl-C的输入，如果输入Ctrl-C就结束循环
+
+>```C++
+std_msgs::String msg;
+std::stringstream ss;
+ss << "hello world " << count;
+msg.data = ss.str();
+```
+>将"hello world "赋给”data”
+
+>```C++
+chatter_pub.publish(msg);
+```
+>开始发布消息
+
+>```C++
+ROS_INFO("%s", msg.data.c_str());
+```
+>在终端打印和计数消息
+
+>```C++
+ros::spinOnce();
+```
+>一次回调函数
+
+>```C++
+loop_rate.sleep();
+```
+>以10hz频率发布消息之后延时，减轻计算机的内存负担
+
+##### 创建订阅者
+(1)初始化ROS节点
+
+(2)订阅需要的话题
+
+(3)循环等待话题消息，接收到消息后进入回调函数
+
+(4)在回调函数中完成消息处理
+
+例程(listener.cpp)如下：
+```C++
+/**
+ * 该例程将订阅chatter话题，消息类型String
+ */
+ 
+#include "ros/ros.h"
+#include "std_msgs/String.h"
+
+// 接收到订阅的消息后，会进入消息回调函数
+void chatterCallback(const std_msgs::String::ConstPtr& msg)
+{
+  // 将接收到的消息打印出来
+  ROS_INFO("I heard: [%s]", msg->data.c_str());
+}
+
+int main(int argc, char **argv)
+{
+  // 初始化ROS节点
+  ros::init(argc, argv, "listener");
+
+  // 创建节点句柄
+  ros::NodeHandle n;
+
+  // 创建一个Subscriber，订阅名为chatter的topic，注册回调函数chatterCallback
+  ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+
+  // 循环等待回调函数
+  ros::spin();
+
+  return 0;
+}
+```
+>分析：
+>```C++
+void chatterCallback(const std_msgs::String::ConstPtr& msg)
+{
+ROS_INFO("I heard: [%s]", msg->data.c_str());
+}
+```
+>这个为回调函数，作用是当有新消息到达时回调函数就是发送I heard字符
+
+>```C++
+ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback
+```
+>从ROS Master订阅chatter话题；无论什么时候有新消息都调用回调函数；字符长度最大为1000
+
+>```C++
+ros::spin();
+```
+>回调函数，当接收到消息时就进入循环，如果没有就等待
+
+##### 编译代码
+(1)设置需要编译代码和生成的可执行文件
+
+(2)设置链接库
+
+(3)设置依赖
+
+例程(cmakelist.txt)如下：
+```cmake
+add_executable(talker src/talker.cpp)
+add_executable(listener src/listener.cpp)
+
+target_link_libraries(talker ${catkin_LIBRARIES})
+target_link_libraries(listener ${catkin_LIBRARIES})
+```
+
+##### 运行可执行文件
+打开终端：
+```bash
+roscore
+```
+打开新终端：
+```bash
+rosrun learning_communication talker
+```
+打开新终端：
+```bash
+rosrun learning_communication listener
+```
+
+##### 自定义话题消息
+步骤：
+(0)在src目录下新建msg文件夹
+
+(1)定义msg文件(Person.msg)
+```
+string name
+uint8  sex
+uint8  age
+
+uint8 unknown = 0
+uint8 male    = 1
+uint8 female  = 2
+
+```
+(2)在package.mxl中添加功能包依赖
+```xml
+<build_depend>message_generation</build_depend>
+
+<exec_depend>message_runtime</exec_depend>
+<exec_depend>geometry_msgs</exec_depend>
+
+```
+
+(3)在Cmakelists.txt添加编译选项
+```cmake
+find_package( ...... message_generation)
+
+catkin_package(CATKIN_DEPENDS geometry_msgs roscpp
+rospy std_msgs message_runtime)
+
+add_message_files(FILES Person.msg)
+generate_messages(DEPENDENCIES std_msgs)
+```
+说明：部分ROS版本中的exec_depend需要改为run_depend
+
+(3)查看是否成功
+```bash
+rosmsg show Person
+```
+
+*************************
+
+### 服务编程
+##### 服务编程流程
+(1)创建服务器
+
+(2)创建客户端
+
+(3)添加编译选项
+
+(4)运行可执行程序
+
+##### 自定义服务请求与应答
+(1)定义srv文件(AddTwoInts.srv)
+```
+int64 a
+int64 b
+---
+int64 sum
+
+```
+
+>说明：三条横杆上面那部分是服务请求消息，下面那部分是应答消息
+
+(2)在package.xml中添加功能包依赖
+```xml
+<build_depend>message_generation</build_depend>
+<exec_depend>message_runtime</exec_depend>
+```
+(3)在cmakelists.txt添加编译选项
+```cmake
+find_package( ...... message_generation)
+
+catkin_package(CATKIN_DEPENDS geometry_msgs roscpp
+rospy std_msgs message_runtime)
+
+add_service_files(FILES AddTwoInts.srv)
+```
+
+##### 创建服务器
+(1)初始化ROS节点
+
+(2)创建Server实例
+
+(3)循环等待服务请求，进入回调函数
+
+(4)在回调函数中完成服务功能的处理，并反馈应答数据
+
+实例(server.cpp)如下：
+```C++
+/**
+ * AddTwoInts Server
+ */
+ 
+#include "ros/ros.h"
+#include "learning_communication/AddTwoInts.h"
+
+// service回调函数，输入参数req，输出参数res
+bool add(learning_communication::AddTwoInts::Request  &req,
+         learning_communication::AddTwoInts::Response &res)
+{
+  // 将输入参数中的请求数据相加，结果放到应答变量中
+  res.sum = req.a + req.b;
+  ROS_INFO("request: x=%ld, y=%ld", (long int)req.a, (long int)req.b);
+  ROS_INFO("sending back response: [%ld]", (long int)res.sum);
+  
+  return true;
+}
+
+int main(int argc, char **argv)
+{
+  // ROS节点初始化
+  ros::init(argc, argv, "add_two_ints_server");
+  
+  // 创建节点句柄
+  ros::NodeHandle n;
+
+  // 创建一个名为add_two_ints的server，注册回调函数add()
+  ros::ServiceServer service = n.advertiseService("add_two_ints", add);
+  
+  // 循环等待回调函数
+  ROS_INFO("Ready to add two ints.");
+  ros::spin();
+
+  return 0;
+}
+```
+
+##### 创建客户端
+(1)初始化ROS节点
+
+(2)创建一个Client实例
+
+(3)发布服务请求数据
+
+(4)等待server处理之后的应答结果
+
+实例(client.cpp)如下：
+```C++
+/**
+ * AddTwoInts Client
+ */
+ 
+#include <cstdlib>
+#include "ros/ros.h"
+#include "learning_communication/AddTwoInts.h"
+
+int main(int argc, char **argv)
+{
+  // ROS节点初始化
+  ros::init(argc, argv, "add_two_ints_client");
+  
+  // 从终端命令行获取两个加数
+  if (argc != 3)
+  {
+    ROS_INFO("usage: add_two_ints_client X Y");
+    return 1;
+  }
+
+  // 创建节点句柄
+  ros::NodeHandle n;
+  
+  // 创建一个client，请求add_two_int service，service消息类型是learning_communication::AddTwoInts
+  ros::ServiceClient client = n.serviceClient<learning_communication::AddTwoInts>("add_two_ints");
+  
+  // 创建learning_communication::AddTwoInts类型的service消息
+  learning_communication::AddTwoInts srv;
+  srv.request.a = atoll(argv[1]);
+  srv.request.b = atoll(argv[2]);
+  
+  // 发布service请求，等待加法运算的应答结果
+  if (client.call(srv))
+  {
+    ROS_INFO("Sum: %ld", (long int)srv.response.sum);
+  }
+  else
+  {
+    ROS_ERROR("Failed to call service add_two_ints");
+    return 1;
+  }
+
+  return 0;
+}
+```
+
+##### 编译代码
+(1)设置需要编译的代码和生成的可执行文件
+
+(2)设置链接库
+
+(3)设置依赖
+
+实例(cmakelists.txt)如下：
+```cmake
+add_executable(server src/server.cpp)
+target_link_libraries(server ${catkin_LIBRARIES})
+add_dependencies(server ${PROJECT_NAME}_gencpp)
+add_executable(client src/client.cpp)
+target_link_libraries(client ${catkin_LIBRARIES})
+add_dependencies(client ${PROJECT_NAME}_gencpp)
+
+```
+
+##### 运行可执行文件
+```bash
+roscore
+```
+打开新终端：
+```bash
+rosrun learning_communication server
+```
+打开新终端：
+```bash
+rosrun learning_communication client 4 8
+```
+
+*************************
+### 动作编程
+##### 什么是动作编程
+![action](http://pdpv2lxdq.bkt.clouddn.com/action.png)
+
+##### 自定义动作消息
+(1)定义action文件(DoDishes.action)
+```
+# Define the goal
+uint32 dishwasher_id  # Specify which dishwasher we want to use
+---
+# Define the result
+uint32 total_dishes_cleaned
+---
+# Define a feedback message
+float32 percent_complete
+```
+(2)在package.xml中添加功能包依赖
+```xml
+<build_depend>actionlib</build_depend>
+<build_depend>actionlib_msgs</build_depend>
+<exec_depend>actionlib</exec_depend>
+<exec_depend>actionlib_msgs</exec_depend>
+```
+(3)在cmakelists.txt添加编译选项
+```cmake
+find_package(catkin REQUIRED actionlib_msgs actionlib)
+add_action_files(DIRECTORY action FILES DoDishes.action)
+generate_messages(DEPENDENCIES actionlib_msgs)
+```
+
+##### 实现一个动作服务器
+(1)初始化ROS节点
+
+(2)创建动作服务器实例
+
+(3)启动服务器，等待动作请求
+
+(4)在回调函数中完成动作服务功能的处理，并反馈进度消息
+
+(5)动作完成，发送结束消息
+
+动作服务器实例(DoDishes_server.cpp)如下：
+```C++
+#include <ros/ros.h>
+#include <actionlib/server/simple_action_server.h>
+#include "learning_communication/DoDishesAction.h"
+
+typedef actionlib::SimpleActionServer<learning_communication::DoDishesAction> Server;
+
+// 收到action的goal后调用该回调函数
+void execute(const learning_communication::DoDishesGoalConstPtr& goal, Server* as)
+{
+    ros::Rate r(1);
+    learning_communication::DoDishesFeedback feedback;
+
+    ROS_INFO("Dishwasher %d is working.", goal->dishwasher_id);
+
+    // 假设洗盘子的进度，并且按照1hz的频率发布进度feedback
+    for(int i=1; i<=10; i++)
+    {
+        feedback.percent_complete = i * 10;
+        as->publishFeedback(feedback);
+        r.sleep();
+    }
+
+    // 当action完成后，向客户端返回结果
+    ROS_INFO("Dishwasher %d finish working.", goal->dishwasher_id);
+    as->setSucceeded();
+}
+
+int main(int argc, char** argv)
+{
+    ros::init(argc, argv, "do_dishes_server");
+    ros::NodeHandle n;
+
+    // 定义一个服务器
+    Server server(n, "do_dishes", boost::bind(&execute, _1, &server), false);
+    
+    // 服务器开始运行
+    server.start();
+
+    ros::spin();
+
+    return 0;
+}
+```
+
+##### 实现一个动作客户端
+(1)初始化ROS节点
+
+(2)创建动作客户端实例
+
+(3)连接动作服务端
+
+(4)发送动作目标
+
+(5)根据不同类型的服务端反馈处理回调函数
+
+动作客户端实例(DoDishes_client.cpp)如下：
+```C++
+#include <actionlib/client/simple_action_client.h>
+#include "learning_communication/DoDishesAction.h"
+
+typedef actionlib::SimpleActionClient<learning_communication::DoDishesAction> Client;
+
+// 当action完成后会调用该回调函数一次
+void doneCb(const actionlib::SimpleClientGoalState& state,
+        const learning_communication::DoDishesResultConstPtr& result)
+{
+    ROS_INFO("Yay! The dishes are now clean");
+    ros::shutdown();
+}
+
+// 当action激活后会调用该回调函数一次
+void activeCb()
+{
+    ROS_INFO("Goal just went active");
+}
+
+// 收到feedback后调用该回调函数
+void feedbackCb(const learning_communication::DoDishesFeedbackConstPtr& feedback)
+{
+    ROS_INFO(" percent_complete : %f ", feedback->percent_complete);
+}
+
+int main(int argc, char** argv)
+{
+    ros::init(argc, argv, "do_dishes_client");
+
+    // 定义一个客户端
+    Client client("do_dishes", true);
+
+    // 等待服务器端
+    ROS_INFO("Waiting for action server to start.");
+    client.waitForServer();
+    ROS_INFO("Action server started, sending goal.");
+
+    // 创建一个action的goal
+    learning_communication::DoDishesGoal goal;
+    goal.dishwasher_id = 1;
+
+    // 发送action的goal给服务器端，并且设置回调函数
+    client.sendGoal(goal,  &doneCb, &activeCb, &feedbackCb);
+
+    ros::spin();
+
+    return 0;
+}
+```
+
+##### 编译代码
+(1)设置需要编译的代码和生成的可执行文件
+
+(2)设置链接库
+
+(3)设置依赖
+
+实例(cmakelists.txt)如下：
+```cmake
+add_executable(DoDishes_client src/DoDishes_client.cpp)
+target_link_libraries( DoDishes_client ${catkin_LIBRARIES})
+add_dependencies(DoDishes_client ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_executable(DoDishes_server src/DoDishes_server.cpp)
+target_link_libraries( DoDishes_server ${catkin_LIBRARIES})
+add_dependencies(DoDishes_server ${${PROJECT_NAME}_EXPORTED_TARGETS})
+```
+
+##### 运行可执行文件
+```bash
+roscore
+```
+打开新终端：
+```bash
+rosrun learning_communication DoDishes_client
+```
+打开新终端：
+```bash
+rosrun learning_communication DoDishes_server
+```
+
+*************************
+
+
+
+
+

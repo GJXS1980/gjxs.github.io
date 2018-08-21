@@ -1,13 +1,14 @@
 ---
 layout:       post
-title:        "ROS笔记第一讲"
+title:        " ROS NOTE 1 "
 subtitle:     "认识ROS"
 date:         2018-08-19 23:25:00
 author:       "G.J.先生"
-header-img:   "img/in-post/2018.08/19/19.png"
+header-img:   "img/in-post/2018.08/19/19.jpeg"
 catalog:      true
 tags:
     - ROS
+    - 深蓝学院课程笔记
 ---
 *****
 >Abstract: "深蓝学院的课程学习笔记，第一讲：认识ROS."<br>                                                                                                                                                                                   <br /> 
