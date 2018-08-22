@@ -53,7 +53,6 @@ int main(int argc, char **argv)
   // 创建一个Publisher，发布名为chatter的topic，消息类型为std_msgs::String
 
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
-
   ros::Rate loop_rate(10);       // 设置循环的频率
 
   int count = 0;
@@ -62,19 +61,13 @@ int main(int argc, char **argv)
     // 初始化std_msgs::String类型的消息
 
     std_msgs::String msg;
-
     std::stringstream ss;
-
     ss << "hello world " << count;
-
     msg.data = ss.str();
-
     // 发布消息
 
     ROS_INFO("%s", msg.data.c_str());
-
     chatter_pub.publish(msg);
-
     ros::spinOnce();    // 循环等待回调函数
     
     loop_rate.sleep();     // 按照循环频率延时
@@ -177,9 +170,7 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
   ROS_INFO("I heard: [%s]", msg->data.c_str());     // 将接收到的消息打印出来
 
 }
-
 int main(int argc, char **argv)
-
 {
   ros::init(argc, argv, "listener");      // 初始化ROS节点
 
@@ -188,7 +179,6 @@ int main(int argc, char **argv)
   // 创建一个Subscriber，订阅名为chatter的topic，注册回调函数chatterCallback
 
   ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
-   
   ros::spin();          // 循环等待回调函数    
 
   return 0;
@@ -349,16 +339,11 @@ bool add(learning_communication::AddTwoInts::Request  &req,
   // 将输入参数中的请求数据相加，结果放到应答变量中
 
   res.sum = req.a + req.b;
-
   ROS_INFO("request: x=%ld, y=%ld", (long int)req.a, (long int)req.b);
-
   ROS_INFO("sending back response: [%ld]", (long int)res.sum);
-  
   return true;
 }
-
 int main(int argc, char **argv)
-
 {
   ros::init(argc, argv, "add_two_ints_server");    // ROS节点初始化
 
@@ -367,13 +352,10 @@ int main(int argc, char **argv)
   // 创建一个名为add_two_ints的server，注册回调函数add()
 
   ros::ServiceServer service = n.advertiseService("add_two_ints", add);
-  
   // 循环等待回调函数
 
   ROS_INFO("Ready to add two ints.");
-
   ros::spin();
-
   return 0;
 }
 ```
@@ -400,17 +382,14 @@ int main(int argc, char **argv)
 #include "learning_communication/AddTwoInts.h"
 
 int main(int argc, char **argv)
-
 {
   ros::init(argc, argv, "add_two_ints_client");     // ROS节点初始化
   
   // 从终端命令行获取两个加数
 
   if (argc != 3)
-
   {
     ROS_INFO("usage: add_two_ints_client X Y");
-
     return 1;
   }
 
@@ -419,29 +398,24 @@ int main(int argc, char **argv)
   // 创建一个client，请求add_two_int service，service消息类型是learning_communication::AddTwoInts
 
   ros::ServiceClient client = n.serviceClient<learning_communication::AddTwoInts>("add_two_ints");
-  
+
   // 创建learning_communication::AddTwoInts类型的service消息
 
   learning_communication::AddTwoInts srv;
-
   srv.request.a = atoll(argv[1]);
-
   srv.request.b = atoll(argv[2]);
   
   // 发布service请求，等待加法运算的应答结果
 
   if (client.call(srv))
-
   {
     ROS_INFO("Sum: %ld", (long int)srv.response.sum);
   }
   else
-
   {
     ROS_ERROR("Failed to call service add_two_ints");
     return 1;
   }
-
   return 0;
 }
 ```
@@ -532,48 +506,36 @@ typedef actionlib::SimpleActionServer<learning_communication::DoDishesAction> Se
 // 收到action的goal后调用该回调函数
 
 void execute(const learning_communication::DoDishesGoalConstPtr& goal, Server* as)
-
 {
     ros::Rate r(1);
-
     learning_communication::DoDishesFeedback feedback;
-
     ROS_INFO("Dishwasher %d is working.", goal->dishwasher_id);
 
     // 假设洗盘子的进度，并且按照1hz的频率发布进度feedback
 
     for(int i=1; i<=10; i++)
-
     {
         feedback.percent_complete = i * 10;
-
         as->publishFeedback(feedback);
-
         r.sleep();
     }
 
     // 当action完成后，向客户端返回结果
 
     ROS_INFO("Dishwasher %d finish working.", goal->dishwasher_id);
-
     as->setSucceeded();
 }
-
 int main(int argc, char** argv)
-
 {
     ros::init(argc, argv, "do_dishes_server");
-
     ros::NodeHandle n;
 
     // 定义一个服务器
 
     Server server(n, "do_dishes", boost::bind(&execute, _1, &server), false);
-
     server.start();       // 服务器开始运行
 
     ros::spin();
-
     return 0;
 }
 ```
@@ -601,17 +563,14 @@ typedef actionlib::SimpleActionClient<learning_communication::DoDishesAction> Cl
 
 void doneCb(const actionlib::SimpleClientGoalState& state,
         const learning_communication::DoDishesResultConstPtr& result)
-
 {
     ROS_INFO("Yay! The dishes are now clean");
-
     ros::shutdown();
 }
 
 // 当action激活后会调用该回调函数一次
 
 void activeCb()
-
 {
     ROS_INFO("Goal just went active");
 }
@@ -619,38 +578,27 @@ void activeCb()
 // 收到feedback后调用该回调函数
 
 void feedbackCb(const learning_communication::DoDishesFeedbackConstPtr& feedback)
-
 {
     ROS_INFO(" percent_complete : %f ", feedback->percent_complete);
 }
-
 int main(int argc, char** argv)
-
 {
     ros::init(argc, argv, "do_dishes_client");
-  
     Client client("do_dishes", true);     // 定义一个客户端
 
     // 等待服务器端
 
     ROS_INFO("Waiting for action server to start.");
-
     client.waitForServer();
-
     ROS_INFO("Action server started, sending goal.");
-
     // 创建一个action的goal
 
     learning_communication::DoDishesGoal goal;
-    
     goal.dishwasher_id = 1;
-
     // 发送action的goal给服务器端，并且设置回调函数
 
     client.sendGoal(goal,  &doneCb, &activeCb, &feedbackCb);
-
     ros::spin();
-
     return 0;
 }
 ```
