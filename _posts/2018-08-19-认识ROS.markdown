@@ -4,7 +4,7 @@ title:        " ROS NOTE 1 "
 subtitle:     "认识ROS"
 date:         2018-08-19 23:25:00
 author:       "G.J.先生"
-header-img:   "img/in-post/2018.08/19/19.png"
+header-img:   "img/in-post/2018.08/19/19.jpg"
 catalog:      true
 tags:
     - ROS
