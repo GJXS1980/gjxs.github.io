@@ -86,3 +86,4 @@ document.body.addEventListener('input', POWERMODE);
 <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 ```
 
+<img src="img/root/tag-bg.jpg" alt="MQTT Logo"><i><p align="right" style="color: gray; font-size:3px;">Source: <a href="http://mqtt.org/" target="_blank" rel="external">MQTT Official Website</a></p></i></p>
