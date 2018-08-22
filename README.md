@@ -47,7 +47,7 @@ gem update --system
 ###### `_posts`为博客更新处，照片可以放在`img/in-post/`目录下
 ###### 如果有中英文版的，．md文件放在`include posts/`目录下，相应修改_posts的文件就行了．
 ##### 6.添加模块
-###### (1)动态曲线
+###### (1)动态鼠标曲线
 添加模块`canvas-nest.min.js`到js目录下
 修改`layouts/post.html`文件在开始添加下面代码
 ```
@@ -71,5 +71,17 @@ POWERMODE.shake = false; // 控制开启/关闭屏幕震动特效
 document.body.addEventListener('input', POWERMODE);
 </script>
 ```
-
+##### (4)返回顶部
+把在rocket.css、signature.css和toc.css下载到css的目录下，然后在   include目录下的head.html文件的头部添加下面代码：
+```xml
+    <link rel="stylesheet" href="/css/rocket.css">
+    <link rel="stylesheet" href="/css/signature.css">
+    <link rel="stylesheet" href="/css/toc.css">
+```
+把在totop.js和toc.js下载到js的目录下，然后在include目录下的footer.html的最后添加下面代码：
+```xml
+<a id="rocket" href="#top" class=""></a>
+<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+<script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+```
 
