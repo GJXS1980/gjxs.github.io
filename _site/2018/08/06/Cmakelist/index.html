@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于自动化、机器人与计算机 | 李伟政，Web & Mobile Lover，自动化　Engineer，UX Designer | 这里是 @GJXS李伟政 的个人博客，与你一起探索这个世界。">
+    <meta name="keywords"  content="李伟政, G.J.先生, GJXS, GJXS1980, GJXS2017, @GJXS1980, G.J.先生的博客, GJXS Blog, 博客, 个人网站, 自动化, ROS, 工程师, 机器人">
+    <meta name="theme-color" content="#000000">
+    
+    <title>ROS CMakeLists.txt - G.J.先生 | 男孩的城堡</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/root/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2018/08/06/Cmakelist/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/gjxs-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- GJXS change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- GJXS Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">G.J.先生 BLOG</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="GJXSblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/Introduction/">Introduction</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#GJXSblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __GJXSNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __GJXSNav__.close()
+        }else{
+            __GJXSNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from
+     * $toggle/$collapse will break global delegation.
+     *
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close GJXSNav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __GJXSNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/2018.08/06/code.jpg" width="0" height="0"> -->
+
+    <!-- canvas-nest.min.js -->   
+<script type="text/javascript" color="238,205,205" opacity='0.7' zIndex="-2" count="99" src="../../../../js/canvas-nest.min.js"></script>
+  <!--
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>　
+-->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/in-post/2018.08/06/code.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#ROS" title="ROS">ROS</a>
+                        
+                        <a class="tag" href="/tags/#CMakeLists.txt" title="CMakeLists.txt">CMakeLists.txt</a>
+                        
+                    </div>
+                    <h1>ROS CMakeLists.txt</h1>
+                    
+                    
+                    <h2 class="subheading">CMakeLists.txt</h2>
+                    
+                    <span class="meta">Posted by G.J.先生 on August 6, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<hr />
+<blockquote>
+  <p>Abstract: “基于ROS文件夹系统的CMakeLists.txt介绍”<br />                                                                                                                                                                                   <br /></p>
+</blockquote>
+
+<hr />
+<hr />
+<h3 id="overview">Overview</h3>
+<p>CMakeLists.txt文件是用于构建软件包的CMake构建系统的输入（The file CMakeLists.txt is the input to the CMake build system for building software packages.）。任何符合CMake的包都包含一个或多个CMakeLists.txt文件，该文件描述了如何构建代码以及将代码安装到何处。用于catkin项目的CMakeLists.txt文件是标准的vanilla CMakeLists.txt文件，其中包含一些其他约束。</p>
+
+<hr />
+<h3 id="overall-structure-and-ordering">Overall Structure and Ordering</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CMake的版本</td>
+      <td style="text-align: center">cmake_minimum_required()</td>
+    </tr>
+    <tr>
+      <td>功能包名称</td>
+      <td style="text-align: center">project()</td>
+    </tr>
+    <tr>
+      <td>查找构建所需的其他CMake/Catkin功能包</td>
+      <td style="text-align: center">find_package()</td>
+    </tr>
+    <tr>
+      <td>启用Python模块支持</td>
+      <td style="text-align: center">catkin_python_setup()</td>
+    </tr>
+    <tr>
+      <td>消息/服务/动作生成器</td>
+      <td style="text-align: center">add_message_files(), add_service_files(), add_action_files()</td>
+    </tr>
+    <tr>
+      <td>调用消息/服务/动作生成</td>
+      <td style="text-align: center">generate_messages()</td>
+    </tr>
+    <tr>
+      <td>指定功能包构建信息导出</td>
+      <td style="text-align: center">catkin_package()</td>
+    </tr>
+    <tr>
+      <td>要构建的库/可执行文件</td>
+      <td style="text-align: center">add_library()/add_executable()/target_link_libraries()</td>
+    </tr>
+    <tr>
+      <td>测试构建</td>
+      <td style="text-align: center">catkin_add_gtest()</td>
+    </tr>
+    <tr>
+      <td>安装规则</td>
+      <td style="text-align: center">install()</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<h3 id="面面俱到">面面俱到</h3>
+<h5 id="cmake版本">CMake版本</h5>
+<p>每个catkin CMakeLists.txt文件必须以所需的CMake版本开头。Catkin需要2.8.3或更高版本。</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 2.8.3<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="功能包名称">功能包名称</h5>
+<p>用法如下：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">project</span><span class="p">(</span>robot_brain<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="寻找相关的cmake包">寻找相关的CMake包</h5>
+<p>使用CMake find_package函数指定需要找到哪些其他CMake包来构建我们的项目。catkin总是至少有一个依赖：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">find_package</span><span class="p">(</span>catkin REQUIRED<span class="p">)</span> 
+</code></pre></div></div>
+<p>如果将它们指定为组件，例如使用包nodelet：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">find_package</span><span class="p">(</span>catkin REQUIRED COMPONENTS nodelet<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="find_package的作用">find_package()的作用</h5>
+<p>如果CMake通过find_package找到包，则会导致创建多个CMake环境变量，这些变量提供有关找到的包的信息。稍后可以在CMake脚本中使用这些环境变量。环境变量描述了功能包导出头文件的位置，源文件所在的位置，功能包所依赖的库以及这些库的路径，格式始终为<PACKAGE NAME="">_<PROPERTY>:</PROPERTY></PACKAGE></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&lt;NAME&gt;_FOUND</td>
+      <td style="text-align: center">如果找到库，则设置为true，否则设置为false</td>
+    </tr>
+    <tr>
+      <td>&lt;NAME&gt;_INCLUDE_DIRS or &lt;NAME&gt;_INCLUDES</td>
+      <td style="text-align: center">导出功能包的路径</td>
+    </tr>
+    <tr>
+      <td>&lt;NAME&gt;_LIBRARIES or &lt;NAME&gt;_LIBS</td>
+      <td style="text-align: center">导出功能包的库</td>
+    </tr>
+    <tr>
+      <td>&lt;NAME&gt;_DEFINITIONS</td>
+      <td style="text-align: center">?</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>如果使用C ++和Boost，则需要在Boost上调用find_package()并指定您正在使用的Boost的哪些方面作为组件。例如，使用Boost线程:</p>
+  <div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">find_package</span><span class="p">(</span>Boost REQUIRED COMPONENTS thread<span class="p">)</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h5 id="catkin_package">catkin_package()</h5>
+<p>catkin_package()是一个catkin提供的CMake宏。这是为构建系统指定catkin特定信息所必需的，而后者又用于生成pkg-config和CMake文件。</p>
+
+<p>在使用add_library()或者add_executable()声明任何目标之前，必须调用此函数。该函数有5个可选参数：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>INCLUDE_DIRS</td>
+      <td style="text-align: center">导出包含功能包的路径(即cflags)</td>
+    </tr>
+    <tr>
+      <td>LIBRARIES</td>
+      <td style="text-align: center">项目中导出的库</td>
+    </tr>
+    <tr>
+      <td>CATKIN_DEPENDS</td>
+      <td style="text-align: center">该项目所依赖的其他catkin项目</td>
+    </tr>
+    <tr>
+      <td>DEPENDS</td>
+      <td style="text-align: center">此项目依赖的非catkin CMake项目</td>
+    </tr>
+    <tr>
+      <td>CFG_EXTRAS</td>
+      <td style="text-align: center">其他配置选项</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>例子：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">catkin_package</span><span class="p">(</span>
+   INCLUDE_DIRS include
+   LIBRARIES <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>
+   CATKIN_DEPENDS roscpp nodelet
+   DEPENDS eigen opencv<span class="p">)</span>
+</code></pre></div></div>
+<p>这表示功能包文件夹中的“include”文件夹是导出头文件所在的位置。CMake环境变量 ${PROJECT_NAME}是传递给project()函数的任何内容，在这种情况下它将是“robot_brain”。“roscpp”+“nodelet”是构建/运行此功能包需要存在的功能包，“eigen”+“opencv”是构建/运行此功能包时需要存在的系统依赖性。</p>
+
+<h5 id="指定构建目标">指定构建目标</h5>
+<p>构建目标可以采用多种形式，但通常它们代表两种可能性之一：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Executable Target</td>
+      <td style="text-align: center">可以运行的程序</td>
+    </tr>
+    <tr>
+      <td>Library Target</td>
+      <td style="text-align: center">构建和/或运行时可由可执行目标使用的库</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="目标命名target-naming">目标命名（Target Naming）</h6>
+<p>catkin中的构建目标的名称必须是唯一的，无论它们是构建/安装到哪个文件夹。可以使用set_target_properties（）函数将目标重命名为其他目标，例：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set_target_properties</span><span class="p">(</span>rviz_image_view
+                      PROPERTIES OUTPUT_NAME image_view
+                      PREFIX <span class="s2">""</span><span class="p">)</span>
+</code></pre></div></div>
+<p>这将在构建和安装输出中将目标rviz_image_view的名称更改为image_view。</p>
+
+<h6 id="自定义输出目录custom-output-directory">自定义输出目录（Custom output directory）</h6>
+<p>可执行文件和库的默认输出目录通常设置为合理的值，但在某些情况下必须自定义。即，包含Python绑定的库必须放在不同的文件夹中，以便可以在Python中导入：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set_target_properties</span><span class="p">(</span>python_module_library
+  PROPERTIES LIBRARY_OUTPUT_DIRECTORY <span class="si">${</span><span class="nv">CATKIN_DEVEL_PREFIX</span><span class="si">}</span>/<span class="si">${</span><span class="nv">CATKIN_PACKAGE_PYTHON_DESTINATION</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h6 id="include-paths-and-library-paths">Include Paths and Library Paths</h6>
+<p>在指定目标之前，您需要指定可以为所述目标找到资源的位置，特别是头文件和库：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Include Paths</td>
+      <td style="text-align: center">在哪里可以找到正在构建的代码（在C/C++中最常见）的头文件</td>
+    </tr>
+    <tr>
+      <td>Library Paths</td>
+      <td style="text-align: center">可执行目标构建的库位于何处</td>
+    </tr>
+    <tr>
+      <td>include_directories(&lt;dir1&gt;, &lt;dir2&gt;, …, &lt;dirN&gt;)</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td>link_directories(&lt;dir1&gt;, &lt;dir2&gt;, …, &lt;dirN&gt;)</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>nclude_directories的参数应该是find_package调用生成的* _INCLUDE_DIRS变量以及需要包含的任何其他目录。如果您使用catkin和Boost，则include_directories（）调用应如下所示：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">include_directories</span><span class="p">(</span>include <span class="si">${</span><span class="nv">Boost_INCLUDE_DIRS</span><span class="si">}</span> <span class="si">${</span><span class="nv">catkin_INCLUDE_DIRS</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>第一个参数“include”表示包中的include/目录也是路径的一部分。</p>
+</blockquote>
+
+<p>所有catkin和CMake软件包在find_packaged时自动添加其链接信息。只需链接到target_link_libraries()中的库,例：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">link_directories</span><span class="p">(</span>~/my_libs<span class="p">)</span>
+</code></pre></div></div>
+
+<h6 id="executable-targets">Executable Targets）</h6>
+<p>要指定必须构建的可执行目标，我们必须使用add_executable() CMake函数。这将构建一个名为myProgram的目标可执行文件，它由3个源文件构成：src/main.cpp, src/some_file.cpp 和 src/another_file.cpp。</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_executable</span><span class="p">(</span>myProgram src/main.cpp src/some_file.cpp src/another_file.cpp<span class="p">)</span>
+</code></pre></div></div>
+
+<h6 id="library-targets">Library Targets</h6>
+<p>该add_library() CMake的功能是用来指定库来构建。默认情况下，catkin构建共享库。</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_library</span><span class="p">(</span><span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span> <span class="si">${${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span><span class="nv">_SRCS</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h6 id="target_link_libraries">target_link_libraries</h6>
+<p>使用target_link_libraries()函数指定可执行目标链接的库。这通常在add_executable()调用之后完成,句法：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">target_link_libraries</span><span class="p">(</span>&lt;executableTargetName&gt;, &lt;lib1&gt;, &lt;lib2&gt;, ... &lt;libN&gt;<span class="p">)</span>
+</code></pre></div></div>
+<p>Example:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_executable</span><span class="p">(</span>foo src/foo.cpp<span class="p">)</span>
+<span class="nb">add_library</span><span class="p">(</span>moo src/moo.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>foo moo<span class="p">)</span>  -- This links foo against libmoo.so
+</code></pre></div></div>
+<blockquote>
+  <p>请注意，在大多数用例中不需要使用link_directories()，因为该信息是通过find_package()自动引入的。</p>
+</blockquote>
+
+<h5 id="messages-services-and-action-targets">Messages, Services, and Action Targets</h5>
+<p>ROS中的消息（.msg），服务（.srv）和操作（.action）文件在构建和使用ROS包之前需要特殊的预处理器构建步骤。这些宏的关键是生成特定于编程语言的文件，以便可以使用所选编程语言中的消息，服务和操作。构建系统将使用所有可用的生成器（例如gencpp，genpy，genlisp等）生成绑定。提供了三个宏来分别处理消息，服务和操作：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>add_message_files</td>
+    </tr>
+    <tr>
+      <td>add_service_files</td>
+    </tr>
+    <tr>
+      <td>add_action_files</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>然后，必须在调用生成的宏之后调用这些宏：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">generate_messages</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>example:
+如果你的软件包在名为“msg”的名为“ MyMessage1.msg ”和“ MyMessage2.msg ” 的目录中有两条消息，并且这些消息依赖于std_msgs和sensor_msgs，那么名为“srv”的目录中的服务名为“ MyService.srv ”，定义使用这些消息和服务的可执行message_program，以及可执行文件do_not_use_local_messages_program，它使用ROS的某些部分，但不包含此程序包中定义的消息/服务，那么您需要在CMakeLists.txt中使用以下内容：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1"># Get the information about this package's buildtime dependencies</span>
+  <span class="nb">find_package</span><span class="p">(</span>catkin REQUIRED
+    COMPONENTS message_generation std_msgs sensor_msgs<span class="p">)</span>
+
+  <span class="c1"># Declare the message files to be built</span>
+  <span class="nf">add_message_files</span><span class="p">(</span>FILES
+    MyMessage1.msg
+    MyMessage2.msg
+  <span class="p">)</span>
+
+  <span class="c1"># Declare the service files to be built</span>
+  <span class="nf">add_service_files</span><span class="p">(</span>FILES
+    MyService.srv
+  <span class="p">)</span>
+
+  <span class="c1"># Actually generate the language-specific message and service files</span>
+  <span class="nf">generate_messages</span><span class="p">(</span>DEPENDENCIES std_msgs sensor_msgs<span class="p">)</span>
+
+  <span class="c1"># Declare that this catkin package's runtime dependencies</span>
+  <span class="nf">catkin_package</span><span class="p">(</span>
+   CATKIN_DEPENDS message_runtime std_msgs sensor_msgs
+  <span class="p">)</span>
+
+  <span class="c1"># 使用MyMessage1等定义可执行文件</span>
+  <span class="nb">add_executable</span><span class="p">(</span>message_program src/main.cpp<span class="p">)</span>
+  <span class="nb">add_dependencies</span><span class="p">(</span>message_program <span class="si">${${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span><span class="nv">_EXPORTED_TARGETS</span><span class="si">}</span> <span class="si">${</span><span class="nv">catkin_EXPORTED_TARGETS</span><span class="si">}</span><span class="p">)</span>
+
+  <span class="c1"># define executable不使用此包提供的任何消息/服务</span>
+  <span class="nb">add_executable</span><span class="p">(</span>does_not_use_local_messages_program src/main.cpp<span class="p">)</span>
+  <span class="nb">add_dependencies</span><span class="p">(</span>does_not_use_local_messages_program <span class="si">${</span><span class="nv">catkin_EXPORTED_TARGETS</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+<blockquote>
+  <p>这些宏必须在catkin_package（）宏之前，以便生成正常工作。catkin_package（）宏必须对message_runtime具有CATKIN_DEPENDS依赖关系。</p>
+</blockquote>
+
+<p>另外，如果要构建actionlib操作，并在“action”目录中有一个名为“ MyAction.action ” 的操作规范文件，则必须将actionlib_msgs添加到使用catkin find_packaged的组件列表中，并在之前添加以下调用对generate_messages（…）的调用：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">add_action_files</span><span class="p">(</span>FILES
+  MyAction.action
+<span class="p">)</span>
+</code></pre></div></div>
+<p>此外，功能包必须具有对actionlib_msgs的构建依赖性。</p>
+
+<h5 id="enabling-python-module-support">Enabling Python module support</h5>
+<p>如果你的ROS包提供了一些Python模块，你应该创建一个<a href="http://docs.ros.org/api/catkin/html/user_guide/setup_dot_py.html">setup.py</a>文件并调用:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">catkin_python_setup</span><span class="p">()</span>
+</code></pre></div></div>
+<blockquote>
+  <p>在调用generate_messages()和catkin_package()之前。</p>
+</blockquote>
+
+<h5 id="unit-tests">Unit Tests</h5>
+<p>有一个特定于catkin的宏用于处理名为catkin_add_gtest()的基于gtest的单元测试。</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">if</span><span class="p">(</span>CATKIN_ENABLE_TESTING<span class="p">)</span>
+  <span class="nf">catkin_add_gtest</span><span class="p">(</span>myUnitTest test/utest.cpp<span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h5 id="optional-step-specifying-installable-targets">Optional Step: Specifying Installable Targets</h5>
+<p>指定目标应该结束的位置以便对代码进行“make install”，这是使用CMake install（）函数完成的，该函数作为参数：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>TARGETS</td>
+      <td style="text-align: center">目标安装</td>
+    </tr>
+    <tr>
+      <td>ARCHIVE DESTINATION</td>
+      <td style="text-align: center">静态库和DLL（Windows）.lib存根</td>
+    </tr>
+    <tr>
+      <td>LIBRARY DESTINATION</td>
+      <td style="text-align: center">非DLL共享库和模块</td>
+    </tr>
+    <tr>
+      <td>RUNTIME DESTINATION</td>
+      <td style="text-align: center">可执行目标和DLL（Windows）样式共享库</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>example:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">install</span><span class="p">(</span>TARGETS <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>
+  ARCHIVE DESTINATION <span class="si">${</span><span class="nv">CATKIN_PACKAGE_LIB_DESTINATION</span><span class="si">}</span>
+  LIBRARY DESTINATION <span class="si">${</span><span class="nv">CATKIN_PACKAGE_LIB_DESTINATION</span><span class="si">}</span>
+  RUNTIME DESTINATION <span class="si">${</span><span class="nv">CATKIN_PACKAGE_BIN_DESTINATION</span><span class="si">}</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<p>除了这些标准目标，一些文件必须安装到特殊文件夹。即，必须将包含Python绑定的库安装到可在Python中导入的其他文件夹中：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">install</span><span class="p">(</span>TARGETS python_module_library
+  ARCHIVE DESTINATION <span class="si">${</span><span class="nv">CATKIN_PACKAGE_PYTHON_DESTINATION</span><span class="si">}</span>
+  LIBRARY DESTINATION <span class="si">${</span><span class="nv">CATKIN_PACKAGE_PYTHON_DESTINATION</span><span class="si">}</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="installing-python-executable-scripts">Installing Python Executable Scripts</h5>
+<p>对于Python代码，安装规则看起来不同，因为没有使用add_library（）和add_executable（）函数:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">catkin_install_python</span><span class="p">(</span>PROGRAMS scripts/myscript
+  DESTINATION <span class="si">${</span><span class="nv">CATKIN_PACKAGE_BIN_DESTINATION</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+<blockquote>
+  <p>如果您只安装Python脚本并且不提供任何模块，则既不需要创建上面提到的setup.py文件，也不需要调用catkin_python_setup（）。</p>
+</blockquote>
+
+<h5 id="installing-header-files">Installing header files</h5>
+<p>头文件也必须安装到“include”文件夹，这通常是通过安装整个文件夹的文件（可选择按文件名模式过滤并排除SVN子文件夹）来完成的。这可以通过如下安装规则来完成：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">install</span><span class="p">(</span>DIRECTORY include/<span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>/
+  DESTINATION <span class="si">${</span><span class="nv">CATKIN_PACKAGE_INCLUDE_DESTINATION</span><span class="si">}</span>
+  PATTERN <span class="s2">".svn"</span> EXCLUDE
+<span class="p">)</span>
+</code></pre></div></div>
+<p>或者如果include下的子文件夹与包名称不匹配：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">install</span><span class="p">(</span>DIRECTORY include/
+  DESTINATION <span class="si">${</span><span class="nv">CATKIN_GLOBAL_INCLUDE_DESTINATION</span><span class="si">}</span>
+  PATTERN <span class="s2">".svn"</span> EXCLUDE
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="installing-roslaunch-files-or-other-resources">Installing roslaunch Files or Other Resources</h5>
+<p>其他资源如launchfiles可以安装到 ${CATKIN_PACKAGE_SHARE_DESTINATION}:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">install</span><span class="p">(</span>DIRECTORY launch/
+  DESTINATION <span class="si">${</span><span class="nv">CATKIN_PACKAGE_SHARE_DESTINATION</span><span class="si">}</span>/launch
+  PATTERN <span class="s2">".svn"</span> EXCLUDE<span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<blockquote>
+  <p>参考链接：</p>
+
+  <p>1.<a href="http://wiki.ros.org/catkin/CMakeLists.txt">catkinCMakeLists.txt</a></p>
+</blockquote>
+
+<hr />
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/08/02/openwrt/" data-toggle="tooltip" data-placement="top" title="OpenWrt">
+                        Previous<br>
+                        <span>OpenWrt</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/08/20/%E8%AE%A4%E8%AF%86ROS/" data-toggle="tooltip" data-placement="top" title=" ROS NOTE 1 ">
+                        Next<br>
+                        <span> ROS NOTE 1 </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->               
+                
+                </div> 
+
+ <!-- 
+                
+            </div>  
+-->
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ROS" title="ROS" rel="8">
+                                    ROS
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Ubuntu" title="Ubuntu" rel="5">
+                                    Ubuntu
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ROS_Tutorials" title="ROS_Tutorials" rel="2">
+                                    ROS_Tutorials
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#深蓝学院课程笔记" title="深蓝学院课程笔记" rel="3">
+                                    深蓝学院课程笔记
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://github.com/">Github</a></li>
+                    
+                        <li><a href=""></a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!--
+
+-->
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "gjxs";
+    var disqus_identifier = "/2018/08/06/Cmakelist";
+    var disqus_url = "http://localhost:4000/2018/08/06/Cmakelist/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+<footer> 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by GJXS, add target = "_blank" to <a> by GJXS -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/gjxian-sheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://blog.csdn.net/GJXS2017">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-CSDN fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/GJXS1980">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://music.163.com/#/user/home?id=261616078">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-music163 fa-stack-1x fa-inverse">易</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; G.J.先生 BLOG 2018
+                    <br>
+                    Theme by <a href="https://github.com/Huxpro/huxpro.github.io">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=GJXS1980&repo=gjxs.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/gjxs-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so GJXSblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by GJXS
+    var _gaId = 'UA-120526213-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual
+        if ("") {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by GJXS to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/root/icon_wechat.png" width="0" height="0" />     
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

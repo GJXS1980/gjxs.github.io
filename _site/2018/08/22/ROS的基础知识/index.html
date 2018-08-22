@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于自动化、机器人与计算机 | 李伟政，Web & Mobile Lover，自动化　Engineer，UX Designer | 这里是 @GJXS李伟政 的个人博客，与你一起探索这个世界。">
+    <meta name="keywords"  content="李伟政, G.J.先生, GJXS, GJXS1980, GJXS2017, @GJXS1980, G.J.先生的博客, GJXS Blog, 博客, 个人网站, 自动化, ROS, 工程师, 机器人">
+    <meta name="theme-color" content="#000000">
+    
+    <title>ROS NOTE 2 - G.J.先生 | 男孩的城堡</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/root/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2018/08/22/ROS%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/gjxs-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- GJXS change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- GJXS Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">G.J.先生 BLOG</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="GJXSblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/Introduction/">Introduction</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#GJXSblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __GJXSNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __GJXSNav__.close()
+        }else{
+            __GJXSNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from
+     * $toggle/$collapse will break global delegation.
+     *
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close GJXSNav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __GJXSNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/2018.08/21/21.jpg" width="0" height="0"> -->
+
+    <!-- canvas-nest.min.js -->   
+<script type="text/javascript" color="238,205,205" opacity='0.7' zIndex="-2" count="99" src="../../../../js/canvas-nest.min.js"></script>
+  <!--
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>　
+-->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/in-post/2018.08/21/21.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#ROS" title="ROS">ROS</a>
+                        
+                        <a class="tag" href="/tags/#深蓝学院课程笔记" title="深蓝学院课程笔记">深蓝学院课程笔记</a>
+                        
+                    </div>
+                    <h1>ROS NOTE 2</h1>
+                    
+                    
+                    <h2 class="subheading">ROS通信编程</h2>
+                    
+                    <span class="meta">Posted by G.J.先生 on August 22, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<hr />
+<blockquote>
+  <p>Abstract: “深蓝学院的课程学习笔记，第二讲：ROS基础知识中的ROS通信编程.”<br />                                                                                                                                                                  <br /></p>
+</blockquote>
+
+<hr />
+<hr />
+<h3 id="话题编程">话题编程</h3>
+<h5 id="话题编程流程">话题编程流程</h5>
+<p>(1)创建发布者</p>
+
+<p>(2)创建订阅者</p>
+
+<p>(3)添加编译选项</p>
+
+<p>(4)运行可执行程序</p>
+
+<h5 id="创建发布者">创建发布者</h5>
+<p>(1)初始化ROS节点</p>
+
+<p>(2)向ROS Master注册节点信息，包括发布的话题名和话题中的信息类型</p>
+
+<p>(3)按照一定频率循环发布消息</p>
+
+<p>例程(talker.cpp)如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 该例程将发布chatter话题，消息类型String
+ */</span>
+ 
+<span class="cp">#include &lt;sstream&gt;
+</span>
+<span class="cp">#include "ros/ros.h"
+</span>
+<span class="cp">#include "std_msgs/String.h"
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"talker"</span><span class="p">);</span>      <span class="c1">// ROS节点初始化</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>               <span class="c1">// 创建节点句柄</span>
+  
+  <span class="c1">// 创建一个Publisher，发布名为chatter的topic，消息类型为std_msgs::String</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">Publisher</span> <span class="n">chatter_pub</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">advertise</span><span class="o">&lt;</span><span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"chatter"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">Rate</span> <span class="n">loop_rate</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>       <span class="c1">// 设置循环的频率</span>
+
+  <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">ros</span><span class="o">::</span><span class="n">ok</span><span class="p">())</span>
+  <span class="p">{</span>
+    <span class="c1">// 初始化std_msgs::String类型的消息</span>
+
+    <span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span> <span class="n">msg</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+    <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">"hello world "</span> <span class="o">&lt;&lt;</span> <span class="n">count</span><span class="p">;</span>
+    <span class="n">msg</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+    <span class="c1">// 发布消息</span>
+
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="n">chatter_pub</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">spinOnce</span><span class="p">();</span>    <span class="c1">// 循环等待回调函数</span>
+    
+    <span class="n">loop_rate</span><span class="p">.</span><span class="n">sleep</span><span class="p">();</span>     <span class="c1">// 按照循环频率延时</span>
+
+    <span class="o">++</span><span class="n">count</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<blockquote>
+  <p>分析</p>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "ros/ros.h"
+</span></code></pre></div>  </div>
+  <p>包含所有ROS系统要用到的头文件</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "std_msgs/String.h"
+</span></code></pre></div>  </div>
+  <p>包含String.msg的头文件</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"talker"</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <p>初始化ROS并命名节点</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>
+</code></pre></div>  </div>
+  <p>为发布者节点创建一个句柄</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ros</span><span class="o">::</span><span class="n">Publisher</span> <span class="n">chatter_pub</span> <span class="o">=</span>
+<span class="n">n</span><span class="p">.</span><span class="n">advertise</span><span class="o">&lt;</span><span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"chatter"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <p>告诉ROS Master将要发布一个消息类型为std msgs/String，名为chatter的话题,字符长度为1000</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ros</span><span class="o">::</span><span class="n">Rate</span> <span class="n">loop_rate</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <p>设置循环的频率</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="p">(</span><span class="n">ros</span><span class="o">::</span><span class="n">ok</span><span class="p">())</span>
+</code></pre></div>  </div>
+  <p>接收Ctrl-C的输入，如果输入Ctrl-C就结束循环</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span> <span class="n">msg</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+<span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">"hello world "</span> <span class="o">&lt;&lt;</span> <span class="n">count</span><span class="p">;</span>
+<span class="n">msg</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <p>将”hello world “赋给”data”</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chatter_pub</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <p>开始发布消息</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">msg</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+</code></pre></div>  </div>
+  <p>在终端打印和计数消息</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ros</span><span class="o">::</span><span class="n">spinOnce</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <p>一次回调函数</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">loop_rate</span><span class="p">.</span><span class="n">sleep</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <p>以10hz频率发布消息之后延时，减轻计算机的内存负担</p>
+</blockquote>
+
+<h5 id="创建订阅者">创建订阅者</h5>
+<p>(1)初始化ROS节点</p>
+
+<p>(2)订阅需要的话题</p>
+
+<p>(3)循环等待话题消息，接收到消息后进入回调函数</p>
+
+<p>(4)在回调函数中完成消息处理</p>
+
+<p>例程(listener.cpp)如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * 该例程将订阅chatter话题，消息类型String
+ */</span>
+ 
+<span class="cp">#include "ros/ros.h"
+</span>
+<span class="cp">#include "std_msgs/String.h"
+</span>
+<span class="c1">// 接收到订阅的消息后，会进入消息回调函数</span>
+
+<span class="kt">void</span> <span class="nf">chatterCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span><span class="o">::</span><span class="n">ConstPtr</span><span class="o">&amp;</span> <span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"I heard: [%s]"</span><span class="p">,</span> <span class="n">msg</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>     <span class="c1">// 将接收到的消息打印出来</span>
+
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"listener"</span><span class="p">);</span>      <span class="c1">// 初始化ROS节点</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>            <span class="c1">// 创建节点句柄</span>
+
+  <span class="c1">// 创建一个Subscriber，订阅名为chatter的topic，注册回调函数chatterCallback</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"chatter"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">chatterCallback</span><span class="p">);</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">spin</span><span class="p">();</span>          <span class="c1">// 循环等待回调函数    </span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<blockquote>
+  <p>分析：</p>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">chatterCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">std_msgs</span><span class="o">::</span><span class="n">String</span><span class="o">::</span><span class="n">ConstPtr</span><span class="o">&amp;</span> <span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"I heard: [%s]"</span><span class="p">,</span> <span class="n">msg</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+  <p>这个为回调函数，作用是当有新消息到达时回调函数就是发送I heard字符</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"chatter"</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">chatterCallback</span><span class="p">);</span>
+</code></pre></div>  </div>
+  <p>从ROS Master订阅chatter话题；无论什么时候有新消息都调用回调函数；字符长度最大为1000</p>
+</blockquote>
+
+<blockquote>
+  <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ros</span><span class="o">::</span><span class="n">spin</span><span class="p">();</span>
+</code></pre></div>  </div>
+  <p>回调函数，当接收到消息时就进入循环，如果没有就等待</p>
+</blockquote>
+
+<h5 id="编译代码">编译代码</h5>
+<p>(1)设置需要编译代码和生成的可执行文件</p>
+
+<p>(2)设置链接库</p>
+
+<p>(3)设置依赖</p>
+
+<p>例程(cmakelist.txt)如下：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_executable</span><span class="p">(</span>talker src/talker.cpp<span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span>listener src/listener.cpp<span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span>talker <span class="si">${</span><span class="nv">catkin_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>listener <span class="si">${</span><span class="nv">catkin_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="运行可执行文件">运行可执行文件</h5>
+<p>打开终端：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscore
+</code></pre></div></div>
+<p>打开新终端：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosrun learning_communication talker
+</code></pre></div></div>
+<p>打开新终端：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosrun learning_communication listener
+</code></pre></div></div>
+
+<h5 id="自定义话题消息">自定义话题消息</h5>
+<p>步骤：
+(0)在src目录下新建msg文件夹</p>
+
+<p>(1)定义msg文件(Person.msg)</p>
+<pre><code class="language-msg">string name
+uint8  sex
+uint8  age
+
+uint8 unknown = 0
+uint8 male    = 1
+uint8 female  = 2
+
+</code></pre>
+<p>(2)在package.mxl中添加功能包依赖</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build_depend&gt;</span>message_generation<span class="nt">&lt;/build_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>message_runtime<span class="nt">&lt;/exec_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>geometry_msgs<span class="nt">&lt;/exec_depend&gt;</span>
+</code></pre></div></div>
+
+<p>(3)在Cmakelists.txt添加编译选项</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">find_package</span><span class="p">(</span> ...... message_generation<span class="p">)</span>
+
+<span class="nf">catkin_package</span><span class="p">(</span>CATKIN_DEPENDS geometry_msgs roscpp
+rospy std_msgs message_runtime<span class="p">)</span>
+
+<span class="nf">add_message_files</span><span class="p">(</span>FILES Person.msg<span class="p">)</span>
+<span class="nf">generate_messages</span><span class="p">(</span>DEPENDENCIES std_msgs<span class="p">)</span>
+</code></pre></div></div>
+<p>说明：部分ROS版本中的exec_depend需要改为run_depend</p>
+
+<p>(3)查看是否成功</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosmsg show Person
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="服务编程">服务编程</h3>
+<h5 id="服务编程流程">服务编程流程</h5>
+<p>(1)创建服务器</p>
+
+<p>(2)创建客户端</p>
+
+<p>(3)添加编译选项</p>
+
+<p>(4)运行可执行程序</p>
+
+<h5 id="自定义服务请求与应答">自定义服务请求与应答</h5>
+<p>(1)定义srv文件(AddTwoInts.srv)</p>
+<pre><code class="language-srv">int64 a
+int64 b
+---
+int64 sum
+
+</code></pre>
+
+<blockquote>
+  <p>说明：三条横杆上面那部分是服务请求消息，下面那部分是应答消息</p>
+</blockquote>
+
+<p>(2)在package.xml中添加功能包依赖</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build_depend&gt;</span>message_generation<span class="nt">&lt;/build_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>message_runtime<span class="nt">&lt;/exec_depend&gt;</span>
+</code></pre></div></div>
+<p>(3)在cmakelists.txt添加编译选项</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">find_package</span><span class="p">(</span> ...... message_generation<span class="p">)</span>
+
+<span class="nf">catkin_package</span><span class="p">(</span>CATKIN_DEPENDS geometry_msgs roscpp
+rospy std_msgs message_runtime<span class="p">)</span>
+
+<span class="nf">add_service_files</span><span class="p">(</span>FILES AddTwoInts.srv<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="创建服务器">创建服务器</h5>
+<p>(1)初始化ROS节点</p>
+
+<p>(2)创建Server实例</p>
+
+<p>(3)循环等待服务请求，进入回调函数</p>
+
+<p>(4)在回调函数中完成服务功能的处理，并反馈应答数据</p>
+
+<p>实例(server.cpp)如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * AddTwoInts Server
+ */</span>
+ 
+<span class="cp">#include "ros/ros.h"
+</span>
+<span class="cp">#include "learning_communication/AddTwoInts.h"
+</span>
+<span class="c1">// service回调函数，输入参数req，输出参数res</span>
+
+<span class="kt">bool</span> <span class="nf">add</span><span class="p">(</span><span class="n">learning_communication</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">::</span><span class="n">Request</span>  <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span>
+         <span class="n">learning_communication</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">::</span><span class="n">Response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// 将输入参数中的请求数据相加，结果放到应答变量中</span>
+
+  <span class="n">res</span><span class="p">.</span><span class="n">sum</span> <span class="o">=</span> <span class="n">req</span><span class="p">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">req</span><span class="p">.</span><span class="n">b</span><span class="p">;</span>
+  <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"request: x=%ld, y=%ld"</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">int</span><span class="p">)</span><span class="n">req</span><span class="p">.</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">int</span><span class="p">)</span><span class="n">req</span><span class="p">.</span><span class="n">b</span><span class="p">);</span>
+  <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"sending back response: [%ld]"</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">int</span><span class="p">)</span><span class="n">res</span><span class="p">.</span><span class="n">sum</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"add_two_ints_server"</span><span class="p">);</span>    <span class="c1">// ROS节点初始化</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>      <span class="c1">// 创建节点句柄</span>
+
+  <span class="c1">// 创建一个名为add_two_ints的server，注册回调函数add()</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">ServiceServer</span> <span class="n">service</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">advertiseService</span><span class="p">(</span><span class="s">"add_two_ints"</span><span class="p">,</span> <span class="n">add</span><span class="p">);</span>
+  <span class="c1">// 循环等待回调函数</span>
+
+  <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Ready to add two ints."</span><span class="p">);</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">spin</span><span class="p">();</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="创建客户端">创建客户端</h5>
+<p>(1)初始化ROS节点</p>
+
+<p>(2)创建一个Client实例</p>
+
+<p>(3)发布服务请求数据</p>
+
+<p>(4)等待server处理之后的应答结果</p>
+
+<p>实例(client.cpp)如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * AddTwoInts Client
+ */</span>
+ 
+<span class="cp">#include &lt;cstdlib&gt;
+</span>
+<span class="cp">#include "ros/ros.h"
+</span>
+<span class="cp">#include "learning_communication/AddTwoInts.h"
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"add_two_ints_client"</span><span class="p">);</span>     <span class="c1">// ROS节点初始化</span>
+  
+  <span class="c1">// 从终端命令行获取两个加数</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"usage: add_two_ints_client X Y"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>     <span class="c1">// 创建节点句柄</span>
+  
+  <span class="c1">// 创建一个client，请求add_two_int service，service消息类型是learning_communication::AddTwoInts</span>
+
+  <span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">learning_communication</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"add_two_ints"</span><span class="p">);</span>
+
+  <span class="c1">// 创建learning_communication::AddTwoInts类型的service消息</span>
+
+  <span class="n">learning_communication</span><span class="o">::</span><span class="n">AddTwoInts</span> <span class="n">srv</span><span class="p">;</span>
+  <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">atoll</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">atoll</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  
+  <span class="c1">// 发布service请求，等待加法运算的应答结果</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">))</span>
+  <span class="p">{</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Sum: %ld"</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">int</span><span class="p">)</span><span class="n">srv</span><span class="p">.</span><span class="n">response</span><span class="p">.</span><span class="n">sum</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="n">ROS_ERROR</span><span class="p">(</span><span class="s">"Failed to call service add_two_ints"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="编译代码-1">编译代码</h5>
+<p>(1)设置需要编译的代码和生成的可执行文件</p>
+
+<p>(2)设置链接库</p>
+
+<p>(3)设置依赖</p>
+
+<p>实例(cmakelists.txt)如下：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_executable</span><span class="p">(</span>server src/server.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>server <span class="si">${</span><span class="nv">catkin_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">add_dependencies</span><span class="p">(</span>server <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>_gencpp<span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span>client src/client.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>client <span class="si">${</span><span class="nv">catkin_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">add_dependencies</span><span class="p">(</span>client <span class="si">${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span>_gencpp<span class="p">)</span>
+
+</code></pre></div></div>
+
+<h5 id="运行可执行文件-1">运行可执行文件</h5>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscore
+</code></pre></div></div>
+<p>打开新终端：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosrun learning_communication server
+</code></pre></div></div>
+<p>打开新终端：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosrun learning_communication client 4 8
+</code></pre></div></div>
+
+<hr />
+<h3 id="动作编程">动作编程</h3>
+<h5 id="什么是动作编程">什么是动作编程</h5>
+<p><img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="action" /></p>
+
+<h5 id="自定义动作消息">自定义动作消息</h5>
+<p>(1)定义action文件(DoDishes.action)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Define the goal
+uint32 dishwasher_id  # Specify which dishwasher we want to use
+---
+# Define the result
+uint32 total_dishes_cleaned
+---
+# Define a feedback message
+float32 percent_complete
+</code></pre></div></div>
+<p>(2)在package.xml中添加功能包依赖</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build_depend&gt;</span>actionlib<span class="nt">&lt;/build_depend&gt;</span>
+<span class="nt">&lt;build_depend&gt;</span>actionlib_msgs<span class="nt">&lt;/build_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>actionlib<span class="nt">&lt;/exec_depend&gt;</span>
+<span class="nt">&lt;exec_depend&gt;</span>actionlib_msgs<span class="nt">&lt;/exec_depend&gt;</span>
+</code></pre></div></div>
+<p>(3)在cmakelists.txt添加编译选项</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">find_package</span><span class="p">(</span>catkin REQUIRED actionlib_msgs actionlib<span class="p">)</span>
+<span class="nf">add_action_files</span><span class="p">(</span>DIRECTORY action FILES DoDishes.action<span class="p">)</span>
+<span class="nf">generate_messages</span><span class="p">(</span>DEPENDENCIES actionlib_msgs<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="实现一个动作服务器">实现一个动作服务器</h5>
+<p>(1)初始化ROS节点</p>
+
+<p>(2)创建动作服务器实例</p>
+
+<p>(3)启动服务器，等待动作请求</p>
+
+<p>(4)在回调函数中完成动作服务功能的处理，并反馈进度消息</p>
+
+<p>(5)动作完成，发送结束消息</p>
+
+<p>动作服务器实例(DoDishes_server.cpp)如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;ros/ros.h&gt;
+</span>
+<span class="cp">#include &lt;actionlib/server/simple_action_server.h&gt;
+</span>
+<span class="cp">#include "learning_communication/DoDishesAction.h"
+</span>
+<span class="k">typedef</span> <span class="n">actionlib</span><span class="o">::</span><span class="n">SimpleActionServer</span><span class="o">&lt;</span><span class="n">learning_communication</span><span class="o">::</span><span class="n">DoDishesAction</span><span class="o">&gt;</span> <span class="n">Server</span><span class="p">;</span>
+
+<span class="c1">// 收到action的goal后调用该回调函数</span>
+
+<span class="kt">void</span> <span class="nf">execute</span><span class="p">(</span><span class="k">const</span> <span class="n">learning_communication</span><span class="o">::</span><span class="n">DoDishesGoalConstPtr</span><span class="o">&amp;</span> <span class="n">goal</span><span class="p">,</span> <span class="n">Server</span><span class="o">*</span> <span class="n">as</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">Rate</span> <span class="n">r</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">learning_communication</span><span class="o">::</span><span class="n">DoDishesFeedback</span> <span class="n">feedback</span><span class="p">;</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Dishwasher %d is working."</span><span class="p">,</span> <span class="n">goal</span><span class="o">-&gt;</span><span class="n">dishwasher_id</span><span class="p">);</span>
+
+    <span class="c1">// 假设洗盘子的进度，并且按照1hz的频率发布进度feedback</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">feedback</span><span class="p">.</span><span class="n">percent_complete</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">as</span><span class="o">-&gt;</span><span class="n">publishFeedback</span><span class="p">(</span><span class="n">feedback</span><span class="p">);</span>
+        <span class="n">r</span><span class="p">.</span><span class="n">sleep</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 当action完成后，向客户端返回结果</span>
+
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Dishwasher %d finish working."</span><span class="p">,</span> <span class="n">goal</span><span class="o">-&gt;</span><span class="n">dishwasher_id</span><span class="p">);</span>
+    <span class="n">as</span><span class="o">-&gt;</span><span class="n">setSucceeded</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"do_dishes_server"</span><span class="p">);</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="c1">// 定义一个服务器</span>
+
+    <span class="n">Server</span> <span class="n">server</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">"do_dishes"</span><span class="p">,</span> <span class="n">boost</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">execute</span><span class="p">,</span> <span class="n">_1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">server</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">server</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>       <span class="c1">// 服务器开始运行</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">spin</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="实现一个动作客户端">实现一个动作客户端</h5>
+<p>(1)初始化ROS节点</p>
+
+<p>(2)创建动作客户端实例</p>
+
+<p>(3)连接动作服务端</p>
+
+<p>(4)发送动作目标</p>
+
+<p>(5)根据不同类型的服务端反馈处理回调函数</p>
+
+<p>动作客户端实例(DoDishes_client.cpp)如下：</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;actionlib/client/simple_action_client.h&gt;
+</span>
+<span class="cp">#include "learning_communication/DoDishesAction.h"
+</span>
+<span class="k">typedef</span> <span class="n">actionlib</span><span class="o">::</span><span class="n">SimpleActionClient</span><span class="o">&lt;</span><span class="n">learning_communication</span><span class="o">::</span><span class="n">DoDishesAction</span><span class="o">&gt;</span> <span class="n">Client</span><span class="p">;</span>
+
+<span class="c1">// 当action完成后会调用该回调函数一次</span>
+
+<span class="kt">void</span> <span class="nf">doneCb</span><span class="p">(</span><span class="k">const</span> <span class="n">actionlib</span><span class="o">::</span><span class="n">SimpleClientGoalState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">learning_communication</span><span class="o">::</span><span class="n">DoDishesResultConstPtr</span><span class="o">&amp;</span> <span class="n">result</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Yay! The dishes are now clean"</span><span class="p">);</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// 当action激活后会调用该回调函数一次</span>
+
+<span class="kt">void</span> <span class="nf">activeCb</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Goal just went active"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 收到feedback后调用该回调函数</span>
+
+<span class="kt">void</span> <span class="nf">feedbackCb</span><span class="p">(</span><span class="k">const</span> <span class="n">learning_communication</span><span class="o">::</span><span class="n">DoDishesFeedbackConstPtr</span><span class="o">&amp;</span> <span class="n">feedback</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">" percent_complete : %f "</span><span class="p">,</span> <span class="n">feedback</span><span class="o">-&gt;</span><span class="n">percent_complete</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"do_dishes_client"</span><span class="p">);</span>
+    <span class="n">Client</span> <span class="n">client</span><span class="p">(</span><span class="s">"do_dishes"</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>     <span class="c1">// 定义一个客户端</span>
+
+    <span class="c1">// 等待服务器端</span>
+
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Waiting for action server to start."</span><span class="p">);</span>
+    <span class="n">client</span><span class="p">.</span><span class="n">waitForServer</span><span class="p">();</span>
+    <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">"Action server started, sending goal."</span><span class="p">);</span>
+    <span class="c1">// 创建一个action的goal</span>
+
+    <span class="n">learning_communication</span><span class="o">::</span><span class="n">DoDishesGoal</span> <span class="n">goal</span><span class="p">;</span>
+    <span class="n">goal</span><span class="p">.</span><span class="n">dishwasher_id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c1">// 发送action的goal给服务器端，并且设置回调函数</span>
+
+    <span class="n">client</span><span class="p">.</span><span class="n">sendGoal</span><span class="p">(</span><span class="n">goal</span><span class="p">,</span>  <span class="o">&amp;</span><span class="n">doneCb</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">activeCb</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">feedbackCb</span><span class="p">);</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">spin</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5 id="编译代码-2">编译代码</h5>
+<p>(1)设置需要编译的代码和生成的可执行文件</p>
+
+<p>(2)设置链接库</p>
+
+<p>(3)设置依赖</p>
+
+<p>实例(cmakelists.txt)如下：</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">add_executable</span><span class="p">(</span>DoDishes_client src/DoDishes_client.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span> DoDishes_client <span class="si">${</span><span class="nv">catkin_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">add_dependencies</span><span class="p">(</span>DoDishes_client <span class="si">${${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span><span class="nv">_EXPORTED_TARGETS</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">add_executable</span><span class="p">(</span>DoDishes_server src/DoDishes_server.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span> DoDishes_server <span class="si">${</span><span class="nv">catkin_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+<span class="nb">add_dependencies</span><span class="p">(</span>DoDishes_server <span class="si">${${</span><span class="nv">PROJECT_NAME</span><span class="si">}</span><span class="nv">_EXPORTED_TARGETS</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="运行可执行文件-2">运行可执行文件</h5>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roscore
+</code></pre></div></div>
+<p>打开新终端：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosrun learning_communication DoDishes_client
+</code></pre></div></div>
+<p>打开新终端：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rosrun learning_communication DoDishes_server
+</code></pre></div></div>
+
+<hr />
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/08/20/%E8%AE%A4%E8%AF%86ROS/" data-toggle="tooltip" data-placement="top" title=" ROS NOTE 1 ">
+                        Previous<br>
+                        <span> ROS NOTE 1 </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/08/22/ROS%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-2/" data-toggle="tooltip" data-placement="top" title="ROS NOTE 3">
+                        Next<br>
+                        <span>ROS NOTE 3</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->               
+                
+                </div> 
+
+ <!-- 
+                
+            </div>  
+-->
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ROS" title="ROS" rel="8">
+                                    ROS
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Ubuntu" title="Ubuntu" rel="5">
+                                    Ubuntu
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ROS_Tutorials" title="ROS_Tutorials" rel="2">
+                                    ROS_Tutorials
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#深蓝学院课程笔记" title="深蓝学院课程笔记" rel="3">
+                                    深蓝学院课程笔记
+                                </a>
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://github.com/">Github</a></li>
+                    
+                        <li><a href=""></a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!--
+
+-->
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "gjxs";
+    var disqus_identifier = "/2018/08/22/ROS的基础知识 ";
+    var disqus_url = "http://localhost:4000/2018/08/22/ROS%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+<footer> 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by GJXS, add target = "_blank" to <a> by GJXS -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/gjxian-sheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://blog.csdn.net/GJXS2017">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-CSDN fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/GJXS1980">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://music.163.com/#/user/home?id=261616078">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-music163 fa-stack-1x fa-inverse">易</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; G.J.先生 BLOG 2018
+                    <br>
+                    Theme by <a href="https://github.com/Huxpro/huxpro.github.io">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=GJXS1980&repo=gjxs.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/gjxs-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so GJXSblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by GJXS
+    var _gaId = 'UA-120526213-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual
+        if ("") {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by GJXS to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/root/icon_wechat.png" width="0" height="0" />     
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
