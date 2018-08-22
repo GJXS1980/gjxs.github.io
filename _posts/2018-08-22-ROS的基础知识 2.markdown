@@ -1,0 +1,354 @@
+---
+layout:       post
+title:        "ROS NOTE 3"
+subtitle:     "ROS的launch文件和TF坐标变换"
+date:         2018-08-22 09:18:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.08/22/22.jpg"
+catalog:      true
+tags:
+    - ROS
+    - 深蓝学院课程笔记
+---
+*****
+>Abstract: "深蓝学院的课程学习笔记，第二讲：ROS基础知识中的launch文件和TF坐标变换."<br>                                                                                                                                                        <br /> 
+
+----------
+*************************
+### launch文件
+##### launch文件概述
+launch文件：通过XML文件实现多节点的配置和启动（可自动启动ROS Master）
+
+参数设置：
+
+| Name | Usage |
+| -  | :-: |
+| output | 打印日志在终端 | 
+| respawn | 当进程突然终止时，可以自动重新连接 | 
+| required | ROS必须要有的，没有required就启动不了节点 | 
+| ns | 即name_space，命名的空间 | 
+| args | 各种参数的配置 | 
+
+##### launch文件的基本构成
+###### <launch\>标签
+launch文件中的根元素采用<launch\>标签来定义
+
+###### <node\>标签
+例子：
+```xml
+ <node pkg="package-name" type="executable-name" name="nade-name" />
+```
+
+| Name | Usage |
+| -  | :-: |
+| pkg| 节点所在的功能包名称 | 
+| type | 节点的可执行文件名称 | 
+| name | 节点运行时的名称 | 
+
+###### <param\>/<rosparam\>标签
+<param\>的例子：
+```xml
+<param name="output_frame" value="odom" />
+```
+
+| Name | Usage |
+| -  | :-: |
+| name | 参数名 | 
+| value | 参数值 | 
+
+<rosparam\>的例子：
+```xml
+<rosparam file="params.yaml" command="load" ns="params" />
+```
+>加载参数文件中的多个参数
+
+>说明：<param\>/<rosparam\>标签都属于全局变量
+
+###### <arg\>标签
+<arg\>标签为launch文件内部的局部变量，仅限于launch文件使用
+```xml
+<arg name="arg-name" default="arg-value" />
+```
+
+| Name | Usage |
+| -  | :-: |
+| name | 参数名 | 
+| default | 参数值 | 
+
+调用方法：
+```xml
+<param name="foo" value="$(arg arg-name)" />
+<node name="node" pkg="package" type="type" args="$(arg arg-name)" />
+```
+
+###### <remap\>标签
+<remap\>标签:重映射ROS计算图资源的命名
+
+例子：
+```xml
+<remap from="/turtlebot/cmd_vel" to="/cmd_vel" />
+```
+
+| Name | Usage |
+| -  | :-: |
+| from| 原命名 | 
+| to | 映射之后的命名 | 
+
+>说明：重映射之后"/turtlebot/cmd_vel"将不存在，所有"/turtlebot/cmd_vel"的资源都改为"/cmd_vel"路径
+
+###### <include\>标签
+<include\>标签:包含其他launch文件，类似C语言中的头文件包含。
+
+例子：
+```xml
+<include file="$(dirname)/other.launch" />
+```
+
+file:包含的其他launch文件路径
+
+其他的标签用法参照[1]
+
+*************************
+### TF坐标变换
+##### TF坐标变换概述
+TF功能包的作用：
+
+(1)TF功能包可以保留五秒钟内机器人的坐标系相当于全局坐标系的相对位置(关系)
+
+(2)TF功能包可以计算机器人夹取的物体相当于机器人中心坐标系的位置
+
+(3)TF功能包可以计算机器人中心坐标系相当于全局坐标系的位置
+
+TF进行变换的两种方式：
+
+广播TF变换
+
+监听TF变换
+
+
+TF相关的功能包：
+```bash
+#小海龟跟随实验
+sudo apt-get install ros-kinetic-turtle-tf
+roslaunch turtle_tf turtle_tf_demo.launch
+rosrun turtlesim turtle_teleop_key
+rosrun tf view_frames
+
+#可视化工具
+rosrun tf tf_echo turtle1 turtle2
+rosrun rviz rviz -d `rospack find turtle_tf` /rviz/turtle_rviz.rviz
+```
+
+##### 实现一个TF广播器
+(1)定义TF广播器(TransformBroadcaster)
+
+(2)创建坐标变换值
+
+(3)发布坐标变换(sendTransform)
+
+实例(turtle_tf_broadcaster.cpp):
+```cpp
+#include <ros/ros.h>
+
+#include <tf/transform_broadcaster.h>
+
+#include <turtlesim/Pose.h>
+
+std::string turtle_name;
+
+void poseCallback(const turtlesim::PoseConstPtr& msg)
+{
+    // tf广播器
+
+    static tf::TransformBroadcaster br;
+
+    // 根据乌龟当前的位姿，设置相对于世界坐标系的坐标变换
+
+    tf::Transform transform;
+    transform.setOrigin( tf::Vector3(msg->x, msg->y, 0.0) );
+    tf::Quaternion q;
+    q.setRPY(0, 0, msg->theta);
+    transform.setRotation(q);
+
+    // 发布坐标变换
+
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", turtle_name));
+}
+
+int main(int argc, char** argv)
+{
+    // 初始化节点
+
+    ros::init(argc, argv, "my_tf_broadcaster");
+    if (argc != 2)
+    {
+        ROS_ERROR("need turtle name as argument"); 
+        return -1;
+    };
+    turtle_name = argv[1];
+
+    // 订阅乌龟的pose信息
+
+    ros::NodeHandle node;
+    ros::Subscriber sub = node.subscribe(turtle_name+"/pose", 10, &poseCallback);
+
+    ros::spin();
+
+    return 0;
+};
+```
+
+##### 实现一个TF监听器
+(1)定义TF监听器(TransformListener)
+
+(2)查找坐标变换(waitForTransform、 lookupTransform)
+
+实例(turtle_tf_listener.cpp):
+```cpp
+#include <ros/ros.h>
+
+#include <tf/transform_listener.h>
+
+#include <geometry_msgs/Twist.h>
+
+#include <turtlesim/Spawn.h>
+
+int main(int argc, char** argv)
+{
+    // 初始化节点
+
+    ros::init(argc, argv, "my_tf_listener");
+
+    ros::NodeHandle node;
+
+    // 通过服务调用，产生第二只乌龟turtle2
+
+    ros::service::waitForService("spawn");
+    ros::ServiceClient add_turtle =
+    node.serviceClient<turtlesim::Spawn>("spawn");
+    turtlesim::Spawn srv;
+    add_turtle.call(srv);
+
+    // 定义turtle2的速度控制发布器
+
+    ros::Publisher turtle_vel =
+    node.advertise<geometry_msgs::Twist>("turtle2/cmd_vel", 10);
+
+    // tf监听器
+
+    tf::TransformListener listener;
+
+    ros::Rate rate(10.0);
+    while (node.ok())
+    {
+        tf::StampedTransform transform;
+        try
+        {
+            // 查找turtle2与turtle1的坐标变换
+
+            listener.waitForTransform("/turtle2", "/turtle1", ros::Time(0), ros::Duration(3.0));
+            listener.lookupTransform("/turtle2", "/turtle1", ros::Time(0), transform);
+        }
+        catch (tf::TransformException &ex) 
+        {
+            ROS_ERROR("%s",ex.what());
+            ros::Duration(1.0).sleep();
+            continue;
+        }
+
+        // 根据turtle1和turtle2之间的坐标变换，计算turtle2需要运动的线速度和角速度
+
+        // 并发布速度控制指令，使turtle2向turtle1移动
+
+        geometry_msgs::Twist vel_msg;
+        vel_msg.angular.z = 4.0 * atan2(transform.getOrigin().y(),
+                                        transform.getOrigin().x());
+        vel_msg.linear.x = 0.5 * sqrt(pow(transform.getOrigin().x(), 2) +
+                                      pow(transform.getOrigin().y(), 2));
+        turtle_vel.publish(vel_msg);
+
+        rate.sleep();
+    }
+    return 0;
+};
+```
+
+##### 编译代码
+(1)设置需要编译的代码和生成的可执行文件
+
+(2)设置链接库
+
+实例(cmakelists.txt)如下:
+```cmake
+find_package(catkin REQUIRED COMPONENTS
+  geometry_msgs
+  roscpp
+  tf
+  turtlesim
+)
+
+add_executable(turtle_tf_broadcaster src/turtle_tf_broadcaster.cpp)
+target_link_libraries(turtle_tf_broadcaster ${catkin_LIBRARIES})
+
+add_executable(turtle_tf_listener src/turtle_tf_listener.cpp)
+target_link_libraries(turtle_tf_listener ${catkin_LIBRARIES})
+```
+
+实例(package.xml)如下:
+```xml
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>turtlesim</build_depend>
+
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>tf</build_export_depend>
+  <build_export_depend>turtlesim</build_export_depend>
+
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>turtlesim</exec_depend>
+```
+
+##### 编写launch文件
+实例(start_demo_with_listener.launch)如下：
+```xml
+ <launch>
+    <!-- 海龟仿真器 -->
+    <node pkg="turtlesim" type="turtlesim_node" name="sim"/>
+
+    <!-- 键盘控制 -->
+    <node pkg="turtlesim" type="turtle_teleop_key" name="teleop" output="screen"/>
+
+    <!-- 两只海龟的tf广播 -->
+    <node pkg="learning_tf" type="turtle_tf_broadcaster"
+          args="/turtle1" name="turtle1_tf_broadcaster" />
+    <node pkg="learning_tf" type="turtle_tf_broadcaster"
+          args="/turtle2" name="turtle2_tf_broadcaster" />
+
+    <!-- 监听tf广播，并且控制turtle2移动 -->
+    <node pkg="learning_tf" type="turtle_tf_listener"
+          name="listener" />
+
+ </launch>
+```
+运行launch文件启动小海龟跟随例程：
+```bash
+roslaunch learning_tf start_demo_with_listener.launch
+```
+
+
+*************************
+>参考链接
+>
+>[1] http://wiki.ros.org/roslaunch/XML
+
+*************************
+
+
+
+
+
