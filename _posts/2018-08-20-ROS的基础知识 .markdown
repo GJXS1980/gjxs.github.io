@@ -4,7 +4,7 @@ title:        "ROS NOTE 2"
 subtitle:     "ROS通信编程"
 date:         2018-08-21 22:00:00
 author:       "G.J.先生"
-header-img:   "img/in-post/2018.08/21/21.png"
+header-img:   "img/in-post/2018.08/21/21.jpg"
 catalog:      true
 tags:
     - ROS
@@ -408,7 +408,7 @@ int main(int argc, char **argv)
   srv.request.b = atoll(argv[2]);
   
   // 发布service请求，等待加法运算的应答结果
-  
+
   if (client.call(srv))
   {
     ROS_INFO("Sum: %ld", (long int)srv.response.sum);
