@@ -1,0 +1,182 @@
+---
+layout:       post
+title:        "ROS NOTE 6"
+subtitle:     "Gazebo物理仿真环境搭建"
+date:         2018-08-27 12:50:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.08/22/22.jpg"
+catalog:      true
+tags:
+    - ROS
+    - 深蓝学院课程笔记
+    - rviz
+    - Gazebo
+    - ros_control
+---
+*****
+>Abstract: "ROS中的ros_control功能包的介绍及Gazebo物理仿真环境搭建。"<br>                                                                                                                                                                   <br /> 
+
+----------
+*************************
+### 前言--ros_control
+##### ros_control的介绍
+<ul>
+<li> ROS为开发者提供的机器人控制中间件</li>
+<li> 包括一系列控制器接口、传动装置接口、硬件接口、控制器工具箱等等 </li>
+<li> 可以帮助机器人应用功能包快速落地，提高开发效率</li>
+</ul>
+<p>ros_control的总体框架</p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="ros_control的总体框架"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></p></i></p>
+<p>ros_control的控制器数据流图</p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="控制器数据流图"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></p></i></p>
+<ul>
+<li> <code>控制器管理器</code>:提供一种通用的接口来管理不同的控制器。</li>
+<li> <code>控制器</code>:读取硬件状态，发布控制命令，完成每个joint的控制。 </li>
+<li> <code>硬件资源</code>:为上下两层提供硬件资源的接口。 </li>
+<li> <code>机器人硬件抽象</code>:机器人硬件抽象和硬件资源直接打交道，通过write和read方法完成硬件操作。 </li>
+<li> <code>真实机器人</code>:执行接收到的命令。 </li>
+</ul>
+<p>ros_control的控制器</p>
+<ul>
+<li> <code>joint_effort_controller</code></li>
+<li> <code>joint_state_controller</code></li>
+<li> <code>joint_position_controller</code></li>
+<li> <code>joint_velocity_controller</code></li>
+</ul>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="ros_control的控制器"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></p></i></p>
+
+*************************
+### Gazebo物理仿真环境的搭建
+##### Gazebo+ros_control框架
+<img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="Gazebo+ros_control框架"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></p></i></p>
+##### 仿真步骤
+###### 配置机器人模型
+<p>第一步：为link添加惯性参数和碰撞属性</p>
+```xml
+    <!-- Macro for inertia matrix -->
+    <xacro:macro name="sphere_inertial_matrix" params="m r">
+        <inertial>
+            <mass value="${m}" />
+            <inertia ixx="${2*m*r*r/5}" ixy="0" ixz="0"
+                iyy="${2*m*r*r/5}" iyz="0" 
+                izz="${2*m*r*r/5}" />
+        </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="cylinder_inertial_matrix" params="m r h">
+        <inertial>
+            <mass value="${m}" />
+            <inertia ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+                iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+                izz="${m*r*r/2}" /> 
+        </inertial>
+    </xacro:macro>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length = "${wheel_length}"/>
+                </geometry>
+            </collision>
+            <cylinder_inertial_matrix  m="${wheel_mass}" r="${wheel_radius}" h="${wheel_length}" />
+```
+<ul>
+<li> <code>collision</code>：碰撞属性</li>
+<li> <code>cylinder_inertial_matrix</code>：惯性矩阵（如果是一个圆柱体，输入质量、半径和高度）</li>
+</ul>
+
+<p>第二步：为link添加gazebo标签</p>
+```xml
+        <gazebo reference="${prefix}_wheel_link">
+            <material>Gazebo/Gray</material>
+        </gazebo>
+
+        <gazebo reference="${prefix}_caster_link">
+            <material>Gazebo/Black</material>
+        </gazebo>
+
+        <gazebo reference="base_footprint">
+            <turnGravityOff>false</turnGravityOff>
+        </gazebo>
+
+        <gazebo reference="base_link">
+            <material>Gazebo/Blue</material>
+        </gazebo>
+```
+>rviz下的颜色跟gazebo下的颜色用法不一样
+
+<ul>
+<li> <code>material</code>：gazebo下的颜色</li>
+<li> <code>turnGravityOff</code>：重力参数</li>
+</ul>
+
+<p>第三步：为joint添加传动装置</p>
+```xml
+        <!-- Transmission is important to link the joints and the controller -->
+        <transmission name="${prefix}_wheel_joint_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${prefix}_wheel_joint" >
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${prefix}_wheel_joint_motor">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+```
+<ul>
+<li> <code>hardwareInterface</code>：调用速度插件</li>
+<li> <code>mechanicalReduction</code>：</li>
+</ul>
+
+<p>第四步：添加gazebo控制器插件</p>
+```xml
+        <!-- controller -->
+        <gazebo>
+            <plugin name="differential_drive_controller" 
+                    filename="libgazebo_ros_diff_drive.so">
+                <rosDebugLevel>Debug</rosDebugLevel>
+                <publishWheelTF>true</publishWheelTF>
+                <robotNamespace>/</robotNamespace>
+                <publishTf>1</publishTf>
+                <publishWheelJointState>true</publishWheelJointState>
+                <alwaysOn>true</alwaysOn>
+                <updateRate>100.0</updateRate>
+                <legacyMode>true</legacyMode>
+                <leftJoint>left_wheel_joint</leftJoint>
+                <rightJoint>right_wheel_joint</rightJoint>
+                <wheelSeparation>${wheel_joint_y*2}</wheelSeparation>
+                <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+                <broadcastTF>1</broadcastTF>
+                <wheelTorque>30</wheelTorque>
+                <wheelAcceleration>1.8</wheelAcceleration>
+                <commandTopic>cmd_vel</commandTopic>
+                <odometryFrame>odom</odometryFrame> 
+                <odometryTopic>odom</odometryTopic> 
+                <robotBaseFrame>base_footprint</robotBaseFrame>
+            </plugin>
+        </gazebo> 
+```
+<ul>
+<li> <code>robotNamespace</code>：机器人的命名空间</li>
+<li> <code>leftJoint和rightJoint</code>：左右轮转动的关节</li>
+<li> <code>wheelSeparation和wheelDiameter</code>：机器人模型的相关尺寸，在计算差速参数时需要用到</li>
+<li> <code>commandTopic</code>：控制器订阅的速度控制指令，生成全局命名时需要结合robotNamespace中设置的命名空间</li>
+<li> <code>odometryFrame</code>：里程计数据的参考坐标系，ROS中一般命名为odom</li>
+</ul>
+
+###### 创建仿真环境
+
+
+
+
+
+
+
+
+###### 传感器仿真
+
+
+
+
+*************************

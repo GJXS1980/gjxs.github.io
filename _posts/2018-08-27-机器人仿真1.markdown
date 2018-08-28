@@ -1,0 +1,96 @@
+---
+layout:       post
+title:        "ROS NOTE 5"
+subtitle:     "ArbotiX+rviz功能仿真"
+date:         2018-08-27 12:26:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.08/22/22.jpg"
+catalog:      true
+tags:
+    - ROS
+    - 深蓝学院课程笔记
+    - rviz
+    - ArbotiX
+---
+*****
+>Abstract: "ROS中的ArbotiX功能包的用法及ArbotiX+rviz功能仿真的实现。"<br>                                                                                                                                                                   <br /> 
+
+----------
+*************************
+### ArbotiX功能包的概述
+ArbotiX是一款控制电机、舵机的硬件控制板。<br>
+<ul>
+<li> 提供相应的ROS功能包；</li>
+<li> 提供了一个差速控制器，通过接收速度控制指令，更新机器人的里程计状态。 </li>
+</ul>
+>arbotix_ros中的python文件需要添加可执行权限
+
+### 配置ArbotiX控制器
+##### 创建launch文件
+launch文件(arbotix_mbot_with_camera_xacro.launch)代码如下：
+```xml
+<launch>
+    <arg name="model" default="$(find xacro)/xacro --inorder '$(find mbot_description)/urdf/xacro/mbot_with_camera.xacro'" />
+    <arg name="gui" default="false" />
+
+    <param name="robot_description" command="$(arg model)" />
+
+    <!-- 设置GUI参数，显示关节控制插件 -->
+    <param name="use_gui" value="$(arg gui)"/>
+
+    <node name="arbotix" pkg="arbotix_python" type="arbotix_driver" output="screen">
+        <rosparam file="$(find mbot_description)/config/fake_mbot_arbotix.yaml" command="load" />
+        <param name="sim" value="true"/>
+    </node>
+
+    <!-- 运行joint_state_publisher节点，发布机器人的关节状态  -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+    <!-- 运行robot_state_publisher节点，发布tf  -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <!-- 运行rviz可视化界面 -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mbot_description)/config/mbot_arbotix.rviz" required="true" />
+
+</launch>
+```
+
+##### 创建配置文件
+配置文件(fake_mbot_arbotix.yaml)如下：<br>
+```yaml
+controllers: {
+   base_controller: {
+       type: diff_controller, 
+       base_frame_id: base_footprint, 
+       base_width: 0.26, 
+       ticks_meter: 4100, 
+       Kp: 12, 
+       Kd: 12, 
+       Ki: 0, 
+       Ko: 50, 
+       accel_limit: 1.0 
+    }
+}
+```
+
+##### 启动仿真器
+```bash
+roslanch mbot_description arbotix_mbot_with_camera_xacro.launch
+```
+结构图如下：
+![]()
+
+##### 启动键盘控制
+```bash 
+roslaunch mbot_teleop mbot_teleop.launch
+```
+>odom是一个全局坐标系，通过里程计记录机器人当前的运动姿态<br>
+
+### 导航实例
+```bash
+roslaunch rbx1_bringup fake_turtlebot.launch
+roslaunch rbx1_nav fake_amcl.launch map:=test_map.yaml
+rosrun rviz rviz -d `rospack find rbx1_nav`/amcl.rviz
+```
+
+*************************
