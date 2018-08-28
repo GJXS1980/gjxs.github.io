@@ -34,7 +34,7 @@ URDF：URDF(<code>Unified Robot Description Format</code>)为统一的机器人�
 </link>
 ```
 结构图如下：
-<img src="http://pdpv2lxdq.bkt.clouddn.com/link.png" alt="URDF机器人建模"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></p></i></p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/link.png" alt="URDF机器人建模"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></p></i>
 
 ##### <joint\>标签
 <joint\>标签:描述机器人关节的运动学和动力学属性，包括关节运动的位置和速度限制。根据关节运动形式，可以将其分为六种类型：<br>
