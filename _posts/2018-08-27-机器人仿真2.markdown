@@ -26,9 +26,9 @@ tags:
 <li> 可以帮助机器人应用功能包快速落地，提高开发效率</li>
 </ul>
 <p>ros_control的总体框架</p>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="ros_control的总体框架"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></p></i></p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control1.png" alt="ros_control的总体框架"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></i>
 <p>ros_control的控制器数据流图</p>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="控制器数据流图"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></p></i></p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control2.png" alt="控制器数据流图"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></i>
 <ul>
 <li> <code>控制器管理器</code>:提供一种通用的接口来管理不同的控制器。</li>
 <li> <code>控制器</code>:读取硬件状态，发布控制命令，完成每个joint的控制。 </li>
@@ -43,12 +43,12 @@ tags:
 <li> <code>joint_position_controller</code></li>
 <li> <code>joint_velocity_controller</code></li>
 </ul>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="ros_control的控制器"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></p></i></p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control4.png" alt="ros_control的控制器"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></i>
 
 *************************
 ### Gazebo物理仿真环境的搭建
 ##### Gazebo+ros_control框架
-<img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="Gazebo+ros_control框架"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></p></i></p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control3.png" alt="Gazebo+ros_control框架"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></i>
 ##### 仿真步骤
 ###### 配置机器人模型
 <p>第一步：为link添加惯性参数和碰撞属性</p>
