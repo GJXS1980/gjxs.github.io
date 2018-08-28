@@ -34,7 +34,7 @@ URDF：URDF(<code>Unified Robot Description Format</code>)为统一的机器人�
 </link>
 ```
 结构图如下：
-<img src="http://pdpv2lxdq.bkt.clouddn.com/link.png" alt="URDF机器人建模"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></p></i>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/link.png" alt="URDF机器人建模"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></i>
 
 ##### <joint\>标签
 <joint\>标签:描述机器人关节的运动学和动力学属性，包括关节运动的位置和速度限制。根据关节运动形式，可以将其分为六种类型：<br>
@@ -67,7 +67,7 @@ URDF：URDF(<code>Unified Robot Description Format</code>)为统一的机器人�
 </ul>
 结构图如下：
 ![]()
-<img src="http://pdpv2lxdq.bkt.clouddn.com/link.png" alt="URDF机器人建模"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></p></i></p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/link.png" alt="URDF机器人建模"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a><</i>
 
 ##### <robot\>标签
 <robot\>标签:是机器人模型的最顶层标签，<link\>和<joint\>标签都必须包括在<robot\>标签内，一个完整的机器人模型就是由一系列<link\>和<joint\>组成。<br>
@@ -82,7 +82,7 @@ URDF：URDF(<code>Unified Robot Description Format</code>)为统一的机器人�
 </robot>
 ```
 结构图如下：
-<img src="http://pdpv2lxdq.bkt.clouddn.com/robot.png" alt="URDF机器人建模"><i><p align="right" style="color: gray; font-size:3px;">Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></p></i></p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/robot.png" alt="URDF机器人建模"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></i>
 
 ##### 创建机器人建模功能包
 <p> 创建一个机器人建模功能包:</p>
