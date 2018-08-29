@@ -66,7 +66,7 @@ URDF：URDF(<code>Unified Robot Description Format</code>)为统一的机器人�
 <li> <code>safety_controller</code>：描述安全控制器参数。 </li>
 </ul>
 结构图如下：
-<img src="http://pdpv2lxdq.bkt.clouddn.com/link.png" alt="URDF机器人建模"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></i>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/joint.png" alt="URDF机器人建模"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_3:URDF机器人建模</a></i>
 
 ##### <robot\>标签
 <robot\>标签:是机器人模型的最顶层标签，<link\>和<joint\>标签都必须包括在<robot\>标签内，一个完整的机器人模型就是由一系列<link\>和<joint\>组成。<br>
