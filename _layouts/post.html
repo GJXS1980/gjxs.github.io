@@ -78,6 +78,9 @@ layout: default
 				{{ content }}
                 <hr style="visibility: hidden;">
 
+                {% include new-old.html %}
+
+
                 <ul class="pager">
                     {% if page.previous.url %}
                     <li class="previous">
@@ -108,7 +111,6 @@ layout: default
                 </div> 
 
 
-                {% include new-old.html %}
 
 
  <!-- 
