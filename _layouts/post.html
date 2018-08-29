@@ -64,9 +64,6 @@ layout: default
                 col-md-10 col-md-offset-1
                 post-container">
 
-
-                {% include new-old.html %}
-
                 <!-- Multi-Lingual -->
                 {% if page.multilingual %}
 
@@ -76,6 +73,9 @@ layout: default
                     <option value="1"> 英文 English </option>
                 </select>
                 {% endif %}
+
+                
+                {% include new-old.html %}
 
 				{{ content }}
                 <hr style="visibility: hidden;">
