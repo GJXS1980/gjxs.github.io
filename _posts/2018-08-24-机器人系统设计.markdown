@@ -4,7 +4,7 @@ title:        "ROS NOTE 4"
 subtitle:     "URDF机器人建模"
 date:         2018-08-24 08:45:00
 author:       "G.J.先生"
-header-img:   "img/in-post/2018.08/22/22.jpg"
+header-img:   "img/in-post/2018.08/24/robot.png"
 catalog:      true
 tags:
     - ROS
