@@ -171,9 +171,10 @@ Amazon Linux version 2017.09 is available.
 
 
 
-
+<!-- 
 {% if site.disqus_username %}
 <!-- disqus 评论框 start -->
+<!-- 
 <div class="comment">
     <div id="disqus_thread" class="disqus-thread">
 
@@ -182,6 +183,7 @@ Amazon Linux version 2017.09 is available.
 <!-- disqus 评论框 end -->
 
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<!-- 
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus_username}}";
@@ -195,6 +197,7 @@ Amazon Linux version 2017.09 is available.
     })();
 </script>
 <!-- disqus 公共JS代码 end -->
+<!-- 
 {% endif %}
-
-
+-->
+      {% include comments.html %}

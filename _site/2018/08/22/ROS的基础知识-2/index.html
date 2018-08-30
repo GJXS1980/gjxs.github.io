@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="关于自动化、机器人与计算机 | 李伟政，Web & Mobile Lover，自动化　Engineer，UX Designer | 这里是 @GJXS李伟政 的个人博客，与你一起探索这个世界。">
+    <meta name="keywords"  content="李伟政, G.J.先生, GJXS, GJXS1980, GJXS2017, @GJXS1980, G.J.先生的博客, GJXS Blog, 博客, 个人网站, 自动化, ROS, 工程师, 机器人">
+    <meta name="theme-color" content="#000000">
+    
+    <title>ROS NOTE 3 - G.J.先生 | 男孩的城堡</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/root/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2018/08/22/ROS%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/gjxs-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+    <link rel="stylesheet" href="/css/signature.css">
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- GJXS change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- GJXS Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">G.J.先生 BLOG</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="GJXSblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/about/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/search/search/">Search</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/tags/tags/">Tags</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#GJXSblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __GJXSNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __GJXSNav__.close()
+        }else{
+            __GJXSNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from
+     * $toggle/$collapse will break global delegation.
+     *
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close GJXSNav.
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __GJXSNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/in-post/2018.08/22/22.jpg" width="0" height="0"> -->
+
+    <!-- canvas-nest.min.js -->   
+<script type="text/javascript" color="238,205,205" opacity='0.7' zIndex="-2" count="99" src="../../../../js/canvas-nest.min.js"></script>
+
+  <link rel="stylesheet" href="../../../../css/gitalk.css">
+  <script src="../../../../js/gitalk.min.js"></script>
+
+  <!--
+<script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>　
+-->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/in-post/2018.08/22/22.jpg')
+    }
+
+    
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#ROS" title="ROS">ROS</a>
+                        
+                        <a class="tag" href="/tags/#深蓝学院课程笔记" title="深蓝学院课程笔记">深蓝学院课程笔记</a>
+                        
+                    </div>
+                    <h1>ROS NOTE 3</h1>
+                    
+                    
+                    <h2 class="subheading">ROS的launch文件和TF坐标变换</h2>
+                    
+                    <span class="meta">Posted by G.J.先生 on August 22, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+
+				<hr />
+<blockquote>
+  <p>Abstract: “深蓝学院的课程学习笔记，第二讲：ROS基础知识中的launch文件和TF坐标变换.”<br />                                                                                                                                                        <br /></p>
+</blockquote>
+
+<hr />
+<hr />
+<h3 id="launch文件">launch文件</h3>
+<h5 id="launch文件概述">launch文件概述</h5>
+<p>launch文件：通过XML文件实现多节点的配置和启动（可自动启动ROS Master）</p>
+
+<p>参数设置：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>output</td>
+      <td style="text-align: center">打印日志在终端</td>
+    </tr>
+    <tr>
+      <td>respawn</td>
+      <td style="text-align: center">当进程突然终止时，可以自动重新连接</td>
+    </tr>
+    <tr>
+      <td>required</td>
+      <td style="text-align: center">ROS必须要有的，没有required就启动不了节点</td>
+    </tr>
+    <tr>
+      <td>ns</td>
+      <td style="text-align: center">即name_space，命名的空间</td>
+    </tr>
+    <tr>
+      <td>args</td>
+      <td style="text-align: center">各种参数的配置</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="launch文件的基本构成">launch文件的基本构成</h5>
+<h6 id="launch标签">&lt;launch&gt;标签</h6>
+<p>launch文件中的根元素采用&lt;launch&gt;标签来定义</p>
+
+<h6 id="node标签">&lt;node&gt;标签</h6>
+<p>例子：</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"package-name"</span> <span class="na">type=</span><span class="s">"executable-name"</span> <span class="na">name=</span><span class="s">"nade-name"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>pkg</td>
+      <td style="text-align: center">节点所在的功能包名称</td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td style="text-align: center">节点的可执行文件名称</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td style="text-align: center">节点运行时的名称</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="paramrosparam标签">&lt;param&gt;/&lt;rosparam&gt;标签</h6>
+<p>&lt;param&gt;的例子：</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"output_frame"</span> <span class="na">value=</span><span class="s">"odom"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td style="text-align: center">参数名</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td style="text-align: center">参数值</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&lt;rosparam&gt;的例子：</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;rosparam</span> <span class="na">file=</span><span class="s">"params.yaml"</span> <span class="na">command=</span><span class="s">"load"</span> <span class="na">ns=</span><span class="s">"params"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+<blockquote>
+  <p>加载参数文件中的多个参数</p>
+</blockquote>
+
+<blockquote>
+  <p>说明：&lt;param&gt;/&lt;rosparam&gt;标签都属于全局变量</p>
+</blockquote>
+
+<h6 id="arg标签">&lt;arg&gt;标签</h6>
+<p>&lt;arg&gt;标签为launch文件内部的局部变量，仅限于launch文件使用</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;arg</span> <span class="na">name=</span><span class="s">"arg-name"</span> <span class="na">default=</span><span class="s">"arg-value"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td style="text-align: center">参数名</td>
+    </tr>
+    <tr>
+      <td>default</td>
+      <td style="text-align: center">参数值</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>调用方法：</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"foo"</span> <span class="na">value=</span><span class="s">"$(arg arg-name)"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;node</span> <span class="na">name=</span><span class="s">"node"</span> <span class="na">pkg=</span><span class="s">"package"</span> <span class="na">type=</span><span class="s">"type"</span> <span class="na">args=</span><span class="s">"$(arg arg-name)"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h6 id="remap标签">&lt;remap&gt;标签</h6>
+<p>&lt;remap&gt;标签:重映射ROS计算图资源的命名</p>
+
+<p>例子：</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;remap</span> <span class="na">from=</span><span class="s">"/turtlebot/cmd_vel"</span> <span class="na">to=</span><span class="s">"/cmd_vel"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th style="text-align: center">Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>from</td>
+      <td style="text-align: center">原命名</td>
+    </tr>
+    <tr>
+      <td>to</td>
+      <td style="text-align: center">映射之后的命名</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>说明：重映射之后”/turtlebot/cmd_vel”将不存在，所有”/turtlebot/cmd_vel”的资源都改为”/cmd_vel”路径</p>
+</blockquote>
+
+<h6 id="include标签">&lt;include&gt;标签</h6>
+<p>&lt;include&gt;标签:包含其他launch文件，类似C语言中的头文件包含。</p>
+
+<p>例子：</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;include</span> <span class="na">file=</span><span class="s">"$(dirname)/other.launch"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>file:包含的其他launch文件路径</p>
+
+<p>其他的标签用法参照[1]</p>
+
+<hr />
+<h3 id="tf坐标变换">TF坐标变换</h3>
+<h5 id="tf坐标变换概述">TF坐标变换概述</h5>
+<p>TF功能包的作用：</p>
+
+<p>(1)TF功能包可以保留五秒钟内机器人的坐标系相当于全局坐标系的相对位置(关系)</p>
+
+<p>(2)TF功能包可以计算机器人夹取的物体相当于机器人中心坐标系的位置</p>
+
+<p>(3)TF功能包可以计算机器人中心坐标系相当于全局坐标系的位置</p>
+
+<p>TF进行变换的两种方式：</p>
+
+<p>广播TF变换</p>
+
+<p>监听TF变换</p>
+
+<p>TF相关的功能包：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#小海龟跟随实验</span>
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>ros-kinetic-turtle-tf
+roslaunch turtle_tf turtle_tf_demo.launch
+rosrun turtlesim turtle_teleop_key
+rosrun tf view_frames
+
+<span class="c">#可视化工具</span>
+rosrun tf tf_echo turtle1 turtle2
+rosrun rviz rviz <span class="nt">-d</span> <span class="sb">`</span>rospack find turtle_tf<span class="sb">`</span> /rviz/turtle_rviz.rviz
+</code></pre></div></div>
+
+<h5 id="实现一个tf广播器">实现一个TF广播器</h5>
+<p>(1)定义TF广播器(TransformBroadcaster)</p>
+
+<p>(2)创建坐标变换值</p>
+
+<p>(3)发布坐标变换(sendTransform)</p>
+
+<p>实例(turtle_tf_broadcaster.cpp):</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;ros/ros.h&gt;
+</span>
+<span class="cp">#include &lt;tf/transform_broadcaster.h&gt;
+</span>
+<span class="cp">#include &lt;turtlesim/Pose.h&gt;
+</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">turtle_name</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">poseCallback</span><span class="p">(</span><span class="k">const</span> <span class="n">turtlesim</span><span class="o">::</span><span class="n">PoseConstPtr</span><span class="o">&amp;</span> <span class="n">msg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// tf广播器</span>
+
+    <span class="k">static</span> <span class="n">tf</span><span class="o">::</span><span class="n">TransformBroadcaster</span> <span class="n">br</span><span class="p">;</span>
+
+    <span class="c1">// 根据乌龟当前的位姿，设置相对于世界坐标系的坐标变换</span>
+
+    <span class="n">tf</span><span class="o">::</span><span class="n">Transform</span> <span class="n">transform</span><span class="p">;</span>
+    <span class="n">transform</span><span class="p">.</span><span class="n">setOrigin</span><span class="p">(</span> <span class="n">tf</span><span class="o">::</span><span class="n">Vector3</span><span class="p">(</span><span class="n">msg</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span> <span class="n">msg</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="p">);</span>
+    <span class="n">tf</span><span class="o">::</span><span class="n">Quaternion</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">q</span><span class="p">.</span><span class="n">setRPY</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span><span class="o">-&gt;</span><span class="n">theta</span><span class="p">);</span>
+    <span class="n">transform</span><span class="p">.</span><span class="n">setRotation</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+
+    <span class="c1">// 发布坐标变换</span>
+
+    <span class="n">br</span><span class="p">.</span><span class="n">sendTransform</span><span class="p">(</span><span class="n">tf</span><span class="o">::</span><span class="n">StampedTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">ros</span><span class="o">::</span><span class="n">Time</span><span class="o">::</span><span class="n">now</span><span class="p">(),</span> <span class="s">"world"</span><span class="p">,</span> <span class="n">turtle_name</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 初始化节点</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"my_tf_broadcaster"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">ROS_ERROR</span><span class="p">(</span><span class="s">"need turtle name as argument"</span><span class="p">);</span> 
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="n">turtle_name</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="c1">// 订阅乌龟的pose信息</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">node</span><span class="p">;</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">Subscriber</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">turtle_name</span><span class="o">+</span><span class="s">"/pose"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">poseCallback</span><span class="p">);</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">spin</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h5 id="实现一个tf监听器">实现一个TF监听器</h5>
+<p>(1)定义TF监听器(TransformListener)</p>
+
+<p>(2)查找坐标变换(waitForTransform、 lookupTransform)</p>
+
+<p>实例(turtle_tf_listener.cpp):</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;ros/ros.h&gt;
+</span>
+<span class="cp">#include &lt;tf/transform_listener.h&gt;
+</span>
+<span class="cp">#include &lt;geometry_msgs/Twist.h&gt;
+</span>
+<span class="cp">#include &lt;turtlesim/Spawn.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 初始化节点</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="s">"my_tf_listener"</span><span class="p">);</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">NodeHandle</span> <span class="n">node</span><span class="p">;</span>
+
+    <span class="c1">// 通过服务调用，产生第二只乌龟turtle2</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">service</span><span class="o">::</span><span class="n">waitForService</span><span class="p">(</span><span class="s">"spawn"</span><span class="p">);</span>
+    <span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">add_turtle</span> <span class="o">=</span>
+    <span class="n">node</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">turtlesim</span><span class="o">::</span><span class="n">Spawn</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"spawn"</span><span class="p">);</span>
+    <span class="n">turtlesim</span><span class="o">::</span><span class="n">Spawn</span> <span class="n">srv</span><span class="p">;</span>
+    <span class="n">add_turtle</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
+
+    <span class="c1">// 定义turtle2的速度控制发布器</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">Publisher</span> <span class="n">turtle_vel</span> <span class="o">=</span>
+    <span class="n">node</span><span class="p">.</span><span class="n">advertise</span><span class="o">&lt;</span><span class="n">geometry_msgs</span><span class="o">::</span><span class="n">Twist</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"turtle2/cmd_vel"</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+
+    <span class="c1">// tf监听器</span>
+
+    <span class="n">tf</span><span class="o">::</span><span class="n">TransformListener</span> <span class="n">listener</span><span class="p">;</span>
+
+    <span class="n">ros</span><span class="o">::</span><span class="n">Rate</span> <span class="n">rate</span><span class="p">(</span><span class="mf">10.0</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">ok</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">tf</span><span class="o">::</span><span class="n">StampedTransform</span> <span class="n">transform</span><span class="p">;</span>
+        <span class="k">try</span>
+        <span class="p">{</span>
+            <span class="c1">// 查找turtle2与turtle1的坐标变换</span>
+
+            <span class="n">listener</span><span class="p">.</span><span class="n">waitForTransform</span><span class="p">(</span><span class="s">"/turtle2"</span><span class="p">,</span> <span class="s">"/turtle1"</span><span class="p">,</span> <span class="n">ros</span><span class="o">::</span><span class="n">Time</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ros</span><span class="o">::</span><span class="n">Duration</span><span class="p">(</span><span class="mf">3.0</span><span class="p">));</span>
+            <span class="n">listener</span><span class="p">.</span><span class="n">lookupTransform</span><span class="p">(</span><span class="s">"/turtle2"</span><span class="p">,</span> <span class="s">"/turtle1"</span><span class="p">,</span> <span class="n">ros</span><span class="o">::</span><span class="n">Time</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">transform</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">catch</span> <span class="p">(</span><span class="n">tf</span><span class="o">::</span><span class="n">TransformException</span> <span class="o">&amp;</span><span class="n">ex</span><span class="p">)</span> 
+        <span class="p">{</span>
+            <span class="n">ROS_ERROR</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">ex</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+            <span class="n">ros</span><span class="o">::</span><span class="n">Duration</span><span class="p">(</span><span class="mf">1.0</span><span class="p">).</span><span class="n">sleep</span><span class="p">();</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 根据turtle1和turtle2之间的坐标变换，计算turtle2需要运动的线速度和角速度</span>
+
+        <span class="c1">// 并发布速度控制指令，使turtle2向turtle1移动</span>
+
+        <span class="n">geometry_msgs</span><span class="o">::</span><span class="n">Twist</span> <span class="n">vel_msg</span><span class="p">;</span>
+        <span class="n">vel_msg</span><span class="p">.</span><span class="n">angular</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">atan2</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">getOrigin</span><span class="p">().</span><span class="n">y</span><span class="p">(),</span>
+                                        <span class="n">transform</span><span class="p">.</span><span class="n">getOrigin</span><span class="p">().</span><span class="n">x</span><span class="p">());</span>
+        <span class="n">vel_msg</span><span class="p">.</span><span class="n">linear</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">getOrigin</span><span class="p">().</span><span class="n">x</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span>
+                                      <span class="n">pow</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">getOrigin</span><span class="p">().</span><span class="n">y</span><span class="p">(),</span> <span class="mi">2</span><span class="p">));</span>
+        <span class="n">turtle_vel</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">vel_msg</span><span class="p">);</span>
+
+        <span class="n">rate</span><span class="p">.</span><span class="n">sleep</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h5 id="编译代码">编译代码</h5>
+<p>(1)设置需要编译的代码和生成的可执行文件</p>
+
+<p>(2)设置链接库</p>
+
+<p>实例(cmakelists.txt)如下:</p>
+<div class="language-cmake highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">find_package</span><span class="p">(</span>catkin REQUIRED COMPONENTS
+  geometry_msgs
+  roscpp
+  tf
+  turtlesim
+<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>turtle_tf_broadcaster src/turtle_tf_broadcaster.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>turtle_tf_broadcaster <span class="si">${</span><span class="nv">catkin_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>turtle_tf_listener src/turtle_tf_listener.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>turtle_tf_listener <span class="si">${</span><span class="nv">catkin_LIBRARIES</span><span class="si">}</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>实例(package.xml)如下:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;buildtool_depend&gt;</span>catkin<span class="nt">&lt;/buildtool_depend&gt;</span>
+  <span class="nt">&lt;build_depend&gt;</span>geometry_msgs<span class="nt">&lt;/build_depend&gt;</span>
+  <span class="nt">&lt;build_depend&gt;</span>roscpp<span class="nt">&lt;/build_depend&gt;</span>
+  <span class="nt">&lt;build_depend&gt;</span>tf<span class="nt">&lt;/build_depend&gt;</span>
+  <span class="nt">&lt;build_depend&gt;</span>turtlesim<span class="nt">&lt;/build_depend&gt;</span>
+
+  <span class="nt">&lt;build_export_depend&gt;</span>geometry_msgs<span class="nt">&lt;/build_export_depend&gt;</span>
+  <span class="nt">&lt;build_export_depend&gt;</span>roscpp<span class="nt">&lt;/build_export_depend&gt;</span>
+  <span class="nt">&lt;build_export_depend&gt;</span>tf<span class="nt">&lt;/build_export_depend&gt;</span>
+  <span class="nt">&lt;build_export_depend&gt;</span>turtlesim<span class="nt">&lt;/build_export_depend&gt;</span>
+
+  <span class="nt">&lt;exec_depend&gt;</span>geometry_msgs<span class="nt">&lt;/exec_depend&gt;</span>
+  <span class="nt">&lt;exec_depend&gt;</span>roscpp<span class="nt">&lt;/exec_depend&gt;</span>
+  <span class="nt">&lt;exec_depend&gt;</span>tf<span class="nt">&lt;/exec_depend&gt;</span>
+  <span class="nt">&lt;exec_depend&gt;</span>turtlesim<span class="nt">&lt;/exec_depend&gt;</span>
+</code></pre></div></div>
+
+<h5 id="编写launch文件">编写launch文件</h5>
+<p>实例(start_demo_with_listener.launch)如下：</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;launch&gt;</span>
+    <span class="c">&lt;!-- 海龟仿真器 --&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"turtlesim"</span> <span class="na">type=</span><span class="s">"turtlesim_node"</span> <span class="na">name=</span><span class="s">"sim"</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- 键盘控制 --&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"turtlesim"</span> <span class="na">type=</span><span class="s">"turtle_teleop_key"</span> <span class="na">name=</span><span class="s">"teleop"</span> <span class="na">output=</span><span class="s">"screen"</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- 两只海龟的tf广播 --&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"learning_tf"</span> <span class="na">type=</span><span class="s">"turtle_tf_broadcaster"</span>
+          <span class="na">args=</span><span class="s">"/turtle1"</span> <span class="na">name=</span><span class="s">"turtle1_tf_broadcaster"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"learning_tf"</span> <span class="na">type=</span><span class="s">"turtle_tf_broadcaster"</span>
+          <span class="na">args=</span><span class="s">"/turtle2"</span> <span class="na">name=</span><span class="s">"turtle2_tf_broadcaster"</span> <span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- 监听tf广播，并且控制turtle2移动 --&gt;</span>
+    <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">"learning_tf"</span> <span class="na">type=</span><span class="s">"turtle_tf_listener"</span>
+          <span class="na">name=</span><span class="s">"listener"</span> <span class="nt">/&gt;</span>
+
+ <span class="nt">&lt;/launch&gt;</span>
+</code></pre></div></div>
+<p>运行launch文件启动小海龟跟随例程：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>roslaunch learning_tf start_demo_with_listener.launch
+</code></pre></div></div>
+
+<hr />
+<blockquote>
+  <p>参考链接</p>
+
+  <p>[1] http://wiki.ros.org/roslaunch/XML</p>
+</blockquote>
+
+<hr />
+
+
+                <hr style="visibility: hidden;">
+
+                <!-- 打赏功能 -->
+                <section>
+
+            <div class="content-play">
+              <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>
+              <div class="hide_box-play"></div>
+              <div class="shang_box-play">
+                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/img/payimg/close.jpg" alt="取消" /></a>
+                <div class="shang_tit-play">
+                  <p>感谢您的支持，我会继续努力的!</p>
+                </div>
+                <div class="shang_payimg">
+                    <img src="/img/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+              <div class="shang_payimg">    
+                    <img src="/img/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />
+                </div>
+             <!--   <div class="pay_explain">扫码打赏，你说多少就多少</div>   -->
+                <div class="shang_payselect">
+                  <div class="pay_item checked" data-id="alipay">
+                    <span class="pay_logo"><img src="/img/payimg/alipay.jpg" alt="支付宝" /></span>
+                  </div>
+                  <div class="pay_item" data-id="weipay">
+                    <span class="pay_logo"><img src="/img/payimg/wechat.jpg" alt="微信" /></span>
+                  </div>
+                </div>
+                <div class="shang_info-play">
+                  <p>打开<span id="shang_pay_txt">支付宝/微信</span>扫一扫，即可进行扫码打赏哦</p>
+                </div>
+              </div>
+            </div>
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:120px;margin:5px auto;height:45px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/img/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:230px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+          /*  .pay_explain{text-align:center;margin:10px auto;font-size:2px;color:#545454;}  **/
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/08/22/ROS%E7%9A%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" data-toggle="tooltip" data-placement="top" title="ROS NOTE 2">
+                        Previous<br>
+                        <span>ROS NOTE 2</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/08/24/%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" data-toggle="tooltip" data-placement="top" title="ROS NOTE 4">
+                        Next<br>
+                        <span>ROS NOTE 4</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+</section>
+
+
+
+                
+                </div> 
+    
+
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ROS" title="ROS" rel="11">
+                                    ROS
+                                </a>
+                            
+        				
+                            
+                				<a href="/tags/#Ubuntu" title="Ubuntu" rel="5">
+                                    Ubuntu
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#ROS_Tutorials" title="ROS_Tutorials" rel="2">
+                                    ROS_Tutorials
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#深蓝学院课程笔记" title="深蓝学院课程笔记" rel="6">
+                                    深蓝学院课程笔记
+                                </a>
+                            
+        				
+                            
+        				
+                            
+                				<a href="/tags/#rviz" title="rviz" rel="2">
+                                    rviz
+                                </a>
+                            
+        				
+                            
+        				
+                            
+        				
+                            
+        				
+        			</div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                        <li><a href="https://github.com/">Github</a></li>
+                    
+                        <li><a href=""></a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+<footer> 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    
+
+                    <!-- add Weibo, Zhihu by GJXS, add target = "_blank" to <a> by GJXS -->
+                    
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/gjxian-sheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="http://blog.csdn.net/GJXS2017">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-CSDN fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/GJXS1980">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://music.163.com/#/user/home?id=261616078">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-music163 fa-stack-1x fa-inverse">易</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; G.J.先生 BLOG 2018
+                    <br>
+                    Theme by <a href="https://github.com/Huxpro/huxpro.github.io">Hux</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=GJXS1980&repo=gjxs.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/gjxs-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so GJXSblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by GJXS
+    var _gaId = 'UA-120526213-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+<!-- Side Catalog -->
+
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+
+        // interop with multilangual
+        if ("") {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        // init
+        var P = $(_containerSelector),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        // clean
+        $(selector).html('')
+
+        // appending
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by GJXS to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<a id="rocket" href="#top" class=""></a>
+<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+<script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/root/icon_wechat.png" width="0" height="0" />     
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
