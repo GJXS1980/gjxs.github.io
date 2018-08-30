@@ -49,12 +49,12 @@ kramdown:
 
 
 # Disqus settings
-#disqus_username: gjxs
+disqus_username: gjxs
 # livere_uid: MTAyMC8zNzIzMy8xMzc2Nw==
 
 gitalk:
     owner: GJXS1980
-    repo: blog-comments
+    repo: GJXS BLOG
     clientID: 1dfc451dbcd44e33b3f8
     clientSecret: ccdbba5c57dbd361e063865df45c69db3a0d253a
 
