@@ -157,32 +157,18 @@ layout: default
     </div>
 </article>
 
+    <div class="share">
+      {% include sns-share.html %}
+    </div>
+    <div class="comment">
+      {% include comments.html %}
+    </div>
+
 
 <!--
-{% if site.livere_uid %}
-<!- 来必力City版安装代码 -->
-<!--<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-
-       if (typeof LivereTower === 'function') { return; }
-
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-</script>
-<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-<!- City版安装代码已完成 -->
-<!--{% endif %}
--->
-
-
 {% if site.disqus_username %}
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-
+<!--
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "{{site.disqus_username}}";
@@ -196,7 +182,11 @@ layout: default
     })();
 </script>
 <!-- disqus 公共JS代码 end -->
+<!--
 {% endif %}
+
+-->
+
 
 
 {% if site.anchorjs %}

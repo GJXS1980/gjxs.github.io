@@ -49,11 +49,24 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: gjxs
+#disqus_username: gjxs
 # livere_uid: MTAyMC8zNzIzMy8xMzc2Nw==
 
-# Netease settings
-# netease_comment: false
+gitalk:
+    owner: GJXS1980
+    repo: blog-comments
+    clientID: 1dfc451dbcd44e33b3f8
+    clientSecret: ccdbba5c57dbd361e063865df45c69db3a0d253a
+
+
+# ---------------- #
+#      Search      #
+# ---------------- #
+simple_jekyll_search:
+    # 是否支持全文搜索
+    fulltext: false
+    # 最多显示多少条搜索结果
+    limit: 10
 
 
 
