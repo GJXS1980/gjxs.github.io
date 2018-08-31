@@ -1,6 +1,6 @@
 # Site settings
-title: G.J.先生 BLOG
-SEOTitle: G.J.先生 | 男孩的城堡
+title: GJXS BLOG
+SEOTitle: G.J.先生
 header-img: img/root/home-bg.jpg
 email: gjxslwz@gmail.com
 description: "关于自动化、机器人与计算机 | 李伟政，Web & Mobile Lover，自动化　Engineer，UX Designer | 这里是 @GJXS李伟政 的个人博客，与你一起探索这个世界。"
@@ -87,8 +87,8 @@ ga_domain: auto
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "搞笑，代码还是要自己写啊，<br>坑还是要自己填，自己的路自己走"
-sidebar-avatar: /img/root/avatar-gjxs.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: "万头攒动火树银花之处不必找我。<br>"
+sidebar-avatar: /img/root/xiaolz.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
