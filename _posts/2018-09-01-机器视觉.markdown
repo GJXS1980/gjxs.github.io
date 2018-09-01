@@ -114,7 +114,7 @@ Publishers:
 Subscribers: None
 ```
 话题节点为sensor_msgs/PointCloud2<br>
->其中freenect.launch文件如下:<br>
+>其中freenect.launch文件如下:
 ```xml
 <launch>
     <!-- Launch the freenect driver -->
@@ -168,14 +168,13 @@ uint8[] data
 bool is_dense
 ```
 <ul>
-
 <li> <code>fields</code>：每个点的数据类型</li>
 <li> <code>point_step</code>：单点的数据字节步长</li>
 <li> <code>row_step</code>：一列数据的字节步长</li>
 <li> <code>data</code>：点云数据的存储数组,总字节大小为row_step*height</li>
 <li> <code>is_dense</code>：是否有无效点</li>
-
 </ul>
+
 >点云的单帧数据量很大,如果使用分布式网络传输,需要考虑能否满足数据的传输要求,或者针对数据进行压缩
 
 *************************
@@ -196,23 +195,20 @@ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.024 image:=/
 
 ```
 <ul>
-
 <li> <code>size</code>：标定棋盘格的内部角点个数,这里使用的棋盘一共有六行,每行有8个内部角点</li>
 <li> <code>square</code>：这个参数对应每个棋盘格的边长,单位是米</li>
 <li> <code>image和camera</code>：设置摄像头发布的图像话题</li>
-
 </ul>
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E6%91%84%E5%83%8F%E5%A4%B4.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
 <ul>
-
 <li> <code>X</code>：标定靶在摄像头视野中的左右移动</li>
 <li> <code>Y</code>：标定靶在摄像头视野中的上下移动</li>
 <li> <code>Size</code>：标定靶在摄像头视野中的前后移动</li>
 <li> <code>Skew</code>：标定靶在摄像头视野中的倾斜转动</li>
-
 </ul>
 标定的结果保存路径:`/tmp/calibrationdata.tar.gz`
+
 >其中`usb_cam.launch`如下:
 ```xml
 <launch>
@@ -318,7 +314,7 @@ rqt_image_view
 在`rqt_image_view`中订阅/cv_bridge_image话题,会发现两个界面一样,测试成功<br>
 
 <p>分析cv_bridge_test.py</p>
-cv_bridge_test.py代码如下:<br>
+cv_bridge_test.py代码如下:
 ```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -369,11 +365,9 @@ if __name__ == '__main__':
         cv2.destroyAllWindows()
 ```
 <ul>
-
 <li> <code>imgmsg_to_cv2()</code>：将ROS图像消息转换成OpenCV图像数据</li>
 <li> <code>cv2_to_imgmsg()</code>：将OpenCV格式的图像数据转换成ROS图像消息</li>
 <li> <code>输入参数</code>：图像消息流和转换的图像数据格式</li>
-
 </ul>
 
 *************************
@@ -407,7 +401,6 @@ rqt_image_view
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
 <ul>
-
 <p>人脸识别源码分析</p>
 ```python
 #!/usr/bin/env python
@@ -506,12 +499,11 @@ if __name__ == '__main__':
         cv2.destroyAllWindows()
 ```
 <ul>
-
 <li> <code>初始化ros节点</code>：完成ROS节点,图像,识别参数的设置</li>
 <li> <code>ROS图像回调函数</code>：将ROS图像转换成OpenCV的数据格式,然后预处理之后开始调用人脸识别的功能函数,最后把识别结果发布</li>
 <li> <code>人脸识别</code>：调用OpenCV提供的人脸识别接口,与数据库中的人脸特征进行匹配</li>
-
 </ul>
+
 ##### 物体跟踪
 <p>跟踪物体的特征点思路</p>
 ```flow
@@ -627,10 +619,8 @@ if __name__ == '__main__':
         cv2.destroyAllWindows()
 ```
 <ul>
-
 <li> <code>初始化ros节点</code>：完成ROS节点,图像,识别参数的设置</li>
 <li> <code>ROS图像回调函数</code>：将ROS图像转换成OpenCV的数据格式,完成图像预处理之后开始针对两帧图像进行比较,基于图像差异识别到运动的物体,最后标识识别结果并发布</li>
-
 </ul>
 
 *************************
@@ -732,6 +722,7 @@ ar_track_kinect.launch源代码如下:
 
 </launch>
 ```
+
 <p>启动二维码识别示例</p>
 ```bash
 #启动标定之后的摄像头
