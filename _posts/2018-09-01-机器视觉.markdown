@@ -54,7 +54,6 @@ uint32 step
 uint8[] data
 ```
 <ul>
-
 <li> <code>Header</code>：消息头,包含消息序号,时间戳和绑定坐标系</li>
 <li> <code>height</code>：图像的纵向分辨率</li>
 <li> <code>width</code>：图像的横向分辨率</li>
@@ -62,10 +61,8 @@ uint8[] data
 <li> <code>is_bigendian</code>：图像数据的大小端存储模式</li>
 <li> <code>step</code>：一行图像数据的字节数量,作为数据的步长参数</li>
 <li> <code>data</code>：存储图像数据的数组,大小为step*height个字节</li>
-
 </ul>
 >例如:1080*720分辨率的摄像头产生一帧图像数据大小是:3*1080*720=2764800字节,即2.7648MB
-
 
 <p>压缩图像消息</p>
 ```bash
@@ -81,10 +78,8 @@ string format
 uint8[] data
 ```
 <ul>
-
 <li> <code>format</code>：图像的压缩编码格式(jpeg,png,bmp)</li>
 <li> <code>data</code>：存储图像数据数组</li>
-
 </ul>
 ##### 三维图像数据
 <p>安装kinect驱动</p>
@@ -98,7 +93,6 @@ tar xvf SensorKinect093-Bin-Linux-x64-v5.1.2.1.tar.bz2
 cd Sensor-Bin-Linux-x64-v5.1.2.1
 sudo ./install.sh
 ```
-
 <p>显示点云类型</p>
 ```bash
 roslaunch robot_vision freenect.launch
@@ -373,17 +367,14 @@ if __name__ == '__main__':
 *************************
 ##### 人脸识别
 <p>基于Haar特征的级联分类器对象检测算法思路</p>
-```flow
-st=>start: 图像输入
-e=>end: 结果输出
-op1=>operation: 灰阶色彩转换
-op2=>operation: 缩小摄像头图像
-op3=>operation: 直方图均衡化
-op4=>operation: 检测人脸
-
-st->op1->op2->op3->op4->e
-```
-
+<div class="mermaid">
+graph LR;
+    图像输入-->灰阶色彩转换;
+    灰阶色彩转换-->缩小摄像头图像;
+    缩小摄像头图像-->直方图均衡化;
+    直方图均衡化-->检测人脸;
+    检测人脸-->结果输出;
+</div>
 <p>启动人脸识别实例</p>
 ```bash
 #启动摄像头
@@ -395,14 +386,10 @@ roslaunch robot_vision face_detector.launch
 #启动ROS下的QT图像化界面
 rqt_image_view 
 ```
-
 在`rqt_image_view`中订阅/cv_bridge_image话题<br>
-
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.png" alt="机器视觉">
-
 <p>人脸识别源码分析</p>
-
 ```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -507,17 +494,14 @@ if __name__ == '__main__':
 
 ##### 物体跟踪
 <p>跟踪物体的特征点思路</p>
-```flow
-st=>start: 图像输入
-e=>end: 结果输出
-op1=>operation: 特征点采样
-op2=>operation: 两帧图像灰度值对比
-op3=>operation: 特征点估计
-op4=>operation: 特征点过滤
-
-st->op1->op2->op3->op4->e
-```
-
+<div class="mermaid">
+graph LR;
+    图像输入-->特征点采样;
+    特征点采样-->两帧图像灰度值对比;
+    两帧图像灰度值对比-->特征点估计;
+    特征点估计-->特征点过滤;
+    特征点过滤-->结果输出;
+</div>
 <p>启动物体跟踪实例</p>
 ```bash
 #启动摄像头
@@ -529,13 +513,9 @@ roslaunch robot_vision motion_detector.launch
 #启动ROS下的QT图像化界面
 rqt_image_view 
 ```
-
 在`rqt_image_view`中订阅/cv_bridge_image话题<br>
-
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E7%89%A9%E4%BD%93%E8%B7%9F%E8%B8%AA.png" alt="机器视觉">
-
-
 <p>人脸识别源码分析</p>
 ```python
 #!/usr/bin/env python
@@ -631,7 +611,6 @@ if __name__ == '__main__':
 ```bash
 sudo apt-get install ros-kinetic-ar-track-alvar
 ```
-
 <p>创建二维码</p>
 ```bash
 roscore
@@ -643,7 +622,6 @@ rosrun ar_track_alvar createMarker -s 6 5
 ```
 结果如下:
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" alt="机器视觉"><img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" alt="机器视觉"><img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" alt="机器视觉">
-
 <p>二维码识别launch文件</p>
 ar_track_camera.launch源代码如下:
 ```xml
@@ -674,7 +652,6 @@ ar_track_camera.launch源代码如下:
 
 </launch>
 ```
-
 <p>启动二维码识别示例</p>
 ```bash
 #启动标定之后的摄像头
@@ -683,7 +660,6 @@ roslaunch robot_vision usb_cam_with_calibration.launch
 #识别二维码
 roslaunch robot_vision ar_track_camera.launch
 ```
-
 <p>查看识别到的二维码位姿</p>
 ```bash
 rostopic echo /ar_pose_marker
@@ -720,7 +696,6 @@ ar_track_kinect.launch源代码如下:
 
 </launch>
 ```
-
 <p>启动二维码识别示例</p>
 ```bash
 #启动标定之后的摄像头
@@ -732,14 +707,14 @@ roslaunch robot_vision ar_track_camera.launch
 
 ### 扩展
 ##### ORK(Object Recognition Kitchen)
-参考网站:
+参考网站:<br>
 [object_recognition ros wiki](http://wiki.ros.org/object_recognition) <br>
 [object_recognition](http://agas-ros-pkg.googlecode.com/svn/trunk/object_recognition)  <br>
 [Object Recognition Tutorials](http://wg-perception.github.io/ork_tutorials/index.html#object-recognition-tutorials)  <br>
 [ORK Installation](http://wg-perception.github.io/object_recognition_core/install.html#download-build-from-source)  <br>
 
 ##### TensorFlow Obiect Detection API
-参考:
+参考:<br>
 [TensorFlow Object Detection API](https://github.com/opencv/opencv/wiki/TensorFlow-Object-Detection-API)
 
 *************************
