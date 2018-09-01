@@ -204,6 +204,7 @@ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.024 image:=/
 标定的结果保存路径:`/tmp/calibrationdata.tar.gz`
 
 >其中`usb_cam.launch`如下:
+
 ```xml
 <launch>
 
