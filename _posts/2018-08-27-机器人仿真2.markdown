@@ -12,7 +12,7 @@ tags:
     - 课程笔记
     - rviz
     - Gazebo
-    - ros_control
+    - ros control
 ---
 *****
 >Abstract: "ROS中的ros_control功能包的介绍及Gazebo物理仿真环境搭建。"<br>                                                                                                                                                                   <br /> 

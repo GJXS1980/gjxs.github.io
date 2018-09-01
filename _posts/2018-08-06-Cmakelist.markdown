@@ -8,7 +8,7 @@ header-img:   "img/in-post/2018.08/06/code.jpg"
 catalog:      true
 tags:
     - ROS
-    - CMakeLists.txt
+    - CMakeLists
 ---
 *****
 >Abstract: "基于ROS文件夹系统的CMakeLists.txt介绍"<br>                                                                                                                                                                                   <br /> 
