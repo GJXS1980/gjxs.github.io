@@ -399,7 +399,7 @@ rqt_image_view
 在`rqt_image_view`中订阅/cv_bridge_image话题<br>
 
 结果如下:<br>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.png" alt="机器视觉">
 
 <p>人脸识别源码分析</p>
 
@@ -533,7 +533,7 @@ rqt_image_view
 在`rqt_image_view`中订阅/cv_bridge_image话题<br>
 
 结果如下:<br>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/%E7%89%A9%E4%BD%93%E8%B7%9F%E8%B8%AA.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/%E7%89%A9%E4%BD%93%E8%B7%9F%E8%B8%AA.png" alt="机器视觉">
 
 
 <p>人脸识别源码分析</p>
@@ -643,16 +643,16 @@ rosrun ar_track_alvar createMarker -s 6 5
 ```
 结果如下:
 
-<!--
-<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" width=260 height=160 alt="机器视觉">
-<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" width=260 height=160 alt="机器视觉">
-<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" width=260 height=160 alt="机器视觉">
-<i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
--->
 
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" width=260 height=160>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" width=260 height=160>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" width=260 height=160>
+<i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+
+<!--
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" alt="机器视觉"><img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" alt="机器视觉"><img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" alt="机器视觉">
 <i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
-
+-->
 <p>二维码识别launch文件</p>
 ar_track_camera.launch源代码如下:
 ```xml
