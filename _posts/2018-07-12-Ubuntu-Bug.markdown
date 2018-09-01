@@ -8,7 +8,6 @@ header-img:   "img/in-post/2018.07/12/2018.7.12.jpg"
 catalog:      true
 tags:
     - Ubuntu
-    - Ubuntu_BUG
 ---
 *****
 >Abstract: "该教程主要是对Ubuntu系统使用时遇到的一些问题及解决方法的总结。"<br>                                                                                                                                                           <br /> 

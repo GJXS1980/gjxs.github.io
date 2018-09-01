@@ -1,0 +1,757 @@
+---
+layout:       post
+title:        "ROS NOTE 7"
+subtitle:     "机器视觉"
+date:         2018-09-01 10:12:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.09/01/cyber.jpg"
+catalog:      true
+tags:
+    - ROS
+    - 深蓝学院
+    - 课程笔记
+    - 机器视觉
+    - OpenCV
+---
+*****
+>Abstract: "ROS中的图像数据的定义,摄像头标定,ROS+OpenCV应用实例(人脸识别物体跟踪)及二维码的识别。"<br>                                                                                                                                          <br /> 
+
+----------
+
+*************************
+### ROS中的图像数据
+##### 二维图像数据
+<p>显示图像类型</p>
+```bash
+roslaunch usb_cam usb_cam-test.launch
+rostopic info /usb_cam/image_raw
+```
+结果如下:<br>
+```bash
+Type: sensor_msgs/Image
+
+Publishers: 
+ * /usb_cam (http://GJXS:41223/)
+
+Subscribers: 
+ * /image_view (http://GJXS:33697/)
+```
+<p>查看图像消息</p>
+```bash
+rosmsg show sensor_msgs/Image 
+```
+结果如下:<br>
+```msg
+std_msgs/Header header
+  uint32 seq
+  time stamp
+  string frame_id
+uint32 height
+uint32 width
+string encoding
+uint8 is_bigendian
+uint32 step
+uint8[] data
+```
+<ul>
+
+<li> <code>Header</code>：消息头,包含消息序号,时间戳和绑定坐标系</li>
+<li> <code>height</code>：图像的纵向分辨率</li>
+<li> <code>width</code>：图像的横向分辨率</li>
+<li> <code>encoding</code>：图像的编码格式,包含RGB,YUV等常用格式,不涉及图像压缩编码</li>
+<li> <code>is_bigendian</code>：图像数据的大小端存储模式</li>
+<li> <code>step</code>：一行图像数据的字节数量,作为数据的步长参数</li>
+<li> <code>data</code>：存储图像数据的数组,大小为step*height个字节</li>
+
+</ul>
+>例如:1080*720分辨率的摄像头产生一帧图像数据大小是:3*1080*720=2764800字节,即2.7648MB
+
+
+<p>压缩图像消息</p>
+```bash
+rosmsg show sensor_msgs/CompressedImage 
+```
+结果如下:<br>
+```msg
+std_msgs/Header header
+  uint32 seq
+  time stamp
+  string frame_id
+string format
+uint8[] data
+```
+<ul>
+
+<li> <code>format</code>：图像的压缩编码格式(jpeg,png,bmp)</li>
+<li> <code>data</code>：存储图像数据数组</li>
+
+</ul>
+##### 三维图像数据
+<p>安装kinect驱动</p>
+以kinect v1为例:<br>
+```bash
+sudo apt-get install ros-kinetic-freenect-*
+
+git clone https://github.com/avin2/SensorKinect.git
+cd ~/SensorKinect/Bin
+tar xvf SensorKinect093-Bin-Linux-x64-v5.1.2.1.tar.bz2
+cd Sensor-Bin-Linux-x64-v5.1.2.1
+sudo ./install.sh
+```
+
+<p>显示点云类型</p>
+```bash
+roslaunch robot_vision freenect.launch
+rostopic info /camera/depth_registered/points 
+```
+结果如下:<br>
+```msg
+Type: sensor_msgs/PointCloud2
+
+Publishers: 
+ * /camera/camera_nodelet_manager (http://GJXS:43617/)
+
+Subscribers: None
+```
+话题节点为sensor_msgs/PointCloud2<br>
+>其中freenect.launch文件如下:<br>
+```xml
+<launch>
+    <!-- Launch the freenect driver -->
+    <include file="$(find freenect_launch)/launch/freenect.launch">
+        <arg name="publish_tf"                      value="false" /> 
+
+        <!-- use device registration -->
+        <arg name="depth_registration"              value="true" /> 
+
+        <arg name="rgb_processing"                  value="true" />
+        <arg name="ir_processing"                   value="false" />
+        <arg name="depth_processing"                value="false" />
+        <arg name="depth_registered_processing"     value="true" />
+        <arg name="disparity_processing"            value="false" />
+        <arg name="disparity_registered_processing" value="false" />
+        <arg name="sw_registered_processing"        value="false" />
+        <arg name="hw_registered_processing"        value="true" />
+    </include>
+</launch>
+```
+
+<p>查看点云消息</p>
+```bash
+rosmsg show sensor_msgs/PointCloud2
+```
+结果如下:<br>
+```msg
+std_msgs/Header header
+  uint32 seq
+  time stamp
+  string frame_id
+uint32 height
+uint32 width
+sensor_msgs/PointField[] fields
+  uint8 INT8=1
+  uint8 UINT8=2
+  uint8 INT16=3
+  uint8 UINT16=4
+  uint8 INT32=5
+  uint8 UINT32=6
+  uint8 FLOAT32=7
+  uint8 FLOAT64=8
+  string name
+  uint32 offset
+  uint8 datatype
+  uint32 count
+bool is_bigendian
+uint32 point_step
+uint32 row_step
+uint8[] data
+bool is_dense
+```
+<ul>
+
+<li> <code>fields</code>：每个点的数据类型</li>
+<li> <code>point_step</code>：单点的数据字节步长</li>
+<li> <code>row_step</code>：一列数据的字节步长</li>
+<li> <code>data</code>：点云数据的存储数组,总字节大小为row_step*height</li>
+<li> <code>is_dense</code>：是否有无效点</li>
+
+</ul>
+>点云的单帧数据量很大,如果使用分布式网络传输,需要考虑能否满足数据的传输要求,或者针对数据进行压缩
+
+*************************
+### 摄像头的标定
+##### 摄像头标定的意义
+摄像头对光学器件的要求较高,由于摄像头内部与外部的一些原因,生成的物体图像会发生畸形,为了避免数据源造成的误差,需要针对摄像头的参数进行标定.<br>
+<p>安装标定功能包</p>
+```bash
+sudo apt-get install ros-kinetic-camera-calibration
+```
+##### 摄像头标定流程
+```bash
+#启动摄像头
+roslaunch robot_vision usb_cam.launch 
+
+#启动标定包
+rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.024 image:=/usb_cam/image_raw camera:=/usb_cam
+
+```
+<ul>
+
+<li> <code>size</code>：标定棋盘格的内部角点个数,这里使用的棋盘一共有六行,每行有8个内部角点</li>
+<li> <code>square</code>：这个参数对应每个棋盘格的边长,单位是米</li>
+<li> <code>image和camera</code>：设置摄像头发布的图像话题</li>
+
+</ul>
+结果如下:<br>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/%E6%91%84%E5%83%8F%E5%A4%B4.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+<ul>
+
+<li> <code>X</code>：标定靶在摄像头视野中的左右移动</li>
+<li> <code>Y</code>：标定靶在摄像头视野中的上下移动</li>
+<li> <code>Size</code>：标定靶在摄像头视野中的前后移动</li>
+<li> <code>Skew</code>：标定靶在摄像头视野中的倾斜转动</li>
+
+</ul>
+标定的结果保存路径:`/tmp/calibrationdata.tar.gz`
+>其中`usb_cam.launch`如下:
+```xml
+<launch>
+
+  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/video0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="io_method" value="mmap"/>
+  </node>
+
+</launch>
+```
+
+##### 摄像头使用标定文件
+实例如下(usb_cam_with_calibration.launch):
+```xml
+<launch>
+
+    <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
+        <param name="video_device" value="/dev/video0" />
+        <param name="image_width" value="1280" />
+        <param name="image_height" value="720" />
+        <param name="pixel_format" value="yuyv" />
+        <param name="camera_frame_id" value="usb_cam" />
+        <param name="io_method" value="mmap"/>
+
+        <param name="camera_info_url" type="string" value="file://$(find robot_vision)/camera_calibration.yaml" />
+    </node>
+
+</launch>
+```
+
+*************************
+### kinect的标定流程
+```bash
+#启动kinect
+roslaunch robot_vision freenect.launch 
+
+#启动彩色摄像头
+rosrun camera_calibration cameracalibrator.py image:=/camera/rgb/image_raw camera:=/camera/rgb --size 8x6 --square 0.024
+
+#标定红外摄像头
+rosrun camera_calibration cameracalibrator.py image:=/camera/ir/image_raw camera:=/camera/ir --size 8x6 --square 0.024
+
+```
+
+##### kinect使用标定文件
+实例如下(freenect_with_calibration.launch):
+```xml
+<launch>
+
+    <!-- Launch the freenect driver -->
+    <include file="$(find freenect_launch)/launch/freenect.launch">
+        <arg name="publish_tf"                      value="false" /> 
+
+        <!-- use device registration -->
+        <arg name="depth_registration"              value="true" /> 
+
+        <arg name="rgb_processing"                  value="true" />
+        <arg name="ir_processing"                   value="false" />
+        <arg name="depth_processing"                value="false" />
+        <arg name="depth_registered_processing"     value="true" />
+        <arg name="disparity_processing"            value="false" />
+        <arg name="disparity_registered_processing" value="false" />
+        <arg name="sw_registered_processing"        value="false" />
+        <arg name="hw_registered_processing"        value="true" />
+
+        <arg name="rgb_camera_info_url"
+             value="file://$(find robot_vision)/kinect_rgb_calibration.yaml" />
+        <arg name="depth_camera_info_url"
+             value="file://$(find robot_vision)/kinect_depth_calibration.yaml" />
+    </include>
+
+</launch>
+```
+
+*************************
+### ROS+OpenCV
+##### OpenCV的概述
+OpenCV(Open Source Computer Vision Library)是基于BSD许可开发的跨平台开源计算机视觉库(Linux,Windows和Mac OS等);由一系列C函数和少量C++类构成,同时提供C++,Python,Ruby,MATLAB等语言的接口;实现了图像处理和计算机视觉方面的很多通用算法,而且对于非商业应用和商业应用都是免费的;可以直接访问硬件摄像头,而且还提供一个简单的GUI系统--highgui.<br>
+<p>安装OpenCV</p>
+```bash
+sudo apt-get install ros-kinetic-vision-opencv libopencv-dev python-opencv
+```
+<p>ROS与OpenCV的集成框架</p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/%E9%9B%86%E6%88%90%E6%A1%86%E6%9E%B6.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+
+##### 测试例程
+```bash
+#启动摄像头
+roslaunch robot_vision usb_cam.launch
+
+#启动opencv测试例程
+rosrun robot_vision cv_bridge_test.py
+
+#打开ROS的QT图像管理器
+rqt_image_view
+```
+
+在`rqt_image_view`中订阅/cv_bridge_image话题,会发现两个界面一样,测试成功<br>
+
+<p>分析cv_bridge_test.py</p>
+cv_bridge_test.py代码如下:<br>
+```python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import rospy
+import cv2
+from cv_bridge import CvBridge, CvBridgeError
+from sensor_msgs.msg import Image
+
+class image_converter:
+    def __init__(self):    
+        # 创建cv_bridge，声明图像的发布者和订阅者
+        self.image_pub = rospy.Publisher("cv_bridge_image", Image, queue_size=1)
+        self.bridge = CvBridge()
+        self.image_sub = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback)
+
+    def callback(self,data):
+        # 使用cv_bridge将ROS的图像数据转换成OpenCV的图像格式
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
+        except CvBridgeError as e:
+            print e
+
+        # 在opencv的显示窗口中绘制一个圆，作为标记
+        (rows,cols,channels) = cv_image.shape
+        if cols > 60 and rows > 60 :
+            cv2.circle(cv_image, (60, 60), 30, (0,0,255), -1)
+
+        # 显示Opencv格式的图像
+        cv2.imshow("Image window", cv_image)
+        cv2.waitKey(3)
+
+        # 再将opencv格式额数据转换成ros image格式的数据发布
+        try:
+            self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_image, "bgr8"))
+        except CvBridgeError as e:
+            print e
+
+if __name__ == '__main__':
+    try:
+        # 初始化ros节点
+        rospy.init_node("cv_bridge_test")
+        rospy.loginfo("Starting cv_bridge_test node")
+        image_converter()
+        rospy.spin()
+    except KeyboardInterrupt:
+        print "Shutting down cv_bridge_test node."
+        cv2.destroyAllWindows()
+```
+<ul>
+
+<li> <code>imgmsg_to_cv2()</code>：将ROS图像消息转换成OpenCV图像数据</li>
+<li> <code>cv2_to_imgmsg()</code>：将OpenCV格式的图像数据转换成ROS图像消息</li>
+<li> <code>输入参数</code>：图像消息流和转换的图像数据格式</li>
+
+</ul>
+
+*************************
+##### 人脸识别
+<p>基于Haar特征的级联分类器对象检测算法思路</p>
+```flow
+st=>start: 图像输入
+e=>end: 结果输出
+op1=>operation: 灰阶色彩转换
+op2=>operation: 缩小摄像头图像
+op3=>operation: 直方图均衡化
+op4=>operation: 检测人脸
+
+st->op1->op2->op3->op4->e
+```
+
+<p>启动人脸识别实例</p>
+```bash
+#启动摄像头
+roslaunch robot_vision usb_cam.launch
+
+#启动人脸识别节点
+roslaunch robot_vision face_detector.launch 
+
+#启动ROS下的QT图像化界面
+rqt_image_view 
+```
+
+在`rqt_image_view`中订阅/cv_bridge_image话题<br>
+</ul>
+结果如下:<br>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+<ul>
+
+<p>人脸识别源码分析</p>
+```python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import rospy
+import cv2
+import numpy as np
+from sensor_msgs.msg import Image, RegionOfInterest
+from cv_bridge import CvBridge, CvBridgeError
+
+class faceDetector:
+    def __init__(self):
+        rospy.on_shutdown(self.cleanup);
+
+        # 创建cv_bridge
+        self.bridge = CvBridge()
+        self.image_pub = rospy.Publisher("cv_bridge_image", Image, queue_size=1)
+
+        # 获取haar特征的级联表的XML文件，文件路径在launch文件中传入
+        cascade_1 = rospy.get_param("~cascade_1", "")
+        cascade_2 = rospy.get_param("~cascade_2", "")
+
+        # 使用级联表初始化haar特征检测器
+        self.cascade_1 = cv2.CascadeClassifier(cascade_1)
+        self.cascade_2 = cv2.CascadeClassifier(cascade_2)
+
+        # 设置级联表的参数，优化人脸识别，可以在launch文件中重新配置
+        self.haar_scaleFactor  = rospy.get_param("~haar_scaleFactor", 1.2)
+        self.haar_minNeighbors = rospy.get_param("~haar_minNeighbors", 2)
+        self.haar_minSize      = rospy.get_param("~haar_minSize", 40)
+        self.haar_maxSize      = rospy.get_param("~haar_maxSize", 60)
+        self.color = (50, 255, 50)
+
+        # 初始化订阅rgb格式图像数据的订阅者，此处图像topic的话题名可以在launch文件中重映射
+        self.image_sub = rospy.Subscriber("input_rgb_image", Image, self.image_callback, queue_size=1)
+
+    def image_callback(self, data):
+        # 使用cv_bridge将ROS的图像数据转换成OpenCV的图像格式
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")     
+            frame = np.array(cv_image, dtype=np.uint8)
+        except CvBridgeError, e:
+            print e
+
+        # 创建灰度图像
+        grey_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # 创建平衡直方图，减少光线影响
+        grey_image = cv2.equalizeHist(grey_image)
+
+        # 尝试检测人脸
+        faces_result = self.detect_face(grey_image)
+
+        # 在opencv的窗口中框出所有人脸区域
+        if len(faces_result)>0:
+            for face in faces_result: 
+                x, y, w, h = face
+                cv2.rectangle(cv_image, (x, y), (x+w, y+h), self.color, 2)
+
+        # 将识别后的图像转换成ROS消息并发布
+        self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_image, "bgr8"))
+
+    def detect_face(self, input_image):
+        # 首先匹配正面人脸的模型
+        if self.cascade_1:
+            faces = self.cascade_1.detectMultiScale(input_image, 
+                    self.haar_scaleFactor, 
+                    self.haar_minNeighbors, 
+                    cv2.CASCADE_SCALE_IMAGE, 
+                    (self.haar_minSize, self.haar_maxSize))
+                                         
+        # 如果正面人脸匹配失败，那么就尝试匹配侧面人脸的模型
+        if len(faces) == 0 and self.cascade_2:
+            faces = self.cascade_2.detectMultiScale(input_image, 
+                    self.haar_scaleFactor, 
+                    self.haar_minNeighbors, 
+                    cv2.CASCADE_SCALE_IMAGE, 
+                    (self.haar_minSize, self.haar_maxSize))
+        
+        return faces
+
+    def cleanup(self):
+        print "Shutting down vision node."
+        cv2.destroyAllWindows()
+
+if __name__ == '__main__':
+    try:
+        # 初始化ros节点
+        rospy.init_node("face_detector")
+        faceDetector()
+        rospy.loginfo("Face detector is started..")
+        rospy.loginfo("Please subscribe the ROS image.")
+        rospy.spin()
+    except KeyboardInterrupt:
+        print "Shutting down face detector node."
+        cv2.destroyAllWindows()
+```
+<ul>
+
+<li> <code>初始化ros节点</code>：完成ROS节点,图像,识别参数的设置</li>
+<li> <code>ROS图像回调函数</code>：将ROS图像转换成OpenCV的数据格式,然后预处理之后开始调用人脸识别的功能函数,最后把识别结果发布</li>
+<li> <code>人脸识别</code>：调用OpenCV提供的人脸识别接口,与数据库中的人脸特征进行匹配</li>
+
+</ul>
+##### 物体跟踪
+<p>跟踪物体的特征点思路</p>
+```flow
+st=>start: 图像输入
+e=>end: 结果输出
+op1=>operation: 特征点采样
+op2=>operation: 两帧图像灰度值对比
+op3=>operation: 特征点估计
+op4=>operation: 特征点过滤
+
+st->op1->op2->op3->op4->e
+```
+
+<p>启动物体跟踪实例</p>
+```bash
+#启动摄像头
+roslaunch robot_vision usb_cam.launch
+
+#启动人脸识别节点
+roslaunch robot_vision motion_detector.launch
+
+#启动ROS下的QT图像化界面
+rqt_image_view 
+```
+
+在`rqt_image_view`中订阅/cv_bridge_image话题<br>
+</ul>
+结果如下:<br>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/%E7%89%A9%E4%BD%93%E8%B7%9F%E8%B8%AA.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+<ul>
+
+<p>人脸识别源码分析</p>
+```python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import rospy
+import cv2
+import numpy as np
+from sensor_msgs.msg import Image, RegionOfInterest
+from cv_bridge import CvBridge, CvBridgeError
+
+class motionDetector:
+    def __init__(self):
+        rospy.on_shutdown(self.cleanup);
+
+        # 创建cv_bridge
+        self.bridge = CvBridge()
+        self.image_pub = rospy.Publisher("cv_bridge_image", Image, queue_size=1)
+
+        # 设置参数：最小区域、阈值
+        self.minArea   = rospy.get_param("~minArea",   500)
+        self.threshold = rospy.get_param("~threshold", 25)
+
+        self.firstFrame = None
+        self.text = "Unoccupied"
+
+        # 初始化订阅rgb格式图像数据的订阅者，此处图像topic的话题名可以在launch文件中重映射
+        self.image_sub = rospy.Subscriber("input_rgb_image", Image, self.image_callback, queue_size=1)
+
+    def image_callback(self, data):
+        # 使用cv_bridge将ROS的图像数据转换成OpenCV的图像格式
+        try:
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")     
+            frame = np.array(cv_image, dtype=np.uint8)
+        except CvBridgeError, e:
+            print e
+
+        # 创建灰度图像
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gray = cv2.GaussianBlur(gray, (21, 21), 0)
+
+        # 使用两帧图像做比较，检测移动物体的区域
+        if self.firstFrame is None:
+            self.firstFrame = gray
+            return  
+        frameDelta = cv2.absdiff(self.firstFrame, gray)
+        thresh = cv2.threshold(frameDelta, self.threshold, 255, cv2.THRESH_BINARY)[1]
+
+        thresh = cv2.dilate(thresh, None, iterations=2)
+        binary, cnts, hierarchy= cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        for c in cnts:
+            # 如果检测到的区域小于设置值，则忽略
+            if cv2.contourArea(c) < self.minArea:
+               continue 
+
+            # 在输出画面上框出识别到的物体
+            (x, y, w, h) = cv2.boundingRect(c)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (50, 255, 50), 2)
+            self.text = "Occupied"
+
+        # 在输出画面上打当前状态和时间戳信息
+        cv2.putText(frame, "Status: {}".format(self.text), (10, 20),
+            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+
+        # 将识别后的图像转换成ROS消息并发布
+        self.image_pub.publish(self.bridge.cv2_to_imgmsg(frame, "bgr8"))
+
+    def cleanup(self):
+        print "Shutting down vision node."
+        cv2.destroyAllWindows()
+
+if __name__ == '__main__':
+    try:
+        # 初始化ros节点
+        rospy.init_node("motion_detector")
+        rospy.loginfo("motion_detector node is started...")
+        rospy.loginfo("Please subscribe the ROS image.")
+        motionDetector()
+        rospy.spin()
+    except KeyboardInterrupt:
+        print "Shutting down motion detector node."
+        cv2.destroyAllWindows()
+```
+<ul>
+
+<li> <code>初始化ros节点</code>：完成ROS节点,图像,识别参数的设置</li>
+<li> <code>ROS图像回调函数</code>：将ROS图像转换成OpenCV的数据格式,完成图像预处理之后开始针对两帧图像进行比较,基于图像差异识别到运动的物体,最后标识识别结果并发布</li>
+
+</ul>
+
+*************************
+### 二维码识别
+##### 摄像头二维码识别
+<p>安装二维码识别功能包</p>
+```bash
+sudo apt-get install ros-kinetic-ar-track-alvar
+```
+
+<p>创建二维码</p>
+```bash
+roscore
+
+rosrun ar_track_alvar createMarker -s 6 1
+rosrun ar_track_alvar createMarker -s 6 3
+rosrun ar_track_alvar createMarker -s 6 5
+
+```
+结果如下:<br>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" width=260 height=160 alt="机器视觉">
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" width=260 height=160 alt="机器视觉">
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" width=260 height=160 alt="机器视觉">
+<i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+
+<p>二维码识别launch文件</p>
+ar_track_camera.launch源代码如下:
+```xml
+<launch>
+
+    <node pkg="tf" type="static_transform_publisher" name="world_to_cam" 
+          args="0 0 0.5 0 1.57 0 world usb_cam 10" />
+        
+    <arg name="marker_size" default="5" />
+    <arg name="max_new_marker_error" default="0.08" />
+    <arg name="max_track_error" default="0.2" />
+    <arg name="cam_image_topic" default="/usb_cam/image_raw" />
+    <arg name="cam_info_topic" default="/usb_cam/camera_info" />
+    <arg name="output_frame" default="/usb_cam" />
+        
+    <node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="false" output="screen">
+        <param name="marker_size"           type="double" value="$(arg marker_size)" />
+        <param name="max_new_marker_error"  type="double" value="$(arg max_new_marker_error)" />
+        <param name="max_track_error"       type="double" value="$(arg max_track_error)" />
+        <param name="output_frame"          type="string" value="$(arg output_frame)" />
+
+        <remap from="camera_image"  to="$(arg cam_image_topic)" />
+        <remap from="camera_info"   to="$(arg cam_info_topic)" />
+    </node>
+
+    <!-- rviz view /-->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find robot_vision)/config/ar_track_camera.rviz"/>
+
+</launch>
+```
+
+<p>启动二维码识别示例</p>
+```bash
+#启动标定之后的摄像头
+roslaunch robot_vision usb_cam_with_calibration.launch 
+
+#识别二维码
+roslaunch robot_vision ar_track_camera.launch
+```
+
+<p>查看识别到的二维码位姿</p>
+```bash
+rostopic echo /ar_pose_marker
+```
+
+##### kinect二维码识别
+ar_track_kinect.launch源代码如下:
+```xml
+<launch>
+
+    <node pkg="tf" type="static_transform_publisher" name="world_to_cam" 
+          args="0 0 0.5 0 1.57 0 world camera_rgb_optical_frame 10" />
+
+    <arg name="marker_size" default="5.0" />
+    <arg name="max_new_marker_error" default="0.08" />
+    <arg name="max_track_error" default="0.2" />
+
+    <arg name="cam_image_topic" default="/camera/depth_registered/points" />
+    <arg name="cam_info_topic" default="/camera/rgb/camera_info" />
+    <arg name="output_frame" default="/camera_rgb_optical_frame" />
+
+    <node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkers" respawn="false" output="screen">
+        <param name="marker_size" type="double" value="$(arg marker_size)" />
+        <param name="max_new_marker_error" type="double" value="$(arg max_new_marker_error)" />
+        <param name="max_track_error" type="double" value="$(arg max_track_error)" />
+        <param name="output_frame" type="string" value="$(arg output_frame)" />
+
+        <remap from="camera_image"  to="$(arg cam_image_topic)" />
+        <remap from="camera_info"   to="$(arg cam_info_topic)" />
+    </node>
+
+    <!-- rviz view /-->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find robot_vision)/config/ar_track_kinect.rviz"/>
+
+</launch>
+```
+<p>启动二维码识别示例</p>
+```bash
+#启动标定之后的摄像头
+roslaunch robot_vision usb_cam_with_calibration.launch 
+
+#识别二维码
+roslaunch robot_vision ar_track_camera.launch
+```
+
+### 扩展
+##### ORK(Object Recognition Kitchen)
+参考网站:
+[object_recognition ros wiki](http://wiki.ros.org/object_recognition)
+[object_recognition](http://agas-ros-pkg.googlecode.com/svn/trunk/object_recognition)
+[Object Recognition Tutorials](http://wg-perception.github.io/ork_tutorials/index.html#object-recognition-tutorials)
+[ORK Installation](http://wg-perception.github.io/object_recognition_core/install.html#download-build-from-source)
+
+##### TensorFlow Obiect Detection API
+参考:
+[TensorFlow Object Detection API](https://github.com/opencv/opencv/wiki/TensorFlow-Object-Detection-API)
+
+*************************
+

@@ -8,7 +8,7 @@ header-img:   "img/in-post/2018.07/01/blog-07-01-2.jpg"
 catalog:      true
 tags:
     - ROS
-    - ROS_Tutorials
+    - Tutorials
     - Package.xml
 ---
 *****

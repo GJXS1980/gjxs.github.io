@@ -8,7 +8,8 @@ header-img:   "img/in-post/2018.08/19/19.jpg"
 catalog:      true
 tags:
     - ROS
-    - 深蓝学院课程笔记
+    - 深蓝学院
+    - 课程笔记
 ---
 *****
 >Abstract: "深蓝学院的课程学习笔记，第一讲：认识ROS."<br>                                                                                                                                                                                   <br /> 
