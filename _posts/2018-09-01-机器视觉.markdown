@@ -641,7 +641,7 @@ rosrun ar_track_alvar createMarker -s 6 3
 rosrun ar_track_alvar createMarker -s 6 5
 
 ```
-结果如下:<br>
+结果如下:
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" width=260 height=160 alt="机器视觉">
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" width=260 height=160 alt="机器视觉">
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" width=260 height=160 alt="机器视觉">
@@ -736,10 +736,10 @@ roslaunch robot_vision ar_track_camera.launch
 ### 扩展
 ##### ORK(Object Recognition Kitchen)
 参考网站:
-[object_recognition ros wiki](http://wiki.ros.org/object_recognition)
-[object_recognition](http://agas-ros-pkg.googlecode.com/svn/trunk/object_recognition)
-[Object Recognition Tutorials](http://wg-perception.github.io/ork_tutorials/index.html#object-recognition-tutorials)
-[ORK Installation](http://wg-perception.github.io/object_recognition_core/install.html#download-build-from-source)
+[object_recognition ros wiki](http://wiki.ros.org/object_recognition) <br>
+[object_recognition](http://agas-ros-pkg.googlecode.com/svn/trunk/object_recognition)  <br>
+[Object Recognition Tutorials](http://wg-perception.github.io/ork_tutorials/index.html#object-recognition-tutorials)  <br>
+[ORK Installation](http://wg-perception.github.io/object_recognition_core/install.html#download-build-from-source)  <br>
 
 ##### TensorFlow Obiect Detection API
 参考:
