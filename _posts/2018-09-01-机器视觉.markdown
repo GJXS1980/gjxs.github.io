@@ -642,9 +642,17 @@ rosrun ar_track_alvar createMarker -s 6 5
 
 ```
 结果如下:
+
+<!--
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" width=260 height=160 alt="机器视觉">
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" width=260 height=160 alt="机器视觉">
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" width=260 height=160 alt="机器视觉">
+<i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+-->
+
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" alt="机器视觉">
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" alt="机器视觉">
+<img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" alt="机器视觉">
 <i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
 
 <p>二维码识别launch文件</p>
