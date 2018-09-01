@@ -397,11 +397,12 @@ rqt_image_view
 ```
 
 在`rqt_image_view`中订阅/cv_bridge_image话题<br>
-</ul>
+
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
-<ul>
+
 <p>人脸识别源码分析</p>
+
 ```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -530,10 +531,10 @@ rqt_image_view
 ```
 
 在`rqt_image_view`中订阅/cv_bridge_image话题<br>
-</ul>
+
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E7%89%A9%E4%BD%93%E8%B7%9F%E8%B8%AA.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
-<ul>
+
 
 <p>人脸识别源码分析</p>
 ```python
