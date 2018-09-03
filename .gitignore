@@ -1,2 +1,2 @@
 # ignore all .pdf files in the doc/ directory and any of its subdirectories
-_posts/temporary/*.markdown
+posts/temporary/*.markdown
