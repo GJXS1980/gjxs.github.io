@@ -350,15 +350,11 @@ roslaunch learning_tf start_demo_with_listener.launch
 *************************
 
 
-
-
-
 <style>
     .left-bottom .github-fork-ribbon {
-        background-color: #090;
+        background-color: #DC143C;
     }
 </style>
-
 
 <div class="github-fork-ribbon-wrapper left-bottom hidden-xs">
     <div class="github-fork-ribbon">
