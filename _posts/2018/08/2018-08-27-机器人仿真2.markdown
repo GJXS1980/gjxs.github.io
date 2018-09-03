@@ -20,14 +20,7 @@ tags:
 ----------
 *************************
 ### <center> 前言--ros_control </center> 
-<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
-</p>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">ros_control的介绍</strong>
-        </strong>
-    </span>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;ros_control</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的介绍</span>&nbsp;—</span></strong>
 </p>
 <ul>
 <li> ROS为开发者提供的机器人控制中间件</li>
