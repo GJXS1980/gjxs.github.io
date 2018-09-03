@@ -19,17 +19,41 @@ tags:
 
 ----------
 *************************
-### 前言--ros_control
-##### ros_control的介绍
+### <center> 前言--ros_control </center> 
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">ros_control的介绍</strong>
+        </strong>
+    </span>
+</p>
 <ul>
 <li> ROS为开发者提供的机器人控制中间件</li>
 <li> 包括一系列控制器接口、传动装置接口、硬件接口、控制器工具箱等等 </li>
 <li> 可以帮助机器人应用功能包快速落地，提高开发效率</li>
 </ul>
-<p>ros_control的总体框架</p>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control1.png" alt="ros_control的总体框架"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></i>
-<p>ros_control的控制器数据流图</p>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control2.png" alt="控制器数据流图"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></i>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;ros_control</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的总体框架</span>&nbsp;—</span></strong>
+</p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control1.png" alt="ros_control的总体框架">
+<p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;"><span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);">○ &nbsp;</span><span style="max-width: 100%;color: rgb(136, 136, 136);font-size: 12px;letter-spacing: 1.600000023841858px;background-color: rgb(255, 255, 255);">图片来源：ROS理论与实践_4:机器人仿真</span>
+</span>
+<br>
+</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;ros_control</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的控制器数据流图</span>&nbsp;—</span></strong>
+</p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control2.png" alt="控制器数据流图">
+<p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;"><span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);">○ &nbsp;</span><span style="max-width: 100%;color: rgb(136, 136, 136);font-size: 12px;letter-spacing: 1.600000023841858px;background-color: rgb(255, 255, 255);">图片来源：ROS理论与实践_4:机器人仿真</span>
+</span>
+<br>
+</p>
 <ul>
 <li> <code>控制器管理器</code>:提供一种通用的接口来管理不同的控制器。</li>
 <li> <code>控制器</code>:读取硬件状态，发布控制命令，完成每个joint的控制。 </li>
@@ -37,22 +61,53 @@ tags:
 <li> <code>机器人硬件抽象</code>:机器人硬件抽象和硬件资源直接打交道，通过write和read方法完成硬件操作。 </li>
 <li> <code>真实机器人</code>:执行接收到的命令。 </li>
 </ul>
-<p>ros_control的控制器</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;ros_control</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的控制器</span>&nbsp;—</span></strong>
+</p>
 <ul>
 <li> <code>joint_effort_controller</code></li>
 <li> <code>joint_state_controller</code></li>
 <li> <code>joint_position_controller</code></li>
 <li> <code>joint_velocity_controller</code></li>
 </ul>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control4.png" alt="ros_control的控制器"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></i>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control4.png" alt="ros_control的控制器">
+<p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;"><span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);">○ &nbsp;</span><span style="max-width: 100%;color: rgb(136, 136, 136);font-size: 12px;letter-spacing: 1.600000023841858px;background-color: rgb(255, 255, 255);">图片来源：ROS理论与实践_4:机器人仿真</span>
+</span>
+<br>
+</p>
 
 *************************
-### Gazebo物理仿真环境的搭建
-##### Gazebo+ros_control框架
-<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control3.png" alt="Gazebo+ros_control框架"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_4:机器人仿真</a></i>
-##### 仿真步骤
-###### 配置机器人模型
-<p>第一步：为link添加惯性参数和碰撞属性</p>
+### <center> Gazebo物理仿真环境的搭建 </center>
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">Gazebo+ros_control框架</strong>
+        </strong>
+    </span>
+</p>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control3.png" alt="Gazebo+ros_control框架">
+<p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;"><span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);">○ &nbsp;</span><span style="max-width: 100%;color: rgb(136, 136, 136);font-size: 12px;letter-spacing: 1.600000023841858px;background-color: rgb(255, 255, 255);">图片来源：ROS理论与实践_4:机器人仿真</span>
+</span>
+<br>
+</p>
+
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">配置机器人模型</strong>
+        </strong>
+    </span>
+</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;第一步：</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">为link添加惯性参数和碰撞属性</span>&nbsp;—</span></strong></p>
 ```xml
     <!-- Macro for inertia matrix -->
     <xacro:macro name="sphere_inertial_matrix" params="m r">
@@ -85,8 +140,8 @@ tags:
 <li> <code>collision</code>：碰撞属性</li>
 <li> <code>cylinder_inertial_matrix</code>：惯性矩阵（如果是一个圆柱体，输入质量、半径和高度）</li>
 </ul>
-
-<p>第二步：为link添加gazebo标签</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;第二步:</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">为link添加gazebo标签</span>&nbsp;—</span></strong>
+</p>
 ```xml
         <gazebo reference="${prefix}_wheel_link">
             <material>Gazebo/Gray</material>
@@ -110,8 +165,8 @@ tags:
 <li> <code>material</code>：gazebo下的颜色</li>
 <li> <code>turnGravityOff</code>：重力属性</li>
 </ul>
-
-<p>第三步：为joint添加传动装置</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;第三步：</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">为joint添加传动装置</span>&nbsp;—</span></strong>
+</p>
 ```xml
         <!-- Transmission is important to link the joints and the controller -->
         <transmission name="${prefix}_wheel_joint_trans">
@@ -130,8 +185,8 @@ tags:
 <li> <code>hardware_interface/VelocityJointInterface</code>：速度控制接口，相当于电机</li>
 <li> <code>mechanicalReduction</code>：电机的减速比</li>
 </ul>
-
-<p>第四步：添加gazebo控制器插件</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;第四步:</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">添加gazebo控制器插件</span>&nbsp;—</span></strong>
+</p>
 gazebo控制器插件的作用相当于驱动板
 ```xml
         <!-- controller -->
@@ -167,11 +222,19 @@ gazebo控制器插件的作用相当于驱动板
 <li> <code>wheelSeparation和wheelDiameter</code>：机器人模型的相关尺寸，在计算差速参数时需要用到</li>
 <li> <code>commandTopic</code>：控制器订阅的速度控制指令，生成全局命名时需要结合robotNamespace中设置的命名空间</li>
 <li> <code>odometryFrame</code>：里程计数据的参考坐标系，ROS中一般命名为odom</li>
-
 </ul>
 
-###### 创建仿真环境
-<p>在gazebo中加载机器人模型</p>
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/3.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">创建仿真环境</strong>
+        </strong>
+    </span>
+</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;在gazebo中</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">加载机器人模型</span>&nbsp;—</span></strong>
+</p>
 例如(view_mbot_gazebo_empty_world.launch):
 ```xml
 <launch>
@@ -210,7 +273,9 @@ gazebo控制器插件的作用相当于驱动板
 ```
 >其中最主要的是加载机器人模型描述参数和在gazebo中加载机器人模型
 
-<p>创建仿真环境</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;创建</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">仿真环境</span>&nbsp;—</span></strong>
+</p>
+
 <li> 第一种方法：直接添加环境模型 </li>
 >为保证模型顺利加载,建议提前将[模型文件库](https://bitbucket.org/osrf/gazebo_models/downloads/)下载并放置到<code>~/.gazebo/models </code>下
 
@@ -225,9 +290,17 @@ roslaunch mbot_gazebo view_mbot_gazebo_play_ground.launch
 ```bash
 roslaunch mbot_teleop mbot_teleop.launch
 ```
-
-###### 传感器仿真
-<p>摄像头仿真</p>
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/4.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">传感器仿真</strong>
+        </strong>
+    </span>
+</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;摄像头</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">仿真</span>&nbsp;—</span></strong>
+</p>
 实例(camera_gazebo.xacro)如下:
 ```xml
 <?xml version="1.0"?>
@@ -316,9 +389,8 @@ roslaunch mbot_gazebo view_mbot_with_camera_gazebo.launch
 #查看摄像头仿真图像
 rqt_image_view
 ```
-
-
-<p>RGB-D摄像头仿真(kinect)</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;RGB-D摄像头</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">仿真</span>&nbsp;—</span></strong>
+</p>
 实例(kinect_gazebo.xacro)如下:
 ```xml
 <?xml version="1.0"?>
@@ -397,8 +469,8 @@ roslaunch mbot_gazebo view_mbot_with_kinect_gazebo.launch
 #在rviz中查看kinect信息
 rosrun rviz rviz
 ```
-
-<p>激光雷达仿真</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;激光雷达</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">仿真</span>&nbsp;—</span></strong>
+</p>
 实例(lidar_gazebo.xacro)如下:
 ```xml
 <?xml version="1.0"?>
