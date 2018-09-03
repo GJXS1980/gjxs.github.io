@@ -19,9 +19,20 @@ tags:
 ----------
 
 *************************
-### ROS中的图像数据
-##### 二维图像数据
+### <center> ROS中的图像数据 </center>
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">二维图像数据</strong>
+        </strong>
+    </span>
+</p>
+<!--
 <p>显示图像类型</p>
+-->
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;显示</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">图像类型</span>&nbsp;—</span></strong></p>
 ```bash
 roslaunch usb_cam usb_cam-test.launch
 rostopic info /usb_cam/image_raw
@@ -36,7 +47,10 @@ Publishers:
 Subscribers: 
  * /image_view (http://GJXS:33697/)
 ```
+<!--
 <p>查看图像消息</p>
+-->
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;查看</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">图像消息</span>&nbsp;—</span></strong></p>
 ```bash
 rosmsg show sensor_msgs/Image 
 ```
@@ -62,9 +76,11 @@ uint8[] data
 <li> <code>step</code>：一行图像数据的字节数量,作为数据的步长参数</li>
 <li> <code>data</code>：存储图像数据的数组,大小为step*height个字节</li>
 </ul>
+
 >例如:1080*720分辨率的摄像头产生一帧图像数据大小是:3*1080*720=2764800字节,即2.7648MB
 
-<p>压缩图像消息</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;压缩</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">图像消息</span>&nbsp;—</span></strong></p>
 ```bash
 rosmsg show sensor_msgs/CompressedImage 
 ```
@@ -81,8 +97,18 @@ uint8[] data
 <li> <code>format</code>：图像的压缩编码格式(jpeg,png,bmp)</li>
 <li> <code>data</code>：存储图像数据数组</li>
 </ul>
-##### 三维图像数据
-<p>安装kinect驱动</p>
+
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">三维图像数据</strong>
+        </strong>
+    </span>
+</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;安装</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">kinect驱动</span>&nbsp;—</span></strong></p>
 以kinect v1为例:<br>
 ```bash
 sudo apt-get install ros-kinetic-freenect-*
@@ -93,7 +119,7 @@ tar xvf SensorKinect093-Bin-Linux-x64-v5.1.2.1.tar.bz2
 cd Sensor-Bin-Linux-x64-v5.1.2.1
 sudo ./install.sh
 ```
-<p>显示点云类型</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;显示</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">点云类型</span>&nbsp;—</span></strong></p>
 ```bash
 roslaunch robot_vision freenect.launch
 rostopic info /camera/depth_registered/points 
@@ -109,6 +135,7 @@ Subscribers: None
 ```
 话题节点为sensor_msgs/PointCloud2<br>
 >其中freenect.launch文件如下:
+
 ```xml
 <launch>
     <!-- Launch the freenect driver -->
@@ -130,7 +157,8 @@ Subscribers: None
 </launch>
 ```
 
-<p>查看点云消息</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;查看</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">点云消息</span>&nbsp;—</span></strong></p>
+
 ```bash
 rosmsg show sensor_msgs/PointCloud2
 ```
@@ -172,14 +200,37 @@ bool is_dense
 >点云的单帧数据量很大,如果使用分布式网络传输,需要考虑能否满足数据的传输要求,或者针对数据进行压缩
 
 *************************
-### 摄像头的标定
+### <center> 摄像头的标定 </center>
+<!--
 ##### 摄像头标定的意义
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">摄像头标定的意义</strong>
+        </strong>
+    </span>
+</p>
 摄像头对光学器件的要求较高,由于摄像头内部与外部的一些原因,生成的物体图像会发生畸形,为了避免数据源造成的误差,需要针对摄像头的参数进行标定.<br>
-<p>安装标定功能包</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;安装</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">标定功能包</span>&nbsp;—</span></strong></p>
+
 ```bash
 sudo apt-get install ros-kinetic-camera-calibration
 ```
+<!--
 ##### 摄像头标定流程
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">摄像头标定流程</strong>
+        </strong>
+    </span>
+</p>
 ```bash
 #启动摄像头
 roslaunch robot_vision usb_cam.launch 
@@ -194,7 +245,21 @@ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.024 image:=/
 <li> <code>image和camera</code>：设置摄像头发布的图像话题</li>
 </ul>
 结果如下:<br>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/%E6%91%84%E5%83%8F%E5%A4%B4.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+<img src="http://pdpv2lxdq.bkt.clouddn.com/%E6%91%84%E5%83%8F%E5%A4%B4.png" alt="机器视觉">
+<!--
+<i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
+-->
+<p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;"><span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);">○ &nbsp;</span><span style="max-width: 100%;color: rgb(136, 136, 136);font-size: 12px;letter-spacing: 1.600000023841858px;background-color: rgb(255, 255, 255);">图片来源：ROS理论与实践_5:机器人感知</span>
+</span>
+<br>
+</p>
+
+
+
+
 <ul>
 <li> <code>X</code>：标定靶在摄像头视野中的左右移动</li>
 <li> <code>Y</code>：标定靶在摄像头视野中的上下移动</li>
@@ -219,8 +284,18 @@ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.024 image:=/
 
 </launch>
 ```
-
+<!--
 ##### 摄像头使用标定文件
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/3.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">摄像头使用标定文件</strong>
+        </strong>
+    </span>
+</p>
 实例如下(usb_cam_with_calibration.launch):
 ```xml
 <launch>
@@ -240,7 +315,18 @@ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.024 image:=/
 ```
 
 *************************
+<!--
 ### kinect的标定流程
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/4.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">kinect的标定流程</strong>
+        </strong>
+    </span>
+</p>
 ```bash
 #启动kinect
 roslaunch robot_vision freenect.launch 
@@ -252,8 +338,18 @@ rosrun camera_calibration cameracalibrator.py image:=/camera/rgb/image_raw camer
 rosrun camera_calibration cameracalibrator.py image:=/camera/ir/image_raw camera:=/camera/ir --size 8x6 --square 0.024
 
 ```
-
+<!--
 ##### kinect使用标定文件
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/5.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">kinect使用标定文件</strong>
+        </strong>
+    </span>
+</p>
 实例如下(freenect_with_calibration.launch):
 ```xml
 <launch>
@@ -284,17 +380,49 @@ rosrun camera_calibration cameracalibrator.py image:=/camera/ir/image_raw camera
 ```
 
 *************************
-### ROS+OpenCV
+### <center> ROS+OpenCV </center>
+<!--
 ##### OpenCV的概述
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">OpenCV的概述</strong>
+        </strong>
+    </span>
+</p>
 OpenCV(Open Source Computer Vision Library)是基于BSD许可开发的跨平台开源计算机视觉库(Linux,Windows和Mac OS等);由一系列C函数和少量C++类构成,同时提供C++,Python,Ruby,MATLAB等语言的接口;实现了图像处理和计算机视觉方面的很多通用算法,而且对于非商业应用和商业应用都是免费的;可以直接访问硬件摄像头,而且还提供一个简单的GUI系统--highgui.<br>
 <p>安装OpenCV</p>
 ```bash
 sudo apt-get install ros-kinetic-vision-opencv libopencv-dev python-opencv
 ```
 <p>ROS与OpenCV的集成框架</p>
-<img src="http://pdpv2lxdq.bkt.clouddn.com/%E9%9B%86%E6%88%90%E6%A1%86%E6%9E%B6.png" alt="机器视觉"><i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a></i>
-
+<img src="http://pdpv2lxdq.bkt.clouddn.com/%E9%9B%86%E6%88%90%E6%A1%86%E6%9E%B6.png" alt="机器视觉">
+<!--
+<i>Source: <a  target="_blank" rel="external">ROS理论与实践_5:机器人感知</a>
+</i>
+-->
+<p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);box-sizing: border-box !important;word-wrap: break-word !important;"></span>
+    <span style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;"><span style="max-width: 100%;font-size: 10px;color: rgb(110, 194, 201);">○ &nbsp;</span><span style="max-width: 100%;color: rgb(136, 136, 136);font-size: 12px;letter-spacing: 1.600000023841858px;background-color: rgb(255, 255, 255);">图片来源：ROS理论与实践_5:机器人感知</span>
+</span>
+<br>
+</p>
+<!--
 ##### 测试例程
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">测试例程</strong>
+        </strong>
+    </span>
+</p>
 ```bash
 #启动摄像头
 roslaunch robot_vision usb_cam.launch
@@ -308,7 +436,8 @@ rqt_image_view
 
 在`rqt_image_view`中订阅/cv_bridge_image话题,会发现两个界面一样,测试成功<br>
 
-<p>分析cv_bridge_test.py</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;分析</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">cv_bridge_test.py</span>&nbsp;—</span></strong></p>
+
 cv_bridge_test.py代码如下:
 ```python
 #!/usr/bin/env python
@@ -366,8 +495,21 @@ if __name__ == '__main__':
 </ul>
 
 *************************
+<!--
 ##### 人脸识别
-<p>基于Haar特征的级联分类器对象检测算法思路</p>
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/3.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">人脸识别</strong>
+        </strong>
+    </span>
+</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;基于Haar特征的</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">级联分类器对象检测算法思路</span>&nbsp;—</span></strong></p>
+
 <div class="mermaid">
 graph LR;
     图像输入-->灰阶色彩转换;
@@ -376,7 +518,9 @@ graph LR;
     直方图均衡化-->检测人脸;
     检测人脸-->结果输出;
 </div>
-<p>启动人脸识别实例</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;启动</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">人脸识别实例</span>&nbsp;—</span></strong></p>
+
 ```bash
 #启动摄像头
 roslaunch robot_vision usb_cam.launch
@@ -390,7 +534,9 @@ rqt_image_view
 在`rqt_image_view`中订阅/cv_bridge_image话题<br>
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.png" alt="机器视觉">
-<p>人脸识别源码分析</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;人脸识别</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">源码分析</span>&nbsp;—</span></strong></p>
+
 ```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -492,9 +638,20 @@ if __name__ == '__main__':
 <li> <code>ROS图像回调函数</code>：将ROS图像转换成OpenCV的数据格式,然后预处理之后开始调用人脸识别的功能函数,最后把识别结果发布</li>
 <li> <code>人脸识别</code>：调用OpenCV提供的人脸识别接口,与数据库中的人脸特征进行匹配</li>
 </ul>
-
+<!--
 ##### 物体跟踪
-<p>跟踪物体的特征点思路</p>
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/4.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">物体跟踪</strong>
+        </strong>
+    </span>
+</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;跟踪物体</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的特征点思路</span>&nbsp;—</span></strong></p>
+
 <div class="mermaid">
 graph LR;
     图像输入-->特征点采样;
@@ -503,7 +660,8 @@ graph LR;
     特征点估计-->特征点过滤;
     特征点过滤-->结果输出;
 </div>
-<p>启动物体跟踪实例</p>
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;启动</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">物体跟踪实例</span>&nbsp;—</span></strong></p>
+
 ```bash
 #启动摄像头
 roslaunch robot_vision usb_cam.launch
@@ -517,7 +675,9 @@ rqt_image_view
 在`rqt_image_view`中订阅/cv_bridge_image话题<br>
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E7%89%A9%E4%BD%93%E8%B7%9F%E8%B8%AA.png" alt="机器视觉">
-<p>人脸识别源码分析</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;人脸识别</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">源码分析</span>&nbsp;—</span></strong></p>
+
 ```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -606,13 +766,28 @@ if __name__ == '__main__':
 </ul>
 
 *************************
-### 二维码识别
+### <center> 二维码识别 </center>
+<!--
 ##### 摄像头二维码识别
-<p>安装二维码识别功能包</p>
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">摄像头二维码识别</strong>
+        </strong>
+    </span>
+</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;安装</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">二维码识别功能包</span>&nbsp;—</span></strong></p>
+
 ```bash
 sudo apt-get install ros-kinetic-ar-track-alvar
 ```
-<p>创建二维码</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;创建</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">二维码</span>&nbsp;—</span></strong></p>
+
 ```bash
 roscore
 
@@ -623,7 +798,9 @@ rosrun ar_track_alvar createMarker -s 6 5
 ```
 结果如下:
 <img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_1.png" alt="机器视觉"><img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_3.png" alt="机器视觉"><img src="http://pdpv2lxdq.bkt.clouddn.com/MarkerData_5.png" alt="机器视觉">
-<p>二维码识别launch文件</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;二维码识别</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">launch文件</span>&nbsp;—</span></strong></p>
+
 ar_track_camera.launch源代码如下:
 ```xml
 <launch>
@@ -653,7 +830,9 @@ ar_track_camera.launch源代码如下:
 
 </launch>
 ```
-<p>启动二维码识别示例</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;启动</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">二维码识别示例</span>&nbsp;—</span></strong></p>
+
 ```bash
 #启动标定之后的摄像头
 roslaunch robot_vision usb_cam_with_calibration.launch 
@@ -661,12 +840,24 @@ roslaunch robot_vision usb_cam_with_calibration.launch
 #识别二维码
 roslaunch robot_vision ar_track_camera.launch
 ```
-<p>查看识别到的二维码位姿</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;查看</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">识别到的二维码位姿</span>&nbsp;—</span></strong></p>
+
 ```bash
 rostopic echo /ar_pose_marker
 ```
-
+<!--
 ##### kinect二维码识别
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">kinect二维码识别</strong>
+        </strong>
+    </span>
+</p>
 ar_track_kinect.launch源代码如下:
 ```xml
 <launch>
@@ -697,7 +888,9 @@ ar_track_kinect.launch源代码如下:
 
 </launch>
 ```
-<p>启动二维码识别示例</p>
+
+<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;启动</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">二维码识别示例</span>&nbsp;—</span></strong></p>
+
 ```bash
 #启动标定之后的摄像头
 roslaunch robot_vision usb_cam_with_calibration.launch 
@@ -706,15 +899,37 @@ roslaunch robot_vision usb_cam_with_calibration.launch
 roslaunch robot_vision ar_track_camera.launch
 ```
 
-### 扩展
+### <center> 扩展 </center>
+<!--
 ##### ORK(Object Recognition Kitchen)
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">ORK(Object Recognition Kitchen)</strong>
+        </strong>
+    </span>
+</p>
 参考网站:<br>
 [object_recognition ros wiki](http://wiki.ros.org/object_recognition) <br>
 [object_recognition](http://agas-ros-pkg.googlecode.com/svn/trunk/object_recognition)  <br>
 [Object Recognition Tutorials](http://wg-perception.github.io/ork_tutorials/index.html#object-recognition-tutorials)  <br>
 [ORK Installation](http://wg-perception.github.io/object_recognition_core/install.html#download-build-from-source)  <br>
 
+<!--
 ##### TensorFlow Obiect Detection API
+-->
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">TensorFlow Obiect Detection API</strong>
+        </strong>
+    </span>
+</p>
 参考:<br>
 [TensorFlow Object Detection API](https://github.com/opencv/opencv/wiki/TensorFlow-Object-Detection-API)
 
