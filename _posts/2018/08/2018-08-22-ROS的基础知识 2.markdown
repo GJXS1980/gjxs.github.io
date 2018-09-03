@@ -16,10 +16,17 @@ tags:
 
 ----------
 *************************
-### launch文件
-##### launch文件概述
-launch文件：通过XML文件实现多节点的配置和启动（可自动启动ROS Master）
-
+### <center> launch文件 </center>
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">launch文件概述</strong>
+        </strong>
+    </span>
+</p>
+<strong>launch文件</strong>：通过XML文件实现多节点的配置和启动（可自动启动`ROS Master`）<br>
 参数设置：
 
 | Name | Usage |
@@ -30,11 +37,26 @@ launch文件：通过XML文件实现多节点的配置和启动（可自动启�
 | ns | 即name_space，命名的空间 | 
 | args | 各种参数的配置 | 
 
-##### launch文件的基本构成
-###### <launch\>标签
-launch文件中的根元素采用<launch\>标签来定义
-
-###### <node\>标签
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">launch文件的基本构成</strong>
+        </strong>
+    </span>
+</p>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;launch&gt;标签 &nbsp;—</span>
+    </strong>
+</p>
+`launch`文件中的根元素采用<launch\>标签来定义<br>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;node&gt;标签 &nbsp;—</span>
+    </strong>
+</p>
 例子：
 ```xml
  <node pkg="package-name" type="executable-name" name="nade-name" />
@@ -46,8 +68,12 @@ launch文件中的根元素采用<launch\>标签来定义
 | type | 节点的可执行文件名称 | 
 | name | 节点运行时的名称 | 
 
-###### <param\>/<rosparam\>标签
-<param\>的例子：
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;param&gt;标签和&lt;rosparam&gt;标签 &nbsp;—</span>
+    </strong>
+</p>
+`&lt;param &gt;`的例子：
 ```xml
 <param name="output_frame" value="odom" />
 ```
@@ -57,7 +83,7 @@ launch文件中的根元素采用<launch\>标签来定义
 | name | 参数名 | 
 | value | 参数值 | 
 
-<rosparam\>的例子：
+`&lt; rosparam &gt;`的例子：
 ```xml
 <rosparam file="params.yaml" command="load" ns="params" />
 ```
@@ -65,8 +91,12 @@ launch文件中的根元素采用<launch\>标签来定义
 
 >说明：<param\>/<rosparam\>标签都属于全局变量
 
-###### <arg\>标签
-<arg\>标签为launch文件内部的局部变量，仅限于launch文件使用
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;arg&gt;标签 &nbsp;—</span>
+    </strong>
+</p>
+`&lt;arg &gt;`标签为launch文件内部的局部变量，仅限于launch文件使用
 ```xml
 <arg name="arg-name" default="arg-value" />
 ```
@@ -81,10 +111,12 @@ launch文件中的根元素采用<launch\>标签来定义
 <param name="foo" value="$(arg arg-name)" />
 <node name="node" pkg="package" type="type" args="$(arg arg-name)" />
 ```
-
-###### <remap\>标签
-<remap\>标签:重映射ROS计算图资源的命名
-
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;remap&gt;标签 &nbsp;—</span>
+    </strong>
+</p>
+`&lt;remap &gt;`标签:重映射ROS计算图资源的命名<br>
 例子：
 ```xml
 <remap from="/turtlebot/cmd_vel" to="/cmd_vel" />
@@ -97,37 +129,39 @@ launch文件中的根元素采用<launch\>标签来定义
 
 >说明：重映射之后"/turtlebot/cmd_vel"将不存在，所有"/turtlebot/cmd_vel"的资源都改为"/cmd_vel"路径
 
-###### <include\>标签
-<include\>标签:包含其他launch文件，类似C语言中的头文件包含。
-
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;include&gt;标签 &nbsp;—</span>
+    </strong>
+</p>
+`&lt;include&gt;`标签:包含其他launch文件，类似C语言中的头文件包含。<br>
 例子：
 ```xml
 <include file="$(dirname)/other.launch" />
 ```
 
-file:包含的其他launch文件路径
-
-其他的标签用法参照[1]
+`file`:包含的其他launch文件路径<br>
+其他的标签用法参照[1]<br>
 
 *************************
-### TF坐标变换
-##### TF坐标变换概述
-TF功能包的作用：
-
-(1)TF功能包可以保留五秒钟内机器人的坐标系相当于全局坐标系的相对位置(关系)
-
-(2)TF功能包可以计算机器人夹取的物体相当于机器人中心坐标系的位置
-
-(3)TF功能包可以计算机器人中心坐标系相当于全局坐标系的位置
-
-TF进行变换的两种方式：
-
-广播TF变换
-
-监听TF变换
-
-
-TF相关的功能包：
+### <center> TF坐标变换 </center>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; TF坐标变换概述 &nbsp;—</span>
+    </strong>
+</p>
+<strong>TF功能包的作用：</strong>
+<ul>
+<li>TF功能包可以保留五秒钟内机器人的坐标系相当于全局坐标系的相对位置(关系)</li>
+<li>TF功能包可以计算机器人夹取的物体相当于机器人中心坐标系的位置</li>
+<li>TF功能包可以计算机器人中心坐标系相当于全局坐标系的位置</li>
+</ul>
+<strong>TF进行变换的两种方式：</strong>
+<ul>
+<li>广播TF变换</li>
+<li>监听TF变换</li>
+</ul>
+<strong>TF相关的功能包：</strong>
 ```bash
 #小海龟跟随实验
 sudo apt-get install ros-kinetic-turtle-tf
@@ -139,15 +173,15 @@ rosrun tf view_frames
 rosrun tf tf_echo turtle1 turtle2
 rosrun rviz rviz -d `rospack find turtle_tf` /rviz/turtle_rviz.rviz
 ```
-
-##### 实现一个TF广播器
-(1)定义TF广播器(TransformBroadcaster)
-
-(2)创建坐标变换值
-
-(3)发布坐标变换(sendTransform)
-
-实例(turtle_tf_broadcaster.cpp):
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 实现一个TF广播器 &nbsp;—</span>
+    </strong>
+</p>
+<strong>(1)定义TF广播器(TransformBroadcaster)</strong><br>
+<strong>(2)创建坐标变换值</strong><br>
+<strong>(3)发布坐标变换(sendTransform)</strong><br>
+实例(`turtle_tf_broadcaster.cpp`):
 ```cpp
 #include <ros/ros.h>
 
@@ -198,13 +232,14 @@ int main(int argc, char** argv)
     return 0;
 };
 ```
-
-##### 实现一个TF监听器
-(1)定义TF监听器(TransformListener)
-
-(2)查找坐标变换(waitForTransform、 lookupTransform)
-
-实例(turtle_tf_listener.cpp):
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; TF监听器 &nbsp;—</span>
+    </strong>
+</p>
+<strong>(1)定义TF监听器(TransformListener)</strong><br>
+<strong>(2)查找坐标变换(waitForTransform、 lookupTransform)</strong><br>
+实例(`turtle_tf_listener.cpp`):
 ```cpp
 #include <ros/ros.h>
 
@@ -273,13 +308,14 @@ int main(int argc, char** argv)
     return 0;
 };
 ```
-
-##### 编译代码
-(1)设置需要编译的代码和生成的可执行文件
-
-(2)设置链接库
-
-实例(cmakelists.txt)如下:
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 编译代码 &nbsp;—</span>
+    </strong>
+</p>
+<strong>(1)设置需要编译的代码和生成的可执行文件</strong><br>
+<strong>(2)设置链接库</strong><br>
+实例(`cmakelists.txt`)如下:
 ```cmake
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
@@ -294,8 +330,7 @@ target_link_libraries(turtle_tf_broadcaster ${catkin_LIBRARIES})
 add_executable(turtle_tf_listener src/turtle_tf_listener.cpp)
 target_link_libraries(turtle_tf_listener ${catkin_LIBRARIES})
 ```
-
-实例(package.xml)如下:
+实例(`package.xml`)如下:
 ```xml
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>geometry_msgs</build_depend>
@@ -313,9 +348,12 @@ target_link_libraries(turtle_tf_listener ${catkin_LIBRARIES})
   <exec_depend>tf</exec_depend>
   <exec_depend>turtlesim</exec_depend>
 ```
-
-##### 编写launch文件
-实例(start_demo_with_listener.launch)如下：
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 编写launch文件 &nbsp;—</span>
+    </strong>
+</p>
+实例(`start_demo_with_listener.launch`)如下：
 ```xml
  <launch>
     <!-- 海龟仿真器 -->
@@ -336,20 +374,19 @@ target_link_libraries(turtle_tf_listener ${catkin_LIBRARIES})
 
  </launch>
 ```
-运行launch文件启动小海龟跟随例程：
+运行`launch`文件启动小海龟跟随例程：
 ```bash
 roslaunch learning_tf start_demo_with_listener.launch
 ```
 
-
 *************************
->参考链接
->
->[1] http://wiki.ros.org/roslaunch/XML
-
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);text-align: left;">
+    <span style="letter-spacing: 1.600000023841858px;color: rgb(136, 136, 136);font-size: 12px;">参考链接：</span>
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);text-align: left;">
+    <span style="letter-spacing: 1.600000023841858px;color: rgb(136, 136, 136);font-size: 12px;">[1]&nbsp;http://wiki.ros.org/roslaunch/XML</span>
+</p>
 *************************
-
-
 <style>
     .left-bottom .github-fork-ribbon {
         background-color: #DC143C;
