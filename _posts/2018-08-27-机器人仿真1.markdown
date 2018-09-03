@@ -95,3 +95,20 @@ rosrun rviz rviz -d `rospack find rbx1_nav`/amcl.rviz
 ```
 
 *************************
+
+
+
+<style>
+    .left-bottom .github-fork-ribbon {
+        background-color: #090;
+    }
+</style>
+
+
+<div class="github-fork-ribbon-wrapper left-bottom hidden-xs">
+    <div class="github-fork-ribbon">
+        <a href="https://github.com/GJXS1980/SLXY_lesson_code/tree/master/lesson03">Fork me on GitHub</a>
+    </div>
+</div>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
