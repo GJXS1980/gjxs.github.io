@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "ROS NOTE 8"
-subtitle:     "机器视觉"
+subtitle:     "机器语音"
 date:         2018-09-01 22:54:00
 author:       "G.J.先生"
 header-img:   "img/in-post/2018.09/01/voice.jpg"
@@ -56,14 +56,11 @@ graph LR;
 
 
 
-
-
 <style>
     .left-bottom .github-fork-ribbon {
-        background-color: #090;
+        background-color: #DC143C;
     }
 </style>
-
 
 <div class="github-fork-ribbon-wrapper left-bottom hidden-xs">
     <div class="github-fork-ribbon">
