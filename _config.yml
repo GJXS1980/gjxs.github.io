@@ -53,15 +53,12 @@ kramdown:
 # livere_uid: MTAyMC8zNzIzMy8xMzc2Nw==
 
 gitalk:
+    enable: true
     owner: GJXS1980
-    repo: GJXS BLOG
+    repo: gjxs.github.io
     clientID: 1dfc451dbcd44e33b3f8
     clientSecret: ccdbba5c57dbd361e063865df45c69db3a0d253a
-
-
-
-
-
+    admin: GJXS1980
 
 # ---------------- #
 #      Search      #
@@ -71,8 +68,6 @@ simple_jekyll_search:
     fulltext: false
     # 最多显示多少条搜索结果
     limit: 10
-
-
 
 # Analytics settings
 # Baidu Analytics
