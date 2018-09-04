@@ -180,7 +180,7 @@ tags:
 </ul>
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;第四步:</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">添加gazebo控制器插件</span>&nbsp;—</span></strong>
 </p>
-gazebo控制器插件的作用相当于驱动板
+`gazebo控制器插件`的作用相当于`驱动板`.
 ```xml
         <!-- controller -->
         <gazebo>
@@ -228,7 +228,7 @@ gazebo控制器插件的作用相当于驱动板
 </p>
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;在gazebo中</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">加载机器人模型</span>&nbsp;—</span></strong>
 </p>
-例如(view_mbot_gazebo_empty_world.launch):
+例如(`view_mbot_gazebo_empty_world.launch`):
 ```xml
 <launch>
     <!-- 设置launch文件的参数 -->
@@ -273,8 +273,12 @@ gazebo控制器插件的作用相当于驱动板
 >为保证模型顺利加载,建议提前将[模型文件库](https://bitbucket.org/osrf/gazebo_models/downloads/)下载并放置到<code>~/.gazebo/models </code>下
 
 <li> 第二种方法：使用Building Editor </li>
-点击edit下的Building Editor开始绘物理环境<br>
-<p>开始仿真</p>
+点击`edit`下的`Building Editor`开始绘物理环境<br>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 开始仿真 &nbsp;—</span>
+    </strong>
+</p>
 <li> 启动仿真环境 </li>
 ```bash
 roslaunch mbot_gazebo view_mbot_gazebo_play_ground.launch
@@ -294,7 +298,7 @@ roslaunch mbot_teleop mbot_teleop.launch
 </p>
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;摄像头</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">仿真</span>&nbsp;—</span></strong>
 </p>
-实例(camera_gazebo.xacro)如下:
+实例(`camera_gazebo.xacro`)如下:
 ```xml
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="camera">
@@ -370,11 +374,11 @@ roslaunch mbot_teleop mbot_teleop.launch
 </robot>
 ```
 <ul>
-<li> <sensor\>标签：描述传感器</li> 
+<li> &lt;sensor&gt;标签：描述传感器</li> 
  type:传感器类型,camera<br>
  name:摄像头命名,自由设置<br>
-<li> <camera\>标签：描述摄像头参数,包括分辨率,编码格式,图像范围,噪音参数等</li>
-<li> <plugin\>标签：加载摄像头仿真插件(libgazebo_ros_camera.so),设置插件的命名空间,发布图像的话题'参考坐标系等</li>
+<li> &lt;camera&gt;标签：描述摄像头参数,包括分辨率,编码格式,图像范围,噪音参数等</li>
+<li> &lt;plugin&gt;标签：加载摄像头仿真插件(libgazebo_ros_camera.so),设置插件的命名空间,发布图像的话题'参考坐标系等</li>
 </ul>
 ```bash
 #启动仿真环境
@@ -384,7 +388,7 @@ rqt_image_view
 ```
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;RGB-D摄像头</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">仿真</span>&nbsp;—</span></strong>
 </p>
-实例(kinect_gazebo.xacro)如下:
+实例(`kinect_gazebo.xacro`)如下:
 ```xml
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kinect_camera">
@@ -464,7 +468,7 @@ rosrun rviz rviz
 ```
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;激光雷达</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">仿真</span>&nbsp;—</span></strong>
 </p>
-实例(lidar_gazebo.xacro)如下:
+实例(`lidar_gazebo.xacro`)如下:
 ```xml
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="laser">

@@ -23,7 +23,7 @@ tags:
         <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; URDF文件概述 &nbsp;—</span>
     </strong>
 </p>
-<strong> URDF </strong>：即<code>Unified Robot Description Format</code>,为统一的机器人描述格式，是ROS中一个非常重要的机器人模型描述格式。ROS可以解析文件中使用XML格式描述的机器人模型，同时提供URDF文件的`C++解析器`。<br>
+<strong> URDF </strong>：即<code>Unified Robot Description Format</code>,为统一的机器人描述格式，是ROS中一个非常重要的机器人`模型描述格式`。ROS可以解析文件中使用`XML格式`描述的机器人模型，同时提供URDF文件的`C++解析器`。<br>
 <p style="line-height: 1.75em;text-align: center;">
     <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
         <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;link&gt;标签 &nbsp;—</span>
@@ -373,7 +373,7 @@ rosrun xacro xacro.py mbot.xacro > mbot.urdf
         <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 实例 &nbsp;—</span>
     </strong>
 </p>
-<strong>(mbot.xacro)</strong>
+<strong>(`mbot.xacro`)</strong>
 ```xml
 <?xml version="1.0"?>
 <robot name="arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
@@ -384,7 +384,7 @@ rosrun xacro xacro.py mbot.xacro > mbot.urdf
 
 </robot>
 ```
-<strong>(mbot_base.xacro)</strong>
+<strong>(`mbot_base.xacro`)</strong>
 ```xml
 <?xml version="1.0"?>
 <robot name="mbot" xmlns:xacro="http://www.ros.org/wiki/xacro">

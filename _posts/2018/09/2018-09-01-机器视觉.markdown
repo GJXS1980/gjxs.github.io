@@ -91,7 +91,6 @@ uint8[] data
 <li> <code>format</code>：图像的压缩编码格式(jpeg,png,bmp)</li>
 <li> <code>data</code>：存储图像数据数组</li>
 </ul>
-
 <p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
 </p>
 <p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
@@ -103,7 +102,7 @@ uint8[] data
 </p>
 
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;安装</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">kinect驱动</span>&nbsp;—</span></strong></p>
-以kinect v1为例:<br>
+以`kinect v1`为例:<br>
 ```bash
 sudo apt-get install ros-kinetic-freenect-*
 
@@ -127,7 +126,7 @@ Publishers:
 
 Subscribers: None
 ```
-话题节点为sensor_msgs/PointCloud2<br>
+话题节点为`sensor_msgs/PointCloud2`<br>
 >其中freenect.launch文件如下:
 
 ```xml
@@ -204,7 +203,7 @@ bool is_dense
         </strong>
     </span>
 </p>
-摄像头对光学器件的要求较高,由于摄像头内部与外部的一些原因,生成的物体图像会发生畸形,为了避免数据源造成的误差,需要针对摄像头的参数进行标定.<br>
+摄像头对光学器件的要求较高,由于摄像头内部与外部的一些原因,生成的物体图像会发生`畸形`,为了避免数据源造成的误差,需要针对`摄像头的参数`进行`标定`.<br>
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;安装</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">标定功能包</span>&nbsp;—</span></strong></p>
 
 ```bash
@@ -247,7 +246,7 @@ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.024 image:=/
 <li> <code>Size</code>：标定靶在摄像头视野中的前后移动</li>
 <li> <code>Skew</code>：标定靶在摄像头视野中的倾斜转动</li>
 </ul>
-标定的结果保存路径:`/tmp/calibrationdata.tar.gz`
+标定的结果`保存路径`:`/tmp/calibrationdata.tar.gz`
 
 >其中`usb_cam.launch`如下:
 
@@ -274,7 +273,7 @@ rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.024 image:=/
         </strong>
     </span>
 </p>
-实例如下(usb_cam_with_calibration.launch):
+实例如下(`usb_cam_with_calibration.launch`):
 ```xml
 <launch>
 
@@ -322,7 +321,7 @@ rosrun camera_calibration cameracalibrator.py image:=/camera/ir/image_raw camera
         </strong>
     </span>
 </p>
-实例如下(freenect_with_calibration.launch):
+实例如下(`freenect_with_calibration.launch`):
 ```xml
 <launch>
 
@@ -362,12 +361,20 @@ rosrun camera_calibration cameracalibrator.py image:=/camera/ir/image_raw camera
         </strong>
     </span>
 </p>
-OpenCV(Open Source Computer Vision Library)是基于BSD许可开发的跨平台开源计算机视觉库(Linux,Windows和Mac OS等);由一系列C函数和少量C++类构成,同时提供C++,Python,Ruby,MATLAB等语言的接口;实现了图像处理和计算机视觉方面的很多通用算法,而且对于非商业应用和商业应用都是免费的;可以直接访问硬件摄像头,而且还提供一个简单的GUI系统--highgui.<br>
-<p>安装OpenCV</p>
+<strong>OpenCV(Open Source Computer Vision Library)</strong>是基于`BSD许可`开发的跨平台`开源计算机视觉库`(Linux,Windows和Mac OS等);由一系列`C函数`和`少量C++类`构成,同时提供C++,Python,Ruby,MATLAB等语言的接口;实现了`图像处理和计算机视觉方面的很多通用算法`,而且对于非商业应用和商业应用都是`免费`的;可以直接访问硬件摄像头,而且还提供一个简单的`GUI系统--highgui`.<br>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  安装OpenCV &nbsp;—</span>
+    </strong>
+</p>
 ```bash
 sudo apt-get install ros-kinetic-vision-opencv libopencv-dev python-opencv
 ```
-<p>ROS与OpenCV的集成框架</p>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; ROS与OpenCV的集成框架 &nbsp;—</span>
+    </strong>
+</p>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E9%9B%86%E6%88%90%E6%A1%86%E6%9E%B6.png" alt="机器视觉">
 <p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
     <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
@@ -396,11 +403,11 @@ rosrun robot_vision cv_bridge_test.py
 rqt_image_view
 ```
 
-在`rqt_image_view`中订阅/cv_bridge_image话题,会发现两个界面一样,测试成功<br>
+在`rqt_image_view`中订阅`/cv_bridge_image`话题,会发现两个界面一样,测试成功<br>
 
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;分析</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">cv_bridge_test.py</span>&nbsp;—</span></strong></p>
 
-cv_bridge_test.py代码如下:
+`cv_bridge_test.py`代码如下:
 ```python
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -490,7 +497,7 @@ roslaunch robot_vision face_detector.launch
 #启动ROS下的QT图像化界面
 rqt_image_view 
 ```
-在`rqt_image_view`中订阅/cv_bridge_image话题<br>
+在`rqt_image_view`中订阅`/cv_bridge_image`话题<br>
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB.png" alt="机器视觉">
 
@@ -629,7 +636,7 @@ roslaunch robot_vision motion_detector.launch
 #启动ROS下的QT图像化界面
 rqt_image_view 
 ```
-在`rqt_image_view`中订阅/cv_bridge_image话题<br>
+在`rqt_image_view`中订阅`/cv_bridge_image`话题<br>
 结果如下:<br>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/%E7%89%A9%E4%BD%93%E8%B7%9F%E8%B8%AA.png" alt="机器视觉">
 
@@ -755,7 +762,7 @@ rosrun ar_track_alvar createMarker -s 6 5
 
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;二维码识别</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">launch文件</span>&nbsp;—</span></strong></p>
 
-ar_track_camera.launch源代码如下:
+`ar_track_camera.launch`源代码如下:
 ```xml
 <launch>
 
@@ -809,7 +816,7 @@ rostopic echo /ar_pose_marker
         </strong>
     </span>
 </p>
-ar_track_kinect.launch源代码如下:
+`ar_track_kinect.launch`源代码如下:
 ```xml
 <launch>
 

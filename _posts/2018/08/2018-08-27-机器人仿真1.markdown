@@ -19,7 +19,7 @@ tags:
 ----------
 *************************
 ### <center> ArbotiX功能包的概述 </center>
-ArbotiX是一款控制电机、舵机的硬件控制板。<br>
+`ArbotiX`是一款控制电机、舵机的`硬件控制板`。<br>
 <ul>
 <li> 提供相应的ROS功能包；</li>
 <li> 提供了一个差速控制器，通过接收速度控制指令，更新机器人的里程计状态。 </li>
@@ -29,7 +29,7 @@ ArbotiX是一款控制电机、舵机的硬件控制板。<br>
 ### <center> 配置ArbotiX控制器 </center>
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;创建</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">launch文件</span>&nbsp;—</span></strong>
 </p>
-launch文件(arbotix_mbot_with_camera_xacro.launch)代码如下：
+launch文件(`arbotix_mbot_with_camera_xacro.launch`)代码如下：
 ```xml
 <launch>
     <arg name="model" default="$(find xacro)/xacro --inorder '$(find mbot_description)/urdf/xacro/mbot_with_camera.xacro'" />
@@ -58,7 +58,7 @@ launch文件(arbotix_mbot_with_camera_xacro.launch)代码如下：
 ```
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;创建</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">配置文件</span>&nbsp;—</span></strong>
 </p>
-配置文件(fake_mbot_arbotix.yaml)如下：<br>
+配置文件(`fake_mbot_arbotix.yaml`)如下：<br>
 ```yaml
 controllers: {
    base_controller: {
