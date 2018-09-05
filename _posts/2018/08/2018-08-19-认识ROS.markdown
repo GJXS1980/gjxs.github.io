@@ -1,6 +1,6 @@
 ---
 layout:       post
-title:        " ROS NOTE 1 "
+title:        "ROS NOTE 1"
 subtitle:     "认识ROS"
 date:         2018-08-19 23:25:00
 author:       "G.J.先生"
