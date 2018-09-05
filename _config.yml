@@ -55,7 +55,7 @@ kramdown:
 gitalk:
     enable: true
     owner: GJXS1980
-    repo: gjxs.github.io
+    repo: Blog_Comments
     clientID: 1dfc451dbcd44e33b3f8
     clientSecret: ccdbba5c57dbd361e063865df45c69db3a0d253a
     admin: GJXS1980
