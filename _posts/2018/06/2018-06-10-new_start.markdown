@@ -16,12 +16,18 @@ tags:
 
 <!-- Chinese Version -->
 <div class="zh post-container">
-    {% capture about_zh %}{% include posts/2018.06/10/zh.md %}{% endcapture %}
+    {% include /posts/zh_en/2018/06/zh.md %}
+    <!--
+    {% capture about_zh %}{% include /posts/zh_en/2018/06/zh.md %}{% endcapture %}
     {{ about_zh | markdownify }}
+    -->
 </div>
 
 <!-- English Version -->
 <div class="en post-container">
-    {% capture about_en %}{% include posts/2018.06/10/en.md %}{% endcapture %}
+    {% include /posts/zh_en/2018/06/en.md %}
+    <!--
+    {% capture about_en %}{% include /posts/zh_en/2018/06/en.md %}{% endcapture %}
     {{ about_en | markdownify }}
+    -->
 </div>
