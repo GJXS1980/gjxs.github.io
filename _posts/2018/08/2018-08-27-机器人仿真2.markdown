@@ -228,6 +228,15 @@ tags:
 </p>
 <p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;在gazebo中</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">加载机器人模型</span>&nbsp;—</span></strong>
 </p>
+为了保证模型顺利加载,要提前将模型文件库放置到`~/.gazebo/models`:
+```bash
+cd ~/.gazebo/models
+wget https://bitbucket.org/osrf/gazebo_models/get/9533d5559309.zip
+unzip 9533d5559309.zip && rm -rf 9533d5559309.zip
+cp -r  ~/.gazebo/models/osrf-gazebo_models-9533d5559309/* ~/.gazebo/models/
+rm -rf ~/.gazebo/models/osrf-gazebo_models-9533d5559309
+```
+<code>加载自己创建的机器人模型 </code><br>
 例如(`view_mbot_gazebo_empty_world.launch`):
 ```xml
 <launch>
