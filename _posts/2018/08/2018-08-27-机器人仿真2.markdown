@@ -233,8 +233,7 @@ tags:
 cd ~/.gazebo/models
 wget https://bitbucket.org/osrf/gazebo_models/get/9533d5559309.zip
 unzip 9533d5559309.zip && rm -rf 9533d5559309.zip
-cp -r  ~/.gazebo/models/osrf-gazebo_models-9533d5559309/* ~/.gazebo/models/
-rm -rf ~/.gazebo/models/osrf-gazebo_models-9533d5559309
+cp -r  ~/.gazebo/models/osrf-gazebo_models-9533d5559309/* ~/.gazebo/models/ && rm -rf ~/.gazebo/models/osrf-gazebo_models-9533d5559309
 ```
 <code>加载自己创建的机器人模型 </code><br>
 例如(`view_mbot_gazebo_empty_world.launch`):
