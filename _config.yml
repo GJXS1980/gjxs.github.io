@@ -78,6 +78,10 @@ simple_jekyll_search:
 ga_track_id: 'UA-120526213-1'            # Format: UA-xxxxxx-xx
 ga_domain: auto
 
+# Baidu Analytics
+baidu_analytics: 'f449fbb4d143d156c197d3a7a38a779d'
+
+
 
 
 # Sidebar settings
