@@ -67,12 +67,12 @@ mkdir -p ~/QQ
 cd ~/QQ
 #Wine-QQ下载
 wget https://yun.tzmm.com.cn/index.php/s/XRbfi6aOIjv5gwj/download -O QQ.AppImage
-<br>
 #Wine-TIM下载
 wget https://yun.tzmm.com.cn/index.php/s/5hJNzt2VR9aIEF2/download -O TIM.AppImage
 
 svn co https://github.com/GJXS1980/QQ_wechat/trunk/QQ/icon
 ```
+
 2.给每个安装包权限
 ```bash
 cd ~/QQ
