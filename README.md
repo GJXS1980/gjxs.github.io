@@ -86,3 +86,5 @@ document.body.addEventListener('input', POWERMODE);
 <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 ```
 
+##### (5)显示站点总访问量
+具体教程参考:[不蒜子](http://ibruce.info/2015/04/04/busuanzi/)
