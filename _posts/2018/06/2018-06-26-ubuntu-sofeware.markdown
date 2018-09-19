@@ -67,8 +67,10 @@ mkdir -p ~/QQ
 cd ~/QQ
 #Wine-QQ下载
 wget https://yun.tzmm.com.cn/index.php/s/XRbfi6aOIjv5gwj/download -O QQ.AppImage
+
 #Wine-TIM下载
 wget https://yun.tzmm.com.cn/index.php/s/5hJNzt2VR9aIEF2/download -O TIM.AppImage
+
 svn co https://github.com/GJXS1980/QQ_wechat/trunk/QQ/icon
 ```
 2.给每个安装包权限
@@ -86,7 +88,7 @@ gksudo gedit /usr/share/applications/QQ.desktop
 sudo apt-get install gksu
 ```
 在新建的QQ.desktop中添加下面内容,其中xxxx为你电脑终端的名字
-```bash
+```desktop
 [Desktop Entry]
 Name=QQ
 Encoding=UTF-8
@@ -106,7 +108,7 @@ gksudo gedit /usr/share/applications/TIM.desktop
 sudo apt-get install gksu
 ```
 在新建的TIM.desktop中添加下面内容,其中xxxx为你电脑终端的名字
-```bash
+```desktop
 [Desktop Entry]
 Name=TIM
 Encoding=UTF-8
@@ -142,7 +144,7 @@ gksudo gedit /usr/share/applications/wechat.desktop
 sudo apt-get install gksu
 ```
 将下面内容复制到打开的wechat.desktop文件中(其中xxxx为你电脑终端的名字)：
-```bash
+```desktop
 [Desktop Entry]
 Name=wechat
 Encoding=UTF-8
