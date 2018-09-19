@@ -67,7 +67,7 @@ mkdir -p ~/QQ
 cd ~/QQ
 #Wine-QQ下载
 wget https://yun.tzmm.com.cn/index.php/s/XRbfi6aOIjv5gwj/download -O QQ.AppImage
-
+<br>
 #Wine-TIM下载
 wget https://yun.tzmm.com.cn/index.php/s/5hJNzt2VR9aIEF2/download -O TIM.AppImage
 
