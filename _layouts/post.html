@@ -13,7 +13,7 @@ layout: default
   <script src="../../../../js/gitalk.min.js"></script>
 
 
-<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+<link href="/css/reward.css?v=6.2.0" rel="stylesheet" type="text/css" />
 
   <!--
 <script type="text/javascript" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>　
@@ -86,18 +86,10 @@ layout: default
 
 
 
-
-
-
-
-
-
-
-
-
-      <div>
+                 <!-- 打赏功能 -->
+    <div>
         <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>☛看官，求打赏☚</div>
+  <div>☛看官，文章还行吧☚</div>
   <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
     <span>打赏</span>
   </button>
@@ -126,15 +118,31 @@ layout: default
  
  
 
+            <!--  上一篇或者下一篇post按钮 -->
+                <ul class="pager">
+                    {% if page.previous.url %}
+                    <li class="previous">
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                        Previous<br>
+                        <span>{{page.previous.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page.next.url %}
+                    <li class="next">
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                        Next<br>
+                        <span>{{page.next.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+              
 
 
 
 
-
-
-
-
-
+            <!--   评论接口    -->
 
                 {% if site.duoshuo_share and site.duoshuo_username %}
 
@@ -312,5 +320,5 @@ layout: default
 
 
    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
-   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/anime.min.js"></script> 
    <script type="text/javascript" src="/js/src/fireworks.js"></script>
