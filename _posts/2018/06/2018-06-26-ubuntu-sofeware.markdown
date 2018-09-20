@@ -46,14 +46,15 @@ rm -rf cd ~/sogoupinyin
 ### 2.浏览器
 ----------
 ##### chrome
-(1)到[官网](https://www.google.cn/chrome/browser/desktop/index.html)下载安装包
-
+(1)下载安装包
+```bash
+mkdir -p ~/google && cd ~/google
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+```
 (2)安装
 ```bash
-#如果显示缺少依赖，输入下面的命令行安装依赖：
-sudo apt-get install libnss3
-#安装
-sudo dpkg -i <软件名.deb>
+cd ~/google
+sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
 *****
