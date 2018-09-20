@@ -82,8 +82,31 @@ layout: default
                 <hr style="visibility: hidden;">
 
                  <!-- 打赏功能 -->
-                {% include dashang.html %}
+                       <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>☛看官，求打赏☚</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏一个呗</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/payimg/weipayimg.jpg" alt="GJXS 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/payimg/alipayimg.jpg" alt="GJXS 支付宝"/>
+        <p>支付宝</p>
+      </div>                
+
+                 <!-- 打赏功能 -->
+            <!--    {% include dashang.html %}   -->
                 {% if site.duoshuo_share and site.duoshuo_username %}
+
                 <!-- 多说 Share start -->
                 </style>
                 <div class="ds-share"
