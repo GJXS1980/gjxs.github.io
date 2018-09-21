@@ -1,9 +1,4 @@
 /* normalize.css v3.0.2 | MIT License | git.io/normalize */
-html {
-  font-family: sans-serif; /* 1 */
-  -ms-text-size-adjust: 100%; /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-}
 
 
 #rewardButton {
@@ -20,8 +15,8 @@ html {
 }
 #rewardButton span {
   display: inline-block;
-  width: 80px;
-  height: 35px;
+  width: 100px;
+  height: 30px;
   border-radius: 5px;
   color: #fff;
   font-weight: 400;
@@ -29,7 +24,7 @@ html {
   font-variant: normal;
   font-stretch: normal;
   font-size: 18px;
-  font-family: "Microsoft Yahei";
+  font-family: "KaiTi";
   background: #f44336;
 }
 #rewardButton span:hover {
