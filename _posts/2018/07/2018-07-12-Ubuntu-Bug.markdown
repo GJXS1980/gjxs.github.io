@@ -95,6 +95,23 @@ vim /etc/fstab
 重启，问题修复
 
 *****
+##### BUG5:g++: internal compiler error: Killed (program cc1plus)
+###### 问题描述 
+g++: internal compiler error: Killed (program cc1plus)<br>
+Please submit a full bug report,
+###### 解决方法
+主要原因大体上是因为内存不足,有点坑 临时使用交换分区来解决吧
+```
+sudo dd if=/dev/zero of=/swapfile bs=64M count=16
+sudo mkswap /swapfile
+sudo swapon /swapfile
+
+sudo swapoff /swapfile
+sudo rm /swapfile
+```
+
 >参考链接：[无法获得锁/var/lib/dpkg/lock - open (11: 资源暂时不可用)的解决方案](https://blog.csdn.net/zkp0601/article/details/41349253)
+
+[解决: g++: internal compiler error: Killed (program cc1plus)](http://vb2005xu.iteye.com/blog/2171295)
 
 *****

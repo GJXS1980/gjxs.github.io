@@ -123,12 +123,34 @@ chmod +x autoconfig_openwrt.sh
 ### 救砖教程
 意外：[救砖教程](https://github.com/GJXS1980/OpenWrt/tree/master/reset)
 
+### openwrt-SDK安装与配置
+OpenWrt-SDK官网:[OpenWrt-SDK](https://archive.openwrt.org/chaos_calmer/15.05/ramips/mt7628/)
+
+其他路由器[chaos_calmer/15.05](https://archive.openwrt.org/chaos_calmer/15.05/)
+
+配置教程
+```bash
+#解压文件夹
+tar xjf OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
+cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64/
+
+#安装 
+feeds ./scripts/feeds update packages 
+./scripts/feeds install libpcre
+
+```
+
+##### 编译
+```
+make package/xx/compile V=99
+```
+
 *************************
 
 >参考链接
 >
 >1.[极路由2刷OpenWrt的折腾之路](https://www.levey.cn/352.html)
 >
->
+>2. [Ubuntu 使用Openwrt SDK交叉编译ipk包过程全纪录(超多图)](https://blog.csdn.net/lvshaorong/article/details/52931211)
 
 *************************
