@@ -206,20 +206,6 @@ cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
 +hide-user-agent{Mozilla/5.0 (X11; Linux x86_64)} \
 +hide-user-agent{Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0)} \
 
-########################    others    ########################################
-+hide-user-agent{Mozilla/4.0} \
-+hide-user-agent{VLC/2.2.8 LibVLC/2.2.8} \
-+hide-user-agent{Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)} \
-+hide-user-agent{Microsoft-CryptoAPI/10.0} \
-+hide-user-agent{Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)} \
-+hide-user-agent{Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)} \
-+hide-user-agent{Mozilla/4.0 (compatible; MSIE 9.11; Windows NT 6.2; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; InfoPath.3; Creative AutoUpdate v1.41.09; .TDCH 5.0;)} \
-+hide-user-agent{MicroMessenger Client} \
-+hide-user-agent{Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)} \
-+hide-user-agent{%E6%89%8B%E6%9C%BA%E6%B7%98%E5%AE%9D/10585262 CFNetwork/974.2.1 Darwin/18.0.0} \
-+hide-user-agent{WiFi%E4%B8%87%E8%83%BD%E9%92%A5%E5%8C%99/190 CFNetwork/974.2.1 Darwin/18.0.0} \
-+hide-user-agent{Mozilla/4.0 (compatible; MSIE 5.00; Windows 98)} \
-
 }
 /
 ```
@@ -262,12 +248,5 @@ opkg update
 
 >[2] [使用OpenWrt路由自动修改http请求的UserAgent来躲过移动设备检测](http://www.right.com.cn/forum/thread-249325-1-1.html)
 
->[3] [openwrt之wrtnode学习日记day2](https://blog.csdn.net/daoshuti/article/details/53958343)
-
->[4] [Ubuntu 16.04下配置openWRT开发环境](https://www.jianshu.com/p/453925f82327)
-
->[5] [Ubuntu配置OPENWRT开发环境](https://blog.csdn.net/qq_40010218/article/details/79014107)
-
->[6] [编译OpenWRT过程问题解决](https://yq.aliyun.com/articles/33263)
 
 *************************
