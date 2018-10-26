@@ -65,7 +65,7 @@ cat /proc/cpuinfo
 
 (2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)查找cpu和型号对应的固件，并下载<br>
 以极路由1S HC5661A为例,如下图:<br>
-<img src=/img/in-post/2018.10/26/openwrt/openwrt.png alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/openwrt.png" alt="MQTT Logo"><br>
 ```bash
 #下载固件
 wget http://downloads.openwrt.org/releases/18.06.1/targets/ramips/mt76x8/openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
@@ -103,9 +103,9 @@ opkg install luci-app-dogcom_1.0.2-1_all.ipk
     </strong>
 </p>
 先登录<strong>gdut-drcom client</strong>客户端:<br>
-<img src=/img/in-post/2018.10/26/openwrt/gdut.png alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/gdut.png" alt="MQTT Logo"><br>
 配置<strong>wan</strong>,如下图:
-<img src=/img/in-post/2018.10/26/openwrt/gdut1.png alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/gdut1.png" alt="MQTT Logo"><br>
 最后在<strong>putty终端</strong>下面更新源:
 ```bash
 opkg update
@@ -158,18 +158,18 @@ cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
     </strong>
 </p>
 先进入<strong>软件</strong>选项,如下图:
-<img src=/img/in-post/2018.10/26/openwrt/privoxy1.png alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/privoxy1.png" alt="MQTT Logo"><br>
 下载相应的功能包,如下图:
-<img src=/img/in-post/2018.10/26/openwrt/privoxy2.png alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/privoxy2.png" alt="MQTT Logo"><br>
 <p style="line-height: 1.75em;text-align: center;">
     <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
         <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 配置privoxy &nbsp;—</span>
     </strong>
 </p>
 进入<strong>privoxy</strong>选项,<strong>开启</strong>privoxy网络代理,如下图:
-<img src=/img/in-post/2018.10/26/openwrt/privoxy3.png alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/privoxy3.png" alt="MQTT Logo"><br>
 开启<strong>Accept intercepted requests</strong>选项,如下图:
-<img src=/img/in-post/2018.10/26/openwrt/privoxy4.png alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/privoxy4.png" alt="MQTT Logo"><br>
 <p style="line-height: 1.75em;text-align: center;">
     <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
         <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 获取UserAgent &nbsp;—</span>
@@ -178,7 +178,7 @@ cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
 点击UA查询网站：[useragent](http://www.ip138.com/useragent/) <br>
 在AppleWebKit前面的就是我们想要的UA <br>
 如图所示,</strong>Mozilla/5.0 (X11; Linux x86_64)</strong>即我们要用到的UA
-<img src=/img/in-post/2018.10/26/openwrt/UA.png alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/UA.png" alt="MQTT Logo"><br>
 <p style="line-height: 1.75em;text-align: center;">
     <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
         <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 修改UserAgent &nbsp;—</span>
@@ -189,22 +189,6 @@ cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
 #hide-user-agent
 { \
 +hide-user-agent{Mozilla/5.0 (X11; Linux x86_64)} \
-
-}
-/
-```
-附上常用的UA下代码:
-```
-#hide-user-agent
-{ \
-########################    Windows    ########################################
-+hide-user-agent{Mozilla/5.0 (Windows NT 6.1; WOW64)} \
-+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0)} \
-+hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64)} \
-
-########################    Linux   ########################################
-+hide-user-agent{Mozilla/5.0 (X11; Linux x86_64)} \
-+hide-user-agent{Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0)} \
 
 }
 /
