@@ -65,7 +65,7 @@ cat /proc/cpuinfo
 
 (2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)查找cpu和型号对应的固件，并下载<br>
 以极路由1S HC5661A为例,如下图:<br>
-<img src="/img/in-post/2018.10/26/openwrt/openwrt.png" alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/openwrt.png" alt="MQTT Logo">
 ```bash
 #下载固件
 wget http://downloads.openwrt.org/releases/18.06.1/targets/ramips/mt76x8/openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
@@ -106,6 +106,8 @@ opkg install luci-app-dogcom_1.0.2-1_all.ipk
 <img src="/img/in-post/2018.10/26/openwrt/gdut.png" alt="MQTT Logo"><br>
 配置<strong>wan</strong>,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/gdut1.png" alt="MQTT Logo"><br>
+>说明:311xxxxxxx为自己的学号
+
 最后在<strong>putty终端</strong>下面更新源:
 ```bash
 opkg update
@@ -136,11 +138,7 @@ src-git wrtnode https://github.com/WRTnode/openwrt-packages.git
 ./scripts/feeds install -a
 ```
 其他路由器SDK:[chaos_calmer/15.05](https://archive.openwrt.org/chaos_calmer/15.05/)<br>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 配置教程 &nbsp;—</span>
-    </strong>
-</p>
+<strong>配置教程</strong>:
 ```bash
 #解压文件夹
 tar xjf OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
