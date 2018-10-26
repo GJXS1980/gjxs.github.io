@@ -1,0 +1,274 @@
+---
+layout:       post
+title:        "Drcom P"
+subtitle:     "绕过检测移动设备的一种思路"
+date:         2018-10-27 02:00:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.10/26/laptop.jpg"
+catalog:      true
+tags:
+    - Privoxy
+    - Drcom
+    - OpenWrt
+
+---
+*****
+><strong>Abstract:</strong> "基于Drcom校园网客户端绕过检测移动设备的一种思路及实现方法."<br>                                                                                                                                           
+                                                                        <br /> 
+
+----------
+*************************
+### <center> 准备工作 </center>
+<ul>
+    <li> 路由器联网并安装开发者插件 </li><br>
+    <li> 熟悉WinSCP的使用 </li><br>
+    <li> 熟悉putty登录路由器后台的操作 </li><br>
+</ul>
+
+*************************
+### <center> 刷OpenWrt </center>
+<code>以极路由1S HC5661A为例</code><br>
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">刷解锁版不死U-Root</strong>
+        </strong>
+    </span>
+</p>
+进固件作者网站查找对应[u-boot](http://rssn.cn/roms/uboot/),下载自己路由器对应版本的固件, 以极路由1S HC5661A为例,如下图:<br>
+<img src=/img/in-post/2018.10/26/openwrt/hiwifi.png alt="MQTT Logo"><br>
+
+```bash
+#连上路由器后台，进入tmp目录下
+cd /tmp
+#下载对应版本的U-Root
+wget http://rssn.cn/roms/uboot/HC5661A-uboot.bin
+#安装U-Root
+mtd write HC5661A-uboot.bin u-boot
+
+```
+
+<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
+</p>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">刷OpenWrt固件</strong>
+        </strong>
+    </span>
+</p>
+（1）查看一下路由器CPU的型号，以确定我们要刷什么版本的固件
+```bash
+cat /proc/cpuinfo
+```
+
+(2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)查找cpu和型号对应的固件，并下载<br>
+以极路由1S HC5661A为例,如下图:<br>
+<img src=/img/in-post/2018.10/26/openwrt/openwrt.png alt="MQTT Logo"><br>
+```bash
+#下载固件
+wget http://downloads.openwrt.org/releases/18.06.1/targets/ramips/mt76x8/openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
+
+#刷机
+sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
+```
+等待几分钟，当路由器自动重启说明成功（期间不要断开电源，不然就变砖了）<br>
+
+*************************
+### <center> 安装OpenWrt插件 </center>
+登录路由器后台，网址：<strong>192.168.1.1</strong> 起始密码：<strong>admin</strong> <br>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 安装gdut-drcom客户端 &nbsp;—</span>
+    </strong>
+</p>
+<strong>下载相关的功能包</strong>
+```
+链接：https://pan.baidu.com/s/1EUDXJwbRz9luZ2MsotEIjg#list/path=%2F
+密码：GJXS
+```
+解压将drcom里面的文件用WinSCP传到路由器<strong>tmp</strong>文件夹安装：
+```bash
+cd /tmp
+#安装gdut-drcom客户端
+opkg install gdut-drcom_1.6.8-4_mipsel_24kc.ipk
+#安装dogcom客户端
+opkg install dogcom_v1.6.2-1_mipsel_24kc.ipk
+opkg install luci-app-dogcom_1.0.2-1_all.ipk
+```
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 配置网络 &nbsp;—</span>
+    </strong>
+</p>
+先登录<strong>gdut-drcom client</strong>客户端:<br>
+<img src=/img/in-post/2018.10/26/openwrt/gdut.png alt="MQTT Logo"><br>
+配置<strong>wan</strong>,如下图:
+<img src=/img/in-post/2018.10/26/openwrt/gdut1.png alt="MQTT Logo"><br>
+最后在<strong>putty终端</strong>下面更新源:
+```bash
+opkg update
+```
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 选读 &nbsp;—</span>
+    </strong>
+</p>
+另外，要折腾或者其他路由器的可以自己下载OpenWrt-SDK自己编译
+[OpenWrt-SDK](https://archive.openwrt.org/chaos_calmer/15.05/ramips/mt7628/)
+```bash
+cd openwrt/
+cp feeds.conf.default feeds.conf
+```
+将feeds.conf文件修改如下:
+```bash
+src-git base git://git.openwrt.org/openwrt/openwrt.git;v18.06.1
+src-git packages git://git.openwrt.org/feed/packages.git^35e0b737ab496f5b51e80079b0d8c9b442e223f5
+src-git luci git://git.openwrt.org/project/luci.git^f64b1523447547032d5280fb0bcdde570f2ca913
+src-git routing git://git.openwrt.org/feed/routing.git^1b9d1c419f0ecefda51922a7845ab2183d6acd76
+src-git telephony git://git.openwrt.org/feed/telephony.git^b9d7b321d15a44c5abb9e5d43a4ec78abfd9031b
+src-git wrtnode https://github.com/WRTnode/openwrt-packages.git
+```
+添加软件扩展包:
+```
+./scripts/feeds update -a
+./scripts/feeds install -a
+```
+其他路由器SDK:[chaos_calmer/15.05](https://archive.openwrt.org/chaos_calmer/15.05/)<br>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 配置教程 &nbsp;—</span>
+    </strong>
+</p>
+```bash
+#解压文件夹
+tar xjf OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
+cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64/
+
+# 安装 feeds ./scripts/feeds update packages 
+./scripts/feeds install libpcre
+```
+
+*************************
+### <center> 配置privoxy代理 </center>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 安装privoxy、luci-app-privoxy、luci-i18n-privoxy-zh-cn &nbsp;—</span>
+    </strong>
+</p>
+先进入<strong>软件</strong>选项,如下图:
+<img src=/img/in-post/2018.10/26/openwrt/privoxy1.png alt="MQTT Logo"><br>
+下载相应的功能包,如下图:
+<img src=/img/in-post/2018.10/26/openwrt/privoxy2.png alt="MQTT Logo"><br>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 配置privoxy &nbsp;—</span>
+    </strong>
+</p>
+进入<strong>privoxy</strong>选项,<strong>开启</strong>privoxy网络代理,如下图:
+<img src=/img/in-post/2018.10/26/openwrt/privoxy3.png alt="MQTT Logo"><br>
+开启<strong>Accept intercepted requests</strong>选项,如下图:
+<img src=/img/in-post/2018.10/26/openwrt/privoxy4.png alt="MQTT Logo"><br>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 获取UserAgent &nbsp;—</span>
+    </strong>
+</p>
+点击UA查询网站：[useragent](http://www.ip138.com/useragent/) <br>
+在AppleWebKit前面的就是我们想要的UA <br>
+如图所示,</strong>Mozilla/5.0 (X11; Linux x86_64)</strong>即我们要用到的UA
+<img src=/img/in-post/2018.10/26/openwrt/UA.png alt="MQTT Logo"><br>
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 修改UserAgent &nbsp;—</span>
+    </strong>
+</p>
+每一台设备都经过这样检测,同一台设备在不同浏览器,微信,QQ下点击UA查询网站：[useragent](http://www.ip138.com/useragent/),获取其对应的<strong>UA</strong>,通过WinSCP在<strong>etc/privoxy/default.action</strong>文件后面添加相应UA的hide-user-agent,使用格式如下:
+```
+#hide-user-agent
+{ \
++hide-user-agent{Mozilla/5.0 (X11; Linux x86_64)} \
+
+}
+/
+```
+附上常用的UA下代码:
+```
+#hide-user-agent
+{ \
+########################    Windows    ########################################
++hide-user-agent{Mozilla/5.0 (Windows NT 6.1; WOW64)} \
++hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:62.0)} \
++hide-user-agent{Mozilla/5.0 (Windows NT 10.0; Win64; x64)} \
+
+########################    Linux   ########################################
++hide-user-agent{Mozilla/5.0 (X11; Linux x86_64)} \
++hide-user-agent{Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0)} \
+
+########################    others    ########################################
++hide-user-agent{Mozilla/4.0} \
++hide-user-agent{VLC/2.2.8 LibVLC/2.2.8} \
++hide-user-agent{Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)} \
++hide-user-agent{Microsoft-CryptoAPI/10.0} \
++hide-user-agent{Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)} \
++hide-user-agent{Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)} \
++hide-user-agent{Mozilla/4.0 (compatible; MSIE 9.11; Windows NT 6.2; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; InfoPath.3; Creative AutoUpdate v1.41.09; .TDCH 5.0;)} \
++hide-user-agent{MicroMessenger Client} \
++hide-user-agent{Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)} \
++hide-user-agent{%E6%89%8B%E6%9C%BA%E6%B7%98%E5%AE%9D/10585262 CFNetwork/974.2.1 Darwin/18.0.0} \
++hide-user-agent{WiFi%E4%B8%87%E8%83%BD%E9%92%A5%E5%8C%99/190 CFNetwork/974.2.1 Darwin/18.0.0} \
++hide-user-agent{Mozilla/4.0 (compatible; MSIE 5.00; Windows 98)} \
+
+}
+/
+```
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 使环境生效 &nbsp;—</span>
+    </strong>
+</p>
+```bash
+iptables -t nat -N PrivoxyUA
+
+iptables -t nat -A PREROUTING -i br-lan -p tcp -j PrivoxyUA
+
+iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
+```
+
+*************************
+<p style="line-height: 1.75em;text-align: center;">
+    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
+        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 可能产生的问题 &nbsp;—</span>
+    </strong>
+</p>
+问题1：
+```bash
+ * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
+```
+
+解决方法：
+```bash
+echo "nameserver 114.114.114.114">/tmp/resolv.conf
+rm -f /var/lock/opkg.lock
+opkg update
+
+```
+
+*************************
+
+>参考链接：
+>[1] [Ubuntu 使用Openwrt SDK交叉编译ipk包过程全纪录(超多图)](https://blog.csdn.net/lvshaorong/article/details/52931211)
+
+>[2] [使用OpenWrt路由自动修改http请求的UserAgent来躲过移动设备检测](http://www.right.com.cn/forum/thread-249325-1-1.html)
+
+>[3] [openwrt之wrtnode学习日记day2](https://blog.csdn.net/daoshuti/article/details/53958343)
+
+>[4] [Ubuntu 16.04下配置openWRT开发环境](https://www.jianshu.com/p/453925f82327)
+
+>[5] [Ubuntu配置OPENWRT开发环境](https://blog.csdn.net/qq_40010218/article/details/79014107)
+
+>[6] [编译OpenWRT过程问题解决](https://yq.aliyun.com/articles/33263)
+
+*************************

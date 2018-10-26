@@ -139,11 +139,41 @@ feeds ./scripts/feeds update packages
 ./scripts/feeds install libpcre
 
 ```
+可能出现的错误:
+```
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'r8169-firmware', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'e100-firmware', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'bnx2-firmware', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'ar3k-firmware', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'mwifiex-sdio-firmware', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'kmod-phy-bcm-ns-usb2', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'edgeport-firmware', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'kmod-phy-bcm-ns-usb3', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'prism54-firmware', which does not exist
+WARNING: Makefile 'package/linux/Makefile' has a dependency on 'rtl8192su-firmware', which does not exist
+tmp/.config-package.in:36:warning: ignoring type redefinition of 'PACKAGE_libc' from 'boolean' to 'tristate'
+tmp/.config-package.in:64:warning: ignoring type redefinition of 'PACKAGE_libgcc' from 'boolean' to 'tristate'
+tmp/.config-package.in:149:warning: ignoring type redefinition of 'PACKAGE_libpthread' from 'boolean' to 'tristate'
+```
+
+解决方法:
+```
+
+
+
+```
 
 ##### 编译
 ```
 make package/xx/compile V=99
 ```
+
+
+
+
+
+
+
 
 *************************
 
