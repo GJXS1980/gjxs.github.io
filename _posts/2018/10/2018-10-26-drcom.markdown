@@ -172,7 +172,7 @@ cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
 </p>
 点击UA查询网站：[useragent](http://www.ip138.com/useragent/) <br>
 在AppleWebKit前面的就是我们想要的UA <br>
-如图所示,</strong>Mozilla/5.0 (X11; Linux x86_64)</strong>即我们要用到的UA
+如图所示,<strong>Mozilla/5.0 (X11; Linux x86_64)</strong>即我们要用到的UA
 <img src="/img/in-post/2018.10/26/openwrt/UA.png" alt="MQTT Logo"><br>
 <p style="line-height: 1.75em;text-align: center;">
     <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
@@ -207,17 +207,23 @@ iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
         <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 可能产生的问题 &nbsp;—</span>
     </strong>
 </p>
-问题1：
+<strong>问题1：</strong>
 ```bash
  * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
 ```
-解决方法：
+<strong>解决方法：</strong>
 ```bash
 echo "nameserver 114.114.114.114">/tmp/resolv.conf
 rm -f /var/lock/opkg.lock
 opkg update
 
 ```
+
+<strong>问题2：</strong>如果发现按照这个教程来，还是发现会断线<br>
+<strong>解决方法：</strong>可能是没有找全所有在连设备的UA（同一设备，不同浏览器的UA会不一样），这时候建议看看privoxy的日志，一般都有相关User-Agent显示，再把它们按照教程隐藏就好了,具体操作如下:<br>
+执行<strong>使环境生效</strong>那一步,然后在<strong>Privoxy网络代理<7strong>里面的<strong>日志查看器</strong>,点击<strong>读取/刷新日志文件</strong>,就可以查看具体的日志文件,如下图:
+<img src="/img/in-post/2018.10/26/openwrt/UA1.png" alt="MQTT Logo"><br>
+然后找到相关的<strong>User-Agent</strong>,添加到<strong>etc/privoxy/default.action</strong>文件里面就行了.<br>
 
 *************************
 
