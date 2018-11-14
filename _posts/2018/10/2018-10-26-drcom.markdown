@@ -81,7 +81,7 @@ sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 </p>
 <strong>下载相关的功能包</strong>
 ```
-链接：https://pan.baidu.com/s/1EUDXJwbRz9luZ2MsotEIjg#list/path=%2F
+链接：https://pan.baidu.com/s/1y8nK3zIrW0bX2BD3GUk8Gw
 密码：GJXS
 ```
 解压将drcom里面的文件用WinSCP传到路由器<strong>tmp</strong>文件夹安装：

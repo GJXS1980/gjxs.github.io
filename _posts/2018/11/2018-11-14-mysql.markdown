@@ -1,0 +1,96 @@
+---
+layout:       post
+title:        "Mysql"
+subtitle:     "Ubuntu 安装 Mysql"
+date:         2018-11-14 21:36:00
+author:       "G.J.先生"
+header-img:   "img/in-post/2018.11/14/mysql.png"
+catalog:      true
+tags:
+    - Ubuntu
+    - Mysql
+
+---
+*****
+><strong>Abstract:</strong> "Mysql在Ubuntu下安装及配置的相关教程."<br>                                                                                                                                                                     <br /> 
+
+----------
+*************************
+### <center> 安装Mysql </center>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">1.安装Mysql</strong>
+        </strong>
+    </span>
+</p>
+```bash
+sudo apt-get install mysql-server
+sudo apt-get install mysql-client
+sudo apt-get install libmysqlclient-dev
+```
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">2.检查是否安装成功</strong>
+        </strong>
+    </span>
+</p>
+```bash
+sudo netstat -tap | grep mysql
+```
+
+*************************
+### <center> 修改初始密码 </center>
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">1.修改密码</strong>
+        </strong>
+    </span>
+</p>
+```bash
+sudo gedit /etc/mysql/debian.cnf
+```
+将password修改为自己的password,保存退出
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">2.重启</strong>
+        </strong>
+    </span>
+</p>
+```bash
+sudo service mysql restart
+```
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">3.更新密码</strong>
+        </strong>
+    </span>
+</p>
+```bash
+sudo mysql -u root -p
+#然后使用以下命令更新密码(其中new-password为前面设置的密码)
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'new-password';
+
+#一旦完成stop and start了mysql服务器。
+sudo service mysql stop
+sudo service mysql start
+```
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">4.Mysql 连接测试</strong>
+        </strong>
+    </span>
+</p>
+```bash
+mysql -u root -h localhost -p
+```
+
+*************************
+>参考链接:<br>
+>[1] [ERROR 1698 (28000): Access denied for user 'root'@'localhost'](https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost)
+
