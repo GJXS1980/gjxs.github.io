@@ -157,21 +157,42 @@ tmp/.config-package.in:149:warning: ignoring type redefinition of 'PACKAGE_libpt
 ```
 
 解决方法:
+```bash
+cd openwrt/
+cp feeds.conf.default feeds.conf
+```
+将feeds.conf文件修改如下:
+```bash
+src-git base git://git.openwrt.org/openwrt/openwrt.git;v18.06.1
+src-git packages git://git.openwrt.org/feed/packages.git^35e0b737ab496f5b51e80079b0d8c9b442e223f5
+src-git luci git://git.openwrt.org/project/luci.git^f64b1523447547032d5280fb0bcdde570f2ca913
+src-git routing git://git.openwrt.org/feed/routing.git^1b9d1c419f0ecefda51922a7845ab2183d6acd76
+src-git telephony git://git.openwrt.org/feed/telephony.git^b9d7b321d15a44c5abb9e5d43a4ec78abfd9031b
+src-git wrtnode https://github.com/WRTnode/openwrt-packages.git
+```
+添加软件扩展包:
+```
+./scripts/feeds update -a
+./scripts/feeds install -a
 ```
 
-
-
-```
 
 ##### 编译
 ```
 make package/xx/compile V=99
 ```
 
+问题1:
+```
+/home/gjxs/openwrt_ws/openwrt/include/toplevel.mk:167: recipe for target 'staging_dir/host/.prereq-build' failed
+make: *** [staging_dir/host/.prereq-build] Error 1
+/bin/sh: 3: mkhash: not found
+Collecting package info: done
+/bin/sh: 3: mkhash: not found
+```
 
-
-
-
+解决方法:
+删除GCC，重新安装就好了
 
 
 
@@ -182,5 +203,7 @@ make package/xx/compile V=99
 >1.[极路由2刷OpenWrt的折腾之路](https://www.levey.cn/352.html)
 >
 >2. [Ubuntu 使用Openwrt SDK交叉编译ipk包过程全纪录(超多图)](https://blog.csdn.net/lvshaorong/article/details/52931211)
+>
+>3.[编译OpenWRT过程问题解决](https://yq.aliyun.com/articles/33263)
 
 *************************

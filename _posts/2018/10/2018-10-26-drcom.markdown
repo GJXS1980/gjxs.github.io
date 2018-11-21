@@ -17,11 +17,17 @@ tags:
 
 ----------
 *************************
+### <center> 应用环境 </center>
+<ul>
+    <li> 所有支持OpenWrt固件的路由器 </li><br>
+</ul>
+
 ### <center> 准备工作 </center>
 <ul>
     <li> 路由器联网并安装开发者插件 </li><br>
     <li> 熟悉WinSCP的使用 </li><br>
     <li> 熟悉putty登录路由器后台的操作 </li><br>
+    <li> 熟悉Linux基本命令行的操作 </li><br>
 </ul>
 *************************
 ### <center> 刷OpenWrt </center>
@@ -43,6 +49,8 @@ wget http://rssn.cn/roms/uboot/HC5661A-uboot.bin
 #安装U-Root
 mtd write HC5661A-uboot.bin u-boot
 
+# 如果失败,可以试试下面的命令
+mtd write HC5661A-uboot.bin firmware
 ```
 <p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
     <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
@@ -79,20 +87,50 @@ sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
         </strong>
     </span>
 </p>
-<strong>下载相关的功能包</strong>
-```
-链接：https://pan.baidu.com/s/1y8nK3zIrW0bX2BD3GUk8Gw
-密码：GJXS
-```
+<strong>各个路由器相应版本Drcom下载</strong>
+
+| 路由器版本 | 下载链接 | 密码 |
+| ------ | ------ | ------ |
+| 极路由HC5661、HC5761和HC5861 | [下载链接](https://pan.baidu.com/s/1ytMp8I68P8kmFnAZClKzlA) | GJXS |
+| 极路由HC5661A和HC5861B | [下载链接](https://pan.baidu.com/s/1ytMp8I68P8kmFnAZClKzlA) | GJXS |
+| 极路由HC5962 | [下载链接](https://pan.baidu.com/s/1zCJr8svDtSWaTelHd0U04Q) | GJXS |
+| 极路由HC6361 | [下载链接](https://pan.baidu.com/s/1-yw7wpPJzP2BEtapUAxMXQ) | GJXS |
+| 斐讯K2T | [下载链接](https://pan.baidu.com/s/1IB-clF_PPDRglTjTC_9Lnw) | GJXS |
+| 斐讯K2P | [下载链接](https://pan.baidu.com/s/1xv9xRxeYmFylYjIJJr-J9Q) | GJXS |
+| 斐讯K1-PSG1208、K2-PSG1218和K2G | [下载链接](https://pan.baidu.com/s/1Go9uCW0TmXAa935UBDtQew) | GJXS |
+
+>由于路由器版本太多，可以选择自己编译，或者在评论区留言，提供路由器的型号，我看到会帮你们编译。
+
 解压将drcom里面的文件用WinSCP传到路由器<strong>tmp</strong>文件夹安装：
 ```bash
 cd /tmp
 #安装gdut-drcom客户端
 opkg install gdut-drcom_1.6.8-4_mipsel_24kc.ipk
-#安装dogcom客户端
-opkg install dogcom_v1.6.2-1_mipsel_24kc.ipk
-opkg install luci-app-dogcom_1.0.2-1_all.ipk
 ```
+
+### 其他路由器可以自己下载OpenWrt-SDK自己编译:
+首先进入[OpenWrt 18.06](https://archive.openwrt.org/releases/18.06.0/targets/) <br>
+<img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk0.png" alt="MQTT Logo"><br>
+
+找到自己路由器型号,以极路由HC5661A为例,进入[ramips/mt76x8](https://archive.openwrt.org/releases/18.06.0/targets/ramips/mt76x8/)
+<img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk.png" alt="MQTT Logo"><br>
+找到<code>openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz</code>并下载<br>
+<img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk1.png" alt="MQTT Logo"><br>
+>蓝色框表示SDK支持的路由器型号，红色框为SDK文件
+
+其他路由器SDK:[OpenWrt 18.06](https://archive.openwrt.org/releases/18.06.0/targets/)<br>
+<strong>配置教程</strong>:
+```bash
+#解压文件夹
+tar xjf openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz
+cd ~/openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz/
+#进入package下载软件包
+cd package && git clone https://github.com/GJXS1980/ODP.git
+#编译
+cd .. && make package/ODP/compile
+```
+最后编译完的软件包在<code>/bin/packages/xxxx/base/</code>目录下 <br>
+
 <p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
     <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
         <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
@@ -100,51 +138,11 @@ opkg install luci-app-dogcom_1.0.2-1_all.ipk
         </strong>
     </span>
 </p>
-先登录<strong>gdut-drcom client</strong>客户端:<br>
-<img src="/img/in-post/2018.10/26/openwrt/gdut.png" alt="MQTT Logo"><br>
-配置<strong>wan</strong>,如下图:
-<img src="/img/in-post/2018.10/26/openwrt/gdut1.png" alt="MQTT Logo"><br>
->说明:311xxxxxxx为自己的学号
-
-最后在<strong>putty终端</strong>下面更新源:
-```bash
-opkg update
-```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 选读 &nbsp;—</span>
-    </strong>
-</p>
-另外，要折腾或者其他路由器的可以自己下载OpenWrt-SDK自己编译
-[OpenWrt-SDK](https://archive.openwrt.org/chaos_calmer/15.05/ramips/mt7628/)
-```bash
-cd openwrt/
-cp feeds.conf.default feeds.conf
-```
-将feeds.conf文件修改如下:
-```bash
-src-git base git://git.openwrt.org/openwrt/openwrt.git;v18.06.1
-src-git packages git://git.openwrt.org/feed/packages.git^35e0b737ab496f5b51e80079b0d8c9b442e223f5
-src-git luci git://git.openwrt.org/project/luci.git^f64b1523447547032d5280fb0bcdde570f2ca913
-src-git routing git://git.openwrt.org/feed/routing.git^1b9d1c419f0ecefda51922a7845ab2183d6acd76
-src-git telephony git://git.openwrt.org/feed/telephony.git^b9d7b321d15a44c5abb9e5d43a4ec78abfd9031b
-src-git wrtnode https://github.com/WRTnode/openwrt-packages.git
-```
-添加软件扩展包:
-```
-./scripts/feeds update -a
-./scripts/feeds install -a
-```
-其他路由器SDK:[chaos_calmer/15.05](https://archive.openwrt.org/chaos_calmer/15.05/)<br>
-<strong>配置教程</strong>:
-```bash
-#解压文件夹
-tar xjf OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
-cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64/
-
-# 安装 feeds ./scripts/feeds update packages 
-./scripts/feeds install libpcre
-```
+先查看lan的MAC地址值并复制<br>
+<img src="/img/in-post/2018.10/26/openwrt/drcom1.png" alt="MQTT Logo"><br>
+登录<strong>Dr.com</strong>客户端:<br>
+<img src="/img/in-post/2018.10/26/openwrt/drcom.png" alt="MQTT Logo"><br>
+>说明:311xxxxxxx为自己的学号,MAC地址为刚刚复制的，然后随便改后两位数字，最后重启
 
 *************************
 ### <center> 配置privoxy代理 </center>
@@ -191,15 +189,338 @@ cd ./OpenWrt-SDK-15.05-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
 每一台设备都经过这样检测,同一台设备在不同浏览器,微信,QQ下点击UA查询网站：[useragent](http://www.ip138.com/useragent/),获取其对应的<strong>UA</strong>,通过WinSCP在<strong>etc/privoxy/default.action</strong>文件后面添加相应UA的hide-user-agent,使用格式如下:
 ```
 #hide-user-agent
-{ \
-+hide-user-agent{Mozilla/5.0 (X11; Linux x86_64)} \
-}
+{+client-header-filter{android}}
 /
+{+client-header-filter{android1}}
+/
+{+client-header-filter{android2}}
+/
+{+client-header-filter{android3}}
+/
+{+client-header-filter{android4}}
+/
+{+client-header-filter{android5}}
+/
+{+client-header-filter{android6}}
+/
+{+client-header-filter{iPhone}}
+/
+{+client-header-filter{MACOS}}
+/
+{+client-header-filter{iPod}}
+/
+{+client-header-filter{iPad}}
+/
+{+client-header-filter{phone}}
+/
+{+client-header-filter{PHONE}}
+/
+{+client-header-filter{OS}}
+/
+{+client-header-filter{iPhone1}}
+/
+{+client-header-filter{iPhone2}}
+/
+{+client-header-filter{iPhone3}}
+/
+{+client-header-filter{Linux}}
+/
+{+client-header-filter{wv}}
+/
+{+client-header-filter{zh}}
+/
+{+client-header-filter{wifi}}
+/
+{+client-header-filter{WIFI}}
+/
+{+client-header-filter{PandoraBox}}
+/
+{+client-header-filter{OpenWrt}}
+/
+{+client-header-filter{mi51}}
+/
+{+client-header-filter{mi52}}
+/
+{+client-header-filter{mi61}}
+/
+{+client-header-filter{mi62}}
+/
+{+client-header-filter{mip1}}
+/
+{+client-header-filter{mip2}}
+/
+{+client-header-filter{mip3}}
+/
+{+client-header-filter{HUAWEI}}
+/
+{+client-header-filter{Honor}}
+/
+{+client-header-filter{TBS}}
+/
+{+client-header-filter{MI}}
+/
+{+client-header-filter{ONEPLUS}}
+/
+{+client-header-filter{vivo}}
+/
+{+client-header-filter{OPPO}}
+/
+{+client-header-filter{Redmi}}
+/
+{+client-header-filter{XiaoMi}}
+/
+{+client-header-filter{Xiaodu}}
+/
+{+client-header-filter{Xiaodu1}}
+/
+{+client-header-filter{AudioSpeaker}}
+/
+{+client-header-filter{TYPE}}
+/
+{+client-header-filter{mobile}}
+/
+{+client-header-filter{Mobile}}
+/
+{+client-header-filter{MicroMessenger}}
+/
+{+client-header-filter{MQQBrowser}}
+/
+{+client-header-filter{compatible}}
+/
+{+client-header-filter{MSIE}}
+/
+{+client-header-filter{Dalvik}}
+/
+{+client-header-filter{Safari}}
+/
+{+client-header-filter{IEMobile}}
+/
+{+client-header-filter{WAP}}
+/
+{+client-header-filter{MiuiBrowser}}
+/
+{+client-header-filter{BlackBerry}}
+/
+{+client-header-filter{Easemob}}
+/
+{+client-header-filter{Proxy}}
+/
+{+client-header-filter{app}}
+/
+{+client-header-filter{app1}}
+/
+{+client-header-filter{app2}}
+/
+{+client-header-filter{app3}}
+/
+
++hide-user-agent{Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0}
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 使环境生效 &nbsp;—</span>
-    </strong>
+
+在<strong>etc/privoxy/default.filter</strong>文件后面添加相应UA的hide-user-agent,使用格式如下:
+```
+####################### Android System  #################
+CLIENT-HEADER-FILTER: android Replace all "Android" with ""
+s@\b(Android)\b@@ig
+
+CLIENT-HEADER-FILTER: android1 Replace all "U" with ""
+s@\b(U|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: android2 Replace all "Android 2.2.1" with ""
+s@\b(Android 2.2.1|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: android3 Replace all "Android 8.1.0" with ""
+s@\b(Android 8.1.0|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: android4 Replace all "Android 8.1" with ""
+s@\b(Android 8.1|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: android5 Replace all "Android 8.0.0" with ""
+s@\b(Android 8.0.0|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: android6 Replace all "Nexus One" with ""
+s@\b(Nexus One|iP\w+)\b@@ig
+
+###########################################################
+####################### IOS System  #################
+CLIENT-HEADER-FILTER: iPhone Replace all "iPhone" with ""
+s@\b(iPhone)\b@@ig
+
+CLIENT-HEADER-FILTER: MACOS Replace all "MAC OS" with ""
+s@\b(MAC OS)\b@@ig
+
+CLIENT-HEADER-FILTER: iPod Replace all "iPod" with ""
+s@\b(iPod)\b@@ig
+
+CLIENT-HEADER-FILTER: iPad Replace all "iPad" with ""
+s@\b(iPad)\b@@ig
+
+CLIENT-HEADER-FILTER: phone Replace all "phone" with ""
+s@\b(phone)\b@@ig
+
+CLIENT-HEADER-FILTER: PHONE Replace all "PHONE" with ""
+s@\b(PHONE)\b@@ig
+
+CLIENT-HEADER-FILTER: OS Replace all "OS" with ""
+s@\b(OS)\b@@ig
+
+CLIENT-HEADER-FILTER: iPhone1 Replace all "live4iphone" with ""
+s@\b(live4iphone|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: iPhone2 Replace all "iOS 12.0" with ""
+s@\b(iOS 12.0|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: iPhone3 Replace all "CPU iPhone OS 12_0 like Mac OS X" with ""
+s@\b(CPU iPhone OS 12_0 like Mac OS X|iP\w+)\b@@ig
+###########################################################
+####################### Linux System  #################
+CLIENT-HEADER-FILTER: Linux Replace all "Linux" with "Windows"
+s@\b(Linux)\b@Windows@ig
+
+CLIENT-HEADER-FILTER: wv Replace all "wv" with ""
+s@\b(wv|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: zh Replace all "zh-cn" with ""
+s@\b(zh-cn|iP\w+)\b@@ig
+###########################################################
+####################### wifi  #################
+CLIENT-HEADER-FILTER: wifi Replace all "wifi" with ""
+s@\b(wifi)\b@@ig
+
+CLIENT-HEADER-FILTER: WIFI Replace all "WIFI" with ""
+s@\b(WIFI)\b@@ig
+
+CLIENT-HEADER-FILTER: PandoraBox Replace all "PandoraBox" with ""
+s@\b(PandoraBox)\b@@ig
+
+CLIENT-HEADER-FILTER: OpenWrt Replace all "OpenWrt" with ""
+s@\b(OpenWrt)\b@@ig
+###########################################################
+####################### phone  #################
+CLIENT-HEADER-FILTER: mi51 Replace all "MI 5 Build/OPR1.170623.032" with ""
+s@\b(MI 5 Build\/OPR1\.170623\.032|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: mi52 Replace all "MI 5 MIUI" with ""
+s@\b(MI 5 MIUI|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: mi61 Replace all "MI 6 Build/OPR1.170623.027" with ""
+s@\b(MI 6 Build\/OPR1\.170623\.027|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: mi62 Replace all "MI 6 MIUI/V10.0.2.0.OCACNFH" with ""
+s@\b(MI 6 MIUI\/V10\.0\.2\.0\.OCACNFH|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: mip1 Replace all "MI PAD 4 Build/OPM1.171019.019" with ""
+s@\b(MI PAD 4 Build\/OPM1\.171019\.019|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: mip2 Replace all "MI PAD 4 MIUI" with ""
+s@\b(MI PAD 4 MIUI|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: mip3 Replace all "Xiaomi-MI PAD" with ""
+s@\b(Xiaomi-MI PAD|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: HUAWEI Replace all "HUAWEI" with ""
+s@\b(HUAWEI)\b@@ig
+
+CLIENT-HEADER-FILTER: Honor Replace all "Honor" with ""
+s@\b(Honor)\b@@ig
+
+CLIENT-HEADER-FILTER: TBS Replace all "TBS" with ""
+s@\b(TBS)\b@@ig
+
+CLIENT-HEADER-FILTER: MI Replace all "MI" with ""
+s@\b(MI)\b@@ig
+
+CLIENT-HEADER-FILTER: ONEPLUS Replace all "ONEPLUS" with ""
+s@\b(ONEPLUS)\b@@ig
+
+CLIENT-HEADER-FILTER: vivo Replace all "vivo" with ""
+s@\b(vivo)\b@@ig
+
+CLIENT-HEADER-FILTER: OPPO Replace all "OPPO" with ""
+s@\b(OPPO)\b@@ig
+
+CLIENT-HEADER-FILTER: Redmi Replace all "Redmi" with ""
+s@\b(Redmi)\b@@ig
+
+CLIENT-HEADER-FILTER: XiaoMi Replace all "XiaoMi" with ""
+s@\b(XiaoMi)\b@@ig
+
+CLIENT-HEADER-FILTER: Xiaodu Replace all "Xiaodu" with ""
+s@\b(Xiaodu)\b@@ig
+
+CLIENT-HEADER-FILTER: Xiaodu1 Replace all "Xiaodu-AudioSpeaker" with ""
+s@\b(Xiaodu-AudioSpeaker)\b@@ig
+
+CLIENT-HEADER-FILTER: AudioSpeaker Replace all "AudioSpeaker" with ""
+s@\b(AudioSpeaker)\b@@ig
+###########################################################
+####################### others  #################
+CLIENT-HEADER-FILTER: TYPE Replace all "NMF26X|R11s|NMF26F|1607-A01|R16NW|SM-G9500|HUAWEIBAC-AL00|BAC-AL00|HUAWEISTF-AL10|STF-AL10|KNT-UL10|NRD90M|M5 Note|HONORPRA-AL00|PRA-AL00|R16NW|SM-C9000|N2G47H|HUAWEIHWI-AL00|HWI-AL00|MMB29M|N2G47H|X9s|NJH47F|HUAWEIKNT-AL20|KNT-AL20|HONORLLD-AL10|LLD-AL10|HUAWEICOL-AL10|COL-AL10|R16NW|SM-G8850|OD103|OPPO|XIAOMI|MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE" with ""
+s@\b(NMF26X|R11s|NMF26F|1607-A01|R16NW|SM-G9500|HUAWEIBAC-AL00|BAC-AL00|HUAWEISTF-AL10|STF-AL10|KNT-UL10|NRD90M|M5 Note|HONORPRA-AL00|PRA-AL00|R16NW|SM-C9000|N2G47H|HUAWEIHWI-AL00|HWI-AL00|MMB29M|N2G47H|X9s|NJH47F|HUAWEIKNT-AL20|KNT-AL20|HONORLLD-AL10|LLD-AL10|HUAWEICOL-AL10|COL-AL10|R16NW|SM-G8850|OD103|OPPO|XIAOMI|MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE)\b@@ig
+###########################################################
+####################### Web server  #################
+CLIENT-HEADER-FILTER: mobile Replace all "mobile" with ""
+s@\b(mobile)\b@@ig
+
+CLIENT-HEADER-FILTER: Mobile Replace all "Mobile" with ""
+s@\b(Mobile)\b@@ig
+
+CLIENT-HEADER-FILTER: MicroMessenger Replace all "MicroMessenger" with ""
+s@\b(MicroMessenger)\b@@ig
+
+CLIENT-HEADER-FILTER: MQQBrowser Replace all "MQQBrowser" with ""
+s@\b(MQQBrowser)\b@@ig
+
+CLIENT-HEADER-FILTER: compatible Replace all "compatible" with ""
+s@\b(compatible)\b@@ig
+
+CLIENT-HEADER-FILTER: MSIE Replace all "MSIE" with ""
+s@\b(MSIE)\b@@ig
+
+CLIENT-HEADER-FILTER: Dalvik Replace all "Dalvik" with "Mozilla"
+s@\b(Dalvik)\b@Mozilla@ig
+
+CLIENT-HEADER-FILTER: Safari Replace all "Safari" with "Chrome"
+s@\b(Safari)\b@Chrome@ig
+
+CLIENT-HEADER-FILTER: IEMobile Replace all "IEMobile" with ""
+s@\b(IEMobile)\b@@ig
+
+CLIENT-HEADER-FILTER: WAP Replace all "WAP" with ""
+s@\b(WAP)\b@@ig
+
+CLIENT-HEADER-FILTER: MiuiBrowser Replace all "MiuiBrowser" with "Chrome"
+s@\b(MiuiBrowser)\b@Chrome@ig
+
+CLIENT-HEADER-FILTER: BlackBerry Replace all "BlackBerry" with ""
+s@\b(BlackBerry)\b@@ig
+
+CLIENT-HEADER-FILTER: Easemob Replace all "Easemob-SDK" with ""
+s@\b(Easemob-SDK)\b@@ig
+
+CLIENT-HEADER-FILTER: Proxy Replace all "Proxy" with ""
+s@\b(Proxy)\b@@ig
+###########################################################
+############## app ################
+CLIENT-HEADER-FILTER: app Replace all "AMAP_Location_SDK_Android" with ""
+s@\b(AMAP_Location_SDK_Android|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: app1 Replace all "qqlive4iphone" with ""
+s@\b(qqlive4iphone|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: app2 Replace all "Bilibili Freedoooooom/MarkII" with ""
+s@\b(Bilibili Freedoooooom\/MarkII|iP\w+)\b@@ig
+
+CLIENT-HEADER-FILTER: app3 Replace all "AndroidSDK_27_clover_8.1.0" with ""
+s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
+```
+
+<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
+    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
+        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
+            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">5.使环境生效</strong>
+        </strong>
+    </span>
 </p>
 ```bash
 iptables -t nat -N PrivoxyUA
@@ -210,11 +531,7 @@ iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
 ```
 
 *************************
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 可能产生的问题 &nbsp;—</span>
-    </strong>
-</p>
+### <center> 可能产生的问题 </center>
 <strong>问题1：</strong>
 ```bash
  * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
@@ -229,16 +546,13 @@ opkg update
 
 <strong>问题2：</strong>如果发现按照这个教程来，还是发现会断线<br>
 <strong>解决方法：</strong>可能是没有找全所有在连设备的UA（同一设备，不同浏览器的UA会不一样），这时候建议看看privoxy的日志，一般都有相关User-Agent显示，再把它们按照教程隐藏就好了,具体操作如下:<br>
-执行<strong>使环境生效</strong>那一步,然后在<strong>Privoxy网络代理</strong>里面的<strong>日志查看器</strong>,点击<strong>读取/刷新日志文件</strong>,就可以查看具体的日志文件,如下图:
+执行<strong>使环境生效</strong>那一步,然后在<strong>Privoxy网络代理</strong>里面的<strong>日志查看器</strong>,点击<strong>读取/刷新日志文件</strong>,就可以查看具体的日志文件,如下图:<br>
 <img src="/img/in-post/2018.10/26/openwrt/UA1.png" alt="MQTT Logo"><br>
 然后找到相关的<strong>User-Agent</strong>,添加到<strong>etc/privoxy/default.action</strong>文件里面就行了.<br>
 
 *************************
 
 >参考链接：
->[1] [Ubuntu 使用Openwrt SDK交叉编译ipk包过程全纪录(超多图)](https://blog.csdn.net/lvshaorong/article/details/52931211)
-
->[2] [使用OpenWrt路由自动修改http请求的UserAgent来躲过移动设备检测](http://www.right.com.cn/forum/thread-249325-1-1.html)
-
+>[1] [使用OpenWrt路由自动修改http请求的UserAgent来躲过移动设备检测](http://www.right.com.cn/forum/thread-249325-1-1.html)
 
 *************************
