@@ -108,7 +108,7 @@ cd /tmp
 opkg install gdut-drcom_1.6.8-4_mipsel_24kc.ipk
 ```
 
-### 其他路由器可以自己下载OpenWrt-SDK自己编译:
+##### 其他路由器可以自己下载OpenWrt-SDK自己编译:
 首先进入[OpenWrt 18.06](https://archive.openwrt.org/releases/18.06.0/targets/) <br>
 <img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk0.png" alt="MQTT Logo"><br>
 
@@ -130,7 +130,6 @@ cd package && git clone https://github.com/GJXS1980/ODP.git
 cd .. && make package/ODP/compile
 ```
 最后编译完的软件包在<code>/bin/packages/xxxx/base/</code>目录下 <br>
-
 <p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
     <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
         <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
@@ -138,11 +137,11 @@ cd .. && make package/ODP/compile
         </strong>
     </span>
 </p>
-先查看lan的MAC地址值并复制<br>
+先查看<code>lan的MAC地址</code>并复制<br>
 <img src="/img/in-post/2018.10/26/openwrt/drcom1.png" alt="MQTT Logo"><br>
 登录<strong>Dr.com</strong>客户端:<br>
 <img src="/img/in-post/2018.10/26/openwrt/drcom.png" alt="MQTT Logo"><br>
->说明:311xxxxxxx为自己的学号,MAC地址为刚刚复制的，然后随便改后两位数字，最后重启
+>说明:311xxxxxxx为自己的学号,MAC地址为刚刚复制的，然后随便改MAC地址后两位数字
 
 *************************
 ### <center> 配置privoxy代理 </center>
@@ -529,6 +528,7 @@ iptables -t nat -A PREROUTING -i br-lan -p tcp -j PrivoxyUA
 
 iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
 ```
+最后<code>重启路由器</code>,到这里路由器的配置基本完成。
 
 *************************
 ### <center> 可能产生的问题 </center>
