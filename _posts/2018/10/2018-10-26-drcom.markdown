@@ -322,10 +322,8 @@ cd .. && make package/ODP/compile
 </details>
 
 ### Test
-<pre><code class="language-php">
-<?php
-echo "Hello World!";
-?>
+<pre><code class="language-python">
+print("Hello World!")
 </code>
 </pre>
 
