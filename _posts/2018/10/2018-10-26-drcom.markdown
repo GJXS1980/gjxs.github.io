@@ -331,7 +331,8 @@ cd .. && make package/ODP/compile
 <details>
 <summary>在<strong>etc/privoxy/default.filter</strong>文件后面添加相应UA的hide-user-agent</summary>
 
-<pre class="line-numbers"><code class="language-css">
+<pre>
+<code class="language-css line-numbers">
 ####################### Android System  #################
 CLIENT-HEADER-FILTER: android Replace all "Android" with ""
 s@\b(Android)\b@@ig
