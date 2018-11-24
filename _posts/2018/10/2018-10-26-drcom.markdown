@@ -549,7 +549,7 @@ iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
 *************************
 ### <center> 可能产生的问题 </center>
 <strong>问题1：</strong>
-<pre><code class="line-numbers language-bash ">
+<pre><code [class=" language-bash "].line-numbers >
  * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
 </code>
 </pre>
