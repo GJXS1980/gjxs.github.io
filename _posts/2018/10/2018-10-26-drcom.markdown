@@ -41,7 +41,7 @@ tags:
 </p>
 进固件作者网站查找对应[u-boot](http://rssn.cn/roms/uboot/),下载自己路由器对应版本的固件, 以极路由1S HC5661A为例,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/hiwifi.png" alt="MQTT Logo">
-<pre class="line-numbers"><code class="language-bash">
+<pre><code class="language-bash line-numbers">
 #连上路由器后台，进入tmp目录下
 cd /tmp
 #下载对应版本的U-Root
@@ -61,8 +61,7 @@ mtd write HC5661A-uboot.bin firmware
     </span>
 </p>
 （1）查看一下路由器CPU的型号，以确定我们要刷什么版本的固件
-<pre class="line-numbers"><code class="language-bash">
-
+<pre><code class="language-bash line-numbers">
 cat /proc/cpuinfo
 </code>
 </pre>
@@ -70,7 +69,7 @@ cat /proc/cpuinfo
 (2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)查找cpu和型号对应的固件，并下载<br>
 以极路由1S HC5661A为例,如下图:<br>
 <img src="/img/in-post/2018.10/26/openwrt/openwrt.png" alt="MQTT Logo">
-<pre class="line-numbers"><code class="language-bash">
+<pre><code class="language-bash line-numbers">
 #下载固件
 wget http://downloads.openwrt.org/releases/18.06.1/targets/ramips/mt76x8/openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 
@@ -107,7 +106,7 @@ sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 >由于路由器版本太多，可以选择自己编译，或者在评论区留言，提供路由器的型号，我看到会帮你们编译。
 
 解压将drcom里面的文件用WinSCP传到路由器<strong>tmp</strong>文件夹安装：
-<pre class="line-numbers"><code class="language-bash">
+<pre><code class="language-bash line-numbers">
 cd /tmp
 #安装gdut-drcom客户端
 opkg install gdut-drcom_1.6.8-4_mipsel_24kc.ipk
@@ -126,7 +125,7 @@ opkg install gdut-drcom_1.6.8-4_mipsel_24kc.ipk
 
 其他路由器SDK:[OpenWrt 18.06](https://archive.openwrt.org/releases/18.06.0/targets/)<br>
 <strong>配置教程</strong>:
-<pre class="line-numbers"><code class="language-bash">
+<pre><code class="language-bash line-numbers">
 #解压文件夹
 tar xjf openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz
 cd ~/openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz/
@@ -196,7 +195,7 @@ cd .. && make package/ODP/compile
 <details>
 <summary>通过WinSCP在<strong>etc/privoxy/default.action</strong>文件后面添加相应UA的hide-user-agent</summary>
 
-<pre class="line-numbers"><code class="language-css">
+<pre><code class="language-filter line-numbers">
 #hide-user-agent
 {+client-header-filter{android}}
 /
@@ -331,8 +330,7 @@ cd .. && make package/ODP/compile
 <details>
 <summary>在<strong>etc/privoxy/default.filter</strong>文件后面添加相应UA的hide-user-agent</summary>
 
-<pre>
-<code class="language-css line-numbers">
+<pre><code class="language-action line-numbers">
 ####################### Android System  #################
 CLIENT-HEADER-FILTER: android Replace all "Android" with ""
 s@\b(Android)\b@@ig
@@ -538,8 +536,7 @@ s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
         </strong>
     </span>
 </p>
-<pre>
-<code class="language-badh line-numbers">
+<pre><code class="language-badh line-numbers">
 iptables -t nat -N PrivoxyUA
 
 iptables -t nat -A PREROUTING -i br-lan -p tcp -j PrivoxyUA
@@ -552,8 +549,7 @@ iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
 *************************
 ### <center> 可能产生的问题 </center>
 <strong>问题1：</strong>
-<pre>
-<code class="language-badh line-numbers">
+<pre><code class="language-badh line-numbers">
  * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
 </code>
 </pre>
