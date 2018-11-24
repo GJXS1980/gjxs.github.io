@@ -41,7 +41,7 @@ tags:
 </p>
 进固件作者网站查找对应[u-boot](http://rssn.cn/roms/uboot/),下载自己路由器对应版本的固件, 以极路由1S HC5661A为例,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/hiwifi.png" alt="MQTT Logo">
-<pre><code class="language-bash line-numbers">
+<pre class="language-bash line-numbers"><code>
 #连上路由器后台，进入tmp目录下
 cd /tmp
 #下载对应版本的U-Root
@@ -549,7 +549,7 @@ iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
 *************************
 ### <center> 可能产生的问题 </center>
 <strong>问题1：</strong>
-<pre><code [class=" language-bash "].line-numbers >
+<pre><code class="line-numbers language-bash ">
  * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
 </code>
 </pre>
