@@ -69,7 +69,7 @@ cat /proc/cpuinfo
 (2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)查找cpu和型号对应的固件，并下载<br>
 以极路由1S HC5661A为例,如下图:<br>
 <img src="/img/in-post/2018.10/26/openwrt/openwrt.png" alt="MQTT Logo">
-<pre><code class="language-bash line-numbers">
+<pre><code class="language-Bash line-numbers">
 #下载固件
 wget http://downloads.openwrt.org/releases/18.06.1/targets/ramips/mt76x8/openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 
