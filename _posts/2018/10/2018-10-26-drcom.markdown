@@ -330,7 +330,7 @@ print("Hello World!")
 <details>
 <summary>在<strong>etc/privoxy/default.filter</strong>文件后面添加相应UA的hide-user-agent</summary>
 
-```
+<pre class="line-numbers"><code class="language-css">
 ####################### Android System  #################
 CLIENT-HEADER-FILTER: android Replace all "Android" with ""
 s@\b(Android)\b@@ig
@@ -525,8 +525,8 @@ s@\b(Bilibili Freedoooooom\/MarkII|iP\w+)\b@@ig
 
 CLIENT-HEADER-FILTER: app3 Replace all "AndroidSDK_27_clover_8.1.0" with ""
 s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
-```
-
+</code>
+</pre>
 </details>
 
 <p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
