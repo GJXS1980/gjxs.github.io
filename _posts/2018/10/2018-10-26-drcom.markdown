@@ -536,7 +536,7 @@ s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
         </strong>
     </span>
 </p>
-<pre><code class="language-badh line-numbers">
+<pre class="line-numbers"><code class="language-bash">
 iptables -t nat -N PrivoxyUA
 
 iptables -t nat -A PREROUTING -i br-lan -p tcp -j PrivoxyUA
