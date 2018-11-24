@@ -321,6 +321,14 @@ cd .. && make package/ODP/compile
 
 </details>
 
+### Test
+<pre><code class="language-php">
+<?php
+echo "Hello World!";
+?>
+</code>
+</pre>
+
 <details>
 <summary>在<strong>etc/privoxy/default.filter</strong>文件后面添加相应UA的hide-user-agent</summary>
 
