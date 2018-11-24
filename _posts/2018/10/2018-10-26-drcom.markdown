@@ -538,28 +538,33 @@ s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
         </strong>
     </span>
 </p>
-```bash
+<pre>
+<code class="language-badh line-numbers">
 iptables -t nat -N PrivoxyUA
 
 iptables -t nat -A PREROUTING -i br-lan -p tcp -j PrivoxyUA
 
 iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
-```
+</code>
+</pre>
 最后<code>重启路由器</code>,到这里路由器的配置基本完成。
 
 *************************
 ### <center> 可能产生的问题 </center>
 <strong>问题1：</strong>
-```bash
+<pre>
+<code class="language-badh line-numbers">
  * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
-```
+</code>
+</pre>
 <strong>解决方法：</strong>
-```bash
+<pre>
+<code class="language-badh line-numbers">
 echo "nameserver 114.114.114.114">/tmp/resolv.conf
 rm -f /var/lock/opkg.lock
 opkg update
-
-```
+</code>
+</pre>
 
 <strong>问题2：</strong>如果发现按照这个教程来，还是发现会断线<br>
 <strong>解决方法：</strong>可能是没有找全所有在连设备的UA（同一设备，不同浏览器的UA会不一样），这时候建议看看privoxy的日志，一般都有相关User-Agent显示，再把它们按照教程隐藏就好了,具体操作如下:<br>
