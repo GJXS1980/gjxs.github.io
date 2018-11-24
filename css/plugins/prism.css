@@ -231,11 +231,6 @@ pre[class*="language-"].line-numbers > code {
 			text-align: right;
 		}
 
-.reveal pre.line-numbers > code {
-  overflow: visible;
-  padding: 0;
-}
-
 .token.tab:not(:empty),
 .token.cr,
 .token.lf,
