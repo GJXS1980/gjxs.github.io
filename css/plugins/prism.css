@@ -200,11 +200,6 @@ pre[class*="language-"].line-numbers > code {
 	white-space: inherit;
 }
 
-.reveal pre.line-numbers > code {
-  overflow: visible;
-  padding: 0;
-}
-
 .line-numbers .line-numbers-rows {
 	position: absolute;
 	pointer-events: none;
