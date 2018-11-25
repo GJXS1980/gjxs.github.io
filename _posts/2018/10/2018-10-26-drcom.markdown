@@ -12,37 +12,28 @@ tags:
     - OpenWrt
 ---
 *****
-><strong>Abstract:</strong> "基于Drcom校园网客户端绕过检测移动设备的一种思路及实现方法."<br>                                                                                                                                           
-                                                                        <br /> 
+><strong>Abstract</strong> <br>本教程是基于<code>OpenWrt固件</code>和<code>Drcom校园网客户端</code>进行<code>绕过检测移动设备</code>到达<code>反防代理设备</code>的一种思路及实现方法,教程内容主要由三部分组成:<code>刷OpenWrt固件,安装Dr.com插件和配置Privoxy防代理</code>.<br> 教程还介绍了如何用OpenWrt<code>对Dr.com进行编译</code>及<code>客户端UA的获取方法</code>,对于动手能力强的小伙伴,可以自己尝试折腾一下;对于其他小伙伴,我都<code>提供了已经编译好的ipk软件包和UA配置文件</code>,主要用<code>WinSCP</code>对路由器后台相应文件进行操作就行了.
 
 ----------
 *************************
-### <center> 应用环境 </center>
-<ul>
-    <li> 所有支持OpenWrt固件的路由器 </li><br>
-</ul>
-
-### <center> 准备工作 </center>
-<ul>
-    <li> 路由器联网并安装开发者插件 </li><br>
+### <center> <font face="楷体">零 . 准备工作</font> </center>
+<strong>应用环境</strong> <br>
+<ul><li> 所有支持OpenWrt固件的路由器 </li></ul><br>
+<strong>要求</strong> <br>
+<ul><li> 路由器联网并安装开发者插件 </li><br>
     <li> 熟悉WinSCP的使用 </li><br>
     <li> 熟悉putty登录路由器后台的操作 </li><br>
-    <li> 熟悉Linux基本命令行的操作 </li><br>
-</ul>
+    <li> 熟悉Linux基本命令行的操作 </li></ul>
+
 *************************
-### <center> 刷OpenWrt </center>
-<code>以极路由1S HC5661A为例</code><br>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">1.刷解锁版不死U-Root</strong>
-        </strong>
-    </span>
-</p>
-进固件作者网站查找对应[u-boot](http://rssn.cn/roms/uboot/),下载自己路由器对应版本的固件, 以极路由1S HC5661A为例,如下图:
+### <center> <font face="楷体">壹 . 刷OpenWrt</font> </center>
+<code>以极路由1S HC5661A为例</code>
+
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.刷解锁版不死U-Root </font></center></strong>
+进固件作者网站查找对应[u-boot](http://rssn.cn/roms/uboot/),下载自己路由器对应版本的固件, 以<code>极路由1S HC5661A</code>为例,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/hiwifi.png" alt="MQTT Logo">
-<!--    <pre><code class="language-Bash line-numbers">     -->
-<pre class="line-numbers"><code class="language-bash">
+通过<code>putty</code>进入路由器后台,并<code>下载安装uboot:</code><br>
+<pre><code class="language-bash">
 #连上路由器后台，进入tmp目录下
 cd /tmp
 #下载对应版本的U-Root
@@ -54,79 +45,104 @@ mtd write HC5661A-uboot.bin u-boot
 mtd write HC5661A-uboot.bin firmware
 </code>
 </pre>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">2.刷OpenWrt固件</strong>
-        </strong>
-    </span>
-</p>
-（1）查看一下路由器CPU的型号，以确定我们要刷什么版本的固件
-<pre><code class="language-bash line-numbers">
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.刷OpenWrt固件 </font></center></strong>
+如果你是<code>极路由1S</code>或者是<code>斐讯K2T</code>,点开<code>下面折叠内容</code>可以让你提前结束战斗,其他小伙伴继续往下面奋斗吧:<br>
+<details>
+<summary><code>New World</code>(此部分为折叠内容,<code>极路由1SHC5661A或者是斐讯K2T</code>用户进入)</summary>
+
+<pre><code class="language-markdown">
+<code>1.下载固件</code>
+(1)极路由HC5661A
+下载链接:https://pan.baidu.com/s/1j70FVPeUYKBE7lvvNSVfEA
+提取密码:GJXS
+(2)斐讯K2T
+下载链接:https://pan.baidu.com/s/1ZiMpEWsqWdRSenJywoOSaQ
+提取密码:GJXS
+
+<code>2.通过Breed刷入下载的固件</code>
+首先，请确保你已经刷入了不死uboot,进入方法：
+(1)拔掉电源,只留一根和电脑连接的网线（lan口)
+(2)拿一个东西来捅住复位键,一边上电,等待路由器三个灯闪成一个灯的时候就松开(如果一直都是两个灯,那只能用命令行安装固件,直接看第五步)
+(3)电脑浏览器打开192.168.1.1，就可以进入Breed Web
+(4)形成好的习惯,刷之前把所有的东西备份一下,然后到固件更新那里选择刚刚下载的固件刷进去,(到这里结束,直接看第3步).
+(5)通过WinSCP把固件上传到/tmp目录下
+(6)用putty登录路由器后台(下面以极路由1S为例,K2T的把下面命令行相应的固件名改一下就行了):
+    cd /tmp/
+    sysupgrade -F -n HC5661A.bin
+
+(7)等待安装完固件(到这里结束)
+
+<code>3.修改校园网账号</code><br>
+(1)登录OpenWrt后台:
+地址:192.168.1.1
+密码:admin
+(2)修改校园网账号和密码,MAC地址复制粘贴lan的MAC地址,然后任意修改后两位值
+(3)重启生效
+</code>
+</pre>
+</details>
+
+（1）查看一下<code>路由器CPU的型号</code>，以确定我们要刷什么版本的固件
+<pre><code class="language-bash">
 cat /proc/cpuinfo
 </code>
 </pre>
 
-(2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)查找cpu和型号对应的固件，并下载<br>
-以极路由1S HC5661A为例,如下图:<br>
+(2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)<code>查找cpu和型号对应的固件</code>，并下载.<br>
+以<code>极路由1S HC5661A</code>为例,如下图:<br>
 <img src="/img/in-post/2018.10/26/openwrt/openwrt.png" alt="MQTT Logo">
-<pre><code class="language-Bash line-numbers">
+可以直接点击<code>图中红框</code>的网址<code>直接下载</code>,然后再通过<code>WinSCP</code>上传到<code>路由器的/tmp目录下</code>,<code>下面操作是直接下载到路由器的/tmp目录下(要连网):</code><br>
+<pre><code class="language-Bash">
 #下载固件
+cd /tmp
 wget http://downloads.openwrt.org/releases/18.06.1/targets/ramips/mt76x8/openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 
 #刷机
 sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 </code>
 </pre>
-
->温馨提示:1.刷机的时候最好用网线直连.<br>
+<code>等待路由器重启</code>,到这里OpenWrt固件就安装成功了.
+>温馨提示:<br>1.刷机的时候最好用网线直连.<br>
 2.等待几分钟，当路由器自动重启说明成功（期间不要断开电源，不然就变砖了）<br>
 
 *************************
-### <center> 安装OpenWrt插件 </center>
-登录路由器后台，网址：<strong>192.168.1.1</strong> 起始密码：<strong>admin</strong> <br>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">1.安装gdut-drcom客户端</strong>
-        </strong>
-    </span>
-</p>
-<strong>各个路由器相应版本Drcom下载</strong>
+### <center> <font face="楷体">贰 . 安装OpenWrt插件</font> </center>
+<strong>登录路由器后台</strong>，<code>网址：</code><strong>192.168.1.1</strong> <code>起始密码：</code><strong>admin</strong> <br>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装gdut-drcom客户端 </font></center></strong>
+<strong>各个路由器相应版本Dr.com插件下载</strong>
 
 | 路由器版本 | 下载链接 | 密码 |
 | ------ | ------ | ------ |
-| 极路由HC5661、HC5761和HC5861 | [下载链接](https://pan.baidu.com/s/1ytMp8I68P8kmFnAZClKzlA) | GJXS |
-| 极路由HC5661A和HC5861B | [下载链接](https://pan.baidu.com/s/1ytMp8I68P8kmFnAZClKzlA) | GJXS |
-| 极路由HC5962 | [下载链接](https://pan.baidu.com/s/1zCJr8svDtSWaTelHd0U04Q) | GJXS |
-| 极路由HC6361 | [下载链接](https://pan.baidu.com/s/1-yw7wpPJzP2BEtapUAxMXQ) | GJXS |
-| 斐讯K2T | [下载链接](https://pan.baidu.com/s/1IB-clF_PPDRglTjTC_9Lnw) | GJXS |
-| 斐讯K2P | [下载链接](https://pan.baidu.com/s/1xv9xRxeYmFylYjIJJr-J9Q) | GJXS |
-| 斐讯K1-PSG1208、K2-PSG1218和K2G | [下载链接](https://pan.baidu.com/s/1Go9uCW0TmXAa935UBDtQew) | GJXS |
+| 极路由HC5661、HC5761和HC5861 | [下载链接](https://pan.baidu.com/s/1_SNTcn40zPLYieKZ_hz3QA#list/path=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FHiWiFi%2FHC5661_HC5761_HC5861&parentPath=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FHiWiFi) | GJXS |
+| 极路由HC5661A和HC5861B | [下载链接](https://pan.baidu.com/s/1OTnN7Cu5YKOHrpC-mFlzQg#list/path=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FHiWiFi%2FHC5661A_HC5861B&parentPath=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FHiWiFi) | GJXS |
+| 极路由HC5962 | [下载链接](https://pan.baidu.com/s/1RgVk1cDxN9OZpbXT4B_Hrw#list/path=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FHiWiFi%2FHC5962&parentPath=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FHiWiFi) | GJXS |
+| 极路由HC6361 | [下载链接](https://pan.baidu.com/s/1U8KrQN7aY-EFy4KDir3FUg#list/path=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FHiWiFi%2FHC6361&parentPath=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FHiWiFi) | GJXS |
+| 斐讯K2T | [下载链接](https://pan.baidu.com/s/101HxA0EmiBtoh0M-JJeduQ#list/path=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FPHICOMM%2FK2T&parentPath=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FPHICOMM) | GJXS |
+| 斐讯K2P | [下载链接](https://pan.baidu.com/s/1Ud9C4D4c7gr3JWpXaGLAww#list/path=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FPHICOMM%2FK2P&parentPath=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FPHICOMM) | GJXS |
+| 斐讯K1-PSG1208、K2-PSG1218和K2G | [下载链接](https://pan.baidu.com/s/1QLALFDvXR7nVWK9p-mN-Zg#list/path=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FPHICOMM%2FPSG1208_K2%20PSG1218_K2G&parentPath=%2F%E6%A0%A1%E5%9B%AD%E7%BD%91drcom%2Fdrcom%E5%AE%A2%E6%88%B7%E7%AB%AF%2FPHICOMM) | GJXS |
 
->由于路由器版本太多，可以选择自己编译，或者在评论区留言，提供路由器的型号，我看到会帮你们编译。
+><code>说明:</code>由于路由器版本太多，可以选择自己编译，或者在评论区留言，提供路由器的型号，我看到会帮你们编译。
 
-解压将drcom里面的文件用WinSCP传到路由器<strong>tmp</strong>文件夹安装：
-<pre><code class="language-bash line-numbers">
+将下载是<code>Drcom插件</code>用<code>WinSCP</code>传到路由器<code>tmp</code>文件夹下安装：<br>
+<pre><code class="language-bash">
 cd /tmp
 #安装gdut-drcom客户端
-opkg install gdut-drcom_1.6.8-4_mipsel_24kc.ipk
+opkg install gdut-drcom_6.0-4_mipsel_24kc.ipk
 </code>
 </pre>
-
-##### 其他路由器可以自己下载OpenWrt-SDK自己编译:
+到这里,gdut-drcom客户端已经安装完了,<code>直接到第2步配置网络</code>,如果<code>上面没有提供到gdut-drcom客户端的小伙伴继续看选做部分</code>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 选做:OpenWrt SDK编译gdut-drcom客户端 </font></center></strong>
+<strong>(1)下载OpenWrt SDK</strong><br>
 首先进入[OpenWrt 18.06](https://archive.openwrt.org/releases/18.06.0/targets/) <br>
 <img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk0.png" alt="MQTT Logo"><br>
-
-找到自己路由器型号,以极路由HC5661A为例,进入[ramips/mt76x8](https://archive.openwrt.org/releases/18.06.0/targets/ramips/mt76x8/)
+根据自己路由器的<code>路由器型号</code>进入相应的网站,<code>以极路由HC5661A为例</code>,进入[ramips/mt76x8](https://archive.openwrt.org/releases/18.06.0/targets/ramips/mt76x8/)
 <img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk.png" alt="MQTT Logo"><br>
 找到<code>openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz</code>并下载<br>
-<img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk1.png" alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk1.png" alt="MQTT Logo">
 >蓝色框表示SDK支持的路由器型号，红色框为SDK文件
 
-其他路由器SDK:[OpenWrt 18.06](https://archive.openwrt.org/releases/18.06.0/targets/)<br>
-<strong>配置教程</strong>:
-<pre><code class="language-bash line-numbers">
+<strong>2.编译drcom插件教程</strong>:
+<pre><code class="language-bash">
 #解压文件夹
 tar xjf openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz
 cd ~/openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz/
@@ -136,66 +152,43 @@ cd package && git clone https://github.com/GJXS1980/ODP.git
 cd .. && make package/ODP/compile
 </code>
 </pre>
-最后编译完的软件包在<code>/bin/packages/xxxx/base/</code>目录下 <br>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">2.配置网络</strong>
-        </strong>
-    </span>
-</p>
-先查看<code>lan的MAC地址</code>并复制<br>
+最后编译完的软件包在<code>/bin/packages/xxxx/base/</code>目录下,到这里你也有一个适合自己路由器的drcom插件了,<code>回到步骤1安装gdut-drcom客户端.</code><br>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.配置网络 </font></center></strong>
+<strong>(1)先查看<code>lan的MAC地址</code>并复制lan的MAC地址</strong><br>
 <img src="/img/in-post/2018.10/26/openwrt/drcom1.png" alt="MQTT Logo"><br>
-登录<strong>Dr.com</strong>客户端:<br>
-<img src="/img/in-post/2018.10/26/openwrt/drcom.png" alt="MQTT Logo"><br>
+<strong>(2)修改<strong>Dr.com</strong>客户端的配置:</strong><br>
+<img src="/img/in-post/2018.10/26/openwrt/drcom.png" alt="MQTT Logo">
 >说明:311xxxxxxx为自己的学号,MAC地址为刚刚复制的，然后随便改MAC地址后两位数字
 
+<code>重启</code>,完成配置,应该可以拨号成功.
+
 *************************
-### <center> 配置privoxy代理 </center>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">1.安装privoxy、luci-app-privoxy、luci-i18n-privoxy-zh-cn</strong>
-        </strong>
-    </span>
-</p>
+### <center> <font face="楷体">叁 . 配置privoxy代理</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装privoxy及相关软件 </font></center></strong>
 先进入<strong>软件</strong>选项,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/privoxy1.png" alt="MQTT Logo"><br>
-下载相应的功能包,如下图:
-<img src="/img/in-post/2018.10/26/openwrt/privoxy2.png" alt="MQTT Logo"><br>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">2.配置privoxy</strong>
-        </strong>
-    </span>
-</p>
+下载<code>图中红框</code>里面的<code>三个软件</code>,如下图:
+<img src="/img/in-post/2018.10/26/openwrt/privoxy2.png" alt="MQTT Logo">
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.配置privoxy </font></center></strong>
 进入<strong>privoxy</strong>选项,<strong>开启</strong>privoxy网络代理,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/privoxy3.png" alt="MQTT Logo"><br>
 开启<strong>Accept intercepted requests</strong>选项,如下图:
-<img src="/img/in-post/2018.10/26/openwrt/privoxy4.png" alt="MQTT Logo"><br>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">3.获取UserAgent</strong>
-        </strong>
-    </span>
-</p>
-点击UA查询网站：[useragent](http://www.ip138.com/useragent/) <br>
-在AppleWebKit前面的就是我们想要的UA <br>
-如图所示,<strong>Mozilla/5.0 (X11; Linux x86_64)</strong>即我们要用到的UA
-<img src="/img/in-post/2018.10/26/openwrt/UA.png" alt="MQTT Logo"><br>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">4.修改UserAgent</strong>
-        </strong>
-    </span>
-</p>
-每一台设备都经过这样检测,同一台设备在不同浏览器,微信,QQ下点击UA查询网站：[useragent](http://www.ip138.com/useragent/),获取其对应的<strong>UA</strong><br>,通过WinSCP在<strong>etc/privoxy/default.action</strong>文件后面添加相应UA的hide-user-agent
+<img src="/img/in-post/2018.10/26/openwrt/privoxy4.png" alt="MQTT Logo">
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.获取UserAgent </font></center></strong>
+<code>由于我已经整合了大部分的UA,基本可以满足要求,可以直接跳到第4步</code><br>
+获取UA有两个常用的方法:<br>
+<strong>方法一:通过网站直接查UA</strong><br>
+(1) 点击UA查询网站：[useragent](http://www.ip138.com/useragent/) <br>
+(2) 在AppleWebKit前面的就是我们想要的UA,如图所示,<strong>Mozilla/5.0 (X11; Linux x86_64)</strong>即我们要用到的UA
+<img src="/img/in-post/2018.10/26/openwrt/UA.png" alt="MQTT Logo">
+<strong>方法二:使用fiddler对手机上的程序进行抓包</strong><br>
+由于网上很多教程,我这里就不展开讨论<br>
+推荐教程:<br>[使用fiddler对手机上的程序进行抓包](https://zm12.sm-tc.cn/?src=l4uLj4zF0NCIiIjRnJGdk5CYjNGckJLQkpqWi5aekdCejYuWnJOajNDLxsbIzM7P0ZeLkpM%3D&uid=1651a7b6ef594e5236b385df0e67515f&hid=3a058f7b77c13e61026bd06c91f9b0b6&pos=4&cid=9&time=1541152821963&from=click&restype=1&pagetype=0000000000000000&bu=web&query=fiddler%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85&mode=&v=1&force=true&wap=false&province=%E5%B9%BF%E4%B8%9C%E7%9C%81&city=%E4%BD%9B%E5%B1%B1%E5%B8%82&uc_param_str=dnntnwvepffrgibijbprsvdsdichei) <br>
+[使用fiddler实现手机抓包](https://www.jianshu.com/p/724097741bdf) <br>
 
-<details>
-<summary><code>view code</code>(此部分为折叠内容)</summary>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.修改UserAgent </font></center></strong>
+通过<code>WinSCP</code>进入路由器后台,打开<code>etc/privoxy/default.action</code>文件,<code>在文件最后面添加下面折叠部分的内容:</code>
+<details><summary><code>view code</code>(此部分为折叠内容)</summary>
 
 <pre><code class="language-filter line-numbers">
 #hide-user-agent
@@ -325,14 +318,10 @@ cd .. && make package/ODP/compile
 /
 
 +hide-user-agent{Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0}
-</code>
-</pre>
+</code></pre>
 </details>
-
-在<strong>etc/privoxy/default.filter</strong>文件后面添加相应UA的hide-user-agent
-
-<details>
-<summary><code>view code</code>(此部分为折叠内容)</summary>
+打开<code>etc/privoxy/default.filter</code>文件,在文件最后面<code>添加下面折叠部分的内容:</code>
+<details><summary><code>view code</code>(此部分为折叠内容)</summary>
 
 <pre><code class="language-action line-numbers">
 ####################### Android System  #################
@@ -532,34 +521,25 @@ s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
 </code>
 </pre>
 </details>
-
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">5.使环境生效</strong>
-        </strong>
-    </span>
-</p>
-<pre class="line-numbers"><code class="language-bash">
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.使环境生效 </font></center></strong>
+<pre><code class="language-vim ">
 iptables -t nat -N PrivoxyUA
-
 iptables -t nat -A PREROUTING -i br-lan -p tcp -j PrivoxyUA
-
 iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
 </code>
 </pre>
-最后<code>重启路由器</code>,到这里路由器的配置基本完成。
+最后<code>重启路由器</code>,到这里路由器的配置基本完成,可以安心搞科研了。
 
 *************************
-### <center> 可能产生的问题 </center>
+### <center> <font face="楷体">肆 . 可能产生的问题</font> </center>
 <strong>问题1：</strong>
-<pre><code class="language-bash line-numbers ">
+<pre><code class="language-log line-numbers">
  * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
 </code>
 </pre>
 <strong>解决方法：</strong>
 <pre>
-<code class="language-bash line-numbers">
+<code class="language-bash">
 echo "nameserver 114.114.114.114">/tmp/resolv.conf
 rm -f /var/lock/opkg.lock
 opkg update
@@ -569,7 +549,7 @@ opkg update
 <strong>问题2：</strong>如果发现按照这个教程来，还是发现会断线<br>
 <strong>解决方法：</strong>可能是没有找全所有在连设备的UA（同一设备，不同浏览器的UA会不一样），这时候建议看看privoxy的日志，一般都有相关User-Agent显示，再把它们按照教程隐藏就好了,具体操作如下:<br>
 执行<strong>使环境生效</strong>那一步,然后在<strong>Privoxy网络代理</strong>里面的<strong>日志查看器</strong>,点击<strong>读取/刷新日志文件</strong>,就可以查看具体的日志文件,如下图:<br>
-<img src="/img/in-post/2018.10/26/openwrt/UA1.png" alt="MQTT Logo"><br>
+<img src="/img/in-post/2018.10/26/openwrt/UA1.png" alt="MQTT Logo">
 然后找到相关的<strong>User-Agent</strong>,添加到<strong>etc/privoxy/default.action</strong>文件里面就行了.<br>
 
 *************************

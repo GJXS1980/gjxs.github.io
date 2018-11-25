@@ -112,6 +112,10 @@
 {% if site.service-worker %}
 <script src="{{ "/js/snackbar.js " | prepend: site.baseurl }}"></script>
 <script src="{{ "/js/sw-registration.js " | prepend: site.baseurl }}"></script>
+
+<!-- prism -->
+<link rel="stylesheet" href="/css/prism.css" data-noprefix />
+
 {% endif %}
 
 <!-- async load function -->
@@ -382,11 +386,7 @@ var _hmt = _hmt || [];
 })();
 </script>
 
-<script src="/js/plugins/prism.js"></script>
-
-<script src="/js/plugins/prism-line-numbers.js"></script>
-
-
+<script src="/js/prism.js"></script>
 
 <a id="rocket" href="#top" class=""></a>
 <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
