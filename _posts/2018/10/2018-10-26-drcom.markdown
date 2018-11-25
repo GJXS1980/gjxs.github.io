@@ -194,7 +194,7 @@ cd .. && make package/ODP/compile
 每一台设备都经过这样检测,同一台设备在不同浏览器,微信,QQ下点击UA查询网站：[useragent](http://www.ip138.com/useragent/),获取其对应的<strong>UA</strong><br>,通过WinSCP在<strong>etc/privoxy/default.action</strong>文件后面添加相应UA的hide-user-agent
 
 <details>
-<summary>view code</summary>
+<summary><code>view code</code>(此部分为折叠内容)</summary>
 
 <pre><code class="language-filter line-numbers">
 #hide-user-agent
@@ -331,7 +331,7 @@ cd .. && make package/ODP/compile
 在<strong>etc/privoxy/default.filter</strong>文件后面添加相应UA的hide-user-agent
 
 <details>
-<summary>view code</summary>
+<summary><code>view code</code>(此部分为折叠内容)</summary>
 
 <pre><code class="language-action line-numbers">
 ####################### Android System  #################
