@@ -18,7 +18,7 @@ tags:
 *************************
 ### <center> <font face="楷体">零 . 安装Mysql</font> </center>
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装Mysql </font></center></strong>
-<pre><code class="language-bash">
+<pre><code class="language-bash line-numbers">
 sudo apt-get install mysql-server
 sudo apt-get install mysql-client
 sudo apt-get install libmysqlclient-dev
