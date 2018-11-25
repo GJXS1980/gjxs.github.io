@@ -60,14 +60,14 @@ sudo cp libmsc.so /usr/lib/libmsc.so
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.语音听写 </font></center></strong>
 程序源代码(`iat_publish.cpp`)如下:
 
-<pre><code class="language-cpp">
+```cpp
 /*
 * 语音听写(iFly Auto Transform)技术能够实时地将语音转换成对应的文字。
 */
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
+#include "stdlib.h"
+#include "stdio.h"
+#include "string.h"
+#include "unistd.h"
 #include "robot_voice/qisr.h"
 #include "robot_voice/msp_cmn.h"
 #include "robot_voice/msp_errors.h"
@@ -214,9 +214,9 @@ exit:
     MSPLogout(); // Logout...
     return 0;
 }
-</code>
-</pre>
+```
 
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.语音听写 </font></center></strong>
 <ul>
 <li>subscriber用来接收语音唤醒信号,接收到唤醒信号之后,会将wakeupFlag变量置位</li><br>
 <li>主循环中调用SDK的语音听写功能,识别成功后置位resultFlag变量,通过Publisher将识别出来的字符串发布</li><br>
@@ -249,7 +249,7 @@ rostopic echo /voiceWords
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.语音合成 </font></center></strong>
 程序源代码(`tts_subscribe.cpp`)如下:
-<pre><code class="language-cpp">
+```cpp
 /*
 * 语音合成（Text To Speech，TTS）技术能够自动将任意文字实时转换为连续的
 * 自然语音，是一种能够在任何时间、任何地点，向任何人提供语音信息服务的
@@ -474,8 +474,7 @@ exit:
 
     return 0;
 }
-</code>
-</pre>
+```
 
 <ul>
 <li>`main函数`中声明了一个订阅`voiceWords`话题的`subscriber`,接收输入的语音字符串</li><br>
@@ -521,7 +520,7 @@ Failed to open LIRC support. You will not be able to use your remote control.
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.智能语音助手 </font></center></strong>
 程序源代码(`voice_assistant.cpp`)如下:
-<pre><code class="language-cpp">
+```cpp
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
@@ -775,22 +774,22 @@ exit:
 
     return 0;
 }
-</code>
-</pre>
+```
+
 在`CMakeLists.txt`中加入编译规则
-<pre><code class="language-cmake">
+<pre><code class="language-makefile">
 add_executable(voice_assistant src/voice_assistant.cpp)
 target_link_libraries(
    voice_assistant
    ${catkin_LIBRARIES} 
    libmsc.so -ldl -pthread
  )
-</code>
-</pre>
+</code></pre>
+
 <ul>
 <li>智能语音助手示例</li><br>
 </ul>
-<pre><code class="language-bash">
+<pre><code class="language-vim">
 roscore
 rosrun robot_voice iat_publish
 rosrun robot_voice voice_assistant
