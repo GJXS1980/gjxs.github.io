@@ -58,8 +58,7 @@ sudo cp libmsc.so /usr/lib/libmsc.so
 >说明:科大讯飞的SDK带有ID号,每个人每次下载后的ID都不相同,更换SDK之后需要修改代码中的APPID
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.语音听写 </font></center></strong>
-程序源代码(`iat_publish.cpp`)如下:
-
+程序源代码(`iat_publish.cpp`)如下:<br>
 ```cpp
 /*
 * 语音听写(iFly Auto Transform)技术能够实时地将语音转换成对应的文字。
@@ -215,8 +214,6 @@ exit:
     return 0;
 }
 ```
-
-### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.语音听写 </font></center></strong>
 <ul>
 <li>subscriber用来接收语音唤醒信号,接收到唤醒信号之后,会将wakeupFlag变量置位</li><br>
 <li>主循环中调用SDK的语音听写功能,识别成功后置位resultFlag变量,通过Publisher将识别出来的字符串发布</li><br>
