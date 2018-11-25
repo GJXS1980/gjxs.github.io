@@ -41,7 +41,8 @@ tags:
 </p>
 进固件作者网站查找对应[u-boot](http://rssn.cn/roms/uboot/),下载自己路由器对应版本的固件, 以极路由1S HC5661A为例,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/hiwifi.png" alt="MQTT Logo">
-<pre class="language-bash line-numbers"><code>
+<!--  <pre class="language-bash line-numbers"><code>   -->
+<pre class="line-numbers"><code class="language-bash">
 #连上路由器后台，进入tmp目录下
 cd /tmp
 #下载对应版本的U-Root
