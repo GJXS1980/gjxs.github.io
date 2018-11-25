@@ -14,7 +14,7 @@ tags:
     - OpenCV
 ---
 *****
->Abstract: "ROS中的图像数据的定义,摄像头标定,ROS+OpenCV应用实例(人脸识别物体跟踪)及二维码的识别。"<br>                                                                                                                                          <br /> 
+><strong>Abstract:</strong> "ROS中的图像数据的定义,摄像头标定,ROS+OpenCV应用实例(人脸识别物体跟踪)及二维码的识别。"<br>                                                                                                                        <br /> 
 
 ----------
 

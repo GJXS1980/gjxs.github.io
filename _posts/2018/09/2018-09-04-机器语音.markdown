@@ -19,12 +19,8 @@ tags:
 ----------
 
 *************************
-### <center> ROS下的机器语音概述 </center>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 语音识别的理论模型 &nbsp;—</span>
-    </strong>
-</p>
+### <center> <font face="楷体">壹 . ROS下的机器语音概述</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.语音识别的理论模型 </font></center></strong>
 <div class="mermaid">
 graph LR;
     st[语音输入]-->op[预处理];
@@ -39,22 +35,14 @@ graph LR;
     op3[模板库]-->op2[模板匹配];
     op7[专家知识库]-->op4[判决];
 </div>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 常用功能包 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.常用功能包 </font></center></strong>
 <ul>
 <li> <code>pocketsphinx</code>：集成CMU Sphinx和Festival开源项目中的代码,实现语音识别的功能.</li>
 <li> <code>audio-common</code>：提供文本转语音(Text-to-speech,TTS)的功能实现完成"机器人说话"的想法</li>
 <li> <code>AIML</code>：人工智能标记语言,Artifical Intelligence Markup Language,是一种创建自然语言软件代理的XML语言.</li>
 </ul>
-### <center> 科大讯飞SDK </center>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 下载及配置 &nbsp;—</span>
-    </strong>
-</p>
+### <center> <font face="楷体">贰 . 科大讯飞SDK</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.下载及配置 </font></center></strong>
 <ul>
 <li>下载SDK</li><br>
 </ul>
@@ -62,23 +50,20 @@ graph LR;
 <ul>
 <li>将科大讯飞SDK库文件拷到系统目录</li><br>
 </ul>
-```bash
+<pre><code class="language-bash">
 #找到相应的版本(一般都是64位)
 sudo cp libmsc.so /usr/lib/libmsc.so
-```
+</code>
+</pre>
 >说明:科大讯飞的SDK带有ID号,每个人每次下载后的ID都不相同,更换SDK之后需要修改代码中的APPID
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 语音听写 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.语音听写 </font></center></strong>
 程序源代码(`iat_publish.cpp`)如下:
-```cpp
+
+<pre><code class="language-cpp">
 /*
 * 语音听写(iFly Auto Transform)技术能够实时地将语音转换成对应的文字。
 */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -88,16 +73,12 @@ sudo cp libmsc.so /usr/lib/libmsc.so
 #include "robot_voice/msp_errors.h"
 #include "robot_voice/speech_recognizer.h"
 #include <iconv.h>
-
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-
 #define FRAME_LEN   640 
 #define BUFFER_SIZE 4096
-
 int wakeupFlag   = 0 ;
 int resultFlag   = 0 ;
-
 static void show_result(char *string, char is_over)
 {
     resultFlag=1;   
@@ -105,10 +86,8 @@ static void show_result(char *string, char is_over)
     if(is_over)
         putchar('\n');
 }
-
 static char *g_result = NULL;
 static unsigned int g_buffersize = BUFFER_SIZE;
-
 void on_result(const char *result, char is_last)
 {
     if (result) {
@@ -127,7 +106,6 @@ void on_result(const char *result, char is_last)
         show_result(g_result, is_last);
     }
 }
-
 void on_speech_begin()
 {
     if (g_result)
@@ -137,7 +115,6 @@ void on_speech_begin()
     g_result = (char*)malloc(BUFFER_SIZE);
     g_buffersize = BUFFER_SIZE;
     memset(g_result, 0, g_buffersize);
-
     printf("Start Listening...\n");
 }
 void on_speech_end(int reason)
@@ -147,21 +124,17 @@ void on_speech_end(int reason)
     else
         printf("\nRecognizer error %d\n", reason);
 }
-
 /* demo recognize the audio from microphone */
 static void demo_mic(const char* session_begin_params)
 {
     int errcode;
     int i = 0;
-
     struct speech_rec iat;
-
     struct speech_rec_notifier recnotifier = {
         on_result,
         on_speech_begin,
         on_speech_end
     };
-
     errcode = sr_init(&iat, session_begin_params, SR_MIC, &recnotifier);
     if (errcode) {
         printf("speech recognizer init failed\n");
@@ -178,36 +151,29 @@ static void demo_mic(const char* session_begin_params)
     if (errcode) {
         printf("stop listening failed %d\n", errcode);
     }
-
     sr_uninit(&iat);
 }
-
-
 /* main thread: start/stop record ; query the result of recgonization.
  * record thread: record callback(data write)
  * helper thread: ui(keystroke detection)
  */
-
 void WakeUp(const std_msgs::String::ConstPtr& msg)
 {
     printf("waking up\r\n");
     usleep(700*1000);
     wakeupFlag=1;
 }
-
 int main(int argc, char* argv[])
 {
     // 初始化ROS
     ros::init(argc, argv, "voiceRecognition");
     ros::NodeHandle n;
     ros::Rate loop_rate(10);
-
     // 声明Publisher和Subscriber
     // 订阅唤醒语音识别的信号
     ros::Subscriber wakeUpSub = n.subscribe("voiceWakeup", 1000, WakeUp);   
     // 订阅唤醒语音识别的信号    
     ros::Publisher voiceWordsPub = n.advertise<std_msgs::String>("voiceWords", 1000);  
-
     ROS_INFO("Sleeping...");
     int count=0;
     while(ros::ok())
@@ -217,29 +183,22 @@ int main(int argc, char* argv[])
             ROS_INFO("Wakeup...");
             int ret = MSP_SUCCESS;
             const char* login_params = "appid = 594a7b46, work_dir = .";
-
             const char* session_begin_params =
                 "sub = iat, domain = iat, language = zh_cn, "
                 "accent = mandarin, sample_rate = 16000, "
                 "result_type = plain, result_encoding = utf8";
-
             ret = MSPLogin(NULL, NULL, login_params);
             if(MSP_SUCCESS != ret){
                 MSPLogout();
                 printf("MSPLogin failed , Error code %d.\n",ret);
             }
-
             printf("Demo recognizing the speech from microphone\n");
             printf("Speak in 10 seconds\n");
-
             demo_mic(session_begin_params);
-
-            printf("10 sec passed\n");
-        
+            printf("10 sec passed\n");       
             wakeupFlag=0;
             MSPLogout();
         }
-
         // 语音识别完成
         if(resultFlag){
             resultFlag=0;
@@ -247,24 +206,23 @@ int main(int argc, char* argv[])
             msg.data = g_result;
             voiceWordsPub.publish(msg);
         }
-
         ros::spinOnce();
         loop_rate.sleep();
         count++;
     }
-
 exit:
     MSPLogout(); // Logout...
-
     return 0;
 }
-```
+</code>
+</pre>
+
 <ul>
 <li>subscriber用来接收语音唤醒信号,接收到唤醒信号之后,会将wakeupFlag变量置位</li><br>
 <li>主循环中调用SDK的语音听写功能,识别成功后置位resultFlag变量,通过Publisher将识别出来的字符串发布</li><br>
 </ul>
 在`CMakeLists.txt`中加入编译规则
-```cmake
+<pre><code class="language-cmake">
 add_executable(iat_publish 
   src/iat_publish.cpp 
   src/speech_recognizer.c 
@@ -274,24 +232,24 @@ target_link_libraries(
    ${catkin_LIBRARIES} 
    libmsc.so -ldl -lpthread -lm -lrt -lasound
  )
-```
+</code>
+</pre>
+
 <ul>
 <li>语音听写示例</li><br>
 </ul>
-```bash
+<pre><code class="language-bash">
 roscore
 rosrun robot_voice iat_publish
 rostopic pub /voiceWakeup std_msgs/String "data: '110'"
 #查看输入的语音
 rostopic echo /voiceWords
-```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 语音合成 &nbsp;—</span>
-    </strong>
-</p>
+</code>
+</pre>
+
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.语音合成 </font></center></strong>
 程序源代码(`tts_subscribe.cpp`)如下:
-```cpp
+<pre><code class="language-cpp">
 /*
 * 语音合成（Text To Speech，TTS）技术能够自动将任意文字实时转换为连续的
 * 自然语音，是一种能够在任何时间、任何地点，向任何人提供语音信息服务的
@@ -516,50 +474,54 @@ exit:
 
     return 0;
 }
-```
+</code>
+</pre>
+
 <ul>
 <li>`main函数`中声明了一个订阅`voiceWords`话题的`subscriber`,接收输入的语音字符串</li><br>
 <li>回调函数voiceWordCallback中使用SDK接口将字符串转换成中文语音</li><br>
 </ul>
 在`CMakeLists.txt`中加入编译规则
-```cmake
+<pre><code class="language-cmake">
 add_executable(tts_subscribe src/tts_subscribe.cpp)
 target_link_libraries(
    tts_subscribe
    ${catkin_LIBRARIES} 
    libmsc.so -ldl -pthread
  )
-```
+</code>
+</pre>
+
 <ul>
 <li>语音合成示例</li><br>
 </ul>
-```bash
+<pre><code class="language-bash">
 #安装mplayer
 sudo apt-get install mplayer
 #启动例程
 roscore
 rosrun robot_voice tts_subscribe
 rostopic pub /voiceWords std_msgs/String "data: '你好,我是机器人'" 
-```
+</code>
+</pre>
 出现下面的问题时
-```
+
+<pre><code class="language-log line-numbers">
 mplayer: could not connect to socket
 mplayer: No such file or directory
 Failed to open LIRC support. You will not be able to use your remote control.
-```
+</code>
+</pre>
 主要是`mplayer`配置导致,解决方法如下:
-```
+<pre><code class="language-log line-numbers">
 在$HOME/.mplayer/config文件中添加如下配置:lirc=no
-```
+</code>
+</pre>
 >没有这个文件夹的就重新创建一个
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 智能语音助手 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.智能语音助手 </font></center></strong>
 程序源代码(`voice_assistant.cpp`)如下:
-```cpp
+<pre><code class="language-cpp">
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
@@ -802,13 +764,10 @@ int main(int argc, char* argv[])
     printf("## 自然语音，是一种能够在任何时间、任何地点，向任何人提供语音信息服务的  ##\n");
     printf("## 高效便捷手段，非常符合信息时代海量数据、动态更新和个性化查询的需求。  ##\n");
     printf("###########################################################################\n\n");
-
-
     ros::init(argc,argv,"TextToSpeech");
     ros::NodeHandle n;
     ros::Subscriber sub =n.subscribe("voiceWords", 1000,voiceWordsCallback);
     ros::spin();
-
 exit:
     printf("按任意键退出 ...\n");
     getchar();
@@ -816,25 +775,28 @@ exit:
 
     return 0;
 }
-```
+</code>
+</pre>
 在`CMakeLists.txt`中加入编译规则
-```cmake
+<pre><code class="language-cmake">
 add_executable(voice_assistant src/voice_assistant.cpp)
 target_link_libraries(
    voice_assistant
    ${catkin_LIBRARIES} 
    libmsc.so -ldl -pthread
  )
-```
+</code>
+</pre>
 <ul>
 <li>智能语音助手示例</li><br>
 </ul>
-```bash
+<pre><code class="language-bash">
 roscore
 rosrun robot_voice iat_publish
 rosrun robot_voice voice_assistant
 rostopic pub /voiceWakeup std_msgs/String "data: 'HELLO'" 
-```
+</code>
+</pre>
 
 *************************
 <style>
