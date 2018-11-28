@@ -229,7 +229,7 @@
     function generateCatalog (selector) {
 
         // interop with multilangual
-        if ("{{ page.multilingual }}") {
+        if ("{{ page.multilingual }}" == 'true') {
             _containerSelector = 'div.post-container.active'
         } else {
             _containerSelector = 'div.post-container'
@@ -349,7 +349,7 @@
 
 
 <!-- async load function -->
-<!--
+
 <script>
     function async(u, c) {
       var d = document, t = 'script',
@@ -360,16 +360,16 @@
       s.parentNode.insertBefore(o, s);
     }
 </script>
--->
+
 <!-- Highlight.js -->
-<!--
+
 <script>
     async("//cdn.bootcss.com/highlight.js/9.4.0/highlight.min.js",function(){
         hljs.initHighlightingOnLoad();
     })
 </script>
 <link href="//cdn.bootcss.com/highlight.js/9.4.0/styles/github.min.css" rel="stylesheet">
-
+<!--
 <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
       opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
     <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="文章标题 日期 标签" >
@@ -387,7 +387,7 @@
 
 <script src="{{ "/search/js/bootstrap3-typeahead.min.js" | prepend: site.baseurl }}"></script>
 <script src="{{ "/search/js/cb-search.js" | prepend: site.baseurl }}"></script>
-
+-->
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -397,7 +397,7 @@ var _hmt = _hmt || [];
                 s.parentNode.insertBefore(hm, s);
 })();
 </script>
--->
+
 
 <a id="rocket" href="#top" class=""></a>
 <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>

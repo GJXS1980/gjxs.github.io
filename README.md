@@ -97,3 +97,7 @@ document.body.addEventListener('input', POWERMODE);
 <script src="/js/prism.js"></script>
 ```
 下载官方的可能有问题,可以参考这两个:[prism.css](https://github.com/weijunzii/weijunzii.github.io/blob/master/assets/css/prism.css)和[prism.js](https://github.com/weijunzii/weijunzii.github.io/blob/master/assets/js/prism.js)
+##### (7)添加搜索功能
+在右上角添加搜索功能.参考[Soptq.github.io](https://github.com/Soptq/Soptq.github.io)
+
+
