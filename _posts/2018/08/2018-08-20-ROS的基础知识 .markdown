@@ -16,23 +16,15 @@ tags:
 
 ----------
 *************************
-### <center> 话题编程 </center>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 话题编程流程 &nbsp;—</span>
-    </strong>
-</p>
+### <center> <font face="楷体">壹 . 话题编程</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.话题编程流程 </font></center></strong>
 <ul>
 <li>(1)创建发布者</li><br>
 <li>(2)创建订阅者</li><br>
 <li>(3)添加编译选项</li><br>
 <li>(4)运行可执行程序</li><br>
 </ul>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 创建发布者 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.创建发布者 </font></center></strong>
 <ul>
 <li>(1)初始化ROS节点</li><br>
 <li>(2)向ROS Master注册节点信息，包括发布的话题名和话题中的信息类型</li><br>
@@ -150,11 +142,7 @@ loop_rate.sleep();
 ```
 >以10hz频率发布消息之后延时，减轻计算机的内存负担
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 创建订阅者 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.创建订阅者 </font></center></strong>
 <ul>
 <li>(1)初始化ROS节点</li><br>
 <li>(2)订阅需要的话题</li><br>
@@ -211,11 +199,7 @@ ros::spin();
 ```
 >回调函数，当接收到消息时就进入循环，如果没有就等待
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 编译代码 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.编译代码 </font></center></strong>
 <ul>
 <li>(1)设置需要编译代码和生成的可执行文件</li><br>
 <li>(2)设置链接库</li><br>
@@ -229,11 +213,7 @@ add_executable(listener src/listener.cpp)
 target_link_libraries(talker ${catkin_LIBRARIES})
 target_link_libraries(listener ${catkin_LIBRARIES})
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 运行可执行文件 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.运行可执行文件 </font></center></strong>
 打开终端：
 ```bash
 roscore
@@ -246,11 +226,7 @@ rosrun learning_communication talker
 ```bash
 rosrun learning_communication listener
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 自定义话题消息 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 6.自定义话题消息 </font></center></strong>
 <strong>步骤：</strong>
 <ul>
 <li>(0)在src目录下新建msg文件夹</li><br>
@@ -291,24 +267,15 @@ rosmsg show Person
 ```
 
 *************************
-
-### <center> 服务编程 </center>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 服务编程流程 &nbsp;—</span>
-    </strong>
-</p>
+### <center> <font face="楷体">贰 . 服务编程</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.服务编程流程 </font></center></strong>
 <ul>
 <li>(1)创建服务器</li><br>
 <li>(2)创建客户端</li><br>
 <li>(3)添加编译选项</li><br>
 <li>(4)运行可执行程序</li><br>
 </ul>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 自定义服务请求与应答 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.自定义服务请求与应答 </font></center></strong>
 (1)定义srv文件(`AddTwoInts.srv`)
 ```srv
 int64 a
@@ -334,11 +301,7 @@ rospy std_msgs message_runtime)
 
 add_service_files(FILES AddTwoInts.srv)
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 创建服务器 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.创建服务器 </font></center></strong>
 <ul>
 <li>(1)初始化ROS节点</li><br>
 <li>(2)创建Server实例</li><br>
@@ -383,11 +346,7 @@ int main(int argc, char **argv)
   return 0;
 }
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 创建客户端 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.创建客户端 </font></center></strong>
 <ul>
 <li>(1)初始化ROS节点</li><br>
 <li>(2)创建一个Client实例</li><br>
@@ -444,11 +403,7 @@ int main(int argc, char **argv)
   return 0;
 }
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 编译代码 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.编译代码 </font></center></strong>
 <ul>
 <li>(1)设置需要编译的代码和生成的可执行文件</li><br>
 <li>(2)设置链接库</li><br>
@@ -464,11 +419,7 @@ target_link_libraries(client ${catkin_LIBRARIES})
 add_dependencies(client ${PROJECT_NAME}_gencpp)
 
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 运行可执行文件 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 6.运行可执行文件 </font></center></strong>
 ```bash
 roscore
 ```
@@ -482,12 +433,8 @@ rosrun learning_communication client 4 8
 ```
 
 *************************
-### <center> 动作编程 </center>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 什么是动作编程 &nbsp;—</span>
-    </strong>
-</p>
+### <center> <font face="楷体">叁 . 动作编程</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.什么是动作编程 </font></center></strong>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/action.png" alt="action">
 <p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
     <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
@@ -496,11 +443,7 @@ rosrun learning_communication client 4 8
 </span>
 <br>
 </p>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 自定义动作消息 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.自定义动作消息 </font></center></strong>
 (1)定义action文件(`DoDishes.action`)
 ```
 # Define the goal
@@ -525,11 +468,7 @@ find_package(catkin REQUIRED actionlib_msgs actionlib)
 add_action_files(DIRECTORY action FILES DoDishes.action)
 generate_messages(DEPENDENCIES actionlib_msgs)
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 实现一个动作服务器 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.实现一个动作服务器 </font></center></strong>
 <ul>
 <li>(1)初始化ROS节点</li><br>
 <li>(2)创建动作服务器实例</li><br>
@@ -583,11 +522,7 @@ int main(int argc, char** argv)
     return 0;
 }
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 实现一个动作客户端 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.实现一个动作客户端 </font></center></strong>
 <ul>
 <li>(1)初始化ROS节点</li><br>
 <li>(2)创建动作客户端实例</li><br>
@@ -646,11 +581,7 @@ int main(int argc, char** argv)
     return 0;
 }
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 编译代码 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.编译代码 </font></center></strong>
 <ul>
 <li>(1)设置需要编译的代码和生成的可执行文件</li><br>
 <li>(2)设置链接库</li><br>
@@ -665,11 +596,7 @@ add_executable(DoDishes_server src/DoDishes_server.cpp)
 target_link_libraries( DoDishes_server ${catkin_LIBRARIES})
 add_dependencies(DoDishes_server ${${PROJECT_NAME}_EXPORTED_TARGETS})
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 运行可执行文件 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 6.运行可执行文件 </font></center></strong>
 ```bash
 roscore
 ```
