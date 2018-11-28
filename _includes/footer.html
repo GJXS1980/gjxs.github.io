@@ -108,12 +108,13 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/gjxs-blog.min.js " | prepend: site.baseurl }}"></script>
 
+<!-- script pointing to jekyll-search.js -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
 <!-- Service Worker -->
 {% if site.service-worker %}
 <script src="{{ "/js/snackbar.js " | prepend: site.baseurl }}"></script>
 <script src="{{ "/js/sw-registration.js " | prepend: site.baseurl }}"></script>
-
-
 {% endif %}
 
 <!-- async load function -->
@@ -147,7 +148,7 @@
     <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
 -->
 
-
+{% if page.title == 'Archive' %}
 <!-- jquery.tagcloud.js -->
 <script>
     // only load tagcloud.js in tag.html
@@ -161,6 +162,8 @@
         })
     }
 </script>
+<script src='{{ "/js/archive.js " | prepend: site.baseurl }}'></script>
+ {% endif %}
 
 <!--fastClick.js -->
 <script>
@@ -222,7 +225,6 @@
 
 <!-- Side Catalog -->
 {% if page.catalog %}
-
 <script type="text/javascript">
     function generateCatalog (selector) {
 
@@ -282,6 +284,16 @@
 </script>
 {% endif %}
 
+ <script>
+     SimpleJekyllSearch({
+         searchInput: document.getElementById('search-input'),
+         resultsContainer: document.getElementById('results-container'),
+         json: '/search.json',
+         searchResultTemplate: '<li><a href="{url}">{title}</a></li>',
+         noResultsText: 'No results found',
+         fuzzy: true
+     });
+ </script>
 
 <!-- Multi-Lingual -->
 {% if page.multilingual %}
@@ -337,6 +349,7 @@
 
 
 <!-- async load function -->
+<!--
 <script>
     function async(u, c) {
       var d = document, t = 'script',
@@ -347,8 +360,9 @@
       s.parentNode.insertBefore(o, s);
     }
 </script>
-
+-->
 <!-- Highlight.js -->
+<!--
 <script>
     async("//cdn.bootcss.com/highlight.js/9.4.0/highlight.min.js",function(){
         hljs.initHighlightingOnLoad();
@@ -383,7 +397,7 @@ var _hmt = _hmt || [];
                 s.parentNode.insertBefore(hm, s);
 })();
 </script>
-
+-->
 
 <a id="rocket" href="#top" class=""></a>
 <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
