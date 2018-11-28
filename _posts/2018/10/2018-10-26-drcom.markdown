@@ -190,7 +190,7 @@ cd .. && make package/ODP/compile
 通过<code>WinSCP</code>进入路由器后台,打开<code>etc/privoxy/default.action</code>文件,<code>在文件最后面添加下面折叠部分的内容:</code>
 <details><summary><code>view code</code>(此部分为折叠内容)</summary>
 
-<pre><code class="language-filter line-numbers">
+<pre><code class="language-action line-numbers">
 #hide-user-agent
 {+client-header-filter{android}}
 /
@@ -323,7 +323,7 @@ cd .. && make package/ODP/compile
 打开<code>etc/privoxy/default.filter</code>文件,在文件最后面<code>添加下面折叠部分的内容:</code>
 <details><summary><code>view code</code>(此部分为折叠内容)</summary>
 
-<pre><code class="language-action line-numbers">
+<pre><code class="language-filter line-numbers">
 ####################### Android System  #################
 CLIENT-HEADER-FILTER: android Replace all "Android" with ""
 s@\b(Android)\b@@ig
