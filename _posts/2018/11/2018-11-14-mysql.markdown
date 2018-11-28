@@ -31,7 +31,7 @@ sudo netstat -tap | grep mysql
 </pre>
 
 *************************
-### <center> <font face="楷体">贰 . 修改初始密码</font> </center>
+### <center> <font face="楷体">壹 . 修改初始密码</font> </center>
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.查看初始密码 </font></center></strong>
 <pre><code class="language-bash">
 sudo gedit /etc/mysql/debian.cnf
