@@ -521,7 +521,13 @@ s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
 </code>
 </pre>
 </details>
-### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.使环境生效 </font></center></strong>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.添加每天自动重启 </font></center></strong>
+进入<code>路由器网页版后台</code>,找到<code>系统-->计划任务</code>,在框里添加下面代码:
+```crontab
+00 6 * * * sleep 5 && touch /etc/banner && reboot
+```
+<code>每天早上6点钟会自动重启路由器<code>,如果你想要其他时间重启,可以改成其他时间.
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 6.使环境生效 </font></center></strong>
 <pre><code class="language-vim ">
 iptables -t nat -N PrivoxyUA
 iptables -t nat -A PREROUTING -i br-lan -p tcp -j PrivoxyUA
