@@ -145,11 +145,7 @@ tags:
 
 *************************
 ### <center> <font face="楷体">贰 . TF坐标变换</font> </center>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; TF坐标变换概述 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.TF坐标变换概述 </font></center></strong>
 <strong>TF功能包的作用：</strong>
 <ul>
 <li>TF功能包可以保留五秒钟内机器人的坐标系相当于全局坐标系的相对位置(关系)</li>
@@ -173,11 +169,7 @@ rosrun tf view_frames
 rosrun tf tf_echo turtle1 turtle2
 rosrun rviz rviz -d `rospack find turtle_tf` /rviz/turtle_rviz.rviz
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 实现一个TF广播器 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.实现一个TF广播器 </font></center></strong>
 <strong>(1)定义TF广播器(`TransformBroadcaster`)</strong><br>
 <strong>(2)创建坐标变换值</strong><br>
 <strong>(3)发布坐标变换(`sendTransform`)</strong><br>
@@ -232,11 +224,7 @@ int main(int argc, char** argv)
     return 0;
 };
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; TF监听器 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.TF监听器 </font></center></strong>
 <strong>(1)定义TF监听器(`TransformListener`)</strong><br>
 <strong>(2)查找坐标变换(`waitForTransform、 lookupTransform`)</strong><br>
 实例(`turtle_tf_listener.cpp`):
@@ -308,11 +296,7 @@ int main(int argc, char** argv)
     return 0;
 };
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 编译代码 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.编译代码 </font></center></strong>
 <strong>(1)设置需要编译的代码和生成的可执行文件</strong><br>
 <strong>(2)设置链接库</strong><br>
 实例(`cmakelists.txt`)如下:
@@ -348,11 +332,7 @@ target_link_libraries(turtle_tf_listener ${catkin_LIBRARIES})
   <exec_depend>tf</exec_depend>
   <exec_depend>turtlesim</exec_depend>
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 编写launch文件 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.编写launch文件 </font></center></strong>
 实例(`start_demo_with_listener.launch`)如下：
 ```xml
  <launch>
