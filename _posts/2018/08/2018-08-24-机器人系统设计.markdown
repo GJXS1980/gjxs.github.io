@@ -17,18 +17,10 @@ tags:
 
 ----------
 *************************
-### <center> URDF机器人建模 </center>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; URDF文件概述 &nbsp;—</span>
-    </strong>
-</p>
+### <center> <font face="楷体">壹 . URDF机器人建模</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.URDF文件概述 </font></center></strong>
 <strong> URDF </strong>：即<code>Unified Robot Description Format</code>,为统一的机器人描述格式，是ROS中一个非常重要的机器人`模型描述格式`。ROS可以解析文件中使用`XML格式`描述的机器人模型，同时提供URDF文件的`C++解析器`。<br>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;link&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.&lt;link&gt;标签 </font></center></strong>
 <strong>&lt;link&gt;标签</strong>：描述机器人某个刚体部分的外观和物理属性，例如：`尺寸`(size)、`颜色`(color)、`形状`(shape)、`惯性矩阵`(inertial matrix)、`碰撞参数`(collision properties)等。<br>
 | <visual\> | 描述机器人link部分的外观参数 | 
 | <inertial\> | 描述link的惯性参数 | 
@@ -50,11 +42,7 @@ tags:
 </span>
 <br>
 </p>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; &lt;joint&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.&lt;joint&gt;标签 </font></center></strong>
 <strong>&lt;joint&gt;标签</strong>:描述机器人关节的`运动学`和`动力学`属性，包括关节运动的`位置`和`速度限制`。根据关节运动形式，可以将其分为六种类型：<br>
 
 | 关节类型 | 描述 | 
@@ -93,11 +81,7 @@ tags:
 </span>
 <br>
 </p>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; &lt;robot&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.&lt;robot&gt;标签 </font></center></strong>
 <strong>&lt;robot&gt;标签</strong>:是机器人模型的最顶层标签，<link\>和<joint\>标签都必须包括在<robot\>标签内，一个完整的机器人模型就是由一系列<link\>和<joint\>组成。<br>
 例子如下：<br>
 ```xml
@@ -118,11 +102,7 @@ tags:
 </span>
 <br>
 </p>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 创建机器人建模功能包 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.创建机器人建模功能包 </font></center></strong>
 ```bash
 catkin_create_pkg mbot_description urdf xacro
 ```
@@ -132,11 +112,7 @@ catkin_create_pkg mbot_description urdf xacro
 <li> <code>launch</code>：保存相关启动文件； </li>
 <li> <code>config</code>:保存rviz的配置文件。 </li>
 </ul>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 创建一个launch文件(display_mbot_base_urdf.launch) &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 6.创建一个launch文件(display_mbot_base_urdf.launch) </font></center></strong>
 ```xml
 <launch>
     <param name="robot_description" textfile="$(find mbot_description)/urdf/mbot_base.urdf" />
@@ -158,11 +134,7 @@ catkin_create_pkg mbot_description urdf xacro
 <li> <code>joint_state_publisher</code>:发布每个joint（除fixed类型）的状态，而且可以通过UI界面对joint金星控制；</li>
 <li> <code>robot_state_publisher</code>:将机器人各个links、joints之间的关系，通过TF的形式，整理成三维姿态信息发布。 </li>
 </ul>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 创建一个urdf文件(mbot_base.urdf) &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 7.创建一个urdf文件(mbot_base.urdf) </font></center></strong>
 ```xml
 <?xml version="1.0" ?>
 <robot name="mbot">
@@ -257,20 +229,12 @@ catkin_create_pkg mbot_description urdf xacro
 
 </robot>
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 检查URDF模型整体结构 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 8.检查URDF模型整体结构 </font></center></strong>
 ```bash
 urdf_to_graphiz mbot_base.urdf
 
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; URDF建模存在的问题 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 9.URDF建模存在的问题 </font></center></strong>
 <ul>
 <li> 模型冗长，重复内容过多；</li>
 <li> 参数修改麻烦，不便于二次开发： </li>
@@ -279,12 +243,8 @@ urdf_to_graphiz mbot_base.urdf
 </ul>
 
 *************************
-### <center> 优化URDF模型--xacro模型文件 </center>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; xacro模型文件特点概述 &nbsp;—</span>
-    </strong>
-</p>
+### <center> <font face="楷体">贰 . 优化URDF模型--xacro模型文件</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.xacro模型文件特点概述 </font></center></strong>
 <strong>精简模型代码</strong>
 <ul>
 <li> 创建宏定义</li>
@@ -297,65 +257,37 @@ urdf_to_graphiz mbot_base.urdf
 <li> 数学计算</li>
 <li> 条件语句 </li>
 </ul>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 常量定义 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.常量定义 </font></center></strong>
 ```xml
 <xacro:property name="M_PI" value="3.14159"/>
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 常量使用 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.常量使用 </font></center></strong>
 ```xml
 <origin xyz="0 0 0" rpy="${M_PI/2} 0 0"/>
 ```
 >用法：${name} <br>
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 数学计算 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.数学计算 </font></center></strong>
 ```xml
 <origin xyz="0 ${(motor_length+wheel_length)/2} 0" rpy="0 0 0"/>
 ```
 >注意：所有数学运算都会转换成浮点数进行，以保证运算精度。
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 宏定义 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.宏定义 </font></center></strong>
 ```xml
 <xacro:macro name="name" params="A B C">
     ……
 </xacro:macro>
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 宏调用 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 6.宏调用 </font></center></strong>
 ```xml
 <name A="A_value" B="B_value" C="C_value" />
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 文件包含 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 7.文件包含 </font></center></strong>
 ```xml
 <xacro:include filename="$(find mbot_description)/urdf/xacro/mbot_base.xacro" />
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 模型显示 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 8.模型显示 </font></center></strong>
 <strong>方法一：将xacro文件转换成URDF文件后显示</strong>>
 ```bash
 rosrun xacro xacro.py mbot.xacro > mbot.urdf
@@ -368,11 +300,7 @@ rosrun xacro xacro.py mbot.xacro > mbot.urdf
 <param name="robot_description" command="$(arg model)" />
 
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp; 实例 &nbsp;—</span>
-    </strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 9.实例 </font></center></strong>
 <strong>(`mbot.xacro`)</strong>
 ```xml
 <?xml version="1.0"?>

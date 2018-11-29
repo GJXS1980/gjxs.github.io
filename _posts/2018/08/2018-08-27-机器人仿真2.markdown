@@ -19,16 +19,14 @@ tags:
 
 ----------
 *************************
-### <center> 前言--ros_control </center> 
-<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;ros_control</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的介绍</span>&nbsp;—</span></strong>
-</p>
+### <center> <font face="楷体">零 . 前言--ros_control</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.ros_control的介绍 </font></center></strong>
 <ul>
 <li> ROS为开发者提供的机器人控制中间件</li>
 <li> 包括一系列控制器接口、传动装置接口、硬件接口、控制器工具箱等等 </li>
 <li> 可以帮助机器人应用功能包快速落地，提高开发效率</li>
 </ul>
-<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;ros_control</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的总体框架</span>&nbsp;—</span></strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.ros_control的总体框架 </font></center></strong>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control1.png" alt="ros_control的总体框架">
 <p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
     <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
@@ -37,8 +35,7 @@ tags:
 </span>
 <br>
 </p>
-<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;ros_control</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的控制器数据流图</span>&nbsp;—</span></strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.ros_control的控制器数据流图 </font></center></strong>
 <img src="http://pdpv2lxdq.bkt.clouddn.com/ros_control2.png" alt="控制器数据流图">
 <p style="margin-right: 16px;margin-left: 16px;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: justify;white-space: normal;box-sizing: border-box !important;word-wrap: break-word !important;">
     <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;"></span>
@@ -54,8 +51,7 @@ tags:
 <li> <code>机器人硬件抽象</code>:机器人硬件抽象和硬件资源直接打交道，通过write和read方法完成硬件操作。 </li>
 <li> <code>真实机器人</code>:执行接收到的命令。 </li>
 </ul>
-<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;ros_control</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">的控制器</span>&nbsp;—</span></strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.ros_control的控制器 </font></center></strong>
 <ul>
 <li> <code>joint_effort_controller</code></li>
 <li> <code>joint_state_controller</code></li>

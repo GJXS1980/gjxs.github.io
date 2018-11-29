@@ -18,7 +18,7 @@ tags:
 
 ----------
 *************************
-### <center> ArbotiX功能包的概述 </center>
+### <center> <font face="楷体">壹 . ArbotiX功能包的概述</font> </center>
 `ArbotiX`是一款控制电机、舵机的`硬件控制板`。<br>
 <ul>
 <li> 提供相应的ROS功能包；</li>
@@ -26,9 +26,8 @@ tags:
 </ul>
 >arbotix_ros中的python文件需要添加可执行权限
 
-### <center> 配置ArbotiX控制器 </center>
-<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;创建</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">launch文件</span>&nbsp;—</span></strong>
-</p>
+### <center> <font face="楷体">贰 . 配置ArbotiX控制器</font> </center>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.创建launch文件 </font></center></strong>
 launch文件(`arbotix_mbot_with_camera_xacro.launch`)代码如下：
 ```xml
 <launch>
@@ -56,8 +55,7 @@ launch文件(`arbotix_mbot_with_camera_xacro.launch`)代码如下：
 
 </launch>
 ```
-<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;创建</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">配置文件</span>&nbsp;—</span></strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.创建配置文件 </font></center></strong>
 配置文件(`fake_mbot_arbotix.yaml`)如下：<br>
 ```yaml
 controllers: {
@@ -74,22 +72,20 @@ controllers: {
     }
 }
 ```
-<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;启动</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">仿真器</span>&nbsp;—</span></strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.启动仿真器 </font></center></strong>
 ```bash
 roslanch mbot_description arbotix_mbot_with_camera_xacro.launch
 ```
 结构图如下：
 ![]()
 
-<p style="line-height: 1.75em;text-align: center;"><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;启动</span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"></span></strong><strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);"><span style="background-color: rgb(54, 81, 115);text-align: justify;"><span style="font-size: 15px;">键盘控制</span>&nbsp;—</span></strong>
-</p>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.启动键盘控制 </font></center></strong>
 ```bash 
 roslaunch mbot_teleop mbot_teleop.launch
 ```
 >odom是一个全局坐标系，通过里程计记录机器人当前的运动姿态<br>
 
-### <center> 导航实例 </center>
+### <center> <font face="楷体">叁 . 导航实例</font> </center>
 ```bash
 roslaunch rbx1_bringup fake_turtlebot.launch
 roslaunch rbx1_nav fake_amcl.launch map:=test_map.yaml
