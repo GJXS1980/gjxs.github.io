@@ -84,6 +84,13 @@ echo "export PATH="/usr/local/cuda/bin:${PATH}"" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+3.安装opencl
+```bash
+sudo apt-get install nvidia-opencl-dev nvidia-modprobe nvidia-libopencl1-384 nvidia-opencl-icd-384
+
+sudo apt-get install nvidia-cuda-toolkit
+```
+
 ##### 下载源代码
 ```bash
 git clone https://github.com/OpenKinect/libfreenect2.git
@@ -103,9 +110,14 @@ cd ~/libfreenect2 && mkdir build && cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/freenect2
 make
 make install
+
+#赋予权限
+cd ~/libfreenect2
+sudo cp platform/linux/udev/90-kinect2.rules /etc/udev/rules.d/
 ```
 
 ##### 测试运行
+重新插入kinect
 ```bash
 #测试是否安装成功
 cd ~/libfreenect2/build/bin && ./Protonect
@@ -115,8 +127,6 @@ cd ~/libfreenect2/build/bin && ./Protonect gl
 cd ~/libfreenect2/build/bin && ./Protonect cl
 #测试是否支持CPU
 cd ~/libfreenect2/build/bin && ./Protonect cpu
-#测试OpenNI2
-sudo make install-openni2 && NiViewer2
 ```
 
 ***********************************
@@ -200,13 +210,26 @@ git clone https://github.com/code-iai/iai_kinect2.git
 #安装iai_kinect2依赖
 cd ~/kinect_ws/src/iai_kinect2
 rosdep install -r --from-paths .
+
 #编译
 cd ~/kinect_ws
 catkin_make -DCMAKE_BUILD_TYPE="Release"
+rospack profile
+
+#环境设置
+echo "source ~/kinect_ws/devel/setup.bash" >> ~/.bashrc 
+#使环境生效
+source ~/.bashrc
 ```
 
 >出现下面问题时：
->In file included from /opt/ros/kinetic/include/opencv-3.2.0-dev/opencv2/flann/flann_base.hpp:41:0,
+>问题1:ERROR: the following packages/stacks could not have their rosdep keys resolved to system dependencies:
+>解决方法:将命令改写为这个：
+```bash
+rosdep install --from-paths ~/kinect_ws/src/iai_kinect2 --ignore-src -r
+```
+
+>问题2:In file included from /opt/ros/kinetic/include/opencv-3.2.0-dev/opencv2/flann/flann_base.hpp:41:0,
                  from /opt/ros/kinetic/include/opencv-3.2.0-dev/opencv2/flann.hpp:48,
                  from /opt/ros/kinetic/include/opencv-3.2.0-dev/opencv2/opencv.hpp:62,
                  from /home/grey/inmoov_ros/src/iai_kinect2/kinect2_registration/include/kinect2_registration/kinect2_registration.h:24,
@@ -223,6 +246,46 @@ if(OpenCL_FOUND)
   set(EXPORTED_DEPENDENCIES OpenCL)
   add_definitions( -fexceptions )
 ```
+
+<strong>测试运行 </strong><br>
+```bash
+roslaunch kinect2_bridge kinect2_bridge.launch
+rosrun kinect2_viewer kinect2_viewer
+```
+
+##### kinect V2的标定
+```bash
+#创建校准数据文件
+mkdir ~/kinect_cal_data && cd ~/kinect_cal_data
+
+#[ INFO] [Kinect2Bridge::initDevice] device serial:034011551247   
+#在我的/home/robot/catkin_ws/src/iai_kinect2/kinect2_bridge/data的文件夹里建立一个文件夹，取名叫 034011551247 
+rosrun kinect2_bridge kinect2_bridge _fps_limit:=2
+
+###标定彩色摄像头：
+#记录彩色摄像机的图像
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 record color
+#校准内在函数
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 calibrate color
+
+####标定红外：
+#记录红外摄像机的图像
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 record ir
+#校准红外摄像机的内在因素
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 calibrate ir
+
+###帧同步标定：
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record sync
+#按几次空格键记录
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate sync
+
+###深度标定：
+####采集100张图
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record depth
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate depth
+
+```
+然后再把calib_color.yaml calib_ir.yaml calib_pose.yaml calib_depth.yaml拷贝到/home/robot/kinect_ws/src/iai_kinect2/kinect2_bridge/data/034011551247文件夹中
 
 *******************************
 >参考链接
