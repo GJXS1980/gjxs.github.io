@@ -47,7 +47,8 @@ sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_a
 sudo apt-get update
 sudo apt-get install cuda
 ```
-<center>如果有错误,请运行下面：</center><br>
+
+<center><strong>如果有错误,请运行下面：</strong></center>
 安装CUDA8.0要降低gcc和g++版本到5.0以下（可用4.9或者4.8版本的gcc和g++）
 ```bash
 #查看当前gcc版本
