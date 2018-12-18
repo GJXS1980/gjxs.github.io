@@ -37,8 +37,18 @@ sudo apt-get install libopenni2-dev && sudo apt-get install openni2-utils
 ```
 
 2.安装OpenCL/CUDA
-
-安装CUDA8.0要降低gcc和g++版本到5.0以下（可用4.9或者4.8版本的gcc和g++）
+进入[官网](https://developer.nvidia.com/cuda-80-ga2-download-archive)
+选择linux, x86_64, Ubuntu, 16.04, deb(local)
+```bash
+wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb -O cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64-deb -O cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64.deb
+sudo apt-get update
+sudo apt-get install cuda
+```
+>如果有错误,请运行下面：
+>安装CUDA8.0要降低gcc和g++版本到5.0以下（可用4.9或者4.8版本的gcc和g++）
 ```bash
 #查看当前gcc版本
 gcc -v
@@ -61,16 +71,6 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 40
 
 #再用下面命令来看一下版本是否改变了
 gcc -v 
-```
-进入[官网](https://developer.nvidia.com/cuda-80-ga2-download-archive)
-选择linux, x86_64, Ubuntu, 16.04, deb(local)
-```bash
-wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb
-wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64-deb
-sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
-sudo apt-get update
-sudo apt-get install cuda
-sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64.deb
 ```
 
 ```bash

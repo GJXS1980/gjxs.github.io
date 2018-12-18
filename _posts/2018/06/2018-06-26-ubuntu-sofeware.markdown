@@ -67,8 +67,9 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 mkdir -p ~/QQ
 cd ~/QQ
 #Wine-QQ.TIM软件包的下载
-wget https://yun.tzmm.com.cn/index.php/s/XRbfi6aOIjv5gwj/download -O QQ.AppImage && wget https://yun.tzmm.com.cn/index.php/s/5hJNzt2VR9aIEF2/download -O TIM.AppImage && svn co https://github.com/GJXS1980/QQ_wechat/trunk/QQ/icon
+wget http://yun.tzmm.com.cn/index.php/s/XRbfi6aOIjv5gwj/download -O QQ.AppImage && wget http://yun.tzmm.com.cn/index.php/s/5hJNzt2VR9aIEF2/download -O TIM.AppImage && svn co https://github.com/GJXS1980/QQ_wechat/trunk/QQ/icon
 ```
+>源码网站[Wine-QQ-TIM](https://github.com/askme765cs/Wine-QQ-TIM)
 
 2.给每个安装包权限
 ```bash
