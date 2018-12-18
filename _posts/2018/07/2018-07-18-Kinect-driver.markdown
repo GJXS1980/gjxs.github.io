@@ -224,6 +224,7 @@ if(OpenCL_FOUND)
 
 >问题3：CUDA安装出错
 安装CUDA8.0要降低gcc和g++版本到5.0以下（可用4.9或者4.8版本的gcc和g++）
+
 ```bash
 #查看当前gcc版本
 gcc -v
