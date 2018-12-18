@@ -48,32 +48,6 @@ sudo apt-get update
 sudo apt-get install cuda
 ```
 
-<center><strong>如果有错误,请运行下面：</strong></center>
-安装CUDA8.0要降低gcc和g++版本到5.0以下（可用4.9或者4.8版本的gcc和g++）
-```bash
-#查看当前gcc版本
-gcc -v
-
-#安装gcc4.9
-sudo apt-get install gcc-4.9 gcc-4.9-multilib g++-4.9 g++-4.9-multilib
-
-#安装好后输入以下指令
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 40 
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 50
-
-#接着输入：
-sudo update-alternatives --config gcc
-#会看到如下的选项，有 3 个候选项可用于替换 gcc (提供 /usr/bin/gcc)。 
-#要维持当前值[*]请按回车键，或者键入选择的编号： 
-
-#同样也要设置一下g++的 
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 50 
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 40
-
-#再用下面命令来看一下版本是否改变了
-gcc -v 
-```
-
 ```bash
 #安装nvidia-modprobe and opencl-headers
 sudo apt-get install nvidia-modprobe opencl-headers
@@ -246,6 +220,32 @@ if(OpenCL_FOUND)
   message(STATUS "OpenCL based depth registration enabled")
   set(EXPORTED_DEPENDENCIES OpenCL)
   add_definitions( -fexceptions )
+```
+
+>问题3：CUDA安装出错
+安装CUDA8.0要降低gcc和g++版本到5.0以下（可用4.9或者4.8版本的gcc和g++）
+```bash
+#查看当前gcc版本
+gcc -v
+
+#安装gcc4.9
+sudo apt-get install gcc-4.9 gcc-4.9-multilib g++-4.9 g++-4.9-multilib
+
+#安装好后输入以下指令
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 40 
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 50
+
+#接着输入：
+sudo update-alternatives --config gcc
+#会看到如下的选项，有 3 个候选项可用于替换 gcc (提供 /usr/bin/gcc)。 
+#要维持当前值[*]请按回车键，或者键入选择的编号： 
+
+#同样也要设置一下g++的 
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 50 
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 40
+
+#再用下面命令来看一下版本是否改变了
+gcc -v 
 ```
 
 <strong>测试运行 </strong><br>
