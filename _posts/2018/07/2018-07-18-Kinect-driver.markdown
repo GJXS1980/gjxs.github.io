@@ -197,6 +197,49 @@ echo "source ~/kinect_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+<strong>测试运行 </strong><br>
+```bash
+roslaunch kinect2_bridge kinect2_bridge.launch
+rosrun kinect2_viewer kinect2_viewer
+```
+
+最后，由于前面安装PCL依赖的时候卸载了部分的功能包，现在重新安装一下ROS:[ROS Kinetic](https://www.gjxslisa.club/2018/06/25/ros/)
+
+##### kinect V2的标定
+```bash
+#创建校准数据文件
+mkdir ~/kinect_cal_data && cd ~/kinect_cal_data
+
+#[ INFO] [Kinect2Bridge::initDevice] device serial:034011551247   
+#在我的/home/robot/catkin_ws/src/iai_kinect2/kinect2_bridge/data的文件夹里建立一个文件夹，取名叫 034011551247 
+rosrun kinect2_bridge kinect2_bridge _fps_limit:=2
+
+###标定彩色摄像头：
+#记录彩色摄像机的图像
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 record color
+#校准内在函数
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 calibrate color
+
+####标定红外：
+#记录红外摄像机的图像
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 record ir
+#校准红外摄像机的内在因素
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 calibrate ir
+
+###帧同步标定：
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record sync
+#按几次空格键记录
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate sync
+
+###深度标定：
+####采集100张图
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record depth
+rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate depth
+
+```
+然后再把calib_color.yaml calib_ir.yaml calib_pose.yaml calib_depth.yaml拷贝到/home/robot/kinect_ws/src/iai_kinect2/kinect2_bridge/data/034011551247文件夹中
+
+
 >出现下面问题时：
 >问题1:ERROR: the following packages/stacks could not have their rosdep keys resolved to system dependencies:
 >解决方法:将命令改写为这个：
@@ -248,46 +291,6 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 40
 #再用下面命令来看一下版本是否改变了
 gcc -v 
 ```
-
-<strong>测试运行 </strong><br>
-```bash
-roslaunch kinect2_bridge kinect2_bridge.launch
-rosrun kinect2_viewer kinect2_viewer
-```
-
-##### kinect V2的标定
-```bash
-#创建校准数据文件
-mkdir ~/kinect_cal_data && cd ~/kinect_cal_data
-
-#[ INFO] [Kinect2Bridge::initDevice] device serial:034011551247   
-#在我的/home/robot/catkin_ws/src/iai_kinect2/kinect2_bridge/data的文件夹里建立一个文件夹，取名叫 034011551247 
-rosrun kinect2_bridge kinect2_bridge _fps_limit:=2
-
-###标定彩色摄像头：
-#记录彩色摄像机的图像
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 record color
-#校准内在函数
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 calibrate color
-
-####标定红外：
-#记录红外摄像机的图像
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 record ir
-#校准红外摄像机的内在因素
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 calibrate ir
-
-###帧同步标定：
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record sync
-#按几次空格键记录
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate sync
-
-###深度标定：
-####采集100张图
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record depth
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate depth
-
-```
-然后再把calib_color.yaml calib_ir.yaml calib_pose.yaml calib_depth.yaml拷贝到/home/robot/kinect_ws/src/iai_kinect2/kinect2_bridge/data/034011551247文件夹中
 
 *******************************
 >参考链接
