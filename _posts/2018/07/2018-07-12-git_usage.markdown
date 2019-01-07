@@ -97,7 +97,34 @@ git branch -a
 ```
 
 *****
-### <center> <font face="楷体">Usage4:用git下载文件</font> </center>
+### <center> <font face="楷体">Usage4:创建新分支及合并分支到主分支上</font> </center>
+1.<code>创建新分支</code>
+```git
+git branch [new name]
+
+# 查看分支是否创建成功
+git branch -a
+
+```
+
+2.<code>切换到新分支</code>
+```git
+git checkout [new name]
+```
+
+3.<code>合并分支内容到主分支上</code>
+```git
+# 切换到主分支
+git checkout master
+
+# 把新分支的工作成果合并到master分支上
+git merge [new name]
+
+#  将本地代码提交到github
+git push origin master
+```
+
+### <center> <font face="楷体">Usage5:用git下载文件</font> </center>
 1.<code>下载整个项目</code>
 ```bash
 git clone <项目的地址>
