@@ -17,15 +17,8 @@ tags:
 ----------
 *************************
 ### <center> <font face="楷体">壹 . launch文件</font> </center>
-<p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/1.png" style="">
-</p>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">launch文件概述</strong>
-        </strong>
-    </span>
-</p>
+##### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1. launch文件概述 </font></center></strong>
+
 <strong>launch文件</strong>：通过XML文件实现多节点的配置和启动（可自动启动`ROS Master`）<br>
 参数设置：
 
@@ -39,24 +32,15 @@ tags:
 
 <p><img class="" data-copyright="0" data-ratio="0.0859375" data-s="300,640" data-type="png" data-w="1280" src="http://peh4zwh28.bkt.clouddn.com/2.png" style="">
 </p>
-<p style="margin-right: 16px;margin-left: 16px;white-space: normal;max-width: 100%;min-height: 1em;caret-color: rgb(51, 51, 51);color: rgb(51, 51, 51);font-family: -apple-system-font, BlinkMacSystemFont, &quot;Helvetica Neue&quot;, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei UI&quot;, &quot;Microsoft YaHei&quot;, Arial, sans-serif;font-size: 17px;letter-spacing: 0.5440000295639038px;text-align: center;box-sizing: border-box !important;word-wrap: break-word !important;">
-    <span style="max-width: 100%;font-size: 15px;letter-spacing: 1.600000023841858px;box-sizing: border-box !important;word-wrap: break-word !important;">
-        <strong style="max-width: 100%;box-sizing: border-box !important;word-wrap: break-word !important;">
-            <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;">launch文件的基本构成</strong>
-        </strong>
-    </span>
-</p>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;launch&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+
+##### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2. launch文件的基本构成 </font></center></strong>
+
+ <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><font face="楷体"> (1) &lt;launch&gt;标签 </font></strong>
+
 `launch`文件中的根元素采用<strong>&lt;launch&gt;</strong>标签来定义<br>
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;node&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+
+<strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><font face="楷体"> (2) &lt;node&gt;标签 </font></strong>
+
 例子：
 ```xml
  <node pkg="package-name" type="executable-name" name="nade-name" />
@@ -68,11 +52,9 @@ tags:
 | type | 节点的可执行文件名称 | 
 | name | 节点运行时的名称 | 
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;param&gt;标签和&lt;rosparam&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+<strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><font face="楷体"> (3) &lt;param&gt;标签和&lt;rosparam&gt;标签 </font></strong>
+
+
 <strong>&lt;param &gt;</strong>的例子：
 ```xml
 <param name="output_frame" value="odom" />
@@ -91,11 +73,8 @@ tags:
 
 >说明：<param\>/<rosparam\>标签都属于全局变量
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;arg&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+<strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><font face="楷体"> (4) &lt;arg&gt;标签 </font></strong>
+
 <strong>&lt;arg &gt;</strong>标签为launch文件内部的局部变量，`仅限于launch文件`使用
 ```xml
 <arg name="arg-name" default="arg-value" />
@@ -111,11 +90,8 @@ tags:
 <param name="foo" value="$(arg arg-name)" />
 <node name="node" pkg="package" type="type" args="$(arg arg-name)" />
 ```
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;remap&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+<strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><font face="楷体"> (5) &lt;remap&gt;标签 </font></strong>
+
 <strong>&lt;remap &gt;</strong>标签:重映射ROS计算图资源的命名<br>
 例子：
 ```xml
@@ -129,11 +105,8 @@ tags:
 
 >说明：重映射之后"/turtlebot/cmd_vel"将不存在，所有"/turtlebot/cmd_vel"的资源都改为"/cmd_vel"路径
 
-<p style="line-height: 1.75em;text-align: center;">
-    <strong style="font-size: 16px;text-align: center;white-space: normal;color: rgb(255, 255, 255);">
-        <span style="background-color: rgb(54, 81, 115);text-align: justify;">— &nbsp;  &lt;include&gt;标签 &nbsp;—</span>
-    </strong>
-</p>
+<strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><font face="楷体"> (6) &lt;include&gt;标签 </font></strong>
+
 <strong>&lt;include&gt;</strong>标签:包含其他launch文件，类似C语言中的头文件包含。<br>
 例子：
 ```xml
