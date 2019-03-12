@@ -558,6 +558,15 @@ opkg update
 <img src="/img/in-post/2018.10/26/openwrt/UA1.png" alt="MQTT Logo">
 然后找到相关的<strong>User-Agent</strong>,添加到<strong>etc/privoxy/default.action</strong>文件里面就行了.<br>
 
+<strong>问题3：</strong>编译mt7620版本的插件时，会缺依赖<br>
+<strong>解决方法：</strong>安装下面的依赖
+```bash
+sudo apt-get install gawk
+sudo apt-get install libncurses5-dev
+```
+然后再重新编译。
+
+
 *************************
 
 >参考链接：
