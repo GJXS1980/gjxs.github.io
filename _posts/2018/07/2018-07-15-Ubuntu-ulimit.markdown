@@ -3,7 +3,7 @@ layout:       post
 title:        "Ubuntu limits"
 subtitle:     "ulimit setting"
 date:         2018-07-15 1:48:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.07/15/limits.png"
 catalog:      true
 tags:

@@ -3,7 +3,7 @@ layout:       post
 title:        "Ubuntu Diary"
 subtitle:     "daily life of ubuntu"
 date:         2018-07-15 21:40:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.07/15/coffee.jpg"
 catalog:      true
 tags:

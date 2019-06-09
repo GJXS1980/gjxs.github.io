@@ -3,7 +3,7 @@ layout:       post
 title:        "Kinectv2 Drive"
 subtitle:     "install libfreenect2 and IAI Kinect2 "
 date:         2018-07-18 12:27:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.07/18/tools.jpg"
 catalog:      true
 tags:

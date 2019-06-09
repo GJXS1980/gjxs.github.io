@@ -3,7 +3,7 @@ layout:       post
 title:        "ROS Tutorials 1"
 subtitle:     "Navigating the ROS Filesystem"
 date:         2018-07-01 11:18:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.07/01/blog-07-01-1.jpg"
 catalog:      true
 tags:

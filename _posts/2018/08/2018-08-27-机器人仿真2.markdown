@@ -3,7 +3,7 @@ layout:       post
 title:        "ROS NOTE 6"
 subtitle:     "Gazebo物理仿真环境搭建"
 date:         2018-08-27 12:50:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.08/27/robot1.jpg"
 catalog:      true
 tags:

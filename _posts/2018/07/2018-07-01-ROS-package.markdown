@@ -3,7 +3,7 @@ layout:       post
 title:        "ROS Tutorials 2"
 subtitle:     "Package.xml"
 date:         2018-07-01 12:25:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.07/01/blog-07-01-2.jpg"
 catalog:      true
 tags:

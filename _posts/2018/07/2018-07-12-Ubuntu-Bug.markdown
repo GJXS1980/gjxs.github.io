@@ -3,7 +3,7 @@ layout:       post
 title:        "Ubuntu BUG"
 subtitle:     "Ubuntu Filling the pit"
 date:         2018-07-12 12:25:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.07/12/2018.7.12.jpg"
 catalog:      true
 tags:

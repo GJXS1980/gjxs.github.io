@@ -3,7 +3,7 @@ layout:       post
 title:        "ROS NOTE 5"
 subtitle:     "ArbotiX+rviz功能仿真"
 date:         2018-08-27 12:26:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.08/27/robot.jpg"
 catalog:      true
 tags:

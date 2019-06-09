@@ -3,7 +3,7 @@ layout:       post
 title:        "ROS ROSDEP"
 subtitle:     "rosdep usage"
 date:         2018-07-18 00:00:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.07/18/tools1.jpg"
 catalog:      true
 tags:

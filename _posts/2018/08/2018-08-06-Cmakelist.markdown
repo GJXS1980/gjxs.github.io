@@ -3,7 +3,7 @@ layout:       post
 title:        "ROS CMakeLists"
 subtitle:     "CMakeLists.txt"
 date:         2018-08-06 01:30:00
-author:       "G.J.先生"
+author:       "GJXS"
 header-img:   "img/in-post/2018.08/06/code.jpg"
 catalog:      true
 tags:
