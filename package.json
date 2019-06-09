@@ -1,9 +1,9 @@
 {
-    "name": "G.J.先生-blog",
-    "title": "G.J.先生 Blog",
-    "author": "G.J.先生 <gjxslwz@gmail.com>",
+    "name": "GJXS-blog",
+    "title": "GJXS Blog",
+    "author": "GJXS <gjxslwz@gmail.com>",
     "version": "1.7.0",
-    "homepage": "www.gjxslisa.club",
+    "homepage": "www.gjxs1980.top",
     "repository": {
         "type": "git",
         "url": "https://github.com/GJXS1980/gjxs.github.io"

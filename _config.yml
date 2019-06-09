@@ -1,10 +1,10 @@
 # Site settings
 title: GJXS BLOG
-SEOTitle: G.J.先生
+SEOTitle: GJXS
 header-img: img/root/home-bg.jpg
 email: gjxslwz@gmail.com
 description: "关于自动化、机器人与计算机 | Web & Mobile Lover，自动化　Engineer，UX Designer | 这里是 @GJXS 的个人博客，与你一起探索这个世界。"
-keyword: "G.J.先生, GJXS, GJXS1980, GJXS2017, @GJXS1980, G.J.先生的博客, GJXS Blog, 博客, 个人网站, 自动化, ROS, 工程师, 机器人"
+keyword: "GJXS, GJXS1980, GJXS2017, @GJXS1980, GJXS的博客, GJXS Blog, 博客, 个人网站, 自动化, ROS, 工程师, 机器人"
 url: "https://www.gjxslisa.club"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
