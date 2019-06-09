@@ -59,14 +59,14 @@ sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool
 ```
 
 7.检查是否安装成功
-```
-    roscore
+```bash
+roscore
 ```
 <img src="/img/in-post/2018.06/25/roscore.png" alt="ROS-Kinetic">
 
 (2)另外打开一个终端,输入:
-```
-    rosrun rviz rviz
+```bash
+rosrun rviz rviz
 ```
 <img src="/img/in-post/2018.06/25/rviz.png" alt="ROS-Kinetic">
 可以打开rviz就说明已经成功了
