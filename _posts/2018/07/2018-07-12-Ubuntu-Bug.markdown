@@ -101,7 +101,7 @@ g++: internal compiler error: Killed (program cc1plus)<br>
 Please submit a full bug report,
 ###### 解决方法
 主要原因大体上是因为内存不足,有点坑 临时使用交换分区来解决吧
-```
+```bash
 sudo dd if=/dev/zero of=/swapfile bs=64M count=16
 sudo mkswap /swapfile
 sudo swapon /swapfile

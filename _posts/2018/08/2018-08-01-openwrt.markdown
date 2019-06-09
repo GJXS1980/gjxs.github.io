@@ -171,14 +171,14 @@ src-git telephony git://git.openwrt.org/feed/telephony.git^b9d7b321d15a44c5abb9e
 src-git wrtnode https://github.com/WRTnode/openwrt-packages.git
 ```
 添加软件扩展包:
-```
+```bash
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 ```
 
 
 ##### 编译
-```
+```bash
 make package/xx/compile V=99
 ```
 

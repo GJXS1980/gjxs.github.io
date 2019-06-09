@@ -240,7 +240,7 @@ git clone https://github.com/lyfeyaj/sublime-text-imfix.git
 cd sublime-text-imfix
 ```
 运行下面的脚本
-```
+```bash
 ./sublime-imfix
 ```
 重启软件生效
@@ -285,23 +285,12 @@ cd ~/xmind/XMind_amd64 && ./XMind
 ### 7.科学上网
 ----------
 ##### ss-qt5
-(1)输入下面的命令行安装ss-qt5:
+输入下面的命令行安装ss-qt5:
 ```bash
 sudo add-apt-repository ppa:hzwhuang/ss-qt5
 sudo apt-get update
 sudo apt-get install shadowsocks-qt5
 ```
-
-(2)配置ss-qt5及连接
-
-输入科学上网账号
-![输入账号](http://pa59gape3.bkt.clouddn.com/ss-qt5.png)
-
-连接ss-qt5
-![连接](http://pa59gape3.bkt.clouddn.com/ss-qt5-1.png)
-
-(3)配置浏览器代理(以chrome浏览器为例)
-![配置浏览器](http://pa59gape3.bkt.clouddn.com/ss-qt5-2.png)
 
 *****
 >参考链接

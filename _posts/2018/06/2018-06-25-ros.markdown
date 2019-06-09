@@ -26,7 +26,7 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main
 
 2.下载安装秘钥
 ```bash
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 ```
 
 3.确保您的Debian软件包索引是最新的:
@@ -62,13 +62,13 @@ sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool
 ```
     roscore
 ```
-![ROS-Kinetic](http://pa59gape3.bkt.clouddn.com/ros-kinetic.png)
+<img src="/img/in-post/2018.06/25/roscore.png" alt="ROS-Kinetic">
 
 (2)另外打开一个终端,输入:
 ```
     rosrun rviz rviz
 ```
-![ROS-Kinetic](http://pa59gape3.bkt.clouddn.com/ros-kinetic1.png)
+<img src="/img/in-post/2018.06/25/rviz.png" alt="ROS-Kinetic">
 可以打开rviz就说明已经成功了
 
 *****

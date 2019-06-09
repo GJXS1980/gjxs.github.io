@@ -36,11 +36,11 @@ rospack命令可以查看关于功能包的一些属性，比如用rospack find�
 rospack find [package_name]
 ```
 假如要找roscpp的路径，输入下面的命令行：
-```
+```bash
 rospack find roscpp
 ```
 如果是ROS-Kinetic的话应该会看到下面的结果：
-```
+```bash
 /opt/ros/kinetic/share/roscpp
 ```
 
@@ -79,7 +79,7 @@ rosls [locationname[/subdir]]
 rosls roscpp_tutorials
 ```
 结果如下：
-```
+```bash
 cmake  launch  package.xml  srv
 ```
 
