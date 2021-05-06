@@ -100,4 +100,5 @@ document.body.addEventListener('input', POWERMODE);
 ##### (7)添加搜索功能
 在右上角添加搜索功能.参考[Soptq.github.io](https://github.com/Soptq/Soptq.github.io)
 
+### nginx
 
