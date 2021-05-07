@@ -22,6 +22,7 @@ header-img: "img/root/tag-bg.jpg"
     </div>
 </header-->
 
+<!-- Page Header -->
 {% include intro-header.html type='page' short=true %}
 
 <!-- Main Content -->
@@ -63,14 +64,14 @@ header-img: "img/root/tag-bg.jpg"
 					{% if forloop.last %}
 						{% assign _tags = _tags | append: _tag_encode %}
 					{% else %}
-						{% assign _tags = _tags | append: _tag_encode | append: ',' -%}
+						{% assign _tags = _tags | append: _tag_encode | append: ',' %}
 					{% endif %}
 				{% endfor %}
 
 			{% comment %} group by year {% endcomment %}
 			{% assign _currentdate = _article.date | date: '%Y' %}
 			{% if _currentdate != _date %}
-				{% unless forloop.first -%}</section>{% endunless %}
+				{% unless forloop.first %}</section>{% endunless %}
 				<section>
 				<span class="fa listing-seperator">
 					<span class="tag-text">{{ _currentdate }}</span>
@@ -91,11 +92,11 @@ header-img: "img/root/tag-bg.jpg"
 				    </a>
 					<hr>
 				</div>
-			{% if forloop.last -%}</section>{% endif %}
+			{% if forloop.last %}</section>{% endif %}
 			{% endfor %}
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 
