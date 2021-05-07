@@ -36,7 +36,7 @@ anchorjs: false                           # if you want to customize anchor. che
 # from PR#40, to support local preview for Jekyll 3.0
 #plugins: [jekyll-paginate]
 plugins_dir: [jekyll-paginate]
-
+gems: [jekyll-paginate]
 
 
 # Markdown settings
