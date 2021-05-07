@@ -43,10 +43,10 @@ header-img: "img/root/tag-bg.jpg"
 					title="{{ tag[0] }}" rel="{{ tag[1].size }}">
 					{{ tag[0] }}
 					<sup>{{tag[1].size}}</sup>
-				</a>
+				</a>__SEPERATOR__
 				{% endfor %}
 				{% endcapture %}
-        {{ tags | split:'</a>' | sort | join:'</a>' }}
+        {{ tags | split:'__SEPERATOR__' | sort }}
 			</div>
 
             <!-- Article List -->
@@ -91,9 +91,11 @@ header-img: "img/root/tag-bg.jpg"
 				    </a>
 					<hr>
 				</div>
+			{% if forloop.last -%}</section>{% endif %}
 			{% endfor %}
 		</div>
 	</div>
+</div>
 </div>
 
 
