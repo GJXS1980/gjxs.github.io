@@ -252,33 +252,27 @@ rostopic echo /voiceWords
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.语音合成 </font></center></strong>
 程序源代码(`tts_subscribe.cpp`)如下:
+
 <pre><code class="language-cpp">
+
 /*
 * 语音合成（Text To Speech，TTS）技术能够自动将任意文字实时转换为连续的
 * 自然语音，是一种能够在任何时间、任何地点，向任何人提供语音信息服务的
 * 高效便捷手段，非常符合信息时代海量数据、动态更新和个性化查询的需求。
 */
-
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
-
-
 #include "robot_voice/qtts.h"
 #include "robot_voice/msp_cmn.h"
 #include "robot_voice/msp_errors.h"
-
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-
 #include <sstream>
 #include <sys/types.h>
 #include <sys/stat.h>
-
-
 /* wav音频头部格式 */
 typedef struct _wave_pcm_hdr
 {
@@ -476,8 +470,7 @@ exit:
     MSPLogout(); //退出登录
 
     return 0;
-}
-</code></pre>
+}</code></pre>
 
 <ul>
 <li> `main函数`中声明了一个订阅`voiceWords`话题的`subscriber`,接收输入的语音字符串</li><br>
