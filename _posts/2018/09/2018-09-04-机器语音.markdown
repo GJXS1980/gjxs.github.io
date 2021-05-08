@@ -471,6 +471,7 @@ exit:
 
     return 0;
 }</code></pre>
+</code></pre>
 
 <ul>
 <li> `main函数`中声明了一个订阅`voiceWords`话题的`subscriber`,接收输入的语音字符串</li><br>
