@@ -20,7 +20,7 @@ tags:
 ### <center> <font face="楷体">零 . 安装Mysql</font> </center>
 <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装Mysql </font></center></strong>
 
-<pre><code class="language-bash">sudo apt-get install mysql-server
+<pre><code class="language-shell line-numbers">sudo apt-get install mysql-server
 sudo apt-get install mysql-client
 sudo apt-get install libmysqlclient-dev</code></pre>
 
@@ -34,12 +34,12 @@ sudo apt-get install libmysqlclient-dev</code></pre>
 ### <center> <font face="楷体">壹 . 修改初始密码</font> </center>
  <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.查看初始密码 </font></center></strong>
 
-<pre><code class="language-bash">sudo gedit /etc/mysql/debian.cnf</code></pre>
+<pre><code class="language-shell line-numbers">sudo gedit /etc/mysql/debian.cnf</code></pre>
 
 <code>password</code>那一项就是密码,复制粘贴出来<br>
  <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.更新密码 </font></center></strong>
 
-<pre><code class="language-bash">sudo mysql -u root -p
+<pre><code class="language-shell line-numbers">sudo mysql -u root -p
 #输入上面复制粘贴出来的密码登录到mysql
 #然后使用以下命令更新密码(其中new-password为设置的新密码)
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'new-password';
@@ -51,7 +51,7 @@ sudo service mysql restart</code></pre>
 
  <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.Mysql 连接测试 </font></center></strong>
 
-<pre><code class="language-bash">mysql -u root -h localhost -p</code></pre>
+<pre><code class="language-shell line-numbers">mysql -u root -h localhost -p</code></pre>
 
 然后输入<code>新密码</code>即可登录mysql<br>
 
