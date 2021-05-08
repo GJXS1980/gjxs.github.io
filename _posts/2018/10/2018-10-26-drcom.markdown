@@ -16,6 +16,7 @@ tags:
 
 ----------
 *************************
+
 ### <center> <font face="楷体">零 . 准备工作</font> </center>
 <strong>应用环境</strong> <br>
 <ul><li> 所有支持OpenWrt固件的路由器 </li></ul><br>
@@ -26,6 +27,7 @@ tags:
     <li> 熟悉Linux基本命令行的操作 </li></ul>
 
 *************************
+
 ### <center> <font face="楷体">壹 . 刷OpenWrt</font> </center>
 <code>以极路由1S HC5661A为例</code>
 
@@ -33,8 +35,8 @@ tags:
 进固件作者网站查找对应[u-boot](http://rssn.cn/roms/uboot/),下载自己路由器对应版本的固件, 以<code>极路由1S HC5661A</code>为例,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/hiwifi.png" alt="MQTT Logo">
 通过<code>putty</code>进入路由器后台,并<code>下载安装uboot:</code><br>
-<pre><code class="language-bash">
-#连上路由器后台，进入tmp目录下
+
+<pre><code class="language-bash">#连上路由器后台，进入tmp目录下
 cd /tmp
 #下载对应版本的U-Root
 wget http://rssn.cn/roms/uboot/HC5661A-uboot.bin
@@ -42,9 +44,8 @@ wget http://rssn.cn/roms/uboot/HC5661A-uboot.bin
 mtd write HC5661A-uboot.bin u-boot
 
 # 如果失败,可以试试下面的命令
-mtd write HC5661A-uboot.bin firmware
-</code>
-</pre>
+mtd write HC5661A-uboot.bin firmware</code></pre>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.刷OpenWrt固件 </font></center></strong>
 如果你是<code>极路由1S</code>或者是<code>斐讯K2T</code>,点开<code>下面折叠内容</code>可以让你提前结束战斗,其他小伙伴继续往下面奋斗吧:<br>
 <details>
@@ -106,6 +107,7 @@ sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 2.等待几分钟，当路由器自动重启说明成功（期间不要断开电源，不然就变砖了）<br>
 
 *************************
+
 ### <center> <font face="楷体">贰 . 安装OpenWrt插件</font> </center>
 <strong>登录路由器后台</strong>，<code>网址：</code><strong>192.168.1.1</strong> <code>起始密码：</code><strong>admin</strong> <br>
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装gdut-drcom客户端 </font></center></strong>
@@ -163,6 +165,7 @@ cd .. && make package/ODP/compile
 <code>重启</code>,完成配置,应该可以拨号成功.
 
 *************************
+
 ### <center> <font face="楷体">叁 . 配置privoxy代理</font> </center>
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装privoxy及相关软件 </font></center></strong>
 先进入<strong>软件</strong>选项,如下图:
@@ -521,6 +524,7 @@ s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
 </code>
 </pre>
 </details>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 5.添加每天自动重启 </font></center></strong>
 进入<code>路由器网页版后台</code>,找到<code>系统-->计划任务</code>,在框里添加下面代码:
 ```crontab
@@ -537,6 +541,7 @@ iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
 最后<code>重启路由器</code>,到这里路由器的配置基本完成,可以安心搞科研了。
 
 *************************
+
 ### <center> <font face="楷体">肆 . 可能产生的问题</font> </center>
 <strong>问题1：</strong>
 <pre><code class="language-log line-numbers">
