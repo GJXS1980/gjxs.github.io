@@ -14,6 +14,7 @@ tags:
 >Abstract: "该教程主要是介绍git工具的一些基本的用法。"<br>                                                                                                                                                                             <br /> 
 
 ----------
+
 ### <center> <font face="楷体">Usage1:基本的用法 </font> </center>
 1.<code>新建README.md</code>文件
 ```bash
@@ -63,6 +64,7 @@ git branch -m 原名
 ```
 
 *****
+
 ### <center> <font face="楷体">Usage3:删除本地分支和远程分支</font> </center>
 1.<code>查看已有的本地及远程分支</code>
 ```git
@@ -97,6 +99,7 @@ git branch -a
 ```
 
 *****
+
 ### <center> <font face="楷体">Usage4:创建新分支及合并分支到主分支上</font> </center>
 1.<code>创建新分支</code>
 ```git
@@ -138,6 +141,7 @@ svn co https://github.com/GJXS1980/QQ_wechat/trunk/wechat/icon
 ```
 
 *****
+
 ### <center> <font face="楷体">.gitignore的使用</font> </center>
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.忽略文件的原则 </font></center></strong>
 <lu>
@@ -161,6 +165,7 @@ svn co https://github.com/GJXS1980/QQ_wechat/trunk/wechat/icon
 *.ear
 
 ```
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.查看.gitignore的规则 </font></center></strong>
 如果你发现<code>.gitignore写得有问题</code>，需要找出来到底哪个规则写错了，可以<code>用git check-ignore命令检查</code>：
 ```git

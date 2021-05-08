@@ -13,6 +13,7 @@ tags:
 >Abstract: "该教程主要是对Ubuntu系统使用时遇到的一些问题及解决方法的总结。"<br>                                                                                                                                                           <br /> 
 
 ----------
+
 ##### BUG1:不能进入登录界面的解决方法
 ###### 问题描述  
 >问题一：N卡独显电脑安装ubuntu14.04/16.04,一直会卡在ubuntu图标那里进不去安装界面
@@ -29,6 +30,7 @@ sudo apt-get install nvidia-384
 重启，问题解决
 
 *****
+
 ##### BUG2:无法获得锁/var/lib/dpkg/lock - open (11: 资源暂时不可用)
 ###### 问题描述 
 使用Ubuntu打开终端时,输入带有sudo apt-get 命令行是回报下面错误:
@@ -45,6 +47,7 @@ sudo rm /var/lib/dpkg/lock
 ```
 
 *****
+
 ##### BUG3:系统死机后重启停在initramfs界面的解决方法
 ###### 问题描述 
 由于系统错，导致系统发生错误，强制关机，造成重新开机停在initramfs界面，如下图：
@@ -70,6 +73,7 @@ reboot
 ```
 
 *****
+
 ##### BUG4:系统死机后重启停在welcome to emergency mode界面的解决方法
 ###### 问题描述 
 开机的时候，发现进不了系统，显示下面的错误信息：
@@ -95,6 +99,7 @@ vim /etc/fstab
 重启，问题修复
 
 *****
+
 ##### BUG5:g++: internal compiler error: Killed (program cc1plus)
 ###### 问题描述 
 g++: internal compiler error: Killed (program cc1plus)<br>

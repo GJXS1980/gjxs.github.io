@@ -15,8 +15,10 @@ tags:
 >Abstract: "该教程主要是用于Kinect One（Kinect v2）的ROS接口的工具和库的集合IAI Kinect2和libfreenect2的安装。"<br>                                                                                                                            <br /> 
 
 ----------
+
 ## libfreenect2
 *************************
+
 ##### 依赖
 
 Dependence | Version |
@@ -105,6 +107,7 @@ cd ~/libfreenect2/build/bin && ./Protonect cpu
 ```
 
 ***********************************
+
 ### IAI Kinect2
 ##### 依赖
 

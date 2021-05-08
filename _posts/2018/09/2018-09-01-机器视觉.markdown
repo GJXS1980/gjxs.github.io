@@ -19,6 +19,7 @@ tags:
 ----------
 
 *************************
+
 ### <center> <font face="楷体">壹 . ROS中的图像数据</font> </center>
 ##### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.   二维图像数据 </font></center></strong>
 
@@ -186,6 +187,7 @@ bool is_dense
 >点云的单帧数据量很大,如果使用分布式网络传输,需要考虑能否满足数据的传输要求,或者针对数据进行压缩
 
 *************************
+
 ### <center> <font face="楷体">贰  . 摄像头的标定</font> </center>
 ##### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.   摄像头标定的意义 </font></center></strong>
 
@@ -309,6 +311,7 @@ rosrun camera_calibration cameracalibrator.py image:=/camera/ir/image_raw camera
 ```
 
 *************************
+
 ### <center> <font face="楷体">叁 . ROS+OpenCV</font> </center>
 ##### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.   OpenCV的概述 </font></center></strong>
 <strong>OpenCV(Open Source Computer Vision Library)</strong>是基于`BSD许可`开发的跨平台`开源计算机视觉库`(Linux,Windows和Mac OS等);由一系列`C函数`和`少量C++类`构成,同时提供C++,Python,Ruby,MATLAB等语言的接口;实现了`图像处理和计算机视觉方面的很多通用算法`,而且对于非商业应用和商业应用都是`免费`的;可以直接访问硬件摄像头,而且还提供一个简单的`GUI系统--highgui`.<br>
@@ -399,6 +402,7 @@ if __name__ == '__main__':
 </ul>
 
 *************************
+
 ##### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.   人脸识别 </font></center></strong>
 <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><font face="楷体"> (1) 基于Haar特征的级联分类器对象检测算法思路 </font></strong>
 <div class="mermaid">
@@ -643,6 +647,7 @@ if __name__ == '__main__':
 </ul>
 
 *************************
+
 ### <center> <font face="楷体">肆 . 二维码识别</font> </center>
 ##### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.   摄像头二维码识别 </font></center></strong>
 <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><font face="楷体"> (1) 安装二维码识别功能包 </font></strong>

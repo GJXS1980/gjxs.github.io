@@ -14,12 +14,15 @@ tags:
 >Abstract: "基于ubuntu系统下的个人常用软件安装教程，为了以后自己重装软件时可以节省找相关教程的时间。"<br>                                                                                                                                                   <br />                                                                                             
 
 *****
+
 ##### 系统要求
 Ubuntu
 
 *****
+
 ### 1.输入法
 ----------
+
 ##### 搜狗输入法
 （1）下载安装fcitx
 ```bash
@@ -43,8 +46,10 @@ rm -rf cd ~/sogoupinyin
 重启完成配置
 
 *****
+
 ### 2.浏览器
 ----------
+
 ##### chrome
 (1)下载安装包
 ```bash
@@ -58,8 +63,10 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
 
 *****
+
 ### 3.社交软件
 ----------
+
 ##### QQ和TIM的安装
 ****************************
 1.下载安装包
@@ -123,6 +130,7 @@ Name[en]=TIM
 按win键搜索QQ或者TIM，然后打开，右键锁定在启动器
 
 ******************************
+
 ##### 微信的安装
 1.下载安装包
 ```bash
@@ -160,6 +168,7 @@ Name[en]=wechat
 按win键搜索wechat，然后打开，右键锁定在启动器
 
 ***********************************
+
 ##### TeamViewer
 （1）到[官网](https://www.teamviewer.com/en/download/linux/)下载Ubuntu, Debian（x86 64bit）安装包：
 ```
@@ -180,8 +189,10 @@ teamviewer
 ```
 
 *****
+
 ### 4.音乐播放器
 ----------
+
 ##### 网易云音乐
 （1）下载软件包
 > 链接: https://pan.baidu.com/s/1fx-u-QgKJQxW72QnIxrhbw 密码: GJXS
@@ -270,8 +281,10 @@ sudo apt-get install atom
 ```
 
 *****
+
 ### 6.图像处理
 ---------
+
 ##### Xmind8
 (1)去[官网](https://www.xmind.net/xmind/downloads/xmind-8-update7-linux.zip)下载安装包
 ```
@@ -282,8 +295,10 @@ cd ~/xmind/XMind_amd64 && ./XMind
 (2)在搜索那里输入XMind并打开，将XMind锁定在启动器
 
 *****
+
 ### 7.科学上网
 ----------
+
 ##### ss-qt5
 输入下面的命令行安装ss-qt5:
 ```bash

@@ -14,6 +14,7 @@ tags:
 
 ----------
 *************************
+
 ##### 查看ulimit里的最大文件打开数量的默认值
 ```bash
 cat /proc/sys/fs/file-max
@@ -21,6 +22,7 @@ ulimit -n
 ```
 
 *************************
+
 ##### 设置ubuntu内核参数
 ```bash
 #编辑内核参数文件sysctl.conf
@@ -33,6 +35,7 @@ sudo sysctl -p
 ```
 
 *************************
+
 ##### 用户限制设置
 1.设置limits.conf文件
 ```bash
@@ -57,6 +60,7 @@ session required pam_limits.so
 ```
 
 *************************
+
 ##### 查看是否设置成功
 ```bash
 ulimit -n 131072

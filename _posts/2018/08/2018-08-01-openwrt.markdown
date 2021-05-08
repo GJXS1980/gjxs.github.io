@@ -14,6 +14,7 @@ tags:
 
 ----------
 *************************
+
 ### 前提
 ***************
 1.先看看OpenWrt支持的路由器[Table of Hardware](https://openwrt.org/toh/start)
@@ -34,6 +35,7 @@ sudo apt-get install putty
 然后在搜索那里（按win键）找到软件打开就ok了
 ### 刷OpenWrt
 ***************
+
 ##### 用putty登录路由器后台（以SSH方式登录）
 这个ip是你给极路由设定的，默认是192.168.199.1，用户名为：root，密码为路由器后台密码
 ##### 刷解锁版不死U-Root

@@ -16,8 +16,10 @@ tags:
 
 
 *****
+
 ### 查看功能包的依赖关系
 ----------
+
 ##### First-Order Dependencies(一级依赖)
 一级依赖的查看命令：
 ```bash
@@ -40,8 +42,10 @@ rospack depends beginner_tutorials
 ```
 
 *****
+
 ### Package.xml的构成
 ----------
+
 ##### 基本结构(Basic Structure)
 以<package\>标签作为根标签文件:
 ```xml
@@ -73,8 +77,10 @@ Name | Illustration|
 <doc_depend\> | 文档工具相关性(Documentation Tool Dependencies)|
 
 *****
+
 ### Package.xml的文件描述
 ----------
+
 ##### 描述标签（description tag）
 第一句应该是简短的，同时包含功能包的信息。
 ```xml
