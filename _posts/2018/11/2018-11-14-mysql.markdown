@@ -50,7 +50,7 @@ sudo service mysql stop
 sudo service mysql restart
 </code>
 </pre>
-### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.Mysql 连接测试 </font></center></strong>
+ <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.Mysql 连接测试 </font></center></strong>
 <pre><code class="language-bash">
 mysql -u root -h localhost -p
 </code>
