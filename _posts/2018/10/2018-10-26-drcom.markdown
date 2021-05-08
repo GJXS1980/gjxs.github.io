@@ -51,7 +51,7 @@ mtd write HC5661A-uboot.bin firmware</code></pre>
 <details>
 <summary><code>New World</code>(此部分为折叠内容,<code>极路由1SHC5661A或者是斐讯K2T</code>用户进入)</summary>
 
-<pre><code class="language-markdown">
+<pre><code class="language-markdown line-numbers">
 <code>1.下载固件</code>
 (1)极路由HC5661A
 下载链接:https://pan.baidu.com/s/1j70FVPeUYKBE7lvvNSVfEA
@@ -84,16 +84,13 @@ mtd write HC5661A-uboot.bin firmware</code></pre>
 </details>
 
 （1）查看一下<code>路由器CPU的型号</code>，以确定我们要刷什么版本的固件
-<pre><code class="language-bash">
-cat /proc/cpuinfo
-</code>
-</pre>
+<pre><code class="language-shell line-numbers">cat /proc/cpuinfo</code></pre>
 
 (2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)<code>查找cpu和型号对应的固件</code>，并下载.<br>
 以<code>极路由1S HC5661A</code>为例,如下图:<br>
 <img src="/img/in-post/2018.10/26/openwrt/openwrt.png" alt="MQTT Logo">
 可以直接点击<code>图中红框</code>的网址<code>直接下载</code>,然后再通过<code>WinSCP</code>上传到<code>路由器的/tmp目录下</code>,<code>下面操作是直接下载到路由器的/tmp目录下(要连网):</code><br>
-<pre><code class="language-Bash">
+<pre><code class="language-shell line-numbers">
 #下载固件
 cd /tmp
 wget http://downloads.openwrt.org/releases/18.06.1/targets/ramips/mt76x8/openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
@@ -128,13 +125,10 @@ sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 ><code>说明:</code>由于路由器版本太多，可以选择自己编译，或者在评论区留言，提供路由器的型号，我看到会帮你们编译。
 
 将下载是<code>Drcom插件</code>用<code>WinSCP</code>传到路由器<code>tmp</code>文件夹下安装：<br>
-<pre><code class="language-bash">
-cd /tmp
-
+<pre><code class="language-shell line-numbers">cd /tmp
 #安装gdut-drcom客户端
-opkg install gdut-drcom_6.0-4_mipsel_24kc.ipk
-</code>
-</pre>
+opkg install gdut-drcom_6.0-4_mipsel_24kc.ipk</code></pre>
+
 到这里,gdut-drcom客户端已经安装完了,<code>直接到第2步配置网络</code>,如果<code>上面没有提供到gdut-drcom客户端的小伙伴继续看选做部分</code>
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 选做:OpenWrt SDK编译gdut-drcom客户端 </font></center></strong>
@@ -149,16 +143,15 @@ opkg install gdut-drcom_6.0-4_mipsel_24kc.ipk
 >蓝色框表示SDK支持的路由器型号，红色框为SDK文件
 
 <strong>2.编译drcom插件教程</strong>:
-<pre><code class="language-bash">
+<pre><code class="language-shell line-numbers">
 #解压文件夹
 tar xjf openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz
 cd ~/openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz/
 #进入package下载软件包
 cd package && git clone https://github.com/GJXS1980/ODP.git
 #编译
-cd .. && make package/ODP/compile
-</code>
-</pre>
+cd .. && make package/ODP/compile</code></pre>
+
 最后编译完的软件包在<code>/bin/packages/xxxx/base/</code>目录下,到这里你也有一个适合自己路由器的drcom插件了,<code>回到步骤1安装gdut-drcom客户端.</code><br>
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.配置网络 </font></center></strong>
@@ -543,12 +536,10 @@ s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
 <code>每天早上6点钟会自动重启路由器<code>,如果你想要其他时间重启,可以改成其他时间.
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 6.使环境生效 </font></center></strong>
-<pre><code class="language-vim ">
-iptables -t nat -N PrivoxyUA
+<pre><code class="language-shell line-numbers">iptables -t nat -N PrivoxyUA
 iptables -t nat -A PREROUTING -i br-lan -p tcp -j PrivoxyUA
-iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
-</code>
-</pre>
+iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118</code></pre>
+
 最后<code>重启路由器</code>,到这里路由器的配置基本完成,可以安心搞科研了。
 
 *************************
@@ -556,17 +547,12 @@ iptables -t nat -A PrivoxyUA -p tcp --dport 80 -j REDIRECT --to-ports 8118
 ### <center> <font face="楷体">肆 . 可能产生的问题</font> </center>
 <strong>问题1：</strong>
 <pre><code class="language-log line-numbers">
- * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.
-</code>
-</pre>
+ * opkg_conf_load: Could not lock /var/lock/opkg.lock: Resource temporarily unavailable.</code></pre>
+
 <strong>解决方法：</strong>
-<pre>
-<code class="language-bash">
-echo "nameserver 114.114.114.114">/tmp/resolv.conf
+<pre><code class="language-shell line-numbers">echo "nameserver 114.114.114.114">/tmp/resolv.conf
 rm -f /var/lock/opkg.lock
-opkg update
-</code>
-</pre>
+opkg update</code></pre>
 
 <strong>问题2：</strong>如果发现按照这个教程来，还是发现会断线<br>
 <strong>解决方法：</strong>可能是没有找全所有在连设备的UA（同一设备，不同浏览器的UA会不一样），这时候建议看看privoxy的日志，一般都有相关User-Agent显示，再把它们按照教程隐藏就好了,具体操作如下:<br>
@@ -576,12 +562,11 @@ opkg update
 
 <strong>问题3：</strong>编译mt7620版本的插件时，会缺依赖<br>
 <strong>解决方法：</strong>安装下面的依赖
-```bash
-sudo apt-get install gawk
+<pre><code class="language-log line-numbers">sudo apt-get install gawk
 sudo apt-get install libncurses5-dev
-```
-然后再重新编译。
+</code></pre>
 
+然后再重新编译。
 
 *************************
 
