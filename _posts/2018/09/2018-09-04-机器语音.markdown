@@ -217,7 +217,8 @@ exit:
     MSPLogout(); // Logout...
     return 0;
 }
-</code></pre>
+</code>
+</pre>
 
 <ul>
 <li>subscriber用来接收语音唤醒信号,接收到唤醒信号之后,会将wakeupFlag变量置位</li><br>
