@@ -36,7 +36,7 @@ tags:
 <img src="/img/in-post/2018.10/26/openwrt/hiwifi.png" alt="MQTT Logo">
 通过<code>putty</code>进入路由器后台,并<code>下载安装uboot:</code><br>
 
-<pre><code class="language-filter line-numbers">#连上路由器后台，进入tmp目录下
+<pre><code class="language-shell line-numbers">#连上路由器后台，进入tmp目录下
 cd /tmp
 #下载对应版本的U-Root
 wget http://rssn.cn/roms/uboot/HC5661A-uboot.bin
