@@ -16,29 +16,29 @@ tags:
 
 ----------
 *************************
-### <center> <font face="楷体">零 . 安装Mysql</font> </center>
-### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装Mysql </font></center></strong>
+ <center> <font face="楷体">零 . 安装Mysql</font> </center>
+ <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装Mysql </font></center></strong>
 <pre><code class="language-bash line-numbers">
 sudo apt-get install mysql-server
 sudo apt-get install mysql-client
 sudo apt-get install libmysqlclient-dev
 </code>
 </pre>
-### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.检查是否安装成功 </font></center></strong>
+ <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.检查是否安装成功 </font></center></strong>
 <pre><code class="language-bash">
 sudo netstat -tap | grep mysql
 </code>
 </pre>
 
 *************************
-### <center> <font face="楷体">壹 . 修改初始密码</font> </center>
-### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.查看初始密码 </font></center></strong>
+ <center> <font face="楷体">壹 . 修改初始密码</font> </center>
+ <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.查看初始密码 </font></center></strong>
 <pre><code class="language-bash">
 sudo gedit /etc/mysql/debian.cnf
 </code>
 </pre>
 <code>password</code>那一项就是密码,复制粘贴出来<br>
-### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.更新密码 </font></center></strong>
+ <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.更新密码 </font></center></strong>
 <pre><code class="language-bash">
 sudo mysql -u root -p
 #输入上面复制粘贴出来的密码登录到mysql
