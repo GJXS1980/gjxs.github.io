@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       wait
 title:        "ROS NOTE 8"
 subtitle:     "机器语音"
 date:         2018-09-04 20:14:00
@@ -65,7 +65,7 @@ sudo cp libmsc.so /usr/lib/libmsc.so</code></pre>
 程序源代码(`iat_publish.cpp`)如下:
 
 <details><summary><code>view code</code>(此部分为折叠内容,点击即可打开)</summary>
-<pre><code class="language-py">
+<pre><code class="language-cpp">
 /*
 * 语音听写(iFly Auto Transform)技术能够实时地将语音转换成对应的文字。
 */
@@ -221,8 +221,6 @@ exit:
 }
 </code></pre>
 </details>
-
-
 <ul>
 <li>subscriber用来接收语音唤醒信号,接收到唤醒信号之后,会将wakeupFlag变量置位</li><br>
 <li>主循环中调用SDK的语音听写功能,识别成功后置位resultFlag变量,通过Publisher将识别出来的字符串发布</li><br>
@@ -474,7 +472,6 @@ exit:
 
     return 0;
 }</code></pre>
-
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.语音合成 </font></center></strong>
 
 <ul>
@@ -503,14 +500,12 @@ rosrun robot_voice tts_subscribe
 rostopic pub /voiceWords std_msgs/String "data: '你好,我是机器人'" 
 </code>
 </pre>
-
 出现下面的问题时
 <pre><code class="language-log line-numbers">
 mplayer: could not connect to socket
 mplayer: No such file or directory
 Failed to open LIRC support. You will not be able to use your remote control.
 </code></pre>
-
 主要是`mplayer`配置导致,解决方法如下:
 <pre><code class="language-log line-numbers">
 在$HOME/.mplayer/config文件中添加如下配置:lirc=no
@@ -776,7 +771,6 @@ exit:
 }
 </code></pre>
 </details>
-
 在`CMakeLists.txt`中加入编译规则
 <pre><code class="language-cmake line-numbers">
 add_executable(voice_assistant src/voice_assistant.cpp)
