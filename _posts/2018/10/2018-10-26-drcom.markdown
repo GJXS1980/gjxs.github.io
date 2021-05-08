@@ -36,7 +36,7 @@ tags:
 <img src="/img/in-post/2018.10/26/openwrt/hiwifi.png" alt="MQTT Logo">
 通过<code>putty</code>进入路由器后台,并<code>下载安装uboot:</code><br>
 
-<pre><code class="language-bash">#连上路由器后台，进入tmp目录下
+<pre><code class="language-filter line-numbers">#连上路由器后台，进入tmp目录下
 cd /tmp
 #下载对应版本的U-Root
 wget http://rssn.cn/roms/uboot/HC5661A-uboot.bin
@@ -103,6 +103,7 @@ sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 </code>
 </pre>
 <code>等待路由器重启</code>,到这里OpenWrt固件就安装成功了.
+
 >温馨提示:<br>1.刷机的时候最好用网线直连.<br>
 2.等待几分钟，当路由器自动重启说明成功（期间不要断开电源，不然就变砖了）<br>
 
@@ -110,6 +111,7 @@ sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 
 ### <center> <font face="楷体">贰 . 安装OpenWrt插件</font> </center>
 <strong>登录路由器后台</strong>，<code>网址：</code><strong>192.168.1.1</strong> <code>起始密码：</code><strong>admin</strong> <br>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装gdut-drcom客户端 </font></center></strong>
 <strong>各个路由器相应版本Dr.com插件下载</strong>
 
@@ -128,11 +130,13 @@ sysupgrade -F -n openwrt-18.06.1-ramips-mt76x8-hc5661a-squashfs-sysupgrade.bin
 将下载是<code>Drcom插件</code>用<code>WinSCP</code>传到路由器<code>tmp</code>文件夹下安装：<br>
 <pre><code class="language-bash">
 cd /tmp
+
 #安装gdut-drcom客户端
 opkg install gdut-drcom_6.0-4_mipsel_24kc.ipk
 </code>
 </pre>
 到这里,gdut-drcom客户端已经安装完了,<code>直接到第2步配置网络</code>,如果<code>上面没有提供到gdut-drcom客户端的小伙伴继续看选做部分</code>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 选做:OpenWrt SDK编译gdut-drcom客户端 </font></center></strong>
 <strong>(1)下载OpenWrt SDK</strong><br>
 首先进入[OpenWrt 18.06](https://archive.openwrt.org/releases/18.06.0/targets/) <br>
@@ -141,6 +145,7 @@ opkg install gdut-drcom_6.0-4_mipsel_24kc.ipk
 <img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk.png" alt="MQTT Logo"><br>
 找到<code>openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz</code>并下载<br>
 <img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk1.png" alt="MQTT Logo">
+
 >蓝色框表示SDK支持的路由器型号，红色框为SDK文件
 
 <strong>2.编译drcom插件教程</strong>:
@@ -155,11 +160,13 @@ cd .. && make package/ODP/compile
 </code>
 </pre>
 最后编译完的软件包在<code>/bin/packages/xxxx/base/</code>目录下,到这里你也有一个适合自己路由器的drcom插件了,<code>回到步骤1安装gdut-drcom客户端.</code><br>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.配置网络 </font></center></strong>
 <strong>(1)先查看<code>lan的MAC地址</code>并复制lan的MAC地址</strong><br>
 <img src="/img/in-post/2018.10/26/openwrt/drcom1.png" alt="MQTT Logo"><br>
 <strong>(2)修改<strong>Dr.com</strong>客户端的配置:</strong><br>
 <img src="/img/in-post/2018.10/26/openwrt/drcom.png" alt="MQTT Logo">
+
 >说明:311xxxxxxx为自己的学号,MAC地址为刚刚复制的，然后随便改MAC地址后两位数字
 
 <code>重启</code>,完成配置,应该可以拨号成功.
@@ -167,16 +174,19 @@ cd .. && make package/ODP/compile
 *************************
 
 ### <center> <font face="楷体">叁 . 配置privoxy代理</font> </center>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装privoxy及相关软件 </font></center></strong>
 先进入<strong>软件</strong>选项,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/privoxy1.png" alt="MQTT Logo"><br>
 下载<code>图中红框</code>里面的<code>三个软件</code>,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/privoxy2.png" alt="MQTT Logo">
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.配置privoxy </font></center></strong>
 进入<strong>privoxy</strong>选项,<strong>开启</strong>privoxy网络代理,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/privoxy3.png" alt="MQTT Logo"><br>
 开启<strong>Accept intercepted requests</strong>选项,如下图:
 <img src="/img/in-post/2018.10/26/openwrt/privoxy4.png" alt="MQTT Logo">
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.获取UserAgent </font></center></strong>
 <code>由于我已经整合了大部分的UA,基本可以满足要求,可以直接跳到第4步</code><br>
 获取UA有两个常用的方法:<br>
@@ -191,7 +201,7 @@ cd .. && make package/ODP/compile
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.修改UserAgent </font></center></strong>
 通过<code>WinSCP</code>进入路由器后台,打开<code>etc/privoxy/default.action</code>文件,<code>在文件最后面添加下面折叠部分的内容:</code>
-<details><summary><code>view code</code>(此部分为折叠内容)</summary>
+<details><summary><code>view code</code>(此部分为折叠内容,点击即可打开)</summary>
 
 <pre><code class="language-action line-numbers">
 #hide-user-agent
@@ -324,7 +334,7 @@ cd .. && make package/ODP/compile
 </code></pre>
 </details>
 打开<code>etc/privoxy/default.filter</code>文件,在文件最后面<code>添加下面折叠部分的内容:</code>
-<details><summary><code>view code</code>(此部分为折叠内容)</summary>
+<details><summary><code>view code</code>(此部分为折叠内容,点击即可打开)</summary>
 
 <pre><code class="language-filter line-numbers">
 ####################### Android System  #################
@@ -531,6 +541,7 @@ s@\b(AndroidSDK_27_clover_8.1.0|iP\w+)\b@@ig
 00 6 * * * sleep 5 && touch /etc/banner && reboot
 ```
 <code>每天早上6点钟会自动重启路由器<code>,如果你想要其他时间重启,可以改成其他时间.
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 6.使环境生效 </font></center></strong>
 <pre><code class="language-vim ">
 iptables -t nat -N PrivoxyUA
