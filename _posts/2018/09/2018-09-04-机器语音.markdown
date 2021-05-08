@@ -471,7 +471,7 @@ exit:
 
     return 0;
 }</code></pre>
-</code></pre>
+### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.语音合成 </font></center></strong>
 
 <ul>
 <li> `main函数`中声明了一个订阅`voiceWords`话题的`subscriber`,接收输入的语音字符串</li><br>
