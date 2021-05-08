@@ -513,6 +513,7 @@ Failed to open LIRC support. You will not be able to use your remote control.
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.智能语音助手 </font></center></strong>
 程序源代码(`voice_assistant.cpp`)如下:
+<details><summary><code>view code</code>(此部分为折叠内容,点击即可打开)</summary>
 <pre><code class="language-cpp">
 #include <iostream>
 #include <stdio.h>
@@ -768,7 +769,7 @@ exit:
     return 0;
 }
 </code></pre>
-
+</details>
 在`CMakeLists.txt`中加入编译规则
 <pre><code class="language-cmake line-numbers">
 add_executable(voice_assistant src/voice_assistant.cpp)
