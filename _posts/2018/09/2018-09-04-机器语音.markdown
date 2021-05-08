@@ -63,6 +63,8 @@ sudo cp libmsc.so /usr/lib/libmsc.so</code></pre>
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.语音听写 </font></center></strong>
 程序源代码(`iat_publish.cpp`)如下:
+
+<details><summary><code>view code</code>(此部分为折叠内容,点击即可打开)</summary>
 <pre><code class="language-cpp">
 /*
 * 语音听写(iFly Auto Transform)技术能够实时地将语音转换成对应的文字。
@@ -217,8 +219,9 @@ exit:
     MSPLogout(); // Logout...
     return 0;
 }
-</code>
-</pre>
+</code></pre>
+</details>
+
 
 <ul>
 <li>subscriber用来接收语音唤醒信号,接收到唤醒信号之后,会将wakeupFlag变量置位</li><br>
