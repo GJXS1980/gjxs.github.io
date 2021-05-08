@@ -21,6 +21,7 @@ tags:
 *************************
 
 ### <center> <font face="楷体">壹 . ROS下的机器语音概述</font> </center>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.语音识别的理论模型 </font></center></strong>
 <div class="mermaid">
 graph LR;
@@ -36,13 +37,16 @@ graph LR;
     op3[模板库]-->op2[模板匹配];
     op7[专家知识库]-->op4[判决];
 </div>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.常用功能包 </font></center></strong>
 <ul>
 <li> <code>pocketsphinx</code>：集成CMU Sphinx和Festival开源项目中的代码,实现语音识别的功能.</li>
 <li> <code>audio-common</code>：提供文本转语音(Text-to-speech,TTS)的功能实现完成"机器人说话"的想法</li>
 <li> <code>AIML</code>：人工智能标记语言,Artifical Intelligence Markup Language,是一种创建自然语言软件代理的XML语言.</li>
 </ul>
+
 ### <center> <font face="楷体">贰 . 科大讯飞SDK</font> </center>
+
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.下载及配置 </font></center></strong>
 <ul>
 <li>下载SDK</li><br>
@@ -51,16 +55,15 @@ graph LR;
 <ul>
 <li>将科大讯飞SDK库文件拷到系统目录</li><br>
 </ul>
-<pre><code class="language-bash">
-#找到相应的版本(一般都是64位)
-sudo cp libmsc.so /usr/lib/libmsc.so
-</code>
-</pre>
+<pre><code class="language-shell line-numbers">
+# 找到相应的版本(一般都是64位)
+sudo cp libmsc.so /usr/lib/libmsc.so</code></pre>
+
 >说明:科大讯飞的SDK带有ID号,每个人每次下载后的ID都不相同,更换SDK之后需要修改代码中的APPID
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.语音听写 </font></center></strong>
-程序源代码(`iat_publish.cpp`)如下:<br>
-```cpp
+程序源代码(`iat_publish.cpp`)如下:
+<pre><code class="language-cpp">
 /*
 * 语音听写(iFly Auto Transform)技术能够实时地将语音转换成对应的文字。
 */
@@ -214,13 +217,14 @@ exit:
     MSPLogout(); // Logout...
     return 0;
 }
-```
+</code></pre>
+
 <ul>
 <li>subscriber用来接收语音唤醒信号,接收到唤醒信号之后,会将wakeupFlag变量置位</li><br>
 <li>主循环中调用SDK的语音听写功能,识别成功后置位resultFlag变量,通过Publisher将识别出来的字符串发布</li><br>
 </ul>
 在`CMakeLists.txt`中加入编译规则
-<pre><code class="language-cmake">
+<pre><code class="language-cmake line-numbers">
 add_executable(iat_publish 
   src/iat_publish.cpp 
   src/speech_recognizer.c 
@@ -234,9 +238,9 @@ target_link_libraries(
 </pre>
 
 <ul>
-<li>语音听写示例</li><br>
+<li>语音听写示例</li>
 </ul>
-<pre><code class="language-bash">
+<pre><code class="language-shell line-numbers">
 roscore
 rosrun robot_voice iat_publish
 rostopic pub /voiceWakeup std_msgs/String "data: '110'"
@@ -247,7 +251,7 @@ rostopic echo /voiceWords
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.语音合成 </font></center></strong>
 程序源代码(`tts_subscribe.cpp`)如下:
-```cpp
+<pre><code class="language-cpp">
 /*
 * 语音合成（Text To Speech，TTS）技术能够自动将任意文字实时转换为连续的
 * 自然语音，是一种能够在任何时间、任何地点，向任何人提供语音信息服务的
@@ -472,27 +476,26 @@ exit:
 
     return 0;
 }
-```
+</code></pre>
 
 <ul>
-<li>`main函数`中声明了一个订阅`voiceWords`话题的`subscriber`,接收输入的语音字符串</li><br>
+<li> `main函数`中声明了一个订阅`voiceWords`话题的`subscriber`,接收输入的语音字符串</li><br>
 <li>回调函数voiceWordCallback中使用SDK接口将字符串转换成中文语音</li><br>
 </ul>
 在`CMakeLists.txt`中加入编译规则
-<pre><code class="language-cmake">
+<pre><code class="language-cmake line-numbers">
 add_executable(tts_subscribe src/tts_subscribe.cpp)
 target_link_libraries(
    tts_subscribe
    ${catkin_LIBRARIES} 
    libmsc.so -ldl -pthread
  )
-</code>
-</pre>
+</code></pre>
 
 <ul>
-<li>语音合成示例</li><br>
+<li>语音合成示例</li>
 </ul>
-<pre><code class="language-bash">
+<pre><code class="language-shell line-numbers">
 #安装mplayer
 sudo apt-get install mplayer
 #启动例程
@@ -502,23 +505,20 @@ rostopic pub /voiceWords std_msgs/String "data: '你好,我是机器人'"
 </code>
 </pre>
 出现下面的问题时
-
 <pre><code class="language-log line-numbers">
 mplayer: could not connect to socket
 mplayer: No such file or directory
 Failed to open LIRC support. You will not be able to use your remote control.
-</code>
-</pre>
+</code></pre>
 主要是`mplayer`配置导致,解决方法如下:
 <pre><code class="language-log line-numbers">
 在$HOME/.mplayer/config文件中添加如下配置:lirc=no
-</code>
-</pre>
+</code></pre>
 >没有这个文件夹的就重新创建一个
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4.智能语音助手 </font></center></strong>
 程序源代码(`voice_assistant.cpp`)如下:
-```cpp
+<pre><code class="language-cpp">
 #include <iostream>
 #include <stdio.h>
 #include <string.h>
@@ -772,10 +772,10 @@ exit:
 
     return 0;
 }
-```
+</code></pre>
 
 在`CMakeLists.txt`中加入编译规则
-<pre><code class="language-makefile">
+<pre><code class="language-cmake line-numbers">
 add_executable(voice_assistant src/voice_assistant.cpp)
 target_link_libraries(
    voice_assistant
@@ -785,9 +785,9 @@ target_link_libraries(
 </code></pre>
 
 <ul>
-<li>智能语音助手示例</li><br>
+<li>智能语音助手示例</li>
 </ul>
-<pre><code class="language-vim">
+<pre><code class="language-shell line-numbers">
 roscore
 rosrun robot_voice iat_publish
 rosrun robot_voice voice_assistant
