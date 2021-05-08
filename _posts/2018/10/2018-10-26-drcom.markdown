@@ -18,8 +18,10 @@ tags:
 *************************
 
 ### <center> <font face="楷体">零 . 准备工作</font> </center>
-<strong>应用环境</strong> <br>
-<ul><li> 所有支持OpenWrt固件的路由器 </li></ul><br>
+<strong>应用环境</strong> 
+
+<ul><li> 所有支持OpenWrt固件的路由器 </li></ul>
+
 <strong>要求</strong> <br>
 <ul><li> 路由器联网并安装开发者插件 </li><br>
     <li> 熟悉WinSCP的使用 </li><br>
@@ -562,7 +564,7 @@ opkg update</code></pre>
 
 <strong>问题3：</strong>编译mt7620版本的插件时，会缺依赖<br>
 <strong>解决方法：</strong>安装下面的依赖
-<pre><code class="language-log line-numbers">sudo apt-get install gawk
+<pre><code class="language-shell line-numbers">sudo apt-get install gawk
 sudo apt-get install libncurses5-dev
 </code></pre>
 
