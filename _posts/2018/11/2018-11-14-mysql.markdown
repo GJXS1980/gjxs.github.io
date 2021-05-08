@@ -51,7 +51,7 @@ sudo service mysql restart</code></pre>
 
  <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.Mysql 连接测试 </font></center></strong>
 
-<pre><code class="language-shell line-numbers">mysql -u root -h localhost -p</code></pre>
+<pre><code class="language-sql line-numbers">mysql -u root -h localhost -p</code></pre>
 
 然后输入<code>新密码</code>即可登录mysql<br>
 
