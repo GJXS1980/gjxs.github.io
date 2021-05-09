@@ -1,5 +1,5 @@
 ---
-layout:       wait
+layout:       -
 title:        "ROS NOTE 8"
 subtitle:     "机器语音"
 date:         2018-09-04 20:14:00

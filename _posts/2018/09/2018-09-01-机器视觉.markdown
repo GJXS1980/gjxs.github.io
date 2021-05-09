@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       -
 title:        "ROS NOTE 7"
 subtitle:     "机器视觉"
 date:         2018-09-01 10:12:00
