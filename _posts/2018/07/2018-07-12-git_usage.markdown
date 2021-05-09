@@ -77,7 +77,6 @@ git branch -a
 <pre><code class="language-git line-numbers">
 git push origin --delete (分支名)
 </code></pre>
-
 >如果是master分支，在github上<code>将master分支设置成不是default的分支才可以删除</code>
 
 删除后，可再次查看分支情况
@@ -94,7 +93,7 @@ git branch -D (分支名)
 </code></pre>
 如果是<code>master分支</code>，则应该<code>先切换到新分支才可以删除master分支</code>
 <pre><code class="language-git line-numbers">
-git checkout <new_branch>
+git checkout (new_branch)
 git branch -d master
 </code></pre>
 删除后，可再次<code>查看分支情况</code>
