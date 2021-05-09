@@ -30,18 +30,19 @@ tags:
 sudo apt-get install nvidia-384
 </code></pre>
 重启，问题解决
-
 *****
 
 ##### BUG2:无法获得锁/var/lib/dpkg/lock - open (11: 资源暂时不可用)
 
 ###### 问题描述 
 使用Ubuntu打开终端时,输入带有sudo apt-get 命令行是回报下面错误:
+
 >E: 无法获得锁 /var/lib/dpkg/lock - open (11: 资源暂时不可用)
 E: 无法锁定管理目录(/var/lib/dpkg/)，是否有其他进程正占用它？
 
 ###### 原因分析
 在ubuntu系统用带有apt-get 命令行的时候，如果在未完成任务的情况下将终端中断，此时 apt-get进程可能没有结束。当重新开机再次运行带有apt-get命令行的时候，可能会发生上面的错误。
+
 ###### 解决方法
 在终端输入下面命令强制解锁
 <pre><code class="language-shell line-numbers">
@@ -54,23 +55,24 @@ sudo rm /var/lib/dpkg/lock
 ##### BUG3:系统死机后重启停在initramfs界面的解决方法
 
 ###### 问题描述 
-由于系统错，导致系统发生错误，强制关机，造成重新开机停在initramfs界面，如下图：
+由于系统错，导致系统发生错误，强制关机，造成重新开机停在initramfs界面<!--，如下图：
 <div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/1.jpg" height="660" width="400" >
- </div>
+ </div-->
+
 ###### 解决方法
 输入下面的命令（把n改为你装ubuntu系统的盘号）
-```bash
+<pre><code class="language-shell line-numbers">
 fsck -y /dev/sdbn 
-```
+</code></pre>
 我这里是
-```bash
+<pre><code class="language-shell line-numbers">
 fsck -y /dev/sdb11 
-```
-结果如下：
+</code></pre>
+<!--结果如下：
 <div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/2.jpg" height="660" width="400" >
- </div>
+ </div-->
 然后重启
 <pre><code class="language-shell line-numbers">
 reboot
@@ -83,28 +85,26 @@ reboot
 ###### 问题描述 
 开机的时候，发现进不了系统，显示下面的错误信息：
 
->
-welcome to emergency mode！：after logging in ，type “journalctl -xb” to view system logs，“systemctl reboot” to reboot ，“systemctl default” to try again to boot into default mode。 give root password for maintenance （？？ Control-D？？？）’
+>welcome to emergency mode！：after logging in ，type “journalctl -xb” to view system logs，“systemctl reboot” to reboot ，“systemctl default” to try again to boot into default mode。 give root password for maintenance （？？ Control-D？？？）’
 
-<div align="center">
+<!--div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/3.jpg" height="660" width="400" >
- </div>
+ </div-->
 
 ###### 解决方法
 使用下面命令行检查磁盘挂载信息
 <pre><code class="language-shell line-numbers">
 vim /etc/fstab 
 </code></pre>
-<div align="center">
+<!--div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/4.jpg" height="660" width="400" >
- </div>
+ </div-->
 把挂载home的盘的2改为0
-<div align="center">
+<!--div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/5.jpg" height="660" width="400" >
- </div>
+ </div-->
 
 重启，问题修复
-
 *****
 
 ##### BUG5:g++: internal compiler error: Killed (program cc1plus)

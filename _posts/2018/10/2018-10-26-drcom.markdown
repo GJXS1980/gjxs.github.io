@@ -20,7 +20,7 @@ tags:
 ### <center> <font face="楷体">零 . 准备工作</font> </center>
 <strong>应用环境</strong> 
 <ul><li> 所有支持OpenWrt固件的路由器 </li></ul>
-<strong>要求</strong> <br>
+<strong>要求</strong> 
 <ul><li> 路由器联网并安装开发者插件 </li>
     <li> 熟悉WinSCP的使用 </li>
     <li> 熟悉putty登录路由器后台的操作 </li>
