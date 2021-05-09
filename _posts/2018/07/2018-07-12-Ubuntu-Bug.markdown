@@ -32,6 +32,7 @@ sudo apt-get install nvidia-384
 重启，问题解决
 
 *****
+
 ##### BUG2:无法获得锁/var/lib/dpkg/lock - open (11: 资源暂时不可用)
 
 ###### 问题描述 
@@ -78,6 +79,8 @@ fsck -y /dev/sdb11
 reboot
 </code></pre>
 
+*****
+
 ##### BUG4:系统死机后重启停在welcome to emergency mode界面的解决方法
 
 ###### 问题描述 
@@ -101,7 +104,6 @@ vim /etc/fstab
 <!--div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/5.jpg" height="660" width="400" >
  </div-->
-
 重启，问题修复
 
 *****
@@ -109,7 +111,7 @@ vim /etc/fstab
 ##### BUG5:g++: internal compiler error: Killed (program cc1plus)
 
 ###### 问题描述 
-g++: internal compiler error: Killed (program cc1plus)<br>
+g++: internal compiler error: Killed (program cc1plus)
 Please submit a full bug report,
 
 ###### 解决方法
