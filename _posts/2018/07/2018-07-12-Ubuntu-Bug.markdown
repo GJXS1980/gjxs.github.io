@@ -30,8 +30,8 @@ tags:
 sudo apt-get install nvidia-384
 </code></pre>
 重启，问题解决
-*****
 
+*****
 ##### BUG2:无法获得锁/var/lib/dpkg/lock - open (11: 资源暂时不可用)
 
 ###### 问题描述 
@@ -55,8 +55,8 @@ sudo rm /var/lib/dpkg/lock
 ##### BUG3:系统死机后重启停在initramfs界面的解决方法
 
 ###### 问题描述 
-由于系统错，导致系统发生错误，强制关机，造成重新开机停在initramfs界面<!--，如下图：
-<div align="center">
+由于系统错，导致系统发生错误，强制关机，造成重新开机停在initramfs界面，如下图：
+<!--div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/1.jpg" height="660" width="400" >
  </div-->
 
@@ -69,16 +69,14 @@ fsck -y /dev/sdbn
 <pre><code class="language-shell line-numbers">
 fsck -y /dev/sdb11 
 </code></pre>
-<!--结果如下：
-<div align="center">
+结果如下：
+<!--div align="center">
 <img src="http://pbqlliizk.bkt.clouddn.com/2.jpg" height="660" width="400" >
  </div-->
 然后重启
 <pre><code class="language-shell line-numbers">
 reboot
 </code></pre>
-
-*****
 
 ##### BUG4:系统死机后重启停在welcome to emergency mode界面的解决方法
 
@@ -105,6 +103,7 @@ vim /etc/fstab
  </div-->
 
 重启，问题修复
+
 *****
 
 ##### BUG5:g++: internal compiler error: Killed (program cc1plus)
