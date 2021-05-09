@@ -154,8 +154,8 @@ svn co https://github.com/GJXS1980/QQ_wechat/trunk/wechat/icon
 </lu>
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.使用方法 </font></center></strong>
-首先，在你的<code>工作区新建一个名称为.gitignore的文件</code>。<br>
-然后，<code>把要忽略的文件名填进去，Git就会自动忽略这些文件</code>。<br>
+首先，在你的<code>工作区新建一个名称为.gitignore的文件</code>。
+然后，<code>把要忽略的文件名填进去，Git就会自动忽略这些文件</code>。
 例子:
 <pre><code class="language-git line-numbers">
 *.class
@@ -173,7 +173,7 @@ svn co https://github.com/GJXS1980/QQ_wechat/trunk/wechat/icon
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.查看.gitignore的规则 </font></center></strong>
 如果你发现<code>.gitignore写得有问题</code>，需要找出来到底哪个规则写错了，可以<code>用git check-ignore命令检查</code>：
 <pre><code class="language-git line-numbers">
-git check-ignore -v <your_path>
+git check-ignore -v (your_path)
 </code></pre>
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 4..gitignore规则不生效的解决办法 </font></center></strong>
