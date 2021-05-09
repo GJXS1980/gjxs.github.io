@@ -205,7 +205,7 @@ sudo apt-get -f install
 </code></pre>
 （2）在终端里面，进入下载软件包的文件夹，输入下面命令安装下载的软件包
 <pre><code class="language-shell line-numbers">
-sudo apt-get dpkg -i <package-name.deb>
+sudo apt-get dpkg -i (package-name.deb)
 </code></pre>
 
 *****
