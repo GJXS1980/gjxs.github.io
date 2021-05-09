@@ -36,9 +36,10 @@ ubuntu系统的安装如下：
 sudo apt-get install putty
 </code></pre>
 然后在搜索那里（按win键）找到软件打开就ok了
-### 刷OpenWrt
 
 ***************
+
+### 刷OpenWrt
 
 ##### 用putty登录路由器后台（以SSH方式登录）
 这个ip是你给极路由设定的，默认是192.168.199.1，用户名为：root，密码为路由器后台密码
