@@ -29,47 +29,47 @@ CUDA  | 8.0 |
 OpenNI2  | 2.2.0.33 | 
 
 1.安装依赖
-```bash
+<pre><code class="language-shell line-numbers">
 #安装cmake
 sudo apt-get install build-essential cmake pkg-config
 #安装TurboJPEG
 sudo apt-get install libturbojpeg libjpeg-turbo8-dev
 #安装OpenNI2
 sudo apt-get install libopenni2-dev && sudo apt-get install openni2-utils 
-```
+</code></pre>
 
 2.安装OpenCL/CUDA
 进入[官网](https://developer.nvidia.com/cuda-80-ga2-download-archive)
 选择linux, x86_64, Ubuntu, 16.04, deb(local)
-```bash
+<pre><code class="language-shell line-numbers">
 wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb -O cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
 wget https://developer.nvidia.com/compute/cuda/8.0/Prod2/patches/2/cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64-deb -O cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1604-8-0-local-cublas-performance-update_8.0.61-1_amd64.deb
 sudo apt-get update
 sudo apt-get install cuda
-```
+</code></pre>
 
-```bash
+<pre><code class="language-shell line-numbers">
 #安装nvidia-modprobe and opencl-headers
 sudo apt-get install nvidia-modprobe opencl-headers
-```
+</code></pre>
 添加CUDA 路径到系统环境（~/.bashrc）
-```bash
+<pre><code class="language-shell line-numbers">
 echo "export LD_LIBRARY_PATH="/usr/local/cuda/lib64:${LD_LIBRARY_PATH}"" >> ~/.bashrc
 echo "export PATH="/usr/local/cuda/bin:${PATH}"" >> ~/.bashrc
 source ~/.bashrc
-```
+</code></pre>
 
 3.安装opencl
-```bash
+<pre><code class="language-shell line-numbers">
 sudo apt-get install nvidia-opencl-dev nvidia-modprobe nvidia-libopencl1-384 nvidia-opencl-icd-384
 
 sudo apt-get install nvidia-cuda-toolkit
-```
+</code></pre>
 
 ##### 下载源代码
-```bash
+<pre><code class="language-shell line-numbers">
 git clone https://github.com/OpenKinect/libfreenect2.git
 #下载升级文件
 cd ~/libfreenect2/depends; ./download_debs_trusty.sh
@@ -79,10 +79,10 @@ sudo dpkg -i debs/libusb*deb
 sudo dpkg -i debs/libglfw3*deb;
 sudo apt-get install -f; 
 sudo apt-get install libgl1-mesa-dri-lts-vivid
-```
+</code></pre>
 
 ##### 编译，链接
-```bash
+<pre><code class="language-shell line-numbers">
 cd ~/libfreenect2 && mkdir build && cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/freenect2
 make
@@ -91,11 +91,11 @@ make install
 #赋予权限
 cd ~/libfreenect2
 sudo cp platform/linux/udev/90-kinect2.rules /etc/udev/rules.d/
-```
+</code></pre>
 
 ##### 测试运行
 重新插入kinect
-```bash
+<pre><code class="language-shell line-numbers">
 #测试是否安装成功
 cd ~/libfreenect2/build/bin && ./Protonect
 #测试是否支持OpenGL
@@ -104,11 +104,12 @@ cd ~/libfreenect2/build/bin && ./Protonect gl
 cd ~/libfreenect2/build/bin && ./Protonect cl
 #测试是否支持CPU
 cd ~/libfreenect2/build/bin && ./Protonect cpu
-```
+</code></pre>
 
 ***********************************
 
 ### IAI Kinect2
+
 ##### 依赖
 
 Dependence | Version |
@@ -119,13 +120,13 @@ Eigen  | x |
 PCL  | 1.7.x | 
 
 1.安装Eigen 
-```bash
+<pre><code class="language-shell line-numbers">
 sudo apt-get install libeigen3-dev
 sudo cp -r  /usr/include/eigen3/Eigen  /usr/local/include/
-```
+</code></pre>
 
 2.安装OpenCV
-```bash
+<pre><code class="language-shell line-numbers">
 git clone https://github.com/opencv/opencv.git
 cd opencv 
 mkdir release
@@ -133,9 +134,9 @@ cd release
 cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_TIFF=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_GTK=ON -D WITH_OPENGL=ON ..
 make
 sudo make install
-```
+</code></pre>
 配置opencv相关文件
-```bash
+<pre><code class="language-shell line-numbers">
 sudo gedit /etc/ld.so.conf.d/opencv.conf
 #在这个空文件中加入如下代码并保存 
 /usr/local/lib 
@@ -145,13 +146,13 @@ sudo ldconfig
 sudo gedit /etc/bash.bashrc
 #在末尾加如下两行：
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-```
+</code></pre>
 测试是否安装成功
 
 3.安装PCL1.8
 
 安装依赖
-```bash
+<pre><code class="language-shell line-numbers">
 sudo apt-get update
 sudo apt-get install git build-essential linux-libc-dev
 sudo apt-get install cmake cmake-gui 
@@ -166,9 +167,9 @@ sudo apt-get install freeglut3-dev pkg-config
 sudo apt-get install libxmu-dev libxi-dev 
 sudo apt-get install mono-complete
 sudo apt-get install qt-sdk openjdk-8-jdk openjdk-8-jre
-```
+</code></pre>
 下载并编译源代码
-```bash
+<pre><code class="language-shell line-numbers">
 #下载源代码
 git clone https://github.com/PointCloudLibrary/pcl.git
 #编译
@@ -177,10 +178,10 @@ cmake -DCMAKE_BUILD_TYPE=None -DCMAKE_INSTALL_PREFIX=/usr \
            -DBUILD_GPU=ON -DBUILD_apps=ON -DBUILD_examples=ON \
            -DCMAKE_INSTALL_PREFIX=/usr ..
 make && sudo make install
-```
+</code></pre>
 
 ##### 安装IAI Kinect2
-```bash
+<pre><code class="language-shell line-numbers">
 #下载iai_kinect2包
 mkdir -p ~/kinect_ws/src
 cd ~/kinect_ws/src
@@ -198,18 +199,18 @@ rospack profile
 echo "source ~/kinect_ws/devel/setup.bash" >> ~/.bashrc 
 #使环境生效
 source ~/.bashrc
-```
+</code></pre>
 
 <strong>测试运行 </strong><br>
-```bash
+<pre><code class="language-shell line-numbers">
 roslaunch kinect2_bridge kinect2_bridge.launch
 rosrun kinect2_viewer kinect2_viewer
-```
+</code></pre>
 
 最后，由于前面安装PCL依赖的时候卸载了部分的功能包，现在重新安装一下ROS:[ROS Kinetic](https://www.gjxslisa.club/2018/06/25/ros/)
 
 ##### kinect V2的标定
-```bash
+<pre><code class="language-shell line-numbers">
 #创建校准数据文件
 mkdir ~/kinect_cal_data && cd ~/kinect_cal_data
 
@@ -238,17 +239,16 @@ rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate sync
 ####采集100张图
 rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record depth
 rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate depth
-
-```
+</code></pre>
 然后再把calib_color.yaml calib_ir.yaml calib_pose.yaml calib_depth.yaml拷贝到/home/robot/kinect_ws/src/iai_kinect2/kinect2_bridge/data/034011551247文件夹中
 
 
 >出现下面问题时：
 >问题1:ERROR: the following packages/stacks could not have their rosdep keys resolved to system dependencies:
 >解决方法:将命令改写为这个：
-```bash
+<pre><code class="language-shell line-numbers">
 rosdep install --from-paths ~/kinect_ws/src/iai_kinect2 --ignore-src -r
-```
+</code></pre>
 
 >问题2:In file included from /opt/ros/kinetic/include/opencv-3.2.0-dev/opencv2/flann/flann_base.hpp:41:0,
                  from /opt/ros/kinetic/include/opencv-3.2.0-dev/opencv2/flann.hpp:48,
@@ -261,17 +261,17 @@ rosdep install --from-paths ~/kinect_ws/src/iai_kinect2 --ignore-src -r
 
 
 在kinect2_registration中的cmakelists.txt插入“add_definitions（-fexceptions）”并允许catkin_make完成：
-```
+<pre><code class="language-cmake line-numbers">
 if(OpenCL_FOUND)
   message(STATUS "OpenCL based depth registration enabled")
   set(EXPORTED_DEPENDENCIES OpenCL)
   add_definitions( -fexceptions )
-```
+</code></pre>
 
 >问题3：CUDA安装出错
 安装CUDA8.0要降低gcc和g++版本到5.0以下（可用4.9或者4.8版本的gcc和g++）
 
-```bash
+<pre><code class="language-shell line-numbers">
 #查看当前gcc版本
 gcc -v
 
@@ -293,7 +293,7 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 40
 
 #再用下面命令来看一下版本是否改变了
 gcc -v 
-```
+</code></pre>
 
 *******************************
 >参考链接
