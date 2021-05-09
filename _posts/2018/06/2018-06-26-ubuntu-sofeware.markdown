@@ -212,6 +212,7 @@ sudo apt-get dpkg -i (package-name.deb)
 
 ### 5.IDE编辑器
 ----------
+
 ##### sublime text
 （1）安装GPG密钥：
 <pre><code class="language-shell line-numbers">
