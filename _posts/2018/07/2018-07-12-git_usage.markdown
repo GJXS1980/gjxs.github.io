@@ -40,7 +40,7 @@ git commit -m "first commit"
 
 6.<code>添加远程仓库</code>
 <pre><code class="language-git line-numbers">
-git remote add origin <你项目仓库链接>
+git remote add origin (你项目仓库链接)
 </code></pre>
 7.<code>推送代码</code>
 <pre><code class="language-git line-numbers">
