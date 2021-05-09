@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       -
 title:        "ROS NOTE 4"
 subtitle:     "URDF机器人建模"
 date:         2018-08-24 08:45:00

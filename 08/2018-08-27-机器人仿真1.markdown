@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       -
 title:        "ROS NOTE 5"
 subtitle:     "ArbotiX+rviz功能仿真"
 date:         2018-08-27 12:26:00

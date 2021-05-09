@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       -
 title:        "ROS NOTE 1"
 subtitle:     "认识ROS"
 date:         2018-08-19 23:25:00

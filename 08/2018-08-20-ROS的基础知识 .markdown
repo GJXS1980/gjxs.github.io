@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       -
 title:        "ROS NOTE 2"
 subtitle:     "ROS通信编程"
 date:         2018-08-21 22:00:00

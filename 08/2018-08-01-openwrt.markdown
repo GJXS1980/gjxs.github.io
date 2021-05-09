@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       -
 title:        "OpenWrt"
 subtitle:     "openwrt and openwrt-packages"
 date:         2018-08-01 16:50:00

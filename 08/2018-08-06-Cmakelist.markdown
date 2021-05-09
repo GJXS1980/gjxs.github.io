@@ -1,5 +1,5 @@
 ---
-layout:       post
+layout:       -
 title:        "ROS CMakeLists"
 subtitle:     "CMakeLists.txt"
 date:         2018-08-06 01:30:00
