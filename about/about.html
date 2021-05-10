@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "About"
-description: " --. .--- -..- ... "
+description: "Victory won’t come to me unless I go to it."
 header-img: "img/about/steps.jpg" 
 multilingual: true
 ---
@@ -45,19 +45,55 @@ multilingual: true
                 <br><br>
                 </div>
                 <div class="clearfix"></div>
+		<div id="timer"></div>
+
+		<script type="text/javascript">
+			function current() {
+				var d = new Date(),
+				str = 'Last login: The ';
+				if(d.getMonth()==0)   mon="Jan."
+				if(d.getMonth()==1)   mon="Feb."
+				if(d.getMonth()==2)   mon="Mar."
+				if(d.getMonth()==3)   mon="Apr."
+				if(d.getMonth()==4)   mon="May"
+				if(d.getMonth()==5)   mon="Jun."
+				if(d.getMonth()==6)   mon="Jul."
+				if(d.getMonth()==7)   mon="Aug."
+				if(d.getMonth()==8)   mon="Sep."
+				if(d.getMonth()==9)   mon="Oct."
+				if(d.getMonth()==10)   mon="Nov."
+				if(d.getMonth()==11)   mon="Dec."
+
+				str += mon + ' ';
+				str += d.getDate() + ' ';
+				str += d.getHours() + ':';
+				str += d.getMinutes() + ':';
+				str += d.getSeconds() + ' ';
+				str += d.getFullYear() + ' '; 			 
+				str += 'from www.aigrantli.com'; 
+				return str;
+			}
+			window.onload = function() {
+				var timer = document.getElementById("timer");
+				timer.innerHTML = current();
+			}
+		</script>
+
+
                 <div class="about-me__content" id="terminal-start">
-                    <p>Last login: Thu Aug 30 12:26:00 2018 from www.aigrantli.com</p>
+                    <!--p>Last login: Thu Aug 30 12:26:00 2018 from www.aigrantli.com</p-->
 
 <pre style="border: none;">
 <br>
-(  ____ \\__    _/|\     /|(  ____ \
-| (    \/   )  (  ( \   / )| (    \/
-| |         |  |   \ (_) / | (_____ 
-| | ____    |  |    ) _ (  (_____  )
-| | \_  )   |  |   / ( ) \       ) |
-| (___) ||\_)  )  ( /   \ )/\____) |
-(_______)(____/   |/     \|\_______)
-
+ .oOOOo.                              o         
+.O     o                             O       o  
+o                                O   o          
+O                               oOo  o          
+O   .oOOo `OoOo. .oOoO' 'OoOo.   o   O       O  
+o.      O  o     O   o   o   O   O   O       o  
+ O.    oO  O     o   O   O   o   o   o     . O  
+  `OooO'   o     `OoO'o  o   O   `oO OOoOooO o' 
+                                                                                
 Amazon Linux version 2021.05 is available.
 </pre>
 
@@ -79,7 +115,7 @@ Amazon Linux version 2021.05 is available.
                         <p>echo $aspiration</p>
                         <span class="hideme">World Peace.</span>
                         <p>echo $hobby</p>
-                        <span class="hideme">think about life.</span>
+                        <span class="hideme">Think about life.</span>
                     </div>
                 </div>
             </div>
