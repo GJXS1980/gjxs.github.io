@@ -65,10 +65,18 @@ multilingual: true
 				if(d.getMonth()==11)   mon="Dec."
 
 				str += mon + ' ';
-				str += d.getDate() + ' ';
-				str += d.getHours() + ':';
-				str += d.getMinutes() + ':';
-				str += d.getSeconds() + ' ';
+				if(d.getDate() < 10){str += "0" + d.getDate() + ' ';}
+				else{str += d.getDate() + ' ';}
+
+				if(d.getHours()<10){str += "0" + d.getHours() + ':';}
+				else{str += d.getHours() + ':';}
+
+				if(d.getMinutes()<10){str += "0" + d.getMinutes() + ':';}
+				else{str += d.getMinutes() + ':';}
+
+				if(d.getSeconds()<10){str += "0" + d.getSeconds() + ' ';}
+				else{str += d.getSeconds() + ' ';}
+
 				str += d.getFullYear() + ' '; 			 
 				str += 'from www.aigrantli.com'; 
 				return str;
