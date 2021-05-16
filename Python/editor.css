@@ -1,0 +1,607 @@
+*{
+    margin:0;
+    padding:0;
+}
+a{
+    text-decoration: none;
+}
+html body {
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;   
+    user-select: none;
+    background-color: #fff;
+    cursor: default;
+}
+li{
+    list-style: none;
+}
+.header{
+    width:100vw;
+    min-width: 1200px;
+    height:70px;
+    box-shadow: 0 2px 20px 1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.header .logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding:0 20px;
+}
+.header .logo img{
+    width:65px;
+    /* height:46px; */
+    display: block;
+    margin-right:22px;
+    margin-top:5px;
+}
+.header .logo span{
+    color:#333;
+    font-size: 26px;
+    font-weight: bold;
+}
+.header .login{
+    padding-right:55px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.header .login p{
+    font-size: 14px;
+    color: #666666;
+}
+.header .login p a:nth-child(1){
+    padding-right: 10px;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #666666;
+}
+.header .login p a:nth-child(2){
+    padding-left: 10px;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #666666;
+}
+
+.header .user{
+    padding-right:55px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    /*display: none;*/
+}
+.header .user:hover .head-portrait-list{
+    display: block;
+}
+.header .user>img:first-of-type{
+    width:25px;
+    height:25px;
+    border-radius: 50%;
+    display: block;
+}
+.header .user>img:last-of-type{
+    width:15px;
+    height:15px;
+    display: block;
+}
+.header .user>span{
+    display: block;
+    margin-left:8px;
+    margin-right:6px;
+    font-size: 14px;
+}
+.header .head-portrait-list{
+    display: none;
+    width: 100px;
+    position: absolute;
+    z-index: 1001;
+    top: 60px;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 2px 4px 0 grey;
+    border-radius: 4px;
+}
+.header .portraitPage{
+    overflow: visible !important;
+    width: 100%;
+    padding-left: 27px;
+    height: 30px;
+    margin-left: -30px;
+    position: absolute;
+    top: -26px;
+    left: 40%;
+    z-index: 100;
+}
+.header .navPage-1{
+    display: block;
+    border-left: 12px solid transparent !important;
+    border-top: 12px solid transparent !important;
+    border-right: 12px solid transparent !important;
+    border-bottom: 12px solid #cecece !important;
+    position: absolute;
+    top: 2px;
+}
+.header .navPage-2{
+    display: block;
+    border-left: 12px solid transparent !important;
+    border-top: 12px solid transparent !important;
+    border-right: 12px solid transparent !important;
+    border-bottom: 12px solid #fff !important;
+    position: absolute;
+    top: 3px;
+}
+.head-portrait-list ul{
+    width: 100%;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.head-portrait-list ul li{
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.head-portrait-list ul li a{
+    color:#666;
+}
+.head-portrait-list ul li:hover a{
+    font-size: 14px;
+    font-weight: bold;
+    color: #f8a609;
+}
+.head-portrait-list ul li:nth-child(1){
+    margin-top: 0px;
+}
+
+section{
+    width:100%;
+    height:calc(100vh - 70px);
+    margin:0 auto;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+    height:100%;
+}
+.box>div{
+    box-sizing: border-box;
+    height:720px;
+}
+
+/* lf-box */
+.lf-box{
+    min-width:290px;
+    width: 25%;
+    height:100%;
+    line-height: 30px;
+    padding:15px 7px 0 20px;
+    box-sizing: border-box;
+}
+.lf-box .lf-part{
+    height:calc(100% - 55px);
+    overflow:auto;
+    box-sizing: border-box;
+    padding:10px 3px 0;
+}
+.lf-box .lf-part::-webkit-scrollbar{
+    width: 10px;
+    height: 1px;
+}
+.lf-part::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #7f8081;
+}
+.lf-part::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #dee4e8;
+}
+.lf-box h2{
+    margin-bottom:10px;
+    color:#3b3a3a;
+    font-size: 20px;
+    line-height: 30px;
+}
+/* .lf-box p{
+    font-size:18px;
+} */
+.lf-box .describe{
+    font-size: 16px;
+    color:#666;
+    margin-bottom:20px;
+}
+.lf-box .content{
+    font-size: 16px;
+    color:#707070;
+    margin-bottom: 100px;
+    /*height:1000px;*/
+}
+.lf-box .content:last-child{
+    margin-bottom: 0;
+    /*height:1000px;*/
+}
+.lf-box .content .tipText{
+    color:#3b3a3a;
+    line-height: 60px;
+    display: block;
+    /*padding-left:6px;*/
+}
+.lf-box .content .tipText span{
+    color:#3398db;
+    cursor: pointer;
+}
+.lf-footer{
+    box-sizing: border-box;
+    width:100%;
+    height:55px;
+    padding:0 10px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color:#2473b9;
+    font-size: 16px;
+}
+.lf-footer .btnBox{
+    width:43%;
+    min-width:154px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.lf-footer .pre-box,.lf-footer .next-box{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    min-width:70px;
+}
+.lf-footer img{
+    width:8px;
+    height:10px;
+}
+.lf-footer .pre-box{
+    margin-right:10px;
+}
+.lf-footer button{
+    border:1px solid #2473b9;
+    border-radius: 4px;
+    width:80px;
+    height:35px;
+    min-height:35px;
+    line-height: 33px;
+    color:#2473b9;
+    font-size: 16px;
+    padding:0;
+    margin-right:10px;
+    background:#fff;
+    cursor: pointer;
+}
+.lf-footer span{
+    /* cursor: pointer; */
+}
+
+/* ct-box */
+.ct-box{
+    width:50%;
+    min-width:620px;
+    background: #07223e;
+    position: relative;
+}
+.ct-head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height:35px;
+    background: #b6c1c9;
+    overflow: hidden;
+    position: relative;
+}
+.ct-head::after{
+    content:"";
+    display: block;
+    width:25px;
+    height:25px;
+    position: absolute;
+    top:50%;
+    right:5px;
+    transform: translateY(-50%);
+    background: url(./images/add.png) no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+}
+.ct-head .control{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width:65px;
+    height: 100%;
+}
+.ct-head .control img{
+    display: block;
+    width:10px;
+    height:10px;
+}
+.ct-head .control img:first-child{
+    margin-right:11px;
+}
+.ct-head .page{
+    display: inline-block;
+    height:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding:0 12px 0 22px;
+    background: #899aa6;
+    color:#fff;
+    font-size: 18px;
+    margin-right:3px;
+}
+.ct-head .page span{
+    line-height: 35px;
+}
+.ct-head span.active{
+    background: #07223e!important;
+}
+.ct-head .page img{
+    display: block;
+    width:16px;
+    height:16px;
+    margin-left:22px;
+}
+.ct-box>div:last-child{
+    height:calc(100% - 35px);
+}
+.ct-body{
+    height:calc(100% - 78px);
+    padding:12px 20px 0;
+}
+.ct-body .main-body{
+    border:1px solid #fff;
+    border-radius: 4px;
+    height:100%;
+    position: relative;
+    box-sizing: border-box;
+}
+.ct-body .main-body .tip-text{
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom:0;
+    left:0;
+    background:#000;
+    font-size: 16px;
+    color:#fff;
+    height:40px;
+    padding-left:15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #000;
+    z-index:100;
+}
+.ct-body .main-body .tip-text span:nth-child(2){
+    padding:0 15px;
+    line-height: 40px;
+    cursor: pointer;
+}
+.ct-body .pyEditor{
+    /*overflow-y: scroll;*/
+    width: 100%;
+    height: 100%;
+}
+.ct-body .pyEditor::-webkit-scrollbar{
+    width: 10px;
+    height: 1px;
+}
+.pyEditor::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #c5d4e1;
+}
+.pyEditor::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #2d4962;
+}
+.pyEditor{
+    /*scrollbar-thumb:*/
+}
+.pyEditor p{ 
+    height:1000px;
+}
+.ct-foot{
+    position: absolute;
+    bottom:15px;
+    left:0;
+    width:100%;
+    overflow: hidden;
+    padding:0 30px; 
+    box-sizing: border-box;
+    background: transparent;
+}
+.ct-foot .submit{
+    float:right;
+    width:102px;
+    height:36px;
+    border:1.5px solid #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    color:#fff;
+    line-height: 33px;
+    background: #07223e;
+    outline: none;
+    cursor: pointer;
+}
+.ct-foot .export{
+    float:right;
+    width:96px;
+    height:36px;
+    background: #fff;
+    color:#2473b9;
+    font-size: 16px;
+    line-height: 36px;
+    border:none;
+    border-radius: 4px;
+    outline: none;
+    margin-left:28px;
+    cursor: pointer;
+}
+
+/* rt-box */
+.rt-box{
+    width:25%;
+    min-width:290px;
+}
+.rt-box .head,.lf-box .head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left:20px;
+}
+.head>span{
+    font-size: 20px;
+    color:#3b3a3a;
+    font-weight: bold;
+    line-height: 36px;
+}
+.result,.haigui{
+    height:50%;
+    box-sizing: border-box;
+}
+.result{
+    padding:20px 15px 0 0;
+    border-bottom:1px solid #bdbdbd;
+}
+.result>div:last-child{
+    overflow:auto;
+    height:calc(100% - 36px);
+    padding-left:20px;
+}
+.result>div:last-child::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+}
+.result>div:last-child::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #7f8081;
+}
+.result>div:last-child::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #dee4e8;
+}
+.result button,.haigui button{
+    width:50px;
+    height:30px;
+    font-size: 16px;
+    line-height: 28px;
+    border-radius: 4px;
+    outline: none;
+}
+.result .run{
+    color:#fff;
+    background: #2473b9;
+    margin-right:5px;
+    border:none;
+    cursor: pointer;
+}
+.result .clear{
+    color:#2473b9;
+    background: #fff;
+    border:1px solid #2473b9;
+    cursor: pointer;
+}
+.haigui{
+    padding:12px 15px 0 0;
+}
+.haigui .head{
+    padding-left:20px;
+}
+.haigui .hg-body{
+    padding-left:20px;
+    height:calc(100% - 36px);
+    overflow:auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.hg-body::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+}
+.hg-body::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #7f8081;
+}
+.hg-body::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #dee4e8;
+}
+#mycanvas{
+    outline:none;
+}
+.haigui button{
+    border:1px solid #2473b9;
+    color: #2473b9;
+    background: #fff;
+    outline: none;
+    cursor: pointer;
+}
+.haigui .narrow{
+    display: none;
+}
+
+/* resize */
+#lResize{
+    position: absolute;
+    left: -5px;
+    top:0;
+    background: transparent;
+    width:10px;
+    height:100%;
+    cursor: w-resize;
+}
+#rResize{
+    position: absolute;
+    right:-5px;
+    top:0;
+    background: transparent;
+    width:10px;
+    height:100%;
+    cursor: w-resize;
+}
+
+/*.CodeMirror-scroll::-webkit-scrollbar {*/
+/*    background-color: red!important;*/
+/*}*/
+/*.CodeMirror-scroll::-webkit-scrollbar-thumb {*/
+/*    border-radius: 10px;*/
+/*    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+/*    background: red;*/
+/*}*/
+/*.CodeMirror-scroll::-webkit-scrollbar-track {*/
+/*    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+/*    border-radius: 0;*/
+/*    background: green;*/
+/*}*/
