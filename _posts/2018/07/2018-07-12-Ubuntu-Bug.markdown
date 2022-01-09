@@ -4,7 +4,7 @@ title:        "Ubuntu BUG"
 subtitle:     "Ubuntu Filling the pit"
 date:         2018-07-12 12:25:00
 author:       "GJXS"
-header-img:   "img/in-post/2018.07/12/2018.7.12.jpg"
+header-img:   "http://aigrantli.com/2018.7.12.jpg"
 catalog:      true
 tags:
     - Ubuntu

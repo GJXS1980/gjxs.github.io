@@ -4,7 +4,7 @@ title:        "Kinectv2 Drive"
 subtitle:     "install libfreenect2 and IAI Kinect2 "
 date:         2018-07-18 12:27:00
 author:       "GJXS"
-header-img:   "img/in-post/2018.07/18/tools.jpg"
+header-img:   "http://aigrantli.com/limits.png"
 catalog:      true
 tags:
     - Kinect v2

@@ -4,7 +4,7 @@ title:        "Git Tools"
 subtitle:     "git usage"
 date:         2018-07-12 21:52:00
 author:       "GJXS"
-header-img:   "img/in-post/2018.07/12/github.png"
+header-img:   "http://aigrantli.com/github.png"
 catalog:      true
 tags:
     - github

@@ -4,7 +4,7 @@ title:        "Ubuntu Sofeware"
 subtitle:     "Sofeware Installation"
 date:         2018-06-26 13:14:00
 author:       "GJXS"
-header-img:   "img/in-post/2018.06/26/sofeware.jpg"
+header-img:   "http://aigrantli.com/sofeware.jpg"
 catalog:      true
 tags:
     - Sofeware

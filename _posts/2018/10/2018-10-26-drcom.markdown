@@ -4,7 +4,7 @@ title:        "Drcom P"
 subtitle:     "绕过检测移动设备的一种思路"
 date:         2018-10-27 02:00:00
 author:       "GJXS, Jonny"
-header-img:   "img/in-post/2018.10/26/laptop.jpg"
+header-img:   "http://aigrantli.com/laptop.jpg"
 catalog:      true
 tags:
     - Privoxy
@@ -33,7 +33,7 @@ tags:
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.刷解锁版不死U-Root </font></center></strong>
 进固件作者网站查找对应[u-boot](http://rssn.cn/roms/uboot/),下载自己路由器对应版本的固件, 以<code>极路由1S HC5661A</code>为例,如下图:
-<img src="/img/in-post/2018.10/26/openwrt/hiwifi.png" alt="MQTT Logo">
+<img src="http://aigrantli.com/hiwifi.png" alt="MQTT Logo">
 通过<code>putty</code>进入路由器后台,并<code>下载安装uboot:</code><br>
 
 <pre><code class="language-shell line-numbers">#连上路由器后台，进入tmp目录下
@@ -88,7 +88,7 @@ mtd write HC5661A-uboot.bin firmware</code></pre>
 
 (2) 进入[Table of Hardware: Firmware downloads](https://openwrt.org/toh/views/toh_fwdownload)<code>查找cpu和型号对应的固件</code>，并下载.<br>
 以<code>极路由1S HC5661A</code>为例,如下图:<br>
-<img src="/img/in-post/2018.10/26/openwrt/openwrt.png" alt="MQTT Logo">
+<img src="http://aigrantli.com/openwrt.png" alt="MQTT Logo">
 可以直接点击<code>图中红框</code>的网址<code>直接下载</code>,然后再通过<code>WinSCP</code>上传到<code>路由器的/tmp目录下</code>,<code>下面操作是直接下载到路由器的/tmp目录下(要连网):</code><br>
 <pre><code class="language-shell line-numbers">
 #下载固件
@@ -134,11 +134,11 @@ opkg install gdut-drcom_6.0-4_mipsel_24kc.ipk</code></pre>
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 选做:OpenWrt SDK编译gdut-drcom客户端 </font></center></strong>
 <strong>(1)下载OpenWrt SDK</strong><br>
 首先进入[OpenWrt 18.06](https://archive.openwrt.org/releases/18.06.0/targets/) <br>
-<img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk0.png" alt="MQTT Logo"><br>
+<img src="http://aigrantli.com/openwrt-sdk0.png" alt="MQTT Logo"><br>
 根据自己路由器的<code>路由器型号</code>进入相应的网站,<code>以极路由HC5661A为例</code>,进入[ramips/mt76x8](https://archive.openwrt.org/releases/18.06.0/targets/ramips/mt76x8/)
-<img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk.png" alt="MQTT Logo"><br>
+<img src="http://aigrantli.com/openwrt-sdk.png" alt="MQTT Logo"><br>
 找到<code>openwrt-sdk-18.06.0-ramips-mt76x8_gcc-7.3.0_musl.Linux-x86_64.tar.xz</code>并下载<br>
-<img src="/img/in-post/2018.10/26/openwrt/openwrt-sdk1.png" alt="MQTT Logo">
+<img src="http://aigrantli.com/openwrt-sdk1.png" alt="MQTT Logo">
 
 >蓝色框表示SDK支持的路由器型号，红色框为SDK文件
 
@@ -156,9 +156,9 @@ cd .. && make package/ODP/compile</code></pre>
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.配置网络 </font></center></strong>
 <strong>(1)先查看<code>lan的MAC地址</code>并复制lan的MAC地址</strong><br>
-<img src="/img/in-post/2018.10/26/openwrt/drcom1.png" alt="MQTT Logo"><br>
+<img src="http://aigrantli.com/drcom1.png" alt="MQTT Logo"><br>
 <strong>(2)修改<strong>Dr.com</strong>客户端的配置:</strong><br>
-<img src="/img/in-post/2018.10/26/openwrt/drcom.png" alt="MQTT Logo">
+<img src="http://aigrantli.com/drcom.png" alt="MQTT Logo">
 
 >说明:311xxxxxxx为自己的学号,MAC地址为刚刚复制的，然后随便改MAC地址后两位数字
 
@@ -170,15 +170,15 @@ cd .. && make package/ODP/compile</code></pre>
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 1.安装privoxy及相关软件 </font></center></strong>
 先进入<strong>软件</strong>选项,如下图:
-<img src="/img/in-post/2018.10/26/openwrt/privoxy1.png" alt="MQTT Logo"><br>
+<img src="http://aigrantli.com/privoxy1.png" alt="MQTT Logo"><br>
 下载<code>图中红框</code>里面的<code>三个软件</code>,如下图:
-<img src="/img/in-post/2018.10/26/openwrt/privoxy2.png" alt="MQTT Logo">
+<img src="http://aigrantli.com/privoxy2.png" alt="MQTT Logo">
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 2.配置privoxy </font></center></strong>
 进入<strong>privoxy</strong>选项,<strong>开启</strong>privoxy网络代理,如下图:
-<img src="/img/in-post/2018.10/26/openwrt/privoxy3.png" alt="MQTT Logo"><br>
+<img src="http://aigrantli.com/privoxy3.png" alt="MQTT Logo"><br>
 开启<strong>Accept intercepted requests</strong>选项,如下图:
-<img src="/img/in-post/2018.10/26/openwrt/privoxy4.png" alt="MQTT Logo">
+<img src="http://aigrantli.com/privoxy4.png" alt="MQTT Logo">
 
 ### <strong style="max-width: 100%;color: rgb(47, 85, 151);box-sizing: border-box !important;word-wrap: break-word !important;"><center><font face="楷体"> 3.获取UserAgent </font></center></strong>
 <code>由于我已经整合了大部分的UA,基本可以满足要求,可以直接跳到第4步</code><br>
@@ -186,7 +186,7 @@ cd .. && make package/ODP/compile</code></pre>
 <strong>方法一:通过网站直接查UA</strong><br>
 (1) 点击UA查询网站：[useragent](http://www.ip138.com/useragent/) <br>
 (2) 在AppleWebKit前面的就是我们想要的UA,如图所示,<strong>Mozilla/5.0 (X11; Linux x86_64)</strong>即我们要用到的UA
-<img src="/img/in-post/2018.10/26/openwrt/UA.png" alt="MQTT Logo">
+<img src="http://aigrantli.com/UA.png" alt="MQTT Logo">
 <strong>方法二:使用fiddler对手机上的程序进行抓包</strong><br>
 由于网上很多教程,我这里就不展开讨论<br>
 推荐教程:<br>[使用fiddler对手机上的程序进行抓包](https://zm12.sm-tc.cn/?src=l4uLj4zF0NCIiIjRnJGdk5CYjNGckJLQkpqWi5aekdCejYuWnJOajNDLxsbIzM7P0ZeLkpM%3D&uid=1651a7b6ef594e5236b385df0e67515f&hid=3a058f7b77c13e61026bd06c91f9b0b6&pos=4&cid=9&time=1541152821963&from=click&restype=1&pagetype=0000000000000000&bu=web&query=fiddler%E6%89%8B%E6%9C%BA%E6%8A%93%E5%8C%85&mode=&v=1&force=true&wap=false&province=%E5%B9%BF%E4%B8%9C%E7%9C%81&city=%E4%BD%9B%E5%B1%B1%E5%B8%82&uc_param_str=dnntnwvepffrgibijbprsvdsdichei) <br>
@@ -557,7 +557,7 @@ opkg update</code></pre>
 <strong>问题2：</strong>如果发现按照这个教程来，还是发现会断线<br>
 <strong>解决方法：</strong>可能是没有找全所有在连设备的UA（同一设备，不同浏览器的UA会不一样），这时候建议看看privoxy的日志，一般都有相关User-Agent显示，再把它们按照教程隐藏就好了,具体操作如下:<br>
 执行<strong>使环境生效</strong>那一步,然后在<strong>Privoxy网络代理</strong>里面的<strong>日志查看器</strong>,点击<strong>读取/刷新日志文件</strong>,就可以查看具体的日志文件,如下图:<br>
-<img src="/img/in-post/2018.10/26/openwrt/UA1.png" alt="MQTT Logo">
+<img src="http://aigrantli.com/UA1.png" alt="MQTT Logo">
 然后找到相关的<strong>User-Agent</strong>,添加到<strong>etc/privoxy/default.action</strong>文件里面就行了.<br>
 
 <strong>问题3：</strong>编译mt7620版本的插件时，会缺依赖<br>

@@ -4,7 +4,7 @@ title:        "Ubuntu limits"
 subtitle:     "ulimit setting"
 date:         2018-07-15 1:48:00
 author:       "GJXS"
-header-img:   "img/in-post/2018.07/15/limits.png"
+header-img:   "http://aigrantli.com/limits.png"
 catalog:      true
 tags:
     - Ubuntu

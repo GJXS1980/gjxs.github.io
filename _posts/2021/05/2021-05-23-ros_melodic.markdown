@@ -4,7 +4,7 @@ title:        "ROS Melodic Morenia"
 subtitle:     "ROS Melodic Installation"
 date:         2021-05-23 18:18:00
 author:       "GrantLi"
-header-img:   "img/in-post/2021.05/25/melodic.jpg"
+header-img:   "http://aigrantli.com/melodic.jpg"
 catalog:      true
 tags:
     - ROS

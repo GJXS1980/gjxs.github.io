@@ -4,7 +4,7 @@ title:        "Mysql"
 subtitle:     "Ubuntu 安装 Mysql"
 date:         2018-11-14 21:36:00
 author:       "GJXS"
-header-img:   "img/in-post/2018.11/14/mysql.png"
+header-img:   "http://aigrantli.com/mysql.png"
 catalog:      true
 tags:
     - Ubuntu

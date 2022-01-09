@@ -4,7 +4,7 @@ title:        "OpenWrt"
 subtitle:     "openwrt and openwrt-packages"
 date:         2018-08-01 16:50:00
 author:       "GJXS"
-header-img:   "img/in-post/2018.08/01/OpenWrt.png"
+header-img:   "http://aigrantli.com/openwrt.png"
 catalog:      true
 tags:
     - OpenWrt
