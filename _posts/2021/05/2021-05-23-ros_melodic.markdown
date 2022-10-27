@@ -23,7 +23,7 @@ Ubuntu版本：18.04
 ##### 安装过程
 1.设置你的sources.list
 <pre><code class="language-shell line-numbers">
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo sh -c '. /etc/lsb-release && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main" > /etc/apt/sources.list.d/ros-latest.list'
 </code></pre>
 
 2.下载安装秘钥
@@ -50,7 +50,7 @@ sudo apt install python-rosdep
 6.Initialize rosdep
 (1)环境设置
 <pre><code class="language-shell line-numbers">
-echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 </code></pre>
 
