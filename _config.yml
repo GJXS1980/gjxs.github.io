@@ -20,8 +20,6 @@ github_username:    GJXS1980
 #facebook_username:  username
 music163_username:  home?id=261616078
 
-
-
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
