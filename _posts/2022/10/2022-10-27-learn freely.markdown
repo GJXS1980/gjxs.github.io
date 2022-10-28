@@ -4,10 +4,10 @@ title:        "LEARN FREELY"
 subtitle:     "A method of scientific Internet access"
 date:         2022-10-27 01:12:00
 author:       "GrantLi"
-header-img:   "http://aigrantli.com/melodic.jpg"
+header-img:   "http://aigrantli.com/ssr.jpeg"
 catalog:      true
 tags:
-    - test
+    - ssr
     - Ubuntu
 ---
 *****
@@ -20,7 +20,7 @@ Ubuntu版本：18.04及以上
 
 *****
 
-##### 安装软件
+##### 安装ssr软件
 1.下载、安装ssr软件
 <pre><code class="language-shell line-numbers">
 # 下载软件
@@ -31,8 +31,10 @@ sudo dpkg -i shadowsocks-electron_1.1.8_amd64.deb
 </code></pre>
 
 
-##### 配置软件
-导入ssr账号，选择全局代理。在<code>设置</code>打开http代理。
+##### 配置ssr软件
+1. 导入ssr账号,[免费账号链接](https://github.com/Alvin9999/new-pac/wiki/ss%E5%85%8D%E8%B4%B9%E8%B4%A6%E5%8F%B7)。
+
+2. 选择全局代理。在<code>设置</code>打开http代理。
 
 
 ##### 配置终端代理
@@ -59,6 +61,7 @@ wget www.google.com
 </code></pre>
 如果能把google首页下载到主目录下，说明配置成功。
 
+
 *****
 >参考链接: 
 
@@ -66,5 +69,6 @@ wget www.google.com
 
 
 >2. [web商店](https://www.spark-app.store/store/sort/network)
+
 *****
 
