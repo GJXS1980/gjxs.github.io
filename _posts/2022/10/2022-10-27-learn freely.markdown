@@ -25,7 +25,6 @@ Ubuntu版本：16.04及以上
 <pre><code class="language-shell line-numbers">
 # 下载软件
 wget https://mirrors.sdu.edu.cn/spark-store-repository//store/network/shadowsocks-electron/shadowsocks-electron_1.1.8_amd64.deb
-
 # 安装软件
 sudo dpkg -i shadowsocks-electron_1.1.8_amd64.deb
 </code></pre>
