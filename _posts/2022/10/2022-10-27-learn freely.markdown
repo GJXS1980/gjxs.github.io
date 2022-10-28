@@ -7,7 +7,7 @@ author:       "GrantLi"
 header-img:   "http://aigrantli.com/melodic.jpg"
 catalog:      true
 tags:
-    - ssr
+    - test
     - Ubuntu
 ---
 *****
@@ -20,7 +20,7 @@ Ubuntu版本：18.04及以上
 
 *****
 
-##### 安装ssr
+##### 安装软件
 1.下载、安装ssr软件
 <pre><code class="language-shell line-numbers">
 # 下载软件
@@ -31,7 +31,7 @@ sudo dpkg -i shadowsocks-electron_1.1.8_amd64.deb
 </code></pre>
 
 
-##### 配置ssr
+##### 配置软件
 导入ssr账号，选择全局代理。在<code>设置</code>打开http代理。
 
 
@@ -62,7 +62,7 @@ wget www.google.com
 *****
 >参考链接: 
 
->1. [Ubuntu终端科学上网的方法](https://colainlibrary.com/archives/42db6ec5.html)                             
+>1. [Ubuntu终端上网的方法](https://colainlibrary.com/archives/42db6ec5.html)                             
 
 
 >2. [web商店](https://www.spark-app.store/store/sort/network)

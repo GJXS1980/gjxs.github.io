@@ -83,8 +83,6 @@ ga_domain: auto
 baidu_analytics: 'f449fbb4d143d156c197d3a7a38a779d'
 
 
-
-
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "路漫漫 厚积薄发 我亦是行人。<br>"
