@@ -29,7 +29,6 @@ wget https://mirrors.sdu.edu.cn/spark-store-repository//store/network/shadowsock
 sudo dpkg -i shadowsocks-electron_1.1.8_amd64.deb
 </code></pre>
 
-
 ##### 配置ssr软件
 1. 导入ssr账号,[免费账号链接](https://github.com/Alvin9999/new-pac/wiki/ss%E5%85%8D%E8%B4%B9%E8%B4%A6%E5%8F%B7)。
 
